@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/winnerImage"
+        android:layout_width="60dp"
+        android:layout_marginStart="20dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/dummy_profile_image" />
+
+    <TextView
+        android:id="@+id/tvWinnerName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="Joe Lina"
+        android:layout_toEndOf="@+id/winnerImage"
+        android:textColor="@color/navigation_color"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tvWinnerRank"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="20dp"
+
+        android:drawablePadding="20dp"
+        android:fontFamily="@font/poppins_medium"
+        android:gravity="center_vertical"
+        android:text="#1"
+        android:textColor="@color/red"
+        android:textSize="16sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/winnerImage"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="10dp"
+        android:background="@color/edit_text_background" />
+
+</RelativeLayout>

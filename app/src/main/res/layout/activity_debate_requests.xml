@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activities.citizens.DebateRequestsActivity">
+
+    <RelativeLayout
+        android:id="@+id/createPostLayout"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:background="@color/white"
+        android:elevation="10dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="15dp"
+            android:onClick="backBtnPressed"
+            android:src="@drawable/back_arrow" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_margin="10dp"
+            android:fontFamily="@font/poppins_medium"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:text="@string/debate_requests"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+
+    </RelativeLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_debate_requests"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+
+    <RelativeLayout
+        android:id="@+id/noDebateRequestData"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/poppins_medium"
+            android:text="@string/no_debate_requests_yet"
+            android:textColor="@color/app_color"
+            android:textSize="18sp" />
+
+    </RelativeLayout>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activities.politicians.RequestDebateActivity">
+
+    <include layout="@layout/action_bar_layout_2" />
+
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/etPostTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/createPostLayout"
+        android:layout_marginTop="10dp"
+        android:background="@null"
+        android:fontFamily="@font/poppins"
+        android:hint="@string/debate_title"
+        android:padding="15dp"
+        android:textColor="@color/navigation_color"
+        android:textColorHint="@color/navigation_color" />
+
+    <View
+        android:id="@+id/vShadowTwo"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/etPostTitle"
+        android:background="@color/edit_text_background" />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="15dp"
+        android:fontFamily="@font/poppins"
+        android:textSize="16sp"
+        android:textColor="@color/navigation_color"
+        android:text="@string/date" />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="15dp"
+        android:textSize="16sp"
+        android:fontFamily="@font/poppins"
+        android:textColor="@color/navigation_color"
+        android:text="@string/time" />
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>

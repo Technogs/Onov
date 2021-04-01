@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".activities.common.AboutUsActivity">
+
+
+    <include layout="@layout/action_bar_layout" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:id="@+id/tvTitle"
+        android:fontFamily="@font/poppins_medium"
+        android:textColor="@color/black"
+        android:textSize="18sp" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_margin="20dp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/poppins"
+android:gravity="center"
+        android:text="dummy text dummy text dummy text dummy text dummy text dummy textdummy textdummy textvdummy textv dummy text dummy textvdummy text dummy text dummy textvv dummy text dummy textdummy text dummy text v v dummy text dummy text v dummy text "
+        android:layout_height="wrap_content"/>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

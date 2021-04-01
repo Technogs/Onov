@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.common.AllWinnersActivity">
+
+    <include layout="@layout/action_bar_layout"
+        android:id="@+id/ab"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="@string/all_winners"
+        android:layout_below="@+id/ab"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:layout_marginTop="10dp"
+        android:id="@+id/tv"
+        android:fontFamily="@font/poppins_medium"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:id="@+id/tv1"
+        android:layout_below="@+id/tv"
+        android:fontFamily="@font/poppins_bold"
+        android:textColor="@color/black"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/user"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:layout_below="@+id/tv"
+        android:layout_marginTop="20dp"
+        android:layout_alignParentEnd="true"
+        android:fontFamily="@font/poppins_bold"
+        android:textColor="@color/black"
+        android:layout_marginEnd="20dp"
+        android:text="@string/rank"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:id="@+id/rv_all_winners"
+        android:layout_below="@+id/tv1"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:layout_height="wrap_content"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text_blue"
+        android:fontFamily="@font/poppins_medium"
+        android:textSize="18sp"
+        android:visibility="gone"
+        android:id="@+id/noAllWinnersData"
+        android:layout_centerInParent="true"
+        android:text="@string/no_winners_yet"
+        />
+
+</RelativeLayout>

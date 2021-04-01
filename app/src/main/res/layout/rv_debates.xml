@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="15dp"
+    android:layout_marginEnd="15dp"
+    android:layout_marginTop="7dp"
+    android:background="@color/white"
+    android:elevation="10dp"
+    android:orientation="vertical"
+    android:paddingBottom="5dp">
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@drawable/dummy_debate" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:weightSum="6">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/icon1"
+                android:layout_width="30dp"
+                android:layout_height="40dp"
+                android:src="@drawable/thumbs_up" />
+
+
+            <TextView
+                android:id="@+id/tvLikeText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/icon1"
+                android:fontFamily="@font/poppins"
+                android:text="@string/like"
+                android:textColor="@color/app_color"
+                android:textSize="10sp" />
+
+            <TextView
+                android:id="@+id/tvLikeCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/icon1"
+
+                android:layout_marginStart="2dp"
+                android:layout_toEndOf="@+id/tvLikeText"
+                android:fontFamily="@font/poppins_medium"
+                android:text="20"
+                android:textColor="@color/red"
+                android:textSize="10sp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1.5"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/icon2"
+                android:layout_width="30dp"
+                android:layout_height="40dp"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/comment" />
+
+
+            <TextView
+                android:id="@+id/tvCommentText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/icon2"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/poppins"
+                android:text="@string/comment"
+                android:textColor="@color/app_color"
+                android:textSize="10sp" />
+
+            <TextView
+                android:id="@+id/tvCommentC0unt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/icon2"
+                android:layout_marginStart="2dp"
+                android:layout_toEndOf="@+id/tvCommentText"
+                android:fontFamily="@font/poppins_medium"
+                android:text="20"
+                android:textColor="@color/red"
+                android:textSize="10sp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1.2"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/icon3"
+                android:layout_width="30dp"
+                android:layout_height="40dp"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/vote_yea" />
+
+
+            <TextView
+                android:id="@+id/tvVotingText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/icon3"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/poppins"
+                android:text="@string/voting"
+                android:textColor="@color/app_color"
+                android:textSize="10sp" />
+
+            <TextView
+                android:id="@+id/tvVotingCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/icon3"
+                android:layout_marginStart="2dp"
+                android:layout_toEndOf="@+id/tvVotingText"
+                android:fontFamily="@font/poppins_medium"
+                android:text="20"
+                android:textColor="@color/red"
+                android:textSize="10sp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1.2"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/icon4"
+                android:layout_width="30dp"
+                android:layout_height="40dp"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/share" />
+
+
+            <TextView
+                android:id="@+id/tvShareText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/icon4"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/poppins"
+                android:text="@string/share"
+                android:textColor="@color/app_color"
+                android:textSize="10sp" />
+
+            <TextView
+                android:id="@+id/tvShareCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/icon4"
+                android:layout_marginStart="2dp"
+                android:layout_toEndOf="@+id/tvShareText"
+                android:fontFamily="@font/poppins_medium"
+                android:text="20"
+                android:textColor="@color/red"
+                android:textSize="10sp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1.2"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/icon5"
+                android:layout_width="30dp"
+                android:layout_height="40dp"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/donate" />
+
+
+            <TextView
+                android:id="@+id/tvDonateText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/icon5"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/poppins"
+                android:text="@string/donate"
+                android:textColor="@color/app_color"
+                android:textSize="10sp" />
+
+
+        </RelativeLayout>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>

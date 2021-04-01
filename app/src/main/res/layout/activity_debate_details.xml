@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activities.common.DebateDetailsActivity">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <RelativeLayout
+                android:id="@+id/createPostLayout"
+                android:layout_width="match_parent"
+                android:layout_height="?android:attr/actionBarSize"
+                android:background="@color/white"
+                android:elevation="10dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="15dp"
+                    android:onClick="backBtnPressed"
+                    android:src="@drawable/back_arrow" />
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_margin="10dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:text="@string/debate_details"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="20dp">
+
+                <TextView
+                    android:id="@+id/debateDetailsTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins"
+                    android:text="@string/title"
+                    android:textColor="@color/navigation_color"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/debateDetailsTitleValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@+id/debateDetailsTitle"
+                    android:fontFamily="@font/poppins"
+                    android:text="Debate on current affairs"
+                    android:textColor="@color/navigation_color"
+                    android:textSize="16sp" />
+
+
+                <TextView
+                    android:id="@+id/debateDetailsDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/debateDetailsTitle"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/poppins"
+                    android:text="@string/date_"
+                    android:textColor="@color/navigation_color"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/debateDetailsDateValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/debateDetailsTitle"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_toEndOf="@+id/debateDetailsTitle"
+                    android:fontFamily="@font/poppins"
+                    android:text="30-02-2021"
+                    android:textColor="@color/navigation_color"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/debateDetailsTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/debateDetailsDate"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/poppins"
+                    android:text="@string/time_"
+                    android:textColor="@color/navigation_color"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/debateDetailsTimeValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/debateDetailsDate"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_toEndOf="@+id/debateDetailsTitle"
+                    android:fontFamily="@font/poppins"
+                    android:text="10:AM - 11:Am"
+                    android:textColor="@color/navigation_color"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/debateDetailsTimeCreator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/debateDetailsTime"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/poppins"
+                    android:text="@string/created_by_"
+                    android:textColor="@color/navigation_color"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/debateDetailsTimeCreatorValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/debateDetailsTime"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_toEndOf="@+id/debateDetailsTimeCreator"
+                    android:fontFamily="@font/poppins"
+                    android:text="Alex John"
+                    android:textColor="@color/navigation_color"
+                    android:textSize="16sp" />
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/drawable_chat_background">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/round_paly_video" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/debateVotes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/debateDetailsTime"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/poppins"
+                android:text="300 Votes"
+                android:textColor="@color/navigation_color"
+                android:textSize="16sp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnVote"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_below="@id/time"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="40dp"
+                android:background="@drawable/drawable_gradient_button_background"
+                android:fontFamily="@font/poppins"
+                android:text="@string/vote"
+                android:textAllCaps="false"
+                android:layout_marginBottom="40dp"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

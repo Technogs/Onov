@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.common.ProfileActivity">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
+        android:background="@drawable/profile_background">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/transparent_black" />
+
+        <ImageView
+            android:id="@+id/backBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/back_arrow"
+            app:tint="@color/white" />
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/onov_logo_2"
+            app:tint="@color/white" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/backBtn"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="60dp"
+            android:fontFamily="@font/poppins"
+            android:text="@string/update_profile"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/photoLayout"
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="150dp"
+        android:layout_marginEnd="40dp"
+        android:background="@drawable/drawable_white_curved_border_layout"
+        android:elevation="10dp">
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profileImage"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:onClick="onClick"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/dummy_profile_image" />
+
+        <ImageView
+            android:id="@+id/profileClick"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="-20dp"
+            android:layout_toEndOf="@+id/profileImage"
+            android:elevation="3dp"
+            android:src="@drawable/profile_camera" />
+
+
+        <EditText
+            android:id="@+id/profileName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@color/white"
+            android:fontFamily="@font/poppins"
+            android:gravity="center"
+            android:focusable="false"
+            android:text="Jenifer"
+            android:layout_below="@+id/profileImage"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/text_blue" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/profileImage"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="12dp"
+            android:id="@+id/editName"
+            android:onClick="onClick"
+            android:layout_toEndOf="@+id/profileName"
+            android:src="@drawable/edit" />
+
+
+    </RelativeLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/photoLayout">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:orientation="vertical">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:padding="5dp">
+
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/edProfileEmail"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="10dp"
+                    android:focusable="false"
+                    android:layout_marginEnd="10dp"
+                    android:layout_toStartOf="@+id/emailEdit"
+                    android:background="@null"
+                    android:drawableStart="@drawable/mail"
+                    android:drawablePadding="10dp"
+                    android:fontFamily="@font/poppins"
+                    android:gravity="center_vertical"
+                    android:hint="@string/email"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/emailEdit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:onClick="onClick"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/edit" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/edProfileEmail"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/edit_text_background" />
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+                android:padding="5dp">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/phone" />
+
+                <com.hbb20.CountryCodePicker
+                    android:id="@+id/ccPickerProfile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:clickable="false"
+                    android:layout_marginStart="5dp"
+                    android:layout_toEndOf="@+id/icon"
+                    android:textSize="14sp"
+                    app:ccp_arrowColor="@color/black"
+                    app:ccp_autoDetectCountry="true"
+                    app:ccp_contentColor="@color/black"
+                    app:ccp_showFullName="false"
+                    app:ccp_showNameCode="false"
+                    app:ccp_showPhoneCode="false"
+                    app:ccp_textGravity="RIGHT"
+                    app:ccp_textSize="14sp" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/edProfilePhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="10dp"
+                    android:focusable="false"
+                    android:layout_marginEnd="10dp"
+                    android:layout_toStartOf="@+id/phoneEdit"
+                    android:layout_toEndOf="@+id/ccPickerProfile"
+                    android:background="@null"
+                    android:fontFamily="@font/poppins"
+                    android:hint="@string/phone_no"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/phoneEdit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+android:onClick="onClick"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/edit" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="5dp"
+                android:background="@color/edit_text_background" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:visibility="gone"
+                android:padding="5dp">
+
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/edProfilePassword"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_toStartOf="@+id/passwordEdit"
+                    android:background="@null"
+                    android:drawableStart="@drawable/ic_password"
+                    android:drawablePadding="10dp"
+                    android:fontFamily="@font/poppins"
+                    android:gravity="center_vertical"
+                    android:hint="@string/password"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/passwordEdit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/edit" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/edProfilePassword"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/edit_text_background" />
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginTop="30dp"
+                android:orientation="horizontal">
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:orientation="horizontal">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:fontFamily="@font/poppins"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:id="@+id/tv"
+                    android:layout_marginStart="10dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/role_"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:fontFamily="@font/poppins"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:id="@+id/roleValue"
+                    android:layout_marginStart="10dp"
+                    android:layout_height="wrap_content"
+                    android:text="Citizen"
+                    />
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginStart="5dp"
+                    android:background="@color/edit_text_background" />
+
+            </RelativeLayout>
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnUpdateProfile"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="40dp"
+                android:onClick="onClick"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/drawable_gradient_button_background"
+                android:fontFamily="@font/poppins"
+                android:text="@string/update"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+</RelativeLayout>

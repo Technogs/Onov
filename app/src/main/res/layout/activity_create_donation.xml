@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activities.common.CreateDonationActivity">
+
+
+    <include layout="@layout/action_bar_layout"
+        android:id="@+id/ab"/>
+
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_below="@+id/ab"
+    android:layout_marginStart="20dp"
+    android:layout_marginEnd="20dp"
+
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+
+        android:orientation="horizontal"
+        android:padding="5dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/user" />
+
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/etReceiptId"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:layout_marginStart="15dp"
+            android:background="@null"
+            android:textColorHint="@color/black"
+            android:textColor="@color/black"
+            android:fontFamily="@font/poppins"
+            android:hint="@string/receipt_id"
+            android:textSize="14sp" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/edit_text_background" />
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+
+        android:orientation="horizontal"
+        android:padding="5dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/user" />
+
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/etTransactionDate"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="15dp"
+            android:background="@null"
+            android:focusable="false"
+            android:textColorHint="@color/black"
+            android:textColor="@color/black"
+            android:fontFamily="@font/poppins"
+            android:hint="@string/transaction_date"
+            android:textSize="14sp" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/edit_text_background" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+
+        android:orientation="horizontal"
+        android:padding="5dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/user" />
+
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/etTransactionAmount"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="15dp"
+            android:background="@null"
+            android:textColorHint="@color/black"
+            android:textColor="@color/black"
+            android:inputType="numberDecimal"
+            android:fontFamily="@font/poppins"
+            android:hint="@string/transaction_amount"
+            android:textSize="14sp" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/edit_text_background" />
+</LinearLayout>
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnDonate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="100dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/drawable_gradient_button_background"
+        android:fontFamily="@font/poppins_medium"
+        android:onClick="onClick"
+        android:text="@string/donate"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+</RelativeLayout>

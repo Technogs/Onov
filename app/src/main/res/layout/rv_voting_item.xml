@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    android:elevation="10dp"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/drawable_light_grey_curve"
+        android:layout_height="100dp">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+
+            android:layout_marginTop="20dp"
+            android:id="@+id/voterName"
+            android:layout_marginStart="25dp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/poppins_medium"
+            android:text="JOHN DOE GREEN"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:layout_below="@+id/voterName"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="-5dp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/poppins"
+            android:text="Conservative Party"
+            />
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="20dp"
+            android:src="@drawable/dummy_vote"
+            android:layout_centerVertical="true"/>
+
+    </RelativeLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/voterName"
+        android:fontFamily="@font/poppins"
+        android:text="212 votes"
+        />
+</androidx.appcompat.widget.LinearLayoutCompat>

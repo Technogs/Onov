@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.lpa.AnnouncementsActivity">
+
+   <include layout="@layout/action_bar_layout_2"
+       android:id="@+id/ab"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:textSize="18sp"
+        android:visibility="gone"
+        android:id="@+id/noAnnouncementData"
+        android:fontFamily="@font/poppins_medium"
+        android:text="@string/no_announcements_yet"
+        android:textColor="@color/icon_tint_color"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/ab"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:orientation="vertical"
+        tools:listitem="@layout/rv_announcements"
+        android:id="@+id/rv_announcements" />
+
+
+
+
+</RelativeLayout>

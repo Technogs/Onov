@@ -1,0 +1,44 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="?android:attr/actionBarSize"
+    android:background="@color/white"
+    android:elevation="10dp">
+
+    <ImageView
+        android:id="@+id/back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="15dp"
+        android:onClick="backBtnPressed"
+        android:src="@drawable/back_arrow" />
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvScreenTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_margin="10dp"
+        android:fontFamily="@font/poppins_medium"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:text="@string/create_post"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvScreenTitleRight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="10dp"
+        android:fontFamily="@font/poppins_medium"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:textColor="@color/icon_tint_color"
+        android:textSize="16sp"
+        tools:ignore="RelativeOverlap" />
+
+</RelativeLayout>

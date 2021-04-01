@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.common.StartPetition">
+
+    <include
+        android:id="@+id/ab"
+        layout="@layout/action_bar_layout" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/ab"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+
+        android:orientation="vertical">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/poppins_medium"
+            android:text="@string/petition"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/user" />
+
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/etAmount"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:layout_marginStart="15dp"
+                android:background="@null"
+                android:fontFamily="@font/poppins"
+                android:hint="@string/amount"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/edit_text_background" />
+
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/user" />
+
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/etTransactionDate"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="15dp"
+                android:background="@null"
+                android:focusable="false"
+                android:fontFamily="@font/poppins"
+                android:hint="@string/date"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/edit_text_background" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/user" />
+
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/etTransactionAmount"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="15dp"
+                android:background="@null"
+                android:fontFamily="@font/poppins"
+                android:hint="@string/sent_from"
+                android:inputType="numberDecimal"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/edit_text_background" />
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            app:counterEnabled="true"
+            app:counterMaxLength="150">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/drawable_editext_background"
+                android:lines="3" />
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/drawable_gradient_button_background"
+        android:fontFamily="@font/poppins_medium"
+        android:onClick="onClick"
+        android:text="@string/start_petition"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
+</RelativeLayout>

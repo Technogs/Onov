@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipChildren="false"
+    tools:context=".activities.common.HomeTabActivity">
+    <include layout="@layout/action_bar_layout"
+        android:id="@+id/ab_home"/>
+
+    <FrameLayout
+        android:id="@+id/homeTabContainer"
+        android:layout_below="@+id/ab_home"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+
+        android:layout_above="@+id/navigation" />
+
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/navigation"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_alignParentBottom="true"
+        android:background="?android:attr/windowBackground"
+        android:clipChildren="false"
+        android:elevation="0dp"
+        app:itemIconTint="@drawable/drawable_navigation_selector"
+        app:itemTextColor="@drawable/drawable_navigation_selector"
+        app:labelVisibilityMode="labeled"
+        app:menu="@menu/menu_bar">
+
+
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
+
+    <ImageView
+        android:id="@+id/profile_image1"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+
+        android:elevation="10dp"
+        android:src="@drawable/add_debate" />
+
+
+</RelativeLayout>
