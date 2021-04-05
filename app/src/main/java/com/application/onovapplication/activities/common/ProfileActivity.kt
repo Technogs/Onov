@@ -23,6 +23,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.application.onovapplication.BuildConfig
 import com.application.onovapplication.R
 import com.application.onovapplication.model.UserInfo
+import com.application.onovapplication.repository.BaseUrl
 import com.application.onovapplication.viewModels.ProfileViewModel
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_profile.*
@@ -78,7 +79,7 @@ class ProfileActivity : BaseAppCompatActivity(), View.OnClickListener {
             if (it) {
                 if (profileViewModel.status == "success") {
                     setError(profileViewModel.message)
-                   // userPreferences.savePhoto(profileViewModel.photoPath)
+                    // userPreferences.savePhoto(profileViewModel.photoPath)
                 } else {
                     setError(profileViewModel.message)
                     finish()
@@ -93,8 +94,9 @@ class ProfileActivity : BaseAppCompatActivity(), View.OnClickListener {
         edProfileEmail.setText(userInfo.email)
         edProfilePhone.setText(userInfo.phone)
         roleValue.text = userInfo.role
+        profileName.setText(userInfo.fullName)
         ccPickerProfile.setCountryForPhoneCode(userInfo.countryCode!!.toInt())
-        Glide.with(this).load(userInfo.profilePic).into(profileImage)
+        Glide.with(this).load(BaseUrl.photoUrl + userInfo.profilePic).into(profileImage)
     }
 
     override fun onRequestPermissionsResult(
@@ -155,11 +157,12 @@ class ProfileActivity : BaseAppCompatActivity(), View.OnClickListener {
                 val photoURI = FileProvider.getUriForFile(
                     this, "${BuildConfig.APPLICATION_ID}.provider",
                     photoFile
-                 )
+                )
                 mPhotoFile = photoFile
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
                 startActivityForResult(
-                    takePictureIntent,                    REQUEST_TAKE_PHOTO                )
+                    takePictureIntent, REQUEST_TAKE_PHOTO
+                )
             }
         }
     }
@@ -283,6 +286,8 @@ class ProfileActivity : BaseAppCompatActivity(), View.OnClickListener {
                     ccPickerProfile.selectedCountryCode,
                     mPhotoFile
                 )
+
+                showDialog()
             }
         }
     }

@@ -12,12 +12,12 @@
 
     <item
         android:id="@+id/navigation_debate"
-        android:title="@string/create_debate" />
+        android:title="@string/create_post" />
 
     <item
         android:id="@+id/navigation_voting"
-        android:title="@string/voting"
-        android:icon="@drawable/vote_yea"/>
+        android:title="@string/donate"
+        android:icon="@drawable/donate"/>
 
     <item
         android:id="@+id/navigation_more"

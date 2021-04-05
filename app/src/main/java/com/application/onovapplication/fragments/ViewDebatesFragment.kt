@@ -38,7 +38,8 @@ class ViewDebatesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        debatesAdapter = ViewDebatesAdapter(requireContext())
+        //    debatesAdapter = ViewDebatesAdapter(requireContext())
+        noDebateData.visibility = View.VISIBLE
         rv_view_debates.adapter = debatesAdapter
 
     }

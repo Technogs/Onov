@@ -14,6 +14,7 @@ import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : BaseAppCompatActivity(), View.OnClickListener {
 
+
     private val loginViewModel by lazy {
         ViewModelProvider(this).get(LoginViewModel::class.java)
     }
@@ -23,7 +24,8 @@ class LoginActivity : BaseAppCompatActivity(), View.OnClickListener {
 
 
     private val rolesList =
-        arrayOf("Select Role", "Citizens", "Politicians", "Organizations", "Entertainers", "LPA")
+        arrayOf("Select Role", "Citizens", "Politicians", "Organizations", "Entertainers", "lpa")
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -92,8 +94,6 @@ class LoginActivity : BaseAppCompatActivity(), View.OnClickListener {
                     intent.putExtra("role", loginViewModel.userInfo.role)
                     startActivity(intent)
                     finishAffinity()
-
-
                 } else {
                     setError(loginViewModel.message)
                 }

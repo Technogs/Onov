@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.application.onovapplication.R
 import com.application.onovapplication.model.AllWinnersList
 import com.bumptech.glide.Glide
-import com.live.kicktraders.repository.BaseUrl
+import com.application.onovapplication.repository.BaseUrl
 import kotlinx.android.synthetic.main.rv_all_winners.view.*
 
 class AllWinnersAdapter(

@@ -11,8 +11,11 @@ import androidx.lifecycle.ViewModelProvider
 import com.application.onovapplication.R
 import com.application.onovapplication.activities.DonationsActivity
 import com.application.onovapplication.activities.PetitionActivity
+import com.application.onovapplication.activities.ViewLawsActivity
 import com.application.onovapplication.activities.citizens.DebateRequestsActivity
 import com.application.onovapplication.activities.common.*
+import com.application.onovapplication.activities.lpa.CreateAnnouncementActivity
+import com.application.onovapplication.activities.politicians.CreateLawActivity
 import com.application.onovapplication.adapters.MoreScreenAdapter
 import com.application.onovapplication.model.MoreScreenData
 import com.application.onovapplication.viewModels.LogoutViewModel
@@ -35,7 +38,6 @@ class MoreFragment : Fragment(), MoreScreenAdapter.MoreItemListener {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_more, container, false)
 
-
     }
 
 
@@ -44,11 +46,147 @@ class MoreFragment : Fragment(), MoreScreenAdapter.MoreItemListener {
 
         observeViewModel()
 
+
+        when ((activity as HomeTabActivity).userPreferences.getRole()) {
+            "politicians" -> {
+                setPoliticiansList()
+            }
+
+            "entertainers" -> {
+                setEntertainersList()
+
+            }
+            "organizations" -> {
+                setNGOList()
+            }
+
+            "lpa" -> {
+                setLPAList()
+            }
+
+            else -> {
+                setCitizensList()
+            }
+
+        }
+
+
+        moreScreenAdapter = MoreScreenAdapter(requireContext(), dataList, this)
+        
+        rv_more.adapter = moreScreenAdapter
+
+    }
+
+    private fun setPoliticiansList() {
+
         dataList.add(
             MoreScreenData(
                 "Stats",
                 R.drawable.stats
+            )
+        )
+        dataList.add(
+            MoreScreenData(
+                "Total Winning",
+                R.drawable.total_wining
+            )
+        )
 
+        dataList.add(
+            MoreScreenData(
+                "All Winners",
+                R.drawable.all_winners
+
+            )
+        )
+
+
+        dataList.add(
+            MoreScreenData(
+                "Laws",
+                R.drawable.laws
+
+            )
+        )
+
+        dataList.add(
+            MoreScreenData(
+                "Create Event",
+                R.drawable.create_event
+            )
+        )
+
+        dataList.add(
+            MoreScreenData(
+                "Profile",
+                R.drawable.profile
+            )
+        )
+
+
+        dataList.add(
+            MoreScreenData(
+                "Petitions",
+                R.drawable.create_event
+            )
+        )
+
+
+        dataList.add(
+            MoreScreenData(
+                "Debate Requests",
+                R.drawable.debate_requests
+            )
+        )
+
+        dataList.add(
+            MoreScreenData(
+                "My Gov",
+                R.drawable.my_govts
+            )
+        )
+
+        dataList.add(
+            MoreScreenData(
+                "About App",
+                R.drawable.about_app
+            )
+        )
+
+        dataList.add(
+            MoreScreenData(
+                "Setting",
+                R.drawable.settings
+            )
+        )
+        dataList.add(
+            MoreScreenData(
+                "Privacy Policy",
+                R.drawable.privacy_policy
+            )
+        )
+
+        dataList.add(
+            MoreScreenData(
+                "Terms and Conditions",
+                R.drawable.terms_condtions
+            )
+        )
+
+        dataList.add(
+            MoreScreenData(
+                "Logout",
+                R.drawable.logout
+            )
+        )
+    }
+
+
+    private fun setCitizensList() {
+        dataList.add(
+            MoreScreenData(
+                "Stats",
+                R.drawable.stats
             )
         )
         dataList.add(
@@ -98,6 +236,79 @@ class MoreFragment : Fragment(), MoreScreenAdapter.MoreItemListener {
             )
         )
 
+
+        dataList.add(
+            MoreScreenData(
+                "My Gov",
+                R.drawable.my_govts
+            )
+        )
+
+        dataList.add(
+            MoreScreenData(
+                "About App",
+                R.drawable.about_app
+            )
+        )
+
+        dataList.add(
+            MoreScreenData(
+                "Setting",
+                R.drawable.settings
+            )
+        )
+        dataList.add(
+            MoreScreenData(
+                "Privacy Policy",
+                R.drawable.privacy_policy
+            )
+        )
+
+        dataList.add(
+            MoreScreenData(
+                "Terms and Conditions",
+                R.drawable.terms_condtions
+            )
+        )
+
+        dataList.add(
+            MoreScreenData(
+                "Logout",
+                R.drawable.logout
+            )
+        )
+    }
+
+    private fun setNGOList() {
+        dataList.add(
+            MoreScreenData(
+                "Stats",
+                R.drawable.stats
+
+            )
+        )
+        dataList.add(
+            MoreScreenData(
+                "Laws",
+                R.drawable.laws
+
+            )
+        )
+
+        dataList.add(
+            MoreScreenData(
+                "Create Event",
+                R.drawable.create_event
+            )
+        )
+
+        dataList.add(
+            MoreScreenData(
+                "Profile",
+                R.drawable.profile
+            )
+        )
+
         dataList.add(
             MoreScreenData(
                 "About App",
@@ -132,14 +343,178 @@ class MoreFragment : Fragment(), MoreScreenAdapter.MoreItemListener {
             )
         )
 
+    }
 
-        moreScreenAdapter = MoreScreenAdapter(requireContext(), dataList, this)
 
-        rv_more.adapter = moreScreenAdapter
+    private fun setEntertainersList() {
+        dataList.add(
+            MoreScreenData(
+                "Stats",
+                R.drawable.stats
+
+            )
+        )
+
+        dataList.add(
+            MoreScreenData(
+                "Laws",
+                R.drawable.laws
+
+            )
+        )
+
+        dataList.add(
+            MoreScreenData(
+                "Create Event",
+                R.drawable.create_event
+            )
+        )
+
+        dataList.add(
+            MoreScreenData(
+                "Profile",
+                R.drawable.profile
+            )
+        )
+
+        dataList.add(
+            MoreScreenData(
+                "About App",
+                R.drawable.about_app
+            )
+        )
+
+        dataList.add(
+            MoreScreenData(
+                "Setting",
+                R.drawable.settings
+            )
+        )
+
+
+        dataList.add(
+            MoreScreenData(
+                "My Govt's",
+                R.drawable.my_govts
+            )
+        )
+
+        dataList.add(
+            MoreScreenData(
+                "Privacy Policy",
+                R.drawable.privacy_policy
+            )
+        )
+
+        dataList.add(
+            MoreScreenData(
+                "Terms and Conditions",
+                R.drawable.terms_condtions
+            )
+        )
+
+        dataList.add(
+            MoreScreenData(
+                "Logout",
+                R.drawable.logout
+            )
+        )
+
+    }
+    private fun setLPAList() {
+        dataList.add(
+            MoreScreenData(
+                "Make Announcement",
+                R.drawable.stats
+
+            )
+        )
+
+
+        dataList.add(
+            MoreScreenData(
+                "Create Event",
+                R.drawable.create_event
+            )
+        )
+
+        dataList.add(
+            MoreScreenData(
+                "Profile",
+                R.drawable.profile
+            )
+        )
+
+        dataList.add(
+            MoreScreenData(
+                "About App",
+                R.drawable.about_app
+            )
+        )
+
+        dataList.add(
+            MoreScreenData(
+                "Setting",
+                R.drawable.settings
+            )
+        )
+
+
+        dataList.add(
+            MoreScreenData(
+                "My Govt's",
+                R.drawable.my_govts
+            )
+        )
+
+        dataList.add(
+            MoreScreenData(
+                "Privacy Policy",
+                R.drawable.privacy_policy
+            )
+        )
+
+        dataList.add(
+            MoreScreenData(
+                "Terms and Conditions",
+                R.drawable.terms_condtions
+            )
+        )
+
+        dataList.add(
+            MoreScreenData(
+                "Logout",
+                R.drawable.logout
+            )
+        )
 
     }
 
+
     override fun onClick(position: Int) {
+
+        when ((activity as HomeTabActivity).userPreferences.getRole()) {
+            "politicians" -> {
+                politiciansClick(position)
+            }
+
+            "entertainers" -> {
+                entertainersClick(position)
+            }
+
+            "organizations" -> {
+                NGOClick(position)
+            }
+            "lpa" -> {
+                LPAclick(position)
+            }
+            else -> {
+                citizensClicks(position)
+            }
+        }
+    }
+
+    private fun citizensClicks(position: Int) {
         when (position) {
             0 -> {
                 val intent = Intent(requireContext(), StatsActivity::class.java)
@@ -182,35 +557,281 @@ class MoreFragment : Fragment(), MoreScreenAdapter.MoreItemListener {
             }
 
             8 -> {
+                //my govts
+            }
+
+            9 -> {
                 val intent = Intent(requireContext(), AboutUsActivity::class.java)
                 intent.putExtra("type", "about")
                 startActivity(intent)
             }
 
-            9 -> {
-                val intent = Intent(requireContext(), SettingsActivity::class.java)
-                startActivity(intent)
-            }
-
             10 -> {
-                val intent = Intent(requireContext(), AboutUsActivity::class.java)
-                intent.putExtra("type", "privacy")
+                val intent = Intent(requireContext(), SettingsActivity::class.java)
                 startActivity(intent)
             }
 
             11 -> {
                 val intent = Intent(requireContext(), AboutUsActivity::class.java)
-                intent.putExtra("type", "conditions")
+                intent.putExtra("type", "privacy")
                 startActivity(intent)
             }
 
             12 -> {
+                val intent = Intent(requireContext(), AboutUsActivity::class.java)
+                intent.putExtra("type", "conditions")
+                startActivity(intent)
+            }
+
+            13 -> {
                 showPopUp()
 
             }
 
         }
     }
+
+    private fun politiciansClick(position: Int) {
+        when (position) {
+            0 -> {
+                val intent = Intent(requireContext(), StatsActivity::class.java)
+                startActivity(intent)
+            }
+
+            1 -> {
+                val intent = Intent(requireContext(), WinningsActivity::class.java)
+                startActivity(intent)
+            }
+
+            2 -> {
+                val intent = Intent(requireContext(), AllWinnersActivity::class.java)
+                startActivity(intent)
+            }
+
+            3 -> {
+                val intent = Intent(requireContext(), CreateLawActivity::class.java)
+                startActivity(intent)
+            }
+
+            4 -> {
+                val intent = Intent(requireContext(), CreateEventActivity::class.java)
+                startActivity(intent)
+            }
+
+            5 -> {
+                val intent = Intent(requireContext(), ProfileActivity::class.java)
+                startActivity(intent)
+            }
+
+            6 -> {
+                val intent = Intent(requireContext(), PetitionActivity::class.java)
+                startActivity(intent)
+            }
+
+            7 -> {
+                val intent = Intent(requireContext(), DebateRequestsActivity::class.java)
+                startActivity(intent)
+            }
+
+            8 -> {
+                //my govts
+            }
+
+            9 -> {
+                val intent = Intent(requireContext(), AboutUsActivity::class.java)
+                intent.putExtra("type", "about")
+                startActivity(intent)
+            }
+
+            10 -> {
+                val intent = Intent(requireContext(), SettingsActivity::class.java)
+                startActivity(intent)
+            }
+
+            11 -> {
+                val intent = Intent(requireContext(), AboutUsActivity::class.java)
+                intent.putExtra("type", "privacy")
+                startActivity(intent)
+            }
+
+            12 -> {
+                val intent = Intent(requireContext(), AboutUsActivity::class.java)
+                intent.putExtra("type", "conditions")
+                startActivity(intent)
+            }
+
+            13 -> {
+                showPopUp()
+
+            }
+
+        }
+    }
+
+    private fun NGOClick(position: Int) {
+        when (position) {
+            0 -> {
+                val intent = Intent(requireContext(), StatsActivity::class.java)
+                startActivity(intent)
+            }
+
+            1 -> {
+                val intent = Intent(requireContext(), CreateLawActivity::class.java)
+                startActivity(intent)
+            }
+
+            2 -> {
+                val intent = Intent(requireContext(), CreateEventActivity::class.java)
+                startActivity(intent)
+            }
+
+            3 -> {
+                val intent = Intent(requireContext(), ProfileActivity::class.java)
+                startActivity(intent)
+            }
+
+
+            4 -> {
+                val intent = Intent(requireContext(), AboutUsActivity::class.java)
+                intent.putExtra("type", "about")
+                startActivity(intent)
+            }
+
+            5 -> {
+                val intent = Intent(requireContext(), SettingsActivity::class.java)
+                startActivity(intent)
+            }
+
+            6 -> {
+                val intent = Intent(requireContext(), AboutUsActivity::class.java)
+                intent.putExtra("type", "privacy")
+                startActivity(intent)
+            }
+
+            7 -> {
+                val intent = Intent(requireContext(), AboutUsActivity::class.java)
+                intent.putExtra("type", "conditions")
+                startActivity(intent)
+            }
+
+            8 -> {
+                showPopUp()
+
+            }
+
+        }
+    }
+
+    private fun entertainersClick(position: Int) {
+        when (position) {
+            0 -> {
+                val intent = Intent(requireContext(), StatsActivity::class.java)
+                startActivity(intent)
+            }
+
+            1 -> {
+                val intent = Intent(requireContext(), CreateLawActivity::class.java)
+                startActivity(intent)
+            }
+
+            2 -> {
+                val intent = Intent(requireContext(), CreateEventActivity::class.java)
+                startActivity(intent)
+            }
+
+            3 -> {
+                val intent = Intent(requireContext(), ProfileActivity::class.java)
+                startActivity(intent)
+            }
+
+
+            4 -> {
+                val intent = Intent(requireContext(), AboutUsActivity::class.java)
+                intent.putExtra("type", "about")
+                startActivity(intent)
+            }
+
+            5 -> {
+                val intent = Intent(requireContext(), SettingsActivity::class.java)
+                startActivity(intent)
+            }
+
+            6 -> {
+                //pending
+            }
+
+            7 -> {
+                val intent = Intent(requireContext(), AboutUsActivity::class.java)
+                intent.putExtra("type", "privacy")
+                startActivity(intent)
+            }
+
+            8 -> {
+                val intent = Intent(requireContext(), AboutUsActivity::class.java)
+                intent.putExtra("type", "conditions")
+                startActivity(intent)
+            }
+
+            9 -> {
+                showPopUp()
+
+            }
+
+        }
+    }
+
+    private fun LPAclick(position: Int) {
+        when (position) {
+            0 -> {
+                val intent = Intent(requireContext(), CreateAnnouncementActivity::class.java)
+                startActivity(intent)
+            }
+            1 -> {
+                val intent = Intent(requireContext(), CreateEventActivity::class.java)
+                startActivity(intent)
+            }
+
+            2 -> {
+                val intent = Intent(requireContext(), ProfileActivity::class.java)
+                startActivity(intent)
+            }
+
+
+            3 -> {
+                val intent = Intent(requireContext(), AboutUsActivity::class.java)
+                intent.putExtra("type", "about")
+                startActivity(intent)
+            }
+
+            4 -> {
+                val intent = Intent(requireContext(), SettingsActivity::class.java)
+                startActivity(intent)
+            }
+
+            5 -> {
+                //pending
+            }
+
+            6 -> {
+                val intent = Intent(requireContext(), AboutUsActivity::class.java)
+                intent.putExtra("type", "privacy")
+                startActivity(intent)
+            }
+
+            7 -> {
+                val intent = Intent(requireContext(), AboutUsActivity::class.java)
+                intent.putExtra("type", "conditions")
+                startActivity(intent)
+            }
+
+            8 -> {
+                showPopUp()
+
+            }
+
+        }
+    }
+
 
     private fun showPopUp() {
         val builder =

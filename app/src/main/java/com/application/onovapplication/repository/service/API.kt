@@ -87,7 +87,7 @@ interface API {
 
 
     @Multipart
-    @POST("sellerSetting")
+    @POST("saveSetting")
     fun saveSetting(
         @Part("userRef") userRef: RequestBody,
         @Part("notification") notification: RequestBody,
@@ -95,7 +95,7 @@ interface API {
     ): Observable<RegisterResponse>
 
     @Multipart
-    @POST("getSellerSetting")
+    @POST("getSetting")
     fun getSettings(
         @Part("userRef") userRef: RequestBody
     ): Observable<GetSettingsResponse>

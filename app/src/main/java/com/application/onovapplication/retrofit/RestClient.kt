@@ -2,7 +2,7 @@ package com.application.onovapplication.retrofit
 
 
 import com.application.onovapplication.BuildConfig
-import com.live.kicktraders.repository.BaseUrl
+import com.application.onovapplication.repository.BaseUrl
 import com.application.onovapplication.repository.service.API
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

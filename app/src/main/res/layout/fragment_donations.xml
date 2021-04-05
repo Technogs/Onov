@@ -1,33 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".activities.PetitionActivity">
+    tools:context=".fragments.DonationsFragment">
 
-    <include
-        android:id="@+id/ab"
-        layout="@layout/action_bar_layout" />
 
     <TextView
-        android:id="@+id/tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/ab"
-        android:layout_centerHorizontal="true"
+android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/poppins_medium"
-        android:text="@string/petition"
+        android:text="@string/donations"
+        android:id="@+id/tv"
         android:textColor="@color/black"
         android:textSize="18sp" />
 
     <RelativeLayout
-        android:id="@+id/noPetitionLayout"
+        android:id="@+id/noDonationLayout"
         android:layout_width="match_parent"
+        android:layout_below="@+id/tv"
         android:layout_height="match_parent"
-        android:layout_below="@+id/ab"
         android:visibility="gone">
 
         <TextView
@@ -35,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:fontFamily="@font/poppins_medium"
-            android:text="@string/no_petitions_yet"
+            android:text="@string/no_donations_yet"
             android:textColor="@color/app_color"
             android:textSize="18sp" />
 
@@ -43,16 +39,14 @@
 
 
     <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/text"
         android:layout_width="match_parent"
+        android:id="@+id/text"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tv"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="10dp"
+        android:layout_below="@+id/tv"
+        android:layout_marginTop="15dp"
         android:layout_marginEnd="25dp"
         android:weightSum="3">
-
-
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -60,7 +54,7 @@
             android:layout_marginTop="10dp"
             android:layout_weight="1.2"
             android:fontFamily="@font/poppins_bold"
-            android:text="@string/sent_from"
+            android:text="@string/received_from"
             android:textColor="@color/black"
             android:textSize="16sp" />
 
@@ -90,29 +84,27 @@
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
-
     <androidx.recyclerview.widget.RecyclerView
-
-        android:id="@+id/rv_petitions"
+        android:id="@+id/rv_donations_fragment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/btnCreatePetition"
-        android:layout_below="@+id/text"
+        android:layout_above="@+id/btnCreateDonation"
         android:layout_marginBottom="20dp"
+        android:layout_below="@+id/text"
+        android:layout_height="wrap_content"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/rv_donations" />
 
-
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnCreatePetition"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="20dp"
+        android:textColor="@color/white"
+        android:text="@string/create_donations"
+        android:id="@+id/btnCreateDonation"
         android:background="@drawable/drawable_gradient_button_background"
-        android:text="@string/create_petitions"
-        android:textColor="@color/white" />
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        />
 
 </RelativeLayout>

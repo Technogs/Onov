@@ -27,6 +27,7 @@
         android:id="@+id/vShadowTwo"
         android:layout_width="match_parent"
         android:layout_height="1dp"
+        android:alpha="0.4"
         android:layout_below="@+id/etPostTitle"
         android:background="@color/edit_text_background" />
 
@@ -52,5 +53,19 @@
         android:textColor="@color/navigation_color"
         android:text="@string/time" />
 
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="wrap_content"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:layout_gravity="center"
+        android:text="@string/request"
+        android:textAllCaps="false"
+        android:fontFamily="@font/poppins"
+        android:textColor="@color/white"
+        android:background="@drawable/drawable_gradient_button_background"
+        />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

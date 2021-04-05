@@ -68,11 +68,11 @@ class ForgotPasswordOtpActivity : BaseAppCompatActivity(), View.OnClickListener 
             showDialog()
         }
 
-        showDialog()
 
     }
 
     private fun observeViewModel() {
+
         verifyViewModel.successfullyVerified.observe(this, Observer {
             dismissDialog()
             if (it) {

@@ -1,5 +1,6 @@
 package com.live.kicktraders.repository
 
+import com.application.onovapplication.repository.BaseUrl
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder
 import com.application.onovapplication.repository.service.API

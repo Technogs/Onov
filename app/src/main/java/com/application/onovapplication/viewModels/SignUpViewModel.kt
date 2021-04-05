@@ -50,7 +50,7 @@ class SignUpViewModel : ViewModel() {
 
         if (image != null) {
             val requestFile = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), image)
-            body = MultipartBody.Part.createFormData("profile_image", image.name, requestFile)
+            body = MultipartBody.Part.createFormData("profilePic", image.name, requestFile)
         }
 
         val user_email: RequestBody =

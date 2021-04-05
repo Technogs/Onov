@@ -27,7 +27,10 @@ import android.view.MotionEvent as MotionEvent1
 
 abstract class BaseAppCompatActivity : AppCompatActivity() {
 
-    val userPreferences: PreferenceManager by lazy { PreferenceManager(this) }
+    val userPreferences: PreferenceManager by lazy {
+        PreferenceManager(this)
+    }
+
     private val mDialog: Dialog by lazy {
         Dialog(this).apply {
             window?.requestFeature(Window.FEATURE_NO_TITLE)

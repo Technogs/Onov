@@ -33,7 +33,7 @@
     <string name="setting">Setting</string>
     <string name="terms_amp_conditions"><![CDATA[Terms & Conditions]]></string>
     <string name="more">More</string>
-    <string name="no_debates_yet">No Debates Yet</string>
+    <string name="no_debates_yet">No Feed Yet</string>
     <string name="like">Like</string>
     <string name="comment">Comment</string>
     <string name="voting">Voting</string>
@@ -122,6 +122,8 @@
     <string name="start_petition">Start Petition</string>
     <string name="post">Post</string>
     <string name="announcement_title">Announcement Title</string>
+    <string name="create_donations">Create Donations</string>
+    <string name="create_petitions">Create Petitions</string>
 
 
 </resources>

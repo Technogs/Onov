@@ -36,7 +36,7 @@ class RegisterActivity : BaseAppCompatActivity(), View.OnClickListener {
         ViewModelProvider(this).get(SignUpViewModel::class.java)
     }
     private val rolesList =
-        arrayOf("Select Role", "Citizens", "Politicians", "Organizations", "Entertainers", "LPA")
+        arrayOf("Select Role", "Citizens", "Politicians", "Organizations", "Entertainers", "lpa")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

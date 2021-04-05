@@ -25,6 +25,8 @@
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/etLawTitle"
         android:layout_width="match_parent"
+        android:drawablePadding="20dp"
+        android:drawableStart="@drawable/create_law"
         android:layout_height="wrap_content"
         android:layout_below="@+id/createPostLayout"
         android:layout_marginTop="10dp"

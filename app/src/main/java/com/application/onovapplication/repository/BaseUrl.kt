@@ -1,4 +1,4 @@
-package com.live.kicktraders.repository
+package com.application.onovapplication.repository
 
 
 /**
@@ -8,7 +8,6 @@ object BaseUrl {
 
     private const val PROTOCOL_HTTPS = "http://"
     private const val PRODUCTION_URL = "hourlylancer.com/devlop/onov/api/v1/"
-
     private const val IMAGE_URL = "http://hourlylancer.com/devlop/onov/"
 
 
@@ -17,6 +16,5 @@ object BaseUrl {
 
     val photoUrl: String
         get() = IMAGE_URL
-
 
 }
