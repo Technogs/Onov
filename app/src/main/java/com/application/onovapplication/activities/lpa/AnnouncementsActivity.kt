@@ -14,7 +14,7 @@ class AnnouncementsActivity : BaseAppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_announcements)
         tvScreenTitle.text = getString(R.string.announcements)
-        tvScreenTitleRight.text = getString(R.string.create_)
+      //  tvScreenTitleRight.text = getString(R.string.create_)
 
         announcementsAdapter = AnnouncementsAdapter(this)
 

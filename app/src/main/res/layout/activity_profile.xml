@@ -9,7 +9,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="240dp"
+        android:layout_height="260dp"
         android:background="@drawable/profile_background">
 
         <ImageView
@@ -37,12 +37,50 @@
             app:tint="@color/white" />
 
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@+id/backBtn"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/ll"
+            android:layout_marginTop="40dp"
+            android:layout_height="wrap_content">
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="wrap_content"
+                android:text="20 Followers"
+                android:textColor="@color/white"
+                android:textAllCaps="false"
+                android:onClick="onClick"
+                android:id="@+id/followers"
+                android:paddingStart="10dp"
+                android:layout_marginEnd="25dp"
+                android:paddingEnd="10dp"
+                android:background="@drawable/drawable_chat_background"
+                android:layout_height="40dp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="wrap_content"
+                android:text="10 Following"
+                android:onClick="onClick"
+                android:textColor="@color/white"
+                android:textAllCaps="false"
+                android:id="@+id/following"
+                android:paddingStart="10dp"
+                android:layout_marginStart="25dp"
+                android:paddingEnd="10dp"
+                android:background="@drawable/drawable_chat_background"
+                android:layout_height="40dp" />
+        </LinearLayout>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/backBtn"
+            android:layout_below="@+id/ll"
+            android:visibility="gone"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="10dp"
             android:fontFamily="@font/poppins"
             android:text="@string/update_profile"
             android:textColor="@color/white"
@@ -54,17 +92,17 @@
         android:id="@+id/photoLayout"
         android:layout_width="match_parent"
         android:layout_height="140dp"
-        android:layout_marginStart="40dp"
+        android:layout_marginStart="60dp"
         android:layout_marginTop="150dp"
-        android:layout_marginEnd="40dp"
+        android:layout_marginEnd="60dp"
         android:background="@drawable/drawable_white_curved_border_layout"
-        android:elevation="10dp">
+        android:elevation="5dp">
 
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profileImage"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
             android:onClick="onClick"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
@@ -72,12 +110,13 @@
 
         <ImageView
             android:id="@+id/profileClick"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_centerVertical="true"
             android:layout_marginStart="-20dp"
             android:layout_toEndOf="@+id/profileImage"
             android:elevation="3dp"
+
             android:src="@drawable/profile_camera" />
 
 
@@ -89,6 +128,7 @@
             android:background="@color/white"
             android:fontFamily="@font/poppins"
             android:gravity="center"
+            android:textSize="14sp"
             android:focusable="false"
             android:text="Jenifer"
             android:layout_below="@+id/profileImage"
@@ -100,7 +140,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/profileImage"
             android:layout_marginStart="15dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="4dp"
             android:id="@+id/editName"
             android:onClick="onClick"
             android:layout_toEndOf="@+id/profileName"
@@ -111,13 +151,17 @@
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
+        android:layout_marginTop="20dp"
         android:layout_height="match_parent"
         android:layout_below="@+id/photoLayout">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-
+            android:padding="20dp"
+            android:elevation="10dp"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/drawable_chat_background"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:orientation="vertical">
@@ -126,7 +170,6 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
                 android:padding="5dp">
 
 
@@ -217,7 +260,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-android:onClick="onClick"
+                    android:onClick="onClick"
                     android:layout_centerVertical="true"
                     android:src="@drawable/edit" />
             </RelativeLayout>
@@ -273,64 +316,84 @@ android:onClick="onClick"
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="35dp"
-                android:layout_marginTop="30dp"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content">
 
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginStart="10dp"
                     android:orientation="horizontal">
 
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:fontFamily="@font/poppins"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    android:id="@+id/tv"
-                    android:layout_marginStart="10dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/role_"
-                    />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:fontFamily="@font/poppins"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:id="@+id/tv"
+                        android:layout_height="wrap_content"
+                        android:text="@string/role_" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:fontFamily="@font/poppins"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    android:id="@+id/roleValue"
-                    android:layout_marginStart="10dp"
-                    android:layout_height="wrap_content"
-                    android:text="Citizen"
-                    />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:fontFamily="@font/poppins"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:id="@+id/roleValue"
+                        android:layout_marginStart="10dp"
+                        android:layout_height="wrap_content"
+                        android:text="Citizen" />
                 </LinearLayout>
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginStart="5dp"
-                    android:background="@color/edit_text_background" />
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:fontFamily="@font/poppins"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:layout_marginStart="10dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/total_donations" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:fontFamily="@font/poppins"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:id="@+id/donaionsValue"
+                        android:layout_marginStart="10dp"
+                        android:layout_height="wrap_content"
+                        android:text="02" />
+                </LinearLayout>
 
             </RelativeLayout>
-
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnUpdateProfile"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="30dp"
                 android:onClick="onClick"
-                android:layout_marginEnd="20dp"
+                android:layout_marginEnd="40dp"
                 android:background="@drawable/drawable_gradient_button_background"
                 android:fontFamily="@font/poppins"
                 android:text="@string/update"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
-                android:textSize="18sp" />
+                android:textSize="16sp" />
 
 
         </LinearLayout>

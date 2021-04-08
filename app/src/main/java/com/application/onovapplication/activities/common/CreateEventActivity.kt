@@ -13,7 +13,7 @@ class CreateEventActivity : BaseAppCompatActivity() {
 
 
         tvScreenTitle.text = getString(R.string.create_event)
-        tvScreenTitleRight.text = getString(R.string.post)
+        //tvScreenTitleRight.text = getString(R.string.post)
     }
 
 

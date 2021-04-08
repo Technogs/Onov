@@ -3,25 +3,72 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginStart="15dp"
-    android:layout_marginEnd="15dp"
+    android:paddingStart="10dp"
+    android:paddingEnd="10dp"
+    android:paddingBottom="5dp"
     android:layout_marginTop="7dp"
-    android:background="@color/white"
+    android:layout_marginEnd="15dp"
+    android:background="@drawable/drawable_chat_background"
     android:elevation="10dp"
     android:orientation="vertical"
-    android:paddingBottom="5dp">
+    android:layout_marginBottom="10dp"
+    >
 
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="4dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="4dp"
+        android:paddingBottom="8dp">
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/ivChatProfile"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/dummy_profile_image" />
+
+
+        <TextView
+            android:id="@+id/userName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="5dp"
+            android:layout_toEndOf="@+id/ivChatProfile"
+            android:fontFamily="@font/poppins"
+            android:text="Gulf"
+            android:textColor="@color/text_blue"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ivChatProfile"
+            android:fontFamily="@font/poppins"
+            android:layout_marginTop="10dp"
+            android:justificationMode="inter_word"
+            android:text="Lorem Ipsum is simply dummy text ever since the type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the)."
+            android:textColor="@color/navigation_color" />
+    </RelativeLayout>
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="200dp"
+        android:id="@+id/ivFeed"
         android:background="@drawable/dummy_debate" />
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="2dp"
         android:orientation="horizontal"
-        android:weightSum="6">
+        android:weightSum="3">
 
         <RelativeLayout
             android:layout_width="0dp"
@@ -34,7 +81,7 @@
                 android:id="@+id/icon1"
                 android:layout_width="30dp"
                 android:layout_height="40dp"
-                android:src="@drawable/thumbs_up" />
+                android:src="@drawable/ic_like" />
 
 
             <TextView
@@ -66,7 +113,48 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_weight="1.5"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/icon3"
+                android:layout_width="30dp"
+                android:layout_height="40dp"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/ic_dislike" />
+
+
+            <TextView
+                android:id="@+id/tvVotingText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/icon3"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/poppins"
+                android:text="@string/dislike"
+                android:textColor="@color/app_color"
+                android:textSize="10sp" />
+
+            <TextView
+                android:id="@+id/tvVotingCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/icon3"
+                android:layout_marginStart="2dp"
+                android:layout_toEndOf="@+id/tvVotingText"
+                android:fontFamily="@font/poppins_medium"
+                android:text="20"
+                android:textColor="@color/red"
+                android:textSize="10sp" />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
             android:gravity="center">
 
             <ImageView
@@ -74,7 +162,7 @@
                 android:layout_width="30dp"
                 android:layout_height="40dp"
                 android:layout_centerHorizontal="true"
-                android:src="@drawable/comment" />
+                android:src="@drawable/ic_comment" />
 
 
             <TextView
@@ -102,114 +190,6 @@
 
         </RelativeLayout>
 
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1.2"
-            android:gravity="center">
-
-            <ImageView
-                android:id="@+id/icon3"
-                android:layout_width="30dp"
-                android:layout_height="40dp"
-                android:layout_centerHorizontal="true"
-                android:src="@drawable/vote_yea" />
-
-
-            <TextView
-                android:id="@+id/tvVotingText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/icon3"
-                android:layout_centerHorizontal="true"
-                android:fontFamily="@font/poppins"
-                android:text="@string/voting"
-                android:textColor="@color/app_color"
-                android:textSize="10sp" />
-
-            <TextView
-                android:id="@+id/tvVotingCount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/icon3"
-                android:layout_marginStart="2dp"
-                android:layout_toEndOf="@+id/tvVotingText"
-                android:fontFamily="@font/poppins_medium"
-                android:text="20"
-                android:textColor="@color/red"
-                android:textSize="10sp" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1.2"
-            android:gravity="center">
-
-            <ImageView
-                android:id="@+id/icon4"
-                android:layout_width="30dp"
-                android:layout_height="40dp"
-                android:layout_centerHorizontal="true"
-                android:src="@drawable/share" />
-
-
-            <TextView
-                android:id="@+id/tvShareText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/icon4"
-                android:layout_centerHorizontal="true"
-                android:fontFamily="@font/poppins"
-                android:text="@string/share"
-                android:textColor="@color/app_color"
-                android:textSize="10sp" />
-
-            <TextView
-                android:id="@+id/tvShareCount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/icon4"
-                android:layout_marginStart="2dp"
-                android:layout_toEndOf="@+id/tvShareText"
-                android:fontFamily="@font/poppins_medium"
-                android:text="20"
-                android:textColor="@color/red"
-                android:textSize="10sp" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1.2"
-            android:gravity="center">
-
-            <ImageView
-                android:id="@+id/icon5"
-                android:layout_width="30dp"
-                android:layout_height="40dp"
-                android:layout_centerHorizontal="true"
-                android:src="@drawable/donate" />
-
-
-            <TextView
-                android:id="@+id/tvDonateText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/icon5"
-                android:layout_centerHorizontal="true"
-                android:fontFamily="@font/poppins"
-                android:text="@string/donate"
-                android:textColor="@color/app_color"
-                android:textSize="10sp" />
-
-
-        </RelativeLayout>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

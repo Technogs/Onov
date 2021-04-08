@@ -20,18 +20,19 @@
         android:paddingBottom="8dp"
         android:paddingStart="15dp"
         android:paddingEnd="15dp"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:fontFamily="@font/poppins"
         android:hint="Search here"
-        android:drawableEnd="@drawable/send"
-        android:textColorHint="@color/white"
-        android:background="@drawable/drawable_grey_curve"
+        android:drawablePadding="15dp"
+        android:drawableStart="@drawable/ic_search"
+        android:background="@drawable/drawable_chat_background"
         android:layout_height="wrap_content"/>
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_marginTop="10dp"
+        android:id="@+id/rv_search_friends"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/rv_search_friends"
         android:layout_height="wrap_content"/>

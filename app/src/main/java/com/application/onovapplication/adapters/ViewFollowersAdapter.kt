@@ -6,13 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.application.onovapplication.R
-import com.application.onovapplication.model.MoreScreenData
-import kotlinx.android.synthetic.main.rv_debates.view.*
-import kotlinx.android.synthetic.main.rv_more.view.*
+import kotlinx.android.synthetic.main.rv_followers.view.*
 
-class ViewDebatesAdapter(
-    val context: Context
-) : RecyclerView.Adapter<ViewDebatesAdapter.RVHolder>() {
+class ViewFollowersAdapter(val context: Context, val type: String
+) : RecyclerView.Adapter<ViewFollowersAdapter.RVHolder>() {
 
 
     override fun onCreateViewHolder(
@@ -21,24 +18,24 @@ class ViewDebatesAdapter(
     ): RVHolder {
         return RVHolder(
             LayoutInflater.from(context).inflate(
-                R.layout.rv_debates, parent,
+                R.layout.rv_followers, parent,
                 false
             )
         )
     }
 
     override fun getItemCount(): Int {
-        return 5
+        return 12
     }
 
     override fun onBindViewHolder(holder: RVHolder, position: Int) {
 
-        if (position == 3 || position == 1)
+        if (type == "followers")
         {
-            holder.itemView.ivFeed.visibility = View.GONE
+            holder.itemView.btnText.text = context.getString(R.string.remove)
         }
         else{
-            holder.itemView.ivFeed.visibility = View.VISIBLE
+            holder.itemView.btnText.text = context.getString(R.string.unfollow)
 
         }
     }

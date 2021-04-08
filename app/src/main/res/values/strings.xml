@@ -124,6 +124,19 @@
     <string name="announcement_title">Announcement Title</string>
     <string name="create_donations">Create Donations</string>
     <string name="create_petitions">Create Petitions</string>
+    <string name="dislike">Dislike</string>
+    <string name="tap_to_view_details">Tap to view details</string>
+    <string name="title_">Title:</string>
+    <string name="petition_1">Petition 1</string>
+    <string name="total_signatures">Total Signatures:</string>
+    <string name="description_">Description:</string>
+    <string name="sign_petition">Sign Petition</string>
+    <string name="upload_pdf">Upload PDF</string>
+    <string name="total_donations">Total Donations</string>
+    <string name="followers">Followers</string>
+    <string name="following">Following</string>
+    <string name="remove">Remove</string>
+    <string name="unfollow">Unfollow</string>
 
 
 </resources>

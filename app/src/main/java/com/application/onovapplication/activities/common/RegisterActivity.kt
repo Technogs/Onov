@@ -9,6 +9,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import androidx.core.app.ActivityCompat
@@ -284,11 +285,14 @@ class RegisterActivity : BaseAppCompatActivity(), View.OnClickListener {
 
             //    Toast.makeText(this, "New Logo Added", Toast.LENGTH_SHORT).show()
 
+
             Glide.with(this).load(mPhotoFile).into(ivRegister)
 
         } else if (requestCode == REQUEST_GALLERY_PHOTO) {
             val selectedImage = data!!.data
             try {
+
+                Log.e("PRACHI", getRealPathFromUri(selectedImage)!!)
                 mPhotoFile = File(getRealPathFromUri(selectedImage)!!)
                 Glide.with(this).load(mPhotoFile).into(ivRegister)
 

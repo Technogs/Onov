@@ -6,13 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.application.onovapplication.R
-import com.application.onovapplication.model.MoreScreenData
-import kotlinx.android.synthetic.main.rv_debates.view.*
-import kotlinx.android.synthetic.main.rv_more.view.*
+import kotlinx.android.synthetic.main.rv_followers.view.*
 
-class ViewDebatesAdapter(
-    val context: Context
-) : RecyclerView.Adapter<ViewDebatesAdapter.RVHolder>() {
+class SearchFriendsAdapter(val context: Context
+) : RecyclerView.Adapter<SearchFriendsAdapter.RVHolder>() {
 
 
     override fun onCreateViewHolder(
@@ -21,26 +18,18 @@ class ViewDebatesAdapter(
     ): RVHolder {
         return RVHolder(
             LayoutInflater.from(context).inflate(
-                R.layout.rv_debates, parent,
+                R.layout.rv_search_friends, parent,
                 false
             )
         )
     }
 
     override fun getItemCount(): Int {
-        return 5
+        return 8
     }
 
     override fun onBindViewHolder(holder: RVHolder, position: Int) {
 
-        if (position == 3 || position == 1)
-        {
-            holder.itemView.ivFeed.visibility = View.GONE
-        }
-        else{
-            holder.itemView.ivFeed.visibility = View.VISIBLE
-
-        }
     }
 
 

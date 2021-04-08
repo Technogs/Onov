@@ -11,6 +11,5 @@ class RequestDebateActivity : BaseAppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_request_debate)
         tvScreenTitle.text = getString(R.string.request_debate)
-        tvScreenTitleRight.text = getString(R.string.request)
     }
 }

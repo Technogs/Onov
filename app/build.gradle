@@ -74,4 +74,10 @@ dependencies {
 //    otp
     implementation 'com.github.aabhasr1:OtpView:v1.1.2-ktx' // kotlin
 
+// signature view
+    implementation 'com.kyanogen.signatureview:signature-view:1.2'
+
+//  pdf viewer
+    implementation 'com.github.barteksc:android-pdf-viewer:3.2.0-beta.1'
+
 }

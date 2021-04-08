@@ -26,7 +26,9 @@ class HomeTabActivity : BaseAppCompatActivity(),
 
         role = userPreferences.getRole()
 
+
         backArrow.visibility = View.GONE
+        searchButton.visibility = View.VISIBLE
     }
 
 

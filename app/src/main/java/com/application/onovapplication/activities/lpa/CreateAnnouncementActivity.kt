@@ -11,7 +11,6 @@ class CreateAnnouncementActivity : AppCompatActivity() {
         setContentView(R.layout.activity_create_announcement)
 
         tvScreenTitle.text = getString(R.string.create_announcements)
-        tvScreenTitleRight.text = getString(R.string.post)
 
     }
 }

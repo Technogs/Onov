@@ -19,7 +19,6 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import com.application.onovapplication.BuildConfig
 import com.application.onovapplication.R
 import com.application.onovapplication.model.UserInfo
@@ -236,6 +235,20 @@ class ProfileActivity : BaseAppCompatActivity(), View.OnClickListener {
 
     override fun onClick(p0: View?) {
         when (p0!!.id) {
+
+
+            R.id.followers->{
+                val intent = Intent(this , ViewFollowersActivity::class.java)
+                intent.putExtra("type", "followers")
+                startActivity(intent)
+            }
+
+            R.id.following->{
+                val intent = Intent(this , ViewFollowersActivity::class.java)
+                intent.putExtra("type", "following")
+                startActivity(intent)
+            }
+
             R.id.profileImage -> {
                 if (ContextCompat.checkSelfPermission(
                         this,

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activities.PetitionDetailsActivity">
+
+    <include layout="@layout/action_bar_layout"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/drawable_chat_background"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="Sent From:"
+            android:id="@+id/tv"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/poppins"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="ABC"
+            android:textSize="16sp"
+            android:layout_toEndOf="@+id/tv"
+            android:layout_marginStart="40dp"
+            android:id="@+id/senderNameDetails"
+            android:textColor="@color/text_blue"
+            android:fontFamily="@font/poppins"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="@string/title"
+            android:id="@+id/tv2"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/senderNameDetails"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:fontFamily="@font/poppins"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="@string/petition_1"
+            android:textSize="16sp"
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@+id/tv"
+            android:id="@+id/petitionTitleDetails"
+            android:layout_below="@+id/senderNameDetails"
+            android:layout_marginStart="40dp"
+            android:textColor="@color/text_blue"
+            android:fontFamily="@font/poppins"
+            android:layout_height="wrap_content"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="@string/description_"
+            android:id="@+id/tv3"
+            android:layout_marginTop="10dp"
+            android:textSize="16sp"
+            android:layout_below="@id/petitionTitleDetails"
+            android:textColor="@color/black"
+            android:fontFamily="@font/poppins"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="Dummy text Dummy text Dummy text  Dummy text Dummy text Dummy text Dummy text"
+            android:layout_toEndOf="@+id/tv"
+            android:id="@+id/petitionDetails"
+            android:layout_marginTop="10dp"
+            android:textSize="16sp"
+            android:layout_below="@+id/petitionTitleDetails"
+            android:layout_marginStart="40dp"
+            android:textColor="@color/text_blue"
+            android:fontFamily="@font/poppins"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
+
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="40dp"
+        android:layout_gravity="end"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="20dp"
+        android:onClick="onClick"
+android:id="@+id/ivClear"
+        android:src="@drawable/ic_baseline_clear"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:padding="2dp"
+        android:background="@drawable/drawable_chat_background"
+        android:layout_height="wrap_content">
+
+
+    <com.kyanogen.signatureview.SignatureView
+        xmlns:sign="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/signature_view"
+
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        sign:penSize="5dp"
+        sign:penColor="#000000"
+        sign:enableSignature="true"/>
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textAllCaps="false"
+        android:fontFamily="@font/poppins"
+        android:onClick="onClick"
+        android:textColor="@color/white"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/drawable_gradient_button_background"
+        android:text="@string/sign_petition"
+        android:paddingStart="50dp"
+        android:paddingEnd="50dp"
+        />
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>

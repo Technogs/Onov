@@ -58,6 +58,12 @@ abstract class BaseAppCompatActivity : AppCompatActivity() {
         finish()
     }
 
+    open fun searchBtnPressed(view:View?)
+    {
+        val intent = Intent(this, SearchFriendsActivity::class.java)
+        startActivity(intent)
+    }
+
     open fun notificationBtnPressed(view: View?) {
         val intent = Intent(this, NotificationsActivity::class.java)
         startActivity(intent)
