@@ -8,7 +8,6 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.application.onovapplication.R
-import com.application.onovapplication.activities.ResetPasswordActivity
 import com.application.onovapplication.viewModels.VerifyViewModel
 import kotlinx.android.synthetic.main.action_bar_layout_2.*
 import kotlinx.android.synthetic.main.activity_forgot_password_otp.*

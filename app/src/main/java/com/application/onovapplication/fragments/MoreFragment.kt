@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.application.onovapplication.R
 import com.application.onovapplication.activities.DonationsActivity
+import com.application.onovapplication.activities.EventsActivity
 import com.application.onovapplication.activities.PetitionActivity
 import com.application.onovapplication.activities.ViewLawsActivity
 import com.application.onovapplication.activities.citizens.DebateRequestsActivity
@@ -110,7 +111,7 @@ class MoreFragment : Fragment(), MoreScreenAdapter.MoreItemListener {
 
         dataList.add(
             MoreScreenData(
-                "Create Event",
+                "Events",
                 R.drawable.create_event
             )
         )
@@ -211,7 +212,7 @@ class MoreFragment : Fragment(), MoreScreenAdapter.MoreItemListener {
         )
         dataList.add(
             MoreScreenData(
-                "Create Event",
+                "Events",
                 R.drawable.create_event
             )
         )
@@ -296,7 +297,7 @@ class MoreFragment : Fragment(), MoreScreenAdapter.MoreItemListener {
 
         dataList.add(
             MoreScreenData(
-                "Create Event",
+                "Events",
                 R.drawable.create_event
             )
         )
@@ -364,7 +365,7 @@ class MoreFragment : Fragment(), MoreScreenAdapter.MoreItemListener {
 
         dataList.add(
             MoreScreenData(
-                "Create Event",
+                "Events",
                 R.drawable.create_event
             )
         )
@@ -432,7 +433,7 @@ class MoreFragment : Fragment(), MoreScreenAdapter.MoreItemListener {
 
         dataList.add(
             MoreScreenData(
-                "Create Event",
+                "Events",
                 R.drawable.create_event
             )
         )
@@ -613,7 +614,7 @@ class MoreFragment : Fragment(), MoreScreenAdapter.MoreItemListener {
             }
 
             4 -> {
-                val intent = Intent(requireContext(), CreateEventActivity::class.java)
+                val intent = Intent(requireContext(), EventsActivity::class.java)
                 startActivity(intent)
             }
 
@@ -680,7 +681,7 @@ class MoreFragment : Fragment(), MoreScreenAdapter.MoreItemListener {
             }
 
             2 -> {
-                val intent = Intent(requireContext(), CreateEventActivity::class.java)
+                val intent = Intent(requireContext(), EventsActivity::class.java)
                 startActivity(intent)
             }
 
@@ -734,7 +735,7 @@ class MoreFragment : Fragment(), MoreScreenAdapter.MoreItemListener {
             }
 
             2 -> {
-                val intent = Intent(requireContext(), CreateEventActivity::class.java)
+                val intent = Intent(requireContext(), EventsActivity::class.java)
                 startActivity(intent)
             }
 
@@ -786,7 +787,7 @@ class MoreFragment : Fragment(), MoreScreenAdapter.MoreItemListener {
                 startActivity(intent)
             }
             1 -> {
-                val intent = Intent(requireContext(), CreateEventActivity::class.java)
+                val intent = Intent(requireContext(), EventsActivity::class.java)
                 startActivity(intent)
             }
 

@@ -1,4 +1,4 @@
-package com.application.onovapplication.activities
+package com.application.onovapplication.activities.common
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,8 +8,6 @@ import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.application.onovapplication.R
-import com.application.onovapplication.activities.common.BaseAppCompatActivity
-import com.application.onovapplication.activities.common.LoginActivity
 import com.application.onovapplication.viewModels.NewPasswordViewModel
 import kotlinx.android.synthetic.main.action_bar_layout_2.*
 import kotlinx.android.synthetic.main.activity_reset_password.*
