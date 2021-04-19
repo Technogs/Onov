@@ -12,13 +12,17 @@ import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
+import android.webkit.MimeTypeMap
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
+import com.application.onovapplication.BuildConfig
 import com.application.onovapplication.R
 import com.application.onovapplication.activities.common.BaseAppCompatActivity
 import kotlinx.android.synthetic.main.action_bar_layout_2.*
 import kotlinx.android.synthetic.main.activity_create_law.*
+import java.io.File
 
 
 class CreateLawActivity : BaseAppCompatActivity(), View.OnClickListener {
@@ -28,6 +32,8 @@ class CreateLawActivity : BaseAppCompatActivity(), View.OnClickListener {
 
 
     private var myUri: Uri? = null
+
+    private var myFile:String?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,20 +65,27 @@ class CreateLawActivity : BaseAppCompatActivity(), View.OnClickListener {
                 }
             }
 
-            R.id.ivCancel-> {
-                pdfView.visibility = View.GONE
+            R.id.ivCancel -> {
+                tvView.visibility = View.GONE
                 ivCancel.visibility = View.GONE
             }
+
+            R.id.tvView -> {
+                openDocument(myFile)
+            }
         }
+
+
     }
 
 
     private fun showFileChooser() {
         val intent = Intent()
-        intent.type = "application/pdf"
+        intent.type = "application/*"
         intent.action = Intent.ACTION_GET_CONTENT
-        startActivityForResult(Intent.createChooser(intent, "Select Pdf"), PICK_PDF_REQUEST)
+        startActivityForResult(Intent.createChooser(intent, "Select File"), PICK_PDF_REQUEST)
     }
+
 
     override fun onActivityResult(
         requestCode: Int,
@@ -83,20 +96,20 @@ class CreateLawActivity : BaseAppCompatActivity(), View.OnClickListener {
         if (requestCode == PICK_PDF_REQUEST && resultCode == Activity.RESULT_OK && data != null && data.data != null) {
             myUri = data.data
 
-            val myFile =
+             myFile =
                 "${Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)}/${getFileName(
                     this@CreateLawActivity,
                     myUri
                 )}"
 
-            pdfView.visibility = View.VISIBLE
+            tvView.visibility = View.VISIBLE
             ivCancel.visibility = View.VISIBLE
 
-            pdfView.fromUri(myUri)
-                .defaultPage(0)
-                .load()
+            tvView.text = getFileName(this, myUri)
 
-            Log.e("PRACHI", myFile)
+
+
+            Log.e("PRACHI", myFile.toString())
 
             //val file : File = File(myFile)
         }
@@ -133,15 +146,33 @@ class CreateLawActivity : BaseAppCompatActivity(), View.OnClickListener {
         if (requestCode == STORAGE_PERMISSION_CODE) {
 
             //If permission is granted
-            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
                 showFileChooser()
-            } else {
-                //Displaying another toast if permission is not granted
-                Toast.makeText(this, "Oops you just denied the permission", Toast.LENGTH_LONG)
-                    .show()
             }
         }
+    }
+
+
+    private fun openDocument(name: String?) {
+        val intent = Intent(Intent.ACTION_VIEW)
+        val file = File(name)
+        val extension = MimeTypeMap.getFileExtensionFromUrl(
+            FileProvider.getUriForFile(this, BuildConfig.APPLICATION_ID + ".provider",file).toString()
+        )
+        val mimetype =
+            MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension)
+        if (extension.equals("", ignoreCase = true) || mimetype == null) {
+            // if there is no extension or there is no definite mimetype, still try to open the file
+            intent.setDataAndType(FileProvider.getUriForFile(this, BuildConfig.APPLICATION_ID + ".provider",file), "text/*")
+        } else {
+            intent.setDataAndType(FileProvider.getUriForFile(this, BuildConfig.APPLICATION_ID + ".provider",file), mimetype)
+        }
+        // custom message for the intent
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+        startActivity(Intent.createChooser(intent, "Choose an Application:"))
+
     }
 
 

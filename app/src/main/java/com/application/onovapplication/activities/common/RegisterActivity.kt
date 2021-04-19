@@ -90,7 +90,7 @@ class RegisterActivity : BaseAppCompatActivity(), View.OnClickListener {
 
             override fun onItemSelected(
                 parent: AdapterView<*>?,
-                view: View?,
+                 view: View?,
                 position: Int,
                 id: Long
             ) {
@@ -110,7 +110,6 @@ class RegisterActivity : BaseAppCompatActivity(), View.OnClickListener {
 
                     checkEmpty(edRegisterName) -> {
                         setError(getString(R.string.name_error))
-
                     }
 
                     checkEmpty(edRegisterEmail) -> {
@@ -128,6 +127,7 @@ class RegisterActivity : BaseAppCompatActivity(), View.OnClickListener {
                     selectedRole == "Select Role" -> {
                         setError(getString(R.string.role_error))
                     }
+
                     else -> {
                         signUpViewModel.register(
                             this,
@@ -141,11 +141,10 @@ class RegisterActivity : BaseAppCompatActivity(), View.OnClickListener {
                             "3223",
                             "Android"
                         )
+
                         showDialog()
 
                     }
-
-
                 }
 
                 //  signUpViewModel.register(this , )
@@ -258,8 +257,6 @@ class RegisterActivity : BaseAppCompatActivity(), View.OnClickListener {
             getExternalFilesDir(Environment.DIRECTORY_PICTURES)
         return File.createTempFile(mFileName, ".jpg", storageDir)
     }
-
-
     private fun getRealPathFromUri(contentUri: Uri?): String? {
         var cursor: Cursor? = null
         return try {

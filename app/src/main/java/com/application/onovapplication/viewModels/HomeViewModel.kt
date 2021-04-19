@@ -1,12 +1,11 @@
-package com.live.kicktraders.viewModel
+package com.application.onovapplication.viewModels
 
 import android.annotation.SuppressLint
 import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.application.onovapplication.R
-import com.application.onovapplication.model.LoginResponse
-import com.application.onovapplication.model.UserInfo
+import com.application.onovapplication.model.GetFeedResponse
 import com.application.onovapplication.repository.service.DataManager
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.observers.DisposableObserver
@@ -17,64 +16,42 @@ import retrofit2.HttpException
 import java.io.IOException
 import java.util.concurrent.TimeoutException
 
-class LoginViewModel : ViewModel() {
-
+class HomeViewModel : ViewModel() {
 
     private val dataManager: DataManager = DataManager()
     val successful: MutableLiveData<Boolean> = MutableLiveData()
     var message: String = ""
     var status: String = ""
-    lateinit var userInfo: UserInfo
+    lateinit var getFeedResponse: GetFeedResponse
 
 
     @SuppressLint("CheckResult")
-    fun login(
+    fun getFeed(
         context: Context,
-        email: String,
-        password: String,
-        mobileType: String,
-        token: String
+        userPref: String
     ) {
 
 
-        val userEmail: RequestBody =
-            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), email)
-        val userPassword: RequestBody =
-            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), password)
-
-        val fieldType: RequestBody =
-            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), "email")
-
-        val OSType: RequestBody =
-            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), mobileType)
-
-        val deviceToken: RequestBody =
-            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), token)
-
-//        val userRole: RequestBody =
-//            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), role)
+        val userId: RequestBody =
+            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), userPref)
 
 
-        dataManager.login(userEmail, userPassword, fieldType, OSType, deviceToken)
+        dataManager.getFeed(userId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeWith(
-                object : DisposableObserver<LoginResponse>() {
+                object : DisposableObserver<GetFeedResponse>() {
                     override fun onComplete() {
 
                     }
 
-                    override fun onNext(t: LoginResponse) {
+                    override fun onNext(t: GetFeedResponse) {
+                        getFeedResponse = t
                         status = t.status!!
-
-                        if (status == "success") {
-
-                            userInfo = t.userInfo!!
-                        }
-
                         message = t.msg!!
                         successful.value = true
                     }
+
 
                     override fun onError(e: Throwable) {
                         when (e) {
@@ -85,7 +62,6 @@ class LoginViewModel : ViewModel() {
                             is TimeoutException -> {
                                 message = context
                                     .getString(R.string.error_request_timed_out)
-
                             }
                             is HttpException -> {
                                 message = e.message.toString()
@@ -99,4 +75,6 @@ class LoginViewModel : ViewModel() {
                     }
                 })
     }
+
+
 }

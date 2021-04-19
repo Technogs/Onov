@@ -24,7 +24,7 @@ class LoginActivity : BaseAppCompatActivity(), View.OnClickListener {
 
 
     private val rolesList =
-        arrayOf("Select Role", "Citizens", "Politicians", "Organizations", "Entertainers", "lpa")
+        arrayOf("Select Role", "Citizens", "Politicians", "Organizations", "Entertainers", "LPA")
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,17 +59,16 @@ class LoginActivity : BaseAppCompatActivity(), View.OnClickListener {
                         setError(getString(R.string.password_error))
                     }
 
-                    selectedRole == "Select Role" -> {
-                        setError(getString(R.string.role_error))
-                    }
+//                    selectedRole == "Select Role" -> {
+//                        setError(getString(R.string.role_error))
+//                    }
 
                     else -> {
                         loginViewModel.login(
                             this,
                             etEmail.text.toString().trim(),
                             etPassword.text.toString().trim(),
-                            "Android",
-                            selectedRole,
+                             "Android",
                             token
                         )
                         showDialog()

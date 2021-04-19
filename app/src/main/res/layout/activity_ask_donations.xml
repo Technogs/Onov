@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activities.politicians.CreateLawActivity">
+    android:layout_height="match_parent"
+    tools:context=".activities.common.AskDonationsActivity">
 
     <include layout="@layout/action_bar_layout_2" />
 
@@ -32,16 +33,15 @@
                 android:layout_height="36dp" />
 
             <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/etLawTitle"
+                android:id="@+id/etDonationTitle"
                 android:layout_width="match_parent"
                 android:drawablePadding="20dp"
-                android:drawableStart="@drawable/create_law"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/createPostLayout"
                 android:layout_marginTop="10dp"
                 android:background="@null"
                 android:fontFamily="@font/poppins"
-                android:hint="@string/law_title"
+                android:hint="@string/donation_title"
                 android:padding="15dp"
                 android:textColor="@color/navigation_color"
                 android:textColorHint="@color/navigation_color" />
@@ -71,8 +71,8 @@
                 android:layout_gravity="center"
                 android:layout_marginEnd="10sp"
                 android:layout_marginTop="80dp"
-                android:text="@string/upload_filw"
-                android:id="@+id/btnUploadPdf"
+                android:text="@string/upload_picture"
+                android:id="@+id/btnUploadImage"
                 android:onClick="onClick"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
@@ -84,7 +84,7 @@
 
             <ImageView
                 android:layout_width="20dp"
-    android:layout_gravity="end"
+                android:layout_gravity="end"
                 android:onClick="onClick"
                 android:id="@+id/ivCancel"
                 android:layout_marginEnd="20dp"
@@ -92,18 +92,16 @@
                 android:src="@drawable/black_cross"
                 android:layout_height="20dp" />
 
-            <TextView
-                android:id="@+id/tvView"
-                android:textColor="@color/navigation_color"
-                android:gravity= "center"
+            <ImageView
+                android:id="@+id/ivFile"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
-                android:layout_marginTop="30dp"
-                android:onClick="onClick"
+                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="300dp" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
     </ScrollView>
+
 </androidx.appcompat.widget.LinearLayoutCompat>

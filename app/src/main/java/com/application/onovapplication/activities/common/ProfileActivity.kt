@@ -2,6 +2,7 @@ package com.application.onovapplication.activities.common
 
 import android.Manifest
 import android.app.AlertDialog
+import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -11,9 +12,9 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.view.View
+import android.view.Window
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
-import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
@@ -26,6 +27,7 @@ import com.application.onovapplication.repository.BaseUrl
 import com.application.onovapplication.viewModels.ProfileViewModel
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_profile.*
+import kotlinx.android.synthetic.main.donate_dialog.*
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
@@ -34,8 +36,9 @@ import java.util.*
 class ProfileActivity : BaseAppCompatActivity(), View.OnClickListener {
 
     var mPhotoFile: File? = null
-    val REQUEST_TAKE_PHOTO = 101
-    val REQUEST_GALLERY_PHOTO = 201
+    private val REQUEST_TAKE_PHOTO = 101
+    private val REQUEST_GALLERY_PHOTO = 201
+    private var type: String? = null
 
     private val profileViewModel by lazy {
         ViewModelProvider(this).get(ProfileViewModel::class.java)
@@ -44,6 +47,26 @@ class ProfileActivity : BaseAppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
+
+
+        type = intent.getStringExtra("type")
+
+        if (type == "user") {
+            donate.visibility = View.GONE
+            btnUpdateProfile.visibility = View.VISIBLE
+            profileClick.visibility = View.VISIBLE
+            editName.visibility = View.VISIBLE
+            emailEdit.visibility = View.VISIBLE
+            phoneEdit.visibility = View.VISIBLE
+        } else {
+            donate.visibility = View.VISIBLE
+            btnUpdateProfile.visibility = View.GONE
+            profileClick.visibility = View.GONE
+            editName.visibility = View.INVISIBLE
+            emailEdit.visibility = View.INVISIBLE
+            phoneEdit.visibility = View.INVISIBLE
+        }
+
         profileViewModel.getProfile(this, userPreferences.getUserREf())
         showDialog()
         observeViewModel()
@@ -201,7 +224,6 @@ class ProfileActivity : BaseAppCompatActivity(), View.OnClickListener {
 
         if (requestCode == REQUEST_TAKE_PHOTO) {
 
-            Toast.makeText(this, "New Logo Added", Toast.LENGTH_SHORT).show()
 
             Glide.with(this).load(mPhotoFile).into(profileImage)
 
@@ -237,16 +259,26 @@ class ProfileActivity : BaseAppCompatActivity(), View.OnClickListener {
         when (p0!!.id) {
 
 
-            R.id.followers->{
-                val intent = Intent(this , ViewFollowersActivity::class.java)
+            R.id.followers -> {
+                val intent = Intent(this, ViewFollowersActivity::class.java)
                 intent.putExtra("type", "followers")
                 startActivity(intent)
             }
 
-            R.id.following->{
-                val intent = Intent(this , ViewFollowersActivity::class.java)
+            R.id.following -> {
+                val intent = Intent(this, ViewFollowersActivity::class.java)
                 intent.putExtra("type", "following")
                 startActivity(intent)
+            }
+
+            R.id.donors -> {
+                val intent = Intent(this, ViewFollowersActivity::class.java)
+                intent.putExtra("type", "donors")
+                startActivity(intent)
+            }
+
+            R.id.donate -> {
+                openDonationsDialog()
             }
 
             R.id.profileImage -> {
@@ -281,7 +313,6 @@ class ProfileActivity : BaseAppCompatActivity(), View.OnClickListener {
             R.id.phoneEdit -> {
                 setFocusableTrue(edProfilePhone)
                 ccPickerProfile.isClickable = true
-
             }
 
             R.id.btnUpdateProfile -> {
@@ -299,9 +330,29 @@ class ProfileActivity : BaseAppCompatActivity(), View.OnClickListener {
                     ccPickerProfile.selectedCountryCode,
                     mPhotoFile
                 )
-
                 showDialog()
             }
         }
     }
+
+    private fun openDonationsDialog() {
+        val dialog = Dialog(this)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(true)
+        dialog.setContentView(R.layout.donate_dialog)
+        dialog.window!!.setBackgroundDrawableResource(android.R.color.transparent);
+        dialog.show()
+
+
+        dialog.submitDonation.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.cancelDonation.setOnClickListener {
+            dialog.dismiss()
+
+        }
+
+    }
 }
+

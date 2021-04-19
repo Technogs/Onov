@@ -53,12 +53,14 @@
                 android:textColor="@color/white"
                 android:textAllCaps="false"
                 android:onClick="onClick"
+                android:layout_marginStart="25dp"
                 android:id="@+id/followers"
                 android:paddingStart="10dp"
                 android:layout_marginEnd="25dp"
                 android:paddingEnd="10dp"
                 android:background="@drawable/drawable_chat_background"
                 android:layout_height="40dp" />
+
 
             <androidx.appcompat.widget.AppCompatButton
                 android:layout_width="wrap_content"
@@ -68,10 +70,25 @@
                 android:textAllCaps="false"
                 android:id="@+id/following"
                 android:paddingStart="10dp"
-                android:layout_marginStart="25dp"
                 android:paddingEnd="10dp"
                 android:background="@drawable/drawable_chat_background"
                 android:layout_height="40dp" />
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="wrap_content"
+                android:text="@string/_02_donors"
+                android:textColor="@color/white"
+                android:textAllCaps="false"
+                android:onClick="onClick"
+                android:id="@+id/donors"
+                android:layout_marginStart="25dp"
+                android:paddingStart="10dp"
+                android:layout_marginEnd="25dp"
+                android:paddingEnd="10dp"
+                android:background="@drawable/drawable_chat_background"
+                android:layout_height="40dp" />
+
         </LinearLayout>
 
         <TextView
@@ -196,6 +213,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:onClick="onClick"
+
                     android:layout_centerVertical="true"
                     android:src="@drawable/edit" />
 
@@ -395,6 +413,21 @@
                 android:textColor="@color/white"
                 android:textSize="16sp" />
 
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_marginTop="30dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textColor="@color/navigation_color"
+                android:text="@string/donate"
+                android:scaleType="fitCenter"
+                android:padding="5dp"
+                android:onClick="onClick"
+                android:id="@+id/donate"
+                android:visibility="gone"
+                android:drawableTop="@drawable/donate"
+                android:layout_height="wrap_content"/>
 
         </LinearLayout>
 

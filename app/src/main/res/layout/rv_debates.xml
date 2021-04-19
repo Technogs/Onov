@@ -47,6 +47,7 @@
             android:textSize="16sp" />
 
         <TextView
+            android:id="@+id/feedDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/ivChatProfile"
@@ -57,18 +58,38 @@
             android:textColor="@color/navigation_color" />
     </RelativeLayout>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/feedMedia"
+        android:layout_height="200dp">
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:id="@+id/ivFeed"
         android:background="@drawable/dummy_debate" />
 
+        <VideoView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:id="@+id/vvFeed"
+            android:visibility="gone"
+            android:background="@drawable/dummy_debate" />
+
+        <WebView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:id="@+id/wbFeed"
+            android:visibility="gone"
+            android:background="@drawable/dummy_debate" />
+    </RelativeLayout>
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
+        android:id="@+id/ll"
         android:orientation="horizontal"
-        android:weightSum="3">
+      >
 
         <RelativeLayout
             android:layout_width="0dp"
@@ -183,6 +204,48 @@
                 android:layout_below="@+id/icon2"
                 android:layout_marginStart="2dp"
                 android:layout_toEndOf="@+id/tvCommentText"
+                android:fontFamily="@font/poppins_medium"
+                android:text="20"
+                android:textColor="@color/red"
+                android:textSize="10sp" />
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:id="@+id/donateLayout"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/icon4"
+                android:layout_width="30dp"
+                android:layout_height="40dp"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/donate" />
+
+
+            <TextView
+                android:id="@+id/tvDonateText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/icon4"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/poppins"
+                android:text="@string/donate"
+
+                android:textColor="@color/app_color"
+                android:textSize="10sp" />
+
+            <TextView
+                android:id="@+id/tvDonateCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/icon4"
+                android:layout_marginStart="2dp"
+                android:layout_toEndOf="@+id/tvDonateText"
                 android:fontFamily="@font/poppins_medium"
                 android:text="20"
                 android:textColor="@color/red"

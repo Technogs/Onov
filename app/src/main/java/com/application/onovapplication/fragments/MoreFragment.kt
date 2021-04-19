@@ -9,13 +9,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.application.onovapplication.R
-import com.application.onovapplication.activities.DonationsActivity
 import com.application.onovapplication.activities.EventsActivity
 import com.application.onovapplication.activities.PetitionActivity
-import com.application.onovapplication.activities.ViewLawsActivity
 import com.application.onovapplication.activities.citizens.DebateRequestsActivity
 import com.application.onovapplication.activities.common.*
 import com.application.onovapplication.activities.lpa.CreateAnnouncementActivity
+import com.application.onovapplication.activities.DonationsActivity
 import com.application.onovapplication.activities.politicians.CreateLawActivity
 import com.application.onovapplication.adapters.MoreScreenAdapter
 import com.application.onovapplication.model.MoreScreenData
@@ -48,26 +47,25 @@ class MoreFragment : Fragment(), MoreScreenAdapter.MoreItemListener {
 
 
         when ((activity as HomeTabActivity).userPreferences.getRole()) {
-            "politicians" -> {
+            "Politicians" -> {
                 setPoliticiansList()
             }
 
-            "entertainers" -> {
+            "Entertainers" -> {
                 setEntertainersList()
 
             }
-            "organizations" -> {
+            "Organizations" -> {
                 setNGOList()
             }
 
-            "lpa" -> {
+            "LPA" -> {
                 setLPAList()
             }
 
             else -> {
                 setCitizensList()
             }
-
         }
 
 
@@ -99,7 +97,6 @@ class MoreFragment : Fragment(), MoreScreenAdapter.MoreItemListener {
 
             )
         )
-
 
         dataList.add(
             MoreScreenData(
@@ -494,18 +491,18 @@ class MoreFragment : Fragment(), MoreScreenAdapter.MoreItemListener {
     override fun onClick(position: Int) {
 
         when ((activity as HomeTabActivity).userPreferences.getRole()) {
-            "politicians" -> {
+            "Politicians" -> {
                 politiciansClick(position)
             }
 
-            "entertainers" -> {
+            "Entertainers" -> {
                 entertainersClick(position)
             }
 
-            "organizations" -> {
+            "Organizations" -> {
                 NGOClick(position)
             }
-            "lpa" -> {
+            "LPA" -> {
                 LPAclick(position)
             }
             else -> {
@@ -533,6 +530,7 @@ class MoreFragment : Fragment(), MoreScreenAdapter.MoreItemListener {
 
             3 -> {
                 val intent = Intent(requireContext(), ProfileActivity::class.java)
+                intent.putExtra("type", "user")
                 startActivity(intent)
             }
 
@@ -620,6 +618,7 @@ class MoreFragment : Fragment(), MoreScreenAdapter.MoreItemListener {
 
             5 -> {
                 val intent = Intent(requireContext(), ProfileActivity::class.java)
+                intent.putExtra("type", "user")
                 startActivity(intent)
             }
 
@@ -687,6 +686,7 @@ class MoreFragment : Fragment(), MoreScreenAdapter.MoreItemListener {
 
             3 -> {
                 val intent = Intent(requireContext(), ProfileActivity::class.java)
+                intent.putExtra("type", "user")
                 startActivity(intent)
             }
 
@@ -741,6 +741,7 @@ class MoreFragment : Fragment(), MoreScreenAdapter.MoreItemListener {
 
             3 -> {
                 val intent = Intent(requireContext(), ProfileActivity::class.java)
+                intent.putExtra("type", "user")
                 startActivity(intent)
             }
 
@@ -793,6 +794,7 @@ class MoreFragment : Fragment(), MoreScreenAdapter.MoreItemListener {
 
             2 -> {
                 val intent = Intent(requireContext(), ProfileActivity::class.java)
+                intent.putExtra("type", "user")
                 startActivity(intent)
             }
 

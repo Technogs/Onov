@@ -7,8 +7,8 @@ package com.application.onovapplication.repository
 object BaseUrl {
 
     private const val PROTOCOL_HTTPS = "http://"
-    private const val PRODUCTION_URL = "hourlylancer.com/devlop/onov/api/v1/"
-    private const val IMAGE_URL = "http://hourlylancer.com/devlop/onov/"
+    private const val PRODUCTION_URL = "xpertidea.com/mobile/onov/api/v1/"
+    private const val IMAGE_URL = "http://xpertidea.com/mobile/onov/"
 
 
     val apiBaseUrl: String

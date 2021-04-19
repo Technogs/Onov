@@ -61,7 +61,7 @@
     <string name="receive_anonymous_donations">Receive anonymous donations</string>
     <string name="reset_password">Reset Password</string>
     <string name="no_debate_requests_yet">No Debate Requests yet</string>
-    <string name="title">Title:</string>
+    <string name="title">Title</string>
     <string name="date_">Date:</string>
     <string name="time_">Time:</string>
     <string name="view">View</string>
@@ -131,7 +131,7 @@
     <string name="total_signatures">Total Signatures:</string>
     <string name="description_">Description:</string>
     <string name="sign_petition">Sign Petition</string>
-    <string name="upload_pdf">Upload PDF</string>
+    <string name="upload_filw">Upload Document</string>
     <string name="total_donations">Total Donations</string>
     <string name="followers">Followers</string>
     <string name="following">Following</string>
@@ -142,6 +142,14 @@
     <string name="start_date">Start Date</string>
     <string name="start_time">Start Time</string>
     <string name="end_time">End Time</string>
+    <string name="event_price">Event Price ($)</string>
+    <string name="_02_donors">02 Donors</string>
+    <string name="donors">Donors</string>
+    <string name="ask_for_donations">Ask for Donations</string>
+    <string name="donation_title">Donation Title</string>
+    <string name="add_your_donation_amount">Add your Donation Amount</string>
+    <string name="submit">Submit</string>
+    <string name="cancel">Cancel</string>
 
 
 </resources>

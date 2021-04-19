@@ -2,6 +2,7 @@ package com.application.onovapplication.activities.common
 
 import android.os.Bundle
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.application.onovapplication.R
 import com.application.onovapplication.viewModels.SettingsViewModel
@@ -14,7 +15,7 @@ class SettingsActivity : BaseAppCompatActivity() {
     var notificationStatus = ""
     var userRef = ""
     private val settingsViewModel by lazy {
-        ViewModelProviders.of(this).get(SettingsViewModel::class.java)
+        ViewModelProvider(this).get(SettingsViewModel::class.java)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

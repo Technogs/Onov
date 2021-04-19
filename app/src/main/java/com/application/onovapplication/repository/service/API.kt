@@ -15,8 +15,7 @@ interface API {
         @Part("email") email: RequestBody?,
         @Part("Password") Password: RequestBody?,
         @Part("deviceType") mobileType: RequestBody?,
-        @Part("deviceToken") deviceToken: RequestBody?,
-        @Part("Role") role: RequestBody?
+        @Part("deviceToken") deviceToken: RequestBody?
     ): Observable<LoginResponse>
 
     @Multipart
@@ -84,6 +83,13 @@ interface API {
         @Part("email") mobile: RequestBody,
         @Part("Code") code: RequestBody
     ): Observable<LoginResponse>
+
+
+    @Multipart
+    @POST("getFeed")
+    fun getFeed(
+        @Part("userId") userId: RequestBody
+    ): Observable<GetFeedResponse>
 
 
     @Multipart

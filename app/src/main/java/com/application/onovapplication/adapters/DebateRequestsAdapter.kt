@@ -33,7 +33,7 @@ class DebateRequestsAdapter(
 
     override fun onBindViewHolder(holder: RVHolder, position: Int) {
 
-           holder.itemView.btnView.setOnClickListener {
+        holder.itemView.btnView.setOnClickListener {
             val intent = Intent(context, DebateDetailsActivity::class.java)
             context.startActivity(intent)
         }

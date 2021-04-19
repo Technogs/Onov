@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.application.onovapplication.R
 
-class DonationsAdapter(
+class DonationsAdapter (
     val context: Context
 ) : RecyclerView.Adapter<DonationsAdapter.RVHolder>() {
 
@@ -25,7 +25,7 @@ class DonationsAdapter(
     }
 
     override fun getItemCount(): Int {
-        return 12
+        return 4
     }
 
     override fun onBindViewHolder(holder: RVHolder, position: Int) {

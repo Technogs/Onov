@@ -12,7 +12,7 @@
     android:background="@drawable/drawable_white_curved_border_layout">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/ivChatProfile"
+        android:id="@+id/ivSearchProfile"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginEnd="10dp"
@@ -22,12 +22,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins"
-        android:layout_toEndOf="@+id/ivChatProfile"
+        android:layout_toEndOf="@+id/ivSearchProfile"
 android:layout_centerVertical="true"
         android:text="Gulf Doe"
         android:textSize="18sp"
         android:layout_marginEnd="5dp"
-        android:layout_toStartOf="@+id/tvChatDate"
         android:id="@+id/chatUserName"
         android:textColor="@color/black" />
 

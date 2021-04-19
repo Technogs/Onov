@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.application.onovapplication.R
 import com.application.onovapplication.adapters.ViewFollowersAdapter
 import kotlinx.android.synthetic.main.action_bar_layout_2.*
+import kotlinx.android.synthetic.main.activity_profile.*
 import kotlinx.android.synthetic.main.activity_view_followers.*
 
 class ViewFollowersActivity : BaseAppCompatActivity() {
@@ -18,11 +19,18 @@ class ViewFollowersActivity : BaseAppCompatActivity() {
         setContentView(R.layout.activity_view_followers)
 
         type = intent.getStringExtra("type")
-        if (type == "following") {
-            tvScreenTitle.text = getString(R.string.following)
+        when (type) {
+            "following" -> {
+                tvScreenTitle.text = getString(R.string.following)
 
-        } else {
-            tvScreenTitle.text = getString(R.string.followers)
+            }
+            "donors" -> {
+                tvScreenTitle.text = getString(R.string.donors)
+
+            }
+            else -> {
+                tvScreenTitle.text = getString(R.string.followers)
+            }
         }
 
 

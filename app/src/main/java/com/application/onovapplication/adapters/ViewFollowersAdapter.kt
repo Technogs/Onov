@@ -1,14 +1,17 @@
 package com.application.onovapplication.adapters
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.application.onovapplication.R
+import com.application.onovapplication.activities.common.ProfileActivity
 import kotlinx.android.synthetic.main.rv_followers.view.*
 
-class ViewFollowersAdapter(val context: Context, val type: String
+class ViewFollowersAdapter(
+    val context: Context, val type: String
 ) : RecyclerView.Adapter<ViewFollowersAdapter.RVHolder>() {
 
 
@@ -30,13 +33,23 @@ class ViewFollowersAdapter(val context: Context, val type: String
 
     override fun onBindViewHolder(holder: RVHolder, position: Int) {
 
-        if (type == "followers")
-        {
-            holder.itemView.btnText.text = context.getString(R.string.remove)
+        when (type) {
+            "followers" -> {
+                holder.itemView.btnText.text = context.getString(R.string.remove)
+            }
+            "donors" -> {
+                holder.itemView.btnText.visibility = View.GONE
+            }
+            else -> {
+                holder.itemView.btnText.text = context.getString(R.string.unfollow)
+            }
         }
-        else{
-            holder.itemView.btnText.text = context.getString(R.string.unfollow)
 
+
+        holder.itemView.ivFollowProfile.setOnClickListener {
+            val intent = Intent(context, ProfileActivity::class.java)
+            intent.putExtra("type", "other")
+            context.startActivity(intent)
         }
     }
 

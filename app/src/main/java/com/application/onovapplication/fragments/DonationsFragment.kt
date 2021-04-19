@@ -2,11 +2,12 @@ package com.application.onovapplication.fragments
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.application.onovapplication.R
+import com.application.onovapplication.activities.common.AskDonationsActivity
 import com.application.onovapplication.activities.common.CreateDonationActivity
 import com.application.onovapplication.adapters.DonationsAdapter
 import kotlinx.android.synthetic.main.fragment_donations.*
@@ -14,7 +15,8 @@ import kotlinx.android.synthetic.main.fragment_donations.*
 
 class DonationsFragment : Fragment() {
 
-    private var donationsAdapter: DonationsAdapter? = null
+    private var ngoDonationsAdapter1: DonationsAdapter? = null
+    private var ngoDonationsAdapter2: DonationsAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,12 +29,16 @@ class DonationsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        donationsAdapter = DonationsAdapter(requireContext())
-        rv_donations_fragment.adapter = donationsAdapter
+        ngoDonationsAdapter1 = DonationsAdapter(requireContext())
+        ngoDonationsAdapter2 = DonationsAdapter(requireContext())
+
+        rvSentDonations.adapter = ngoDonationsAdapter1
+        rvReceivedDonations.adapter = ngoDonationsAdapter2
 
         btnCreateDonation.setOnClickListener {
-            val intent = Intent(requireContext(), CreateDonationActivity::class.java)
+            val intent = Intent(requireContext(), AskDonationsActivity::class.java)
             startActivity(intent)
         }
+
     }
 }

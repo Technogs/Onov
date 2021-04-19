@@ -45,58 +45,27 @@
 
 
             <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/etAmount"
+                android:id="@+id/etTitle"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
 
                 android:layout_marginStart="15dp"
                 android:background="@null"
                 android:fontFamily="@font/poppins"
-                android:hint="@string/amount"
+                android:hint="@string/title"
                 android:textColor="@color/black"
                 android:textSize="14sp" />
         </androidx.appcompat.widget.LinearLayoutCompat>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/edit_text_background" />
+
+
+
+
 
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-
-            android:orientation="horizontal"
-            android:padding="5dp">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:src="@drawable/user" />
-
-
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/etTransactionDate"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="15dp"
-                android:background="@null"
-                android:focusable="false"
-                android:fontFamily="@font/poppins"
-                android:hint="@string/date"
-                android:textColor="@color/black"
-                android:textSize="14sp" />
-        </androidx.appcompat.widget.LinearLayoutCompat>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/edit_text_background" />
-
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:layout_width="match_parent"
+            android:visibility="gone"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
 

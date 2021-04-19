@@ -41,11 +41,10 @@ class DataManager {
         password: RequestBody,
         fieldType: RequestBody,
         osType: RequestBody,
-        deviceToken: RequestBody,
-        role: RequestBody
+        deviceToken: RequestBody
     ): Observable<LoginResponse> {
 
-        return apiManager.authService.login(fieldType, email , password, osType, deviceToken, role)
+        return apiManager.authService.login(fieldType, email , password, osType, deviceToken)
     }
 
 
@@ -81,6 +80,13 @@ class DataManager {
         userRef: RequestBody
     ): Observable<GetSettingsResponse> {
         return apiManager.authService.getSettings(userRef)
+    }
+
+
+    fun getFeed(
+        userId: RequestBody
+    ): Observable<GetFeedResponse> {
+        return apiManager.authService.getFeed(userId)
     }
 
     fun getStats(

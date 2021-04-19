@@ -5,8 +5,6 @@ import android.view.MenuItem
 import android.view.View
 import androidx.fragment.app.Fragment
 import com.application.onovapplication.R
-import com.application.onovapplication.activities.DonationsActivity
-import com.application.onovapplication.activities.common.BaseAppCompatActivity
 import com.application.onovapplication.fragments.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.action_bar_layout.*
@@ -25,8 +23,6 @@ class HomeTabActivity : BaseAppCompatActivity(),
         navigation.selectedItemId = R.id.navigation_home
 
         role = userPreferences.getRole()
-
-
         backArrow.visibility = View.GONE
         searchButton.visibility = View.VISIBLE
     }
@@ -49,7 +45,7 @@ class HomeTabActivity : BaseAppCompatActivity(),
         when (menuItem.itemId) {
             R.id.navigation_home -> {
                 ab_home.visibility = View.VISIBLE
-                fragment = ViewDebatesFragment()
+                fragment = FeedFragment()
             }
 
             R.id.navigation_chat -> {
@@ -57,17 +53,18 @@ class HomeTabActivity : BaseAppCompatActivity(),
 
                 fragment = ChatFragment()
             }
+
             R.id.navigation_debate -> {
                 ab_home.visibility = View.GONE
                 fragment = CreateDebateFragment()
             }
 
             R.id.navigation_voting -> {
-
                 if (!role.isNullOrEmpty() && role == "Citizens" || !role.isNullOrEmpty() && role == "citizens") {
                     ab_home.visibility = View.VISIBLE
                     fragment = VotingFragment()
-                } else {
+                }
+                else {
                     ab_home.visibility = View.VISIBLE
                     fragment = DonationsFragment()
                 }
@@ -75,7 +72,6 @@ class HomeTabActivity : BaseAppCompatActivity(),
 
             R.id.navigation_more -> {
                 ab_home.visibility = View.VISIBLE
-
                 fragment = MoreFragment()
 
             }
@@ -90,8 +86,6 @@ class HomeTabActivity : BaseAppCompatActivity(),
                 .commit()
             return true
         }
-
         return false
     }
-
 }
