@@ -47,12 +47,22 @@
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/feedDescription"
+            android:id="@+id/feedTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/ivChatProfile"
             android:fontFamily="@font/poppins"
             android:layout_marginTop="10dp"
+            android:justificationMode="inter_word"
+
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/feedDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/feedTitle"
+            android:fontFamily="@font/poppins"
             android:justificationMode="inter_word"
             android:text="Lorem Ipsum is simply dummy text ever since the type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the)."
             android:textColor="@color/navigation_color" />
@@ -67,21 +77,21 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:id="@+id/ivFeed"
-        android:background="@drawable/dummy_debate" />
+      android:scaleType="centerCrop"
+       />
 
         <VideoView
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:id="@+id/vvFeed"
-            android:visibility="gone"
-            android:background="@drawable/dummy_debate" />
+            android:visibility="gone" />
 
         <WebView
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:id="@+id/wbFeed"
-            android:visibility="gone"
-            android:background="@drawable/dummy_debate" />
+            android:visibility="gone" />
+
     </RelativeLayout>
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"

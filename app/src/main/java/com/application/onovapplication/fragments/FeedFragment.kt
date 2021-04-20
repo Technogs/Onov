@@ -44,24 +44,31 @@ class FeedFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        
-        homeViewModel.getFeed(requireContext() , "1")
-        
+        (activity as HomeTabActivity).showDialog()
+
+        homeViewModel.getFeed(requireContext(), "c3Y1b1L6i1KvM")
+        observeViewModel()
         // noDebateData.visibility = View.VISIBLE
-        rv_view_debates.adapter = debatesAdapter
     }
 
- 
-    private fun observeViewModel(){
-        homeViewModel.successful.observe(this, Observer { successful ->
+
+    private fun observeViewModel() {
+        homeViewModel.successful.observe(requireActivity(), Observer { successful ->
             (activity as HomeTabActivity).dismissDialog()
             if (successful != null) {
                 if (successful) {
 //
                     if (homeViewModel.status == "success") {
 
-                        debatesAdapter = ViewDebatesAdapter(requireContext() , homeViewModel.getFeedResponse.feedData!!)
-
+                        if (homeViewModel.getFeedResponse.feedData.isNullOrEmpty()) {
+                            noDebateData.visibility = View.VISIBLE
+                        } else {
+                            debatesAdapter = ViewDebatesAdapter(
+                                requireContext(),
+                                homeViewModel.getFeedResponse.feedData!!
+                            )
+                            rv_view_debates.adapter = debatesAdapter
+                        }
 
                     } else {
                         (activity as HomeTabActivity).setError(homeViewModel.message)
@@ -69,7 +76,6 @@ class FeedFragment : Fragment() {
 
                 } else {
                     (activity as HomeTabActivity).setError(homeViewModel.message)
-
                 }
             }
         })

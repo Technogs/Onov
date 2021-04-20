@@ -88,7 +88,7 @@ interface API {
     @Multipart
     @POST("getFeed")
     fun getFeed(
-        @Part("userId") userId: RequestBody
+        @Part("userRef") userId: RequestBody
     ): Observable<GetFeedResponse>
 
 

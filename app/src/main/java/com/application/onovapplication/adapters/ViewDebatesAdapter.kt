@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
+import android.widget.MediaController
 import androidx.recyclerview.widget.RecyclerView
 import com.application.onovapplication.R
 import com.application.onovapplication.model.FeedData
@@ -47,13 +48,17 @@ class ViewDebatesAdapter(
         holder.itemView.donateLayout.setOnClickListener {
             openDonationsDialog()
         }
-
     }
-
 
     inner class RVHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
         fun bind(feedData: FeedData) {
+
+            Glide.with(context).load(BaseUrl.photoUrl + feedData.profilePic)
+                .into(itemView.ivChatProfile)
+            itemView.userName.text = feedData.name
+            itemView.feedTitle.text = feedData.title
+            itemView.feedDescription.text = feedData.description
 
 
             if (feedData.filePath.isNullOrEmpty()) {
@@ -67,9 +72,12 @@ class ViewDebatesAdapter(
                 itemView.feedDescription.visibility = View.GONE
             } else {
                 itemView.feedDescription.visibility = View.VISIBLE
-
             }
-
+            if (feedData.title.isNullOrEmpty()) {
+                itemView.feedTitle.visibility = View.GONE
+            } else {
+                itemView.feedTitle.visibility = View.VISIBLE
+            }
 
             when (feedData.recordType) {
 
@@ -85,11 +93,21 @@ class ViewDebatesAdapter(
 
             when (feedData.fileType) {
                 "document" -> {
-                   itemView.wbFeed.visibility = View.VISIBLE
-                   itemView.vvFeed.visibility = View.GONE
-                   itemView.ivFeed.visibility = View.GONE
+                    itemView.wbFeed.visibility = View.VISIBLE
+                    itemView.vvFeed.visibility = View.GONE
+                    itemView.ivFeed.visibility = View.GONE
 
-                    itemView.wbFeed.loadUrl(BaseUrl.photoUrl + feedData.filePath)
+                    itemView.wbFeed.settings.javaScriptEnabled = true
+
+                    itemView.wbFeed.settings.javaScriptCanOpenWindowsAutomatically = true
+                    itemView.wbFeed.scrollBarStyle = View.SCROLLBARS_INSIDE_OVERLAY
+
+                    itemView.wbFeed.loadUrl(
+                        "https://docs.google.com/gview?embedded=true&url=".plus(
+                            BaseUrl.photoUrl + feedData.filePath
+                        )
+                    )
+                    //     Log.e("PRACHI","https://docs.google.com/gview?embedded=true&url=".plus(BaseUrl.photoUrl + feedData.filePath))
 
                 }
 
@@ -98,8 +116,10 @@ class ViewDebatesAdapter(
                     itemView.vvFeed.visibility = View.VISIBLE
                     itemView.ivFeed.visibility = View.GONE
 
+                    val mc = MediaController(context)
+                    itemView.vvFeed.setMediaController(mc)
                     itemView.vvFeed.setVideoPath(BaseUrl.photoUrl + feedData.filePath)
-                    itemView.vvFeed.start()
+                    // itemView.vvFeed.start()
                 }
 
                 "image" -> {
@@ -107,7 +127,8 @@ class ViewDebatesAdapter(
                     itemView.vvFeed.visibility = View.GONE
                     itemView.ivFeed.visibility = View.VISIBLE
 
-                    Glide.with(context).load(BaseUrl.photoUrl+ feedData.filePath).into(itemView.ivFeed)
+                    Glide.with(context).load(BaseUrl.photoUrl + feedData.filePath)
+                        .into(itemView.ivFeed)
 
                 }
             }
