@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.application.onovapplication.R
+import com.application.onovapplication.activities.common.BaseAppCompatActivity
 import com.application.onovapplication.activities.common.HomeTabActivity
 import com.application.onovapplication.adapters.ViewDebatesAdapter
 import com.application.onovapplication.viewModels.HomeViewModel
@@ -44,8 +45,9 @@ class FeedFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as HomeTabActivity).showDialog()
 
+        tvRole.text = "Role: ".plus((activity as BaseAppCompatActivity).userPreferences.getRole())
+        (activity as HomeTabActivity).showDialog()
         homeViewModel.getFeed(requireContext(), "c3Y1b1L6i1KvM")
         observeViewModel()
         // noDebateData.visibility = View.VISIBLE

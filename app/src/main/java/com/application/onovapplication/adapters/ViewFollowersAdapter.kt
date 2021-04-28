@@ -37,11 +37,12 @@ class ViewFollowersAdapter(
             "followers" -> {
                 holder.itemView.btnText.text = context.getString(R.string.remove)
             }
-            "donors" -> {
-                holder.itemView.btnText.visibility = View.GONE
+            "following" -> {
+                holder.itemView.btnText.text = context.getString(R.string.unfollow)
             }
             else -> {
-                holder.itemView.btnText.text = context.getString(R.string.unfollow)
+                holder.itemView.btnText.visibility = View.GONE
+
             }
         }
 

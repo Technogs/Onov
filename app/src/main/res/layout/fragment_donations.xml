@@ -226,7 +226,7 @@ android:layout_centerHorizontal="true"
         android:textAllCaps="false"
         android:id="@+id/btnCreateDonation"
         android:background="@drawable/drawable_gradient_button_background"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_alignParentBottom="true"
         />
 

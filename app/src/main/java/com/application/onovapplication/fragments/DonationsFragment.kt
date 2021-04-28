@@ -32,6 +32,7 @@ class DonationsFragment : Fragment() {
         ngoDonationsAdapter1 = DonationsAdapter(requireContext())
         ngoDonationsAdapter2 = DonationsAdapter(requireContext())
 
+
         rvSentDonations.adapter = ngoDonationsAdapter1
         rvReceivedDonations.adapter = ngoDonationsAdapter2
 

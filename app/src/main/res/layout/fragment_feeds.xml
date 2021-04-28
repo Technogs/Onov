@@ -6,10 +6,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.FeedFragment">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="Role: Citizens"
+        android:textColor="@color/black"
+        android:fontFamily="@font/poppins"
+        android:id="@+id/tvRole"
+        />
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_marginTop="7dp"
+        android:layout_below="@+id/tvRole"
         android:id="@+id/rv_view_debates"
         android:layout_marginBottom="10dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"

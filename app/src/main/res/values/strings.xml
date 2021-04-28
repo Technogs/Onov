@@ -150,6 +150,9 @@
     <string name="add_your_donation_amount">Add your Donation Amount</string>
     <string name="submit">Submit</string>
     <string name="cancel">Cancel</string>
+    <string name="view_people_going">View Event Attendees</string>
+    <string name="close">Close</string>
+    <string name="donation_goal_in">Donation Goal($)</string>
 
 
 </resources>

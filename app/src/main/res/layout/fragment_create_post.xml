@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.CreateDebateFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.CreatePostFragment">
 
 
     <RelativeLayout
@@ -28,8 +29,6 @@
             android:textSize="16sp" />
 
 
-
-
         <androidx.appcompat.widget.AppCompatButton
             android:layout_width="wrap_content"
             android:layout_alignParentEnd="true"
@@ -52,19 +51,34 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/createPostLayout"
         android:layout_marginTop="10dp"
+        android:singleLine="true"
         android:background="@null"
-        android:textColorHint="@color/text_blue"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
         android:textColor="@color/text_blue"
         android:fontFamily="@font/poppins"
         android:hint="@string/what_s_on_your_mind"
-        android:padding="15dp" />
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp"
+        android:id="@+id/rv_predefined_texts"
+        android:layout_below="@+id/etPostTitle"
+        tools:listitem="@layout/rv_predefined_texts"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
     <View
         android:id="@+id/vShadowTwo"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:alpha="0.4"
-        android:layout_below="@+id/etPostTitle"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/rv_predefined_texts"
         android:background="@color/edit_text_background" />
 
     <androidx.appcompat.widget.AppCompatEditText
@@ -75,10 +89,13 @@
         android:background="@null"
         android:fontFamily="@font/poppins"
         android:gravity="start"
-        android:textColorHint="@color/text_blue"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
         android:textColor="@color/text_blue"
         android:hint="@string/description"
-        android:padding="15dp" />
+
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp" />
 
     <View
         android:id="@+id/vShadowThree"

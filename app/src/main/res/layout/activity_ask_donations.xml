@@ -66,16 +66,127 @@
                 android:textColor="@color/navigation_color"
                 android:textColorHint="@color/navigation_color" />
 
+            <View
+                android:id="@+id/vShadowThree"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:alpha="0.3"
+                android:layout_below="@+id/etPostTitle"
+                android:background="@color/edit_text_background" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/poppins"
+                android:hint="@string/donation_goal_in"
+                android:padding="15dp"
+                android:inputType="number"
+                android:textColor="@color/navigation_color"
+                android:textColorHint="@color/navigation_color" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+
+                android:layout_below="@+id/vShadowThree"
+                android:layout_marginTop="30dp"
+                android:gravity="center"
+                android:background="@drawable/drawable_rectangle"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="80dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginStart="50dp">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:src="@drawable/file_picture"
+                        android:id="@+id/upload_photo"
+                        android:layout_centerHorizontal="true"
+                        android:layout_height="wrap_content" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="15dp"
+                        android:fontFamily="@font/poppins"
+                        android:text="@string/upload_picture"
+                        android:textColor="@color/navigation_color"
+                        android:textSize="12sp" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="80dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_centerHorizontal="true"
+                    android:background="@color/text_blue"
+
+                    />
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="80dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="50dp"
+                    android:layout_marginStart="50dp">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:src="@drawable/video_transparent"
+                        android:id="@+id/upload_video"
+                        android:layout_centerHorizontal="true"
+
+                        android:layout_height="wrap_content" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="15dp"
+                        android:fontFamily="@font/poppins"
+                        android:text="@string/upload_video"
+                        android:textColor="@color/navigation_color"
+                        android:textSize="12sp" />
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:text="OR"
+                android:textColor="@color/text_blue"
+                android:fontFamily="@font/poppins"
+                android:textSize="20sp"
+                />
+
+
             <androidx.appcompat.widget.AppCompatButton
                 android:layout_width="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginEnd="10sp"
-                android:layout_marginTop="80dp"
-                android:text="@string/upload_picture"
+                android:layout_marginTop="15dp"
+                android:text="@string/upload_filw"
                 android:id="@+id/btnUploadImage"
                 android:onClick="onClick"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
+                android:paddingStart="35dp"
+                android:paddingEnd="35dp"
                 android:textColor="@color/text_blue"
                 android:textAllCaps="false"
                 android:fontFamily="@font/poppins_medium"

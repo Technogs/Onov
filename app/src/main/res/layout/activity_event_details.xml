@@ -193,13 +193,24 @@ android:layout_centerVertical="true"
 
 </RelativeLayout>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_gravity="center"
+                android:textColor="@color/grey"
+                android:text="50 People are going"
+                />
+
 
     <androidx.appcompat.widget.AppCompatButton
         android:layout_width="wrap_content"
         android:background="@drawable/drawable_gradient_button_background"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         android:layout_gravity="center"
         android:paddingStart="20dp"
+        android:id="@+id/payEventBtn"
+        android:onClick="onClick"
         android:paddingEnd="20dp"
         android:textAllCaps="false"
         android:layout_marginBottom="20dp"

@@ -24,17 +24,14 @@ class HomeViewModel : ViewModel() {
     var status: String = ""
     lateinit var getFeedResponse: GetFeedResponse
 
-
     @SuppressLint("CheckResult")
     fun getFeed(
         context: Context,
         userPref: String
     ) {
 
-
         val userId: RequestBody =
             RequestBody.create("multipart/form-data".toMediaTypeOrNull(), userPref)
-
 
         dataManager.getFeed(userId)
             .subscribeOn(Schedulers.io())
@@ -42,7 +39,6 @@ class HomeViewModel : ViewModel() {
             .subscribeWith(
                 object : DisposableObserver<GetFeedResponse>() {
                     override fun onComplete() {
-
                     }
 
                     override fun onNext(t: GetFeedResponse) {
@@ -51,7 +47,6 @@ class HomeViewModel : ViewModel() {
                         message = t.msg!!
                         successful.value = true
                     }
-
 
                     override fun onError(e: Throwable) {
                         when (e) {
@@ -75,6 +70,4 @@ class HomeViewModel : ViewModel() {
                     }
                 })
     }
-
-
 }

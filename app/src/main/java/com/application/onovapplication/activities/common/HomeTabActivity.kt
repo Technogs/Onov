@@ -56,7 +56,7 @@ class HomeTabActivity : BaseAppCompatActivity(),
 
             R.id.navigation_debate -> {
                 ab_home.visibility = View.GONE
-                fragment = CreateDebateFragment()
+                fragment = CreatePostFragment()
             }
 
             R.id.navigation_voting -> {
