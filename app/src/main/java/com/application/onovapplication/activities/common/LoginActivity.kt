@@ -60,6 +60,7 @@ class LoginActivity : BaseAppCompatActivity(), View.OnClickListener {
                     }
 
 //                    selectedRole == "Select Role" -> {
+//
 //                        setError(getString(R.string.role_error))
 //                    }
 

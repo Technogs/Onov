@@ -27,7 +27,8 @@ import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 
-class RegisterActivity : BaseAppCompatActivity(), View.OnClickListener {
+class
+RegisterActivity : BaseAppCompatActivity(), View.OnClickListener {
 
     var mPhotoFile: File? = null
     val REQUEST_TAKE_PHOTO = 101

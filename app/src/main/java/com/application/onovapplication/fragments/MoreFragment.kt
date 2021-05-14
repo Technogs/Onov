@@ -10,7 +10,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.application.onovapplication.R
 import com.application.onovapplication.activities.EventsActivity
-import com.application.onovapplication.activities.PetitionActivity
 import com.application.onovapplication.activities.citizens.DebateRequestsActivity
 import com.application.onovapplication.activities.common.*
 import com.application.onovapplication.activities.lpa.CreateAnnouncementActivity
@@ -85,7 +84,7 @@ class MoreFragment : Fragment(), MoreScreenAdapter.MoreItemListener {
         )
         dataList.add(
             MoreScreenData(
-                "Total Winning",
+                "Debate Search",
                 R.drawable.total_wining
             )
         )
@@ -188,7 +187,7 @@ class MoreFragment : Fragment(), MoreScreenAdapter.MoreItemListener {
         )
         dataList.add(
             MoreScreenData(
-                "Total Winning",
+                "Debate Search",
                 R.drawable.total_wining
             )
         )
@@ -519,7 +518,7 @@ class MoreFragment : Fragment(), MoreScreenAdapter.MoreItemListener {
             }
 
             1 -> {
-                val intent = Intent(requireContext(), WinningsActivity::class.java)
+                val intent = Intent(requireContext(), SearchDebateActivity::class.java)
                 startActivity(intent)
             }
 
@@ -529,13 +528,13 @@ class MoreFragment : Fragment(), MoreScreenAdapter.MoreItemListener {
             }
 
             3 -> {
-                val intent = Intent(requireContext(), ProfileActivity::class.java)
+                val intent = Intent(requireContext(), ProfileActivity2::class.java)
                 intent.putExtra("type", "user")
                 startActivity(intent)
             }
 
             4 -> {
-                val intent = Intent(requireContext(), CreateEventActivity::class.java)
+                val intent = Intent(requireContext(), EventsActivity ::class.java)
                 startActivity(intent)
             }
 
@@ -545,7 +544,7 @@ class MoreFragment : Fragment(), MoreScreenAdapter.MoreItemListener {
             }
 
             6 -> {
-                val intent = Intent(requireContext(), PetitionActivity::class.java)
+                val intent = Intent(requireContext(), StartPetition::class.java)
                 startActivity(intent)
             }
 
@@ -597,7 +596,7 @@ class MoreFragment : Fragment(), MoreScreenAdapter.MoreItemListener {
             }
 
             1 -> {
-                val intent = Intent(requireContext(), WinningsActivity::class.java)
+                val intent = Intent(requireContext(), SearchDebateActivity::class.java)
                 startActivity(intent)
             }
 
@@ -617,13 +616,13 @@ class MoreFragment : Fragment(), MoreScreenAdapter.MoreItemListener {
             }
 
             5 -> {
-                val intent = Intent(requireContext(), ProfileActivity::class.java)
+                val intent = Intent(requireContext(), ProfileActivity2::class.java)
                 intent.putExtra("type", "user")
                 startActivity(intent)
             }
 
             6 -> {
-                val intent = Intent(requireContext(), PetitionActivity::class.java)
+                val intent = Intent(requireContext(), StartPetition::class.java)
                 startActivity(intent)
             }
 
@@ -685,7 +684,7 @@ class MoreFragment : Fragment(), MoreScreenAdapter.MoreItemListener {
             }
 
             3 -> {
-                val intent = Intent(requireContext(), ProfileActivity::class.java)
+                val intent = Intent(requireContext(), ProfileActivity2::class.java)
                 intent.putExtra("type", "user")
                 startActivity(intent)
             }
@@ -740,7 +739,7 @@ class MoreFragment : Fragment(), MoreScreenAdapter.MoreItemListener {
             }
 
             3 -> {
-                val intent = Intent(requireContext(), ProfileActivity::class.java)
+                val intent = Intent(requireContext(), ProfileActivity2::class.java)
                 intent.putExtra("type", "user")
                 startActivity(intent)
             }
@@ -793,7 +792,7 @@ class MoreFragment : Fragment(), MoreScreenAdapter.MoreItemListener {
             }
 
             2 -> {
-                val intent = Intent(requireContext(), ProfileActivity::class.java)
+                val intent = Intent(requireContext(), ProfileActivity2::class.java)
                 intent.putExtra("type", "user")
                 startActivity(intent)
             }

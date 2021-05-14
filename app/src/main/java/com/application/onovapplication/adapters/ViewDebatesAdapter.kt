@@ -2,6 +2,7 @@ package com.application.onovapplication.adapters
 
 import android.app.Dialog
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,7 @@ import android.view.Window
 import android.widget.MediaController
 import androidx.recyclerview.widget.RecyclerView
 import com.application.onovapplication.R
+import com.application.onovapplication.activities.PetitionDetailsActivity
 import com.application.onovapplication.model.FeedData
 import com.application.onovapplication.repository.BaseUrl
 import com.bumptech.glide.Glide
@@ -35,15 +37,41 @@ class ViewDebatesAdapter(
     }
 
     override fun getItemCount(): Int {
-        return feedData.size
+        // return feedData.size
+        return 6
     }
 
     override fun onBindViewHolder(holder: RVHolder, position: Int) {
 
 
-        holder.bind(feedData[position])
-        // holder.itemView.ll.weightSum = 4f
+        //   holder.bind(feedData[position])
+        when (position) {
 
+
+            0 -> {
+                holder.itemView.feedTitle.text = "This is a petition"
+                holder.itemView.feedDescription.text =
+                    "This is a petition description. You can tap on the image to see the details of the petition."
+            }
+
+
+            4 -> {
+                holder.itemView.feedMedia.visibility = View.GONE
+            }
+
+            1 -> {
+                holder.itemView.donateLayout.visibility = View.VISIBLE
+            }
+
+        }
+
+        holder.itemView.feedMedia.setOnClickListener {
+            if (position==0)
+            {
+                val intent = Intent(context, PetitionDetailsActivity::class.java)
+                context.startActivity(intent)
+            }
+        }
 
         holder.itemView.donateLayout.setOnClickListener {
             openDonationsDialog()

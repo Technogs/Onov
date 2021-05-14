@@ -28,12 +28,12 @@ class StatsAdapter(
     }
 
     override fun getItemCount(): Int {
-        return statsList.size
+        return 6
     }
 
     override fun onBindViewHolder(holder: RVHolder, position: Int) {
 
-        holder.bind(statsList[position])
+//        holder.bind(statsList[position])
     }
 
 

@@ -46,7 +46,7 @@
     <string name="votes">Votes</string>
     <string name="date">Date</string>
     <string name="winnings">Winnings</string>
-    <string name="no_winnings_yet">No winnings yet</string>
+    <string name="no_winnings_yet">No Debates yet</string>
     <string name="user">User</string>
     <string name="rank">Rank</string>
     <string name="no_winners_yet">No winners yet</string>
@@ -153,6 +153,29 @@
     <string name="view_people_going">View Event Attendees</string>
     <string name="close">Close</string>
     <string name="donation_goal_in">Donation Goal($)</string>
+    <string name="change_phone_number">Change Phone Number</string>
+    <string name="change_email">Change Email</string>
+    <string name="petition_duration">Petition Duration</string>
+    <string name="petition_description">Petition Description</string>
+    <string name="max_12_months">Max (12 months)</string>
+    <string name="petition_signature_count">Signature Count</string>
+    <string name="website_link">Website Link</string>
+    <string name="petition_title">Petition Title</string>
+    <string name="total_wins">Total Wins:</string>
+    <string name="total_losses">Total Losses:</string>
+    <string name="total_views">Total Views:</string>
+    <string name="last">Last</string>
+    <string name="live">Live</string>
+    <string name="upcoming">Upcoming</string>
+    <string name="about_info">About Info</string>
+    <string name="website_url">Website Url</string>
+    <string name="about_me">About Me</string>
+    <string name="supports">Supports</string>
+    <string name="about_info_details">Click for About Info</string>
+    <string name="submit_signature">Submit Signature</string>
+    <string name="signatures_needed">Signatures Needed</string>
+    <string name="signatures_received_34">Signatures Received: 34</string>
+    <string name="views">Views</string>
 
 
 </resources>

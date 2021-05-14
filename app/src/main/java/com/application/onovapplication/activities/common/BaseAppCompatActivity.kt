@@ -91,7 +91,7 @@ abstract class BaseAppCompatActivity : AppCompatActivity() {
             w!!.getLocationOnScreen(scrcoords)
             val x = ev!!.rawX + w.left - scrcoords[0]
             val y = ev.rawY + w.top - scrcoords[1]
-            if (ev.action === MotionEvent1.ACTION_UP
+            if (ev.action == MotionEvent1.ACTION_UP
                 && (x < w.left || x >= w.right || y < w.top || y > w.bottom)
             ) {
                 disappearKeyboard()

@@ -16,6 +16,18 @@
         android:textSize="16sp" />
 
     <TextView
+        android:id="@+id/tvStatsViews"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="456"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/navigation_color"
+        android:textSize="16sp" />
+
+    <TextView
         android:id="@+id/tvStatsVotes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

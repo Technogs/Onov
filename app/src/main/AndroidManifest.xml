@@ -15,7 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OnovApplication"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activities.EventPaymentActivity"></activity>
+        <activity android:name=".activities.common.AboutInfoActivity"></activity>
+        <activity android:name=".activities.common.ProfileActivity2" />
+        <activity android:name=".activities.EventPaymentActivity" />
         <activity
             android:name=".activities.common.AskDonationsActivity"
             android:launchMode="singleTop"
@@ -107,7 +109,7 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
-            android:name=".activities.PetitionActivity"
+            android:name=".activities.SignPetitionActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden" />
@@ -157,7 +159,7 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
-            android:name=".activities.common.WinningsActivity"
+            android:name=".activities.common.SearchDebateActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden" />

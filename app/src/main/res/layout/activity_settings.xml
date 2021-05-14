@@ -96,4 +96,145 @@
         app:drawableEndCompat="@drawable/ic_arrow_forward"
         app:drawableTint="@color/red" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.9dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/edit_text_background" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="30dp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="@string/change_email"
+        android:textColor="@color/black" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="30dp"
+        android:paddingEnd="15dp"
+        android:background="@drawable/drawable_chat_background"
+        android:padding="5dp">
+
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edProfileEmail"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_toStartOf="@+id/emailEdit"
+            android:background="@null"
+            android:drawableStart="@drawable/mail"
+            android:drawablePadding="10dp"
+            android:focusable="false"
+            android:fontFamily="@font/poppins"
+            android:gravity="center_vertical"
+            android:hint="@string/email"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:id="@+id/emailEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:onClick="onClick"
+            android:src="@drawable/edit" />
+
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.9dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/edit_text_background" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="30dp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="@string/change_phone_number"
+        android:textColor="@color/black" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="30dp"
+        android:paddingEnd="15dp"
+        android:background="@drawable/drawable_chat_background"
+        android:padding="5dp">
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@drawable/phone" />
+
+        <com.hbb20.CountryCodePicker
+            android:id="@+id/ccPickerProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:clickable="false"
+            android:layout_marginStart="5dp"
+            android:layout_toEndOf="@+id/icon"
+            android:textSize="14sp"
+            app:ccp_arrowColor="@color/black"
+            app:ccp_autoDetectCountry="true"
+            app:ccp_contentColor="@color/black"
+            app:ccp_showFullName="false"
+            app:ccp_showNameCode="false"
+            app:ccp_showPhoneCode="false"
+            app:ccp_textGravity="RIGHT"
+            app:ccp_textSize="14sp" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edProfilePhone"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:focusable="false"
+            android:layout_marginEnd="10dp"
+            android:layout_toStartOf="@+id/phoneEdit"
+            android:layout_toEndOf="@+id/ccPickerProfile"
+            android:background="@null"
+            android:fontFamily="@font/poppins"
+            android:hint="@string/phone_no"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:id="@+id/phoneEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:onClick="onClick"
+            android:layout_centerVertical="true"
+            android:src="@drawable/edit" />
+
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.9dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/edit_text_background" />
+
+
 </androidx.appcompat.widget.LinearLayoutCompat>

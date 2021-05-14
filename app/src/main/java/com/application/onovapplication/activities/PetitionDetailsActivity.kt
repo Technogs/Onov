@@ -1,5 +1,6 @@
 package com.application.onovapplication.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -14,10 +15,10 @@ class PetitionDetailsActivity : BaseAppCompatActivity(), View.OnClickListener {
     }
 
     override fun onClick(p0: View?) {
-        when(p0?.id)
-        {
-            R.id.ivClear->{
-                signature_view.clearCanvas()
+        when (p0?.id) {
+            R.id.signPetition -> {
+                val intent = Intent(this, SignPetitionActivity::class.java)
+                startActivity(intent)
             }
         }
     }

@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".activities.common.AboutInfoActivity">
+
+
+    <include layout="@layout/action_bar_layout"/>
+
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginTop="15dp"
+    android:text="@string/about_info"
+    android:textSize="18sp"
+android:fontFamily="@font/poppins"
+    android:textColor="@color/black"
+    android:layout_height="wrap_content"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_marginTop="25dp"
+        android:text="@string/about_me"
+        android:textSize="14sp"
+        android:layout_marginStart="20dp"
+        android:fontFamily="@font/poppins"
+        android:textColor="@color/black"
+        android:layout_height="wrap_content"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="25dp"
+        app:boxBackgroundMode="none"
+        app:counterEnabled="true"
+        app:counterMaxLength="300"
+        app:counterTextColor="@color/black"
+        app:hintEnabled="false">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/drawable_chat_background"
+            android:drawablePadding="14dp"
+            android:fontFamily="@font/poppins"
+            android:hint="@string/comment"
+            android:imeOptions="actionNext"
+            android:inputType="textImeMultiLine"
+            android:maxLines="3"
+            android:lines="3"
+            android:maxLength="300"
+            android:padding="16dp"
+            android:textSize="16sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+
+        android:layout_marginTop="15dp"
+        android:text="@string/website_url"
+        android:textSize="14sp"
+        android:layout_marginStart="20dp"
+        android:fontFamily="@font/poppins"
+        android:textColor="@color/black"
+        android:layout_height="wrap_content"/>
+
+
+    <EditText
+        android:id="@+id/websiteLink"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="10dp"
+        android:layout_marginStart="20dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:layout_marginTop="10dp"
+        android:paddingTop="5dp"
+        android:fontFamily="@font/poppins"
+        android:gravity="center"
+        android:text="www.abc.com"
+        android:textSize="14sp"
+        android:paddingBottom="5dp"
+        android:background="@drawable/drawable_chat_background"
+        android:layout_marginEnd="20dp"
+        android:layout_below="@+id/abtMe"
+        android:layout_height="wrap_content"
+        android:focusable="false" />
+
+    <TextView
+        android:layout_width="wrap_content"
+
+        android:layout_marginTop="15dp"
+        android:text="@string/supports"
+        android:textSize="14sp"
+        android:layout_marginStart="20dp"
+        android:fontFamily="@font/poppins"
+        android:textColor="@color/black"
+        android:layout_height="wrap_content"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginStart="25dp"
+        android:background="@drawable/drawable_chat_background"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+
+    <Spinner
+        android:id="@+id/spAbout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:background="@android:color/white"
+        android:gravity="center"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:spinnerMode="dropdown" />
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center"
+        android:layout_marginEnd="10dp"
+        android:src="@drawable/ic_down_arrow" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="15dp"
+        android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/ll2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/photoLayout"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="15dp"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:id="@+id/tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins"
+            android:text="@string/role_"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/roleValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/poppins"
+            android:text="Citizen"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/photoLayout"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="40dp"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/poppins"
+            android:text="@string/total_donations"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/donaionsValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/poppins"
+            android:text="02"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+    </LinearLayout>
+    </RelativeLayout>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

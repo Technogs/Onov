@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.common.SearchDebateActivity">
+
+    <include
+        android:id="@+id/ab"
+        layout="@layout/action_bar_layout" />
+
+
+    <EditText
+        android:id="@+id/searchDebate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ab"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
+        android:layout_toStartOf="@+id/searchBtn"
+        android:background="@drawable/drawable_blue_curve"
+        android:drawablePadding="15dp"
+        android:fontFamily="@font/poppins"
+        android:hint="Search Debate"
+        android:paddingStart="15dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="15dp"
+        android:paddingBottom="8dp"
+        android:textColor="@color/black" />
+
+    <ImageView
+        android:id="@+id/searchBtn"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/ab"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:src="@drawable/ic_search" />
+
+
+    <LinearLayout
+        android:id="@+id/ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_below="@+id/searchBtn"
+        android:background="@drawable/drawable_chat_background"
+        android:orientation="horizontal" >
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/last"
+        android:text="@string/last"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:onClick="onClick"
+        android:fontFamily="@font/poppins"
+        android:background="@drawable/blue_solid_curve"
+        android:layout_weight="1"
+        />
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/live"
+        android:text="@string/live"
+        android:textAllCaps="false"
+        android:fontFamily="@font/poppins"
+        android:layout_width="wrap_content"
+        android:onClick="onClick"
+        android:background="@drawable/drawable_chat_background"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        />
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/upcoming"
+        android:text="@string/upcoming"
+        android:textAllCaps="false"
+        android:onClick="onClick"
+        android:fontFamily="@font/poppins"
+        android:background="@drawable/drawable_chat_background"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        />
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_winnings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ll"
+        android:layout_marginTop="10dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+
+    <TextView
+        android:id="@+id/noWinningsData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:fontFamily="@font/poppins_medium"
+        android:text="@string/no_winnings_yet"
+        android:textColor="@color/text_blue"
+        android:textSize="18sp" />
+
+
+</RelativeLayout>

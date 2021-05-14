@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.application.onovapplication.R
-import com.application.onovapplication.activities.common.ProfileActivity
+import com.application.onovapplication.activities.common.ProfileActivity2
 import kotlinx.android.synthetic.main.rv_followers.view.*
 
 class ViewFollowersAdapter(
@@ -48,7 +48,7 @@ class ViewFollowersAdapter(
 
 
         holder.itemView.ivFollowProfile.setOnClickListener {
-            val intent = Intent(context, ProfileActivity::class.java)
+            val intent = Intent(context, ProfileActivity2::class.java)
             intent.putExtra("type", "other")
             context.startActivity(intent)
         }

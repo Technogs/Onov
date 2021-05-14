@@ -11,8 +11,9 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:text="Role: Citizens"
-        android:textColor="@color/black"
-        android:fontFamily="@font/poppins"
+        android:textSize="18sp"
+        android:textColor="@color/text_blue"
+        android:fontFamily="@font/poppins_bold"
         android:id="@+id/tvRole"
         />
 

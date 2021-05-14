@@ -39,6 +39,7 @@ class MoreScreenAdapter(
             moreItemListener.onClick(position)
 
         }
+
     }
 
 

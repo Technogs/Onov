@@ -34,7 +34,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
             android:src="@drawable/onov_logo_2"
-            app:tint="@color/white" />
+            android:tint="@color/white" />
 
 
         <LinearLayout

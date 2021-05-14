@@ -16,9 +16,9 @@ class StatsActivity : BaseAppCompatActivity() {
 
     private val statsList: ArrayList<StatsDataList> = ArrayList()
 
-    private val statsViewModel by lazy {
-        ViewModelProvider(this).get(StatsViewModel::class.java)
-    }
+//    private val statsViewModel by lazy {
+//        ViewModelProvider(this).get(StatsViewModel::class.java)
+//    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,41 +26,41 @@ class StatsActivity : BaseAppCompatActivity() {
         setContentView(R.layout.activity_stats)
 
 
-        statsViewModel.getStats(this, userPreferences.getUserREf())
-        showDialog()
-
+//        statsViewModel.getStats(this, userPreferences.getUserREf())
+//        showDialog()
+//
 
         statsAdapter = StatsAdapter(this, statsList)
         rv_stats.adapter = statsAdapter
 
-        observeViewModel()
+       // observeViewModel()
     }
 
 
-    private fun observeViewModel() {
+//    private fun observeViewModel() {
+//
+//        statsViewModel.successful.observe(this, Observer {
+//            dismissDialog()
+//            if (it) {
+//                if (statsViewModel.status == "success") {
+//
+//                    statsList.addAll(statsViewModel.statsResponse.statsDataList!!)
+//
+//                    if (statsList.isEmpty()) {
+//                        noStatsData.visibility = View.VISIBLE
+//                    } else {
+//                        statsAdapter?.notifyDataSetChanged()
+//                    }
+//                }
+//                else{
+//                    setError(statsViewModel.message)
+//                }
+//            }
+//            else{
+//                setError(statsViewModel.message)
+//
+//            }
+//        })
 
-        statsViewModel.successful.observe(this, Observer {
-            dismissDialog()
-            if (it) {
-                if (statsViewModel.status == "success") {
-
-                    statsList.addAll(statsViewModel.statsResponse.statsDataList!!)
-
-                    if (statsList.isEmpty()) {
-                        noStatsData.visibility = View.VISIBLE
-                    } else {
-                        statsAdapter?.notifyDataSetChanged()
-                    }
-                }
-                else{
-                    setError(statsViewModel.message)
-                }
-            }
-            else{
-                setError(statsViewModel.message)
-
-            }
-        })
-
-    }
+   // }
 }
