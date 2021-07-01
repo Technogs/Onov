@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="15dp">
+
+    <include layout="@layout/action_bar_layout"/>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:weightSum="3">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:layout_weight="1">
+                <TextView
+                    android:id="@+id/tvExecutive"
+                    android:layout_width="120dp"
+                    android:layout_height="50dp"
+                    android:text="Executive"
+                    android:textSize="16dp"
+                    android:gravity="center"
+                    android:textColor="@color/grey"
+                    android:textStyle="bold"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:paddingTop="9dp"
+                    android:paddingBottom="9dp"
+                    android:background="@drawable/drawable_white_curved_border_layout"
+                    android:elevation="3dp"
+                    android:layout_margin="10dp"
+                    android:layout_gravity="center_horizontal"
+                    android:fontFamily="@font/poppins_medium"/>
+
+                <TextView
+                    android:id="@+id/tvSenate"
+                    android:layout_width="120dp"
+                    android:layout_height="50dp"
+                    android:text="Senate"
+                    android:textSize="16dp"
+                    android:gravity="center"
+                    android:textColor="@color/grey"
+                    android:textStyle="bold"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:paddingTop="9dp"
+                    android:paddingBottom="9dp"
+                    android:background="@drawable/drawable_white_curved_border_layout"
+                    android:elevation="3dp"
+                    android:layout_margin="10dp"
+                    android:layout_gravity="center_horizontal"
+                    android:fontFamily="@font/poppins_medium"/>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/tvLegislation"
+                    android:layout_width="120dp"
+                    android:layout_height="50dp"
+                    android:text="Legislation"
+                    android:textSize="16dp"
+                    android:gravity="center"
+                    android:textColor="@color/grey"
+                    android:textStyle="bold"
+                    android:paddingTop="9dp"
+                    android:paddingBottom="9dp"
+                    android:background="@drawable/drawable_white_curved_border_layout"
+                    android:elevation="3dp"
+                    android:layout_margin="10dp"
+                    android:layout_gravity="center_horizontal"
+                    android:fontFamily="@font/poppins_medium"/>
+
+                <TextView
+                    android:id="@+id/tvCongress"
+                    android:layout_width="120dp"
+                    android:layout_height="50dp"
+                    android:text="Congress"
+                    android:textSize="16dp"
+                    android:gravity="center"
+                    android:textColor="@color/grey"
+                    android:textStyle="bold"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:paddingTop="9dp"
+                    android:paddingBottom="9dp"
+                    android:background="@drawable/drawable_white_curved_border_layout"
+                    android:elevation="3dp"
+                    android:layout_margin="10dp"
+                    android:layout_gravity="center_horizontal"
+                    android:fontFamily="@font/poppins_medium"/>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/tvJudicial"
+                    android:layout_width="120dp"
+                    android:layout_height="50dp"
+                    android:text="Judicial"
+                    android:textSize="16dp"
+                    android:gravity="center"
+                    android:textColor="@color/grey"
+                    android:textStyle="bold"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:paddingTop="9dp"
+                    android:paddingBottom="9dp"
+                    android:background="@drawable/drawable_white_curved_border_layout"
+                    android:elevation="3dp"
+                    android:layout_margin="10dp"
+                    android:layout_gravity="center_horizontal"
+                    android:fontFamily="@font/poppins_medium"/>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <FrameLayout
+        android:id="@+id/my_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>

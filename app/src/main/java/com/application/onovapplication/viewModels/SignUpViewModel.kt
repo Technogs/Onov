@@ -43,15 +43,32 @@ class SignUpViewModel : ViewModel() {
         image: File?,
         role: String,
         device_token: String,
-        oSTYpe: String
+        oSTYpe: String,
+        aboutSection: String,
+        websiteUrl : String,
+        coverPhoto: File?,
+        party:String
     ) {
 
         var body: MultipartBody.Part? = null
+        var body2: MultipartBody.Part? = null
 
         if (image != null) {
             val requestFile = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), image)
             body = MultipartBody.Part.createFormData("profilePic", image.name, requestFile)
         }
+
+        if (coverPhoto!=null)
+        {
+            val requestFile = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), coverPhoto)
+            body2 = MultipartBody.Part.createFormData("coverPhoto", coverPhoto.name, requestFile)
+        }
+
+        val about : RequestBody =  RequestBody.create("multipart/form-data".toMediaTypeOrNull(), aboutSection)
+        val website : RequestBody =  RequestBody.create("multipart/form-data".toMediaTypeOrNull(), websiteUrl)
+        val partySupport : RequestBody =  RequestBody.create("multipart/form-data".toMediaTypeOrNull(), party)
+
+
 
         val user_email: RequestBody =
             RequestBody.create("multipart/form-data".toMediaTypeOrNull(), email)
@@ -86,7 +103,11 @@ class SignUpViewModel : ViewModel() {
             deviceToken,
             phoneCountryCode,
             mobileType,
-            body!!
+            body!!,
+            body2!!,
+            about,
+            website,
+            partySupport
         )
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

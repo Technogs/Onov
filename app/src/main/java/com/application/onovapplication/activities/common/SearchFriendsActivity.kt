@@ -20,6 +20,11 @@ class SearchFriendsActivity : BaseAppCompatActivity() {
         rv_search_friends.adapter = searchFriendsAdapter
 
 
+        btnSearch.setOnClickListener {
+
+        }
+
+
 
     }
 }

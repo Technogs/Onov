@@ -1,10 +1,10 @@
 package com.application.onovapplication.model
 
+import android.os.Parcelable
 import com.google.gson.annotations.Expose
 
 import com.google.gson.annotations.SerializedName
-
-
+import kotlinx.android.parcel.Parcelize
 
 
 class LoginResponse {
@@ -29,76 +29,93 @@ class LoginResponse {
     var userInfo: UserInfo? = null
 }
 
-class UserInfo{
+@Parcelize
+data class UserInfo(
     @SerializedName("id")
     @Expose
-    var id: String? = null
+    var id: String? = null,
 
     @SerializedName("userRef")
     @Expose
-    var userRef: String? = null
-
-    @SerializedName("countryCode")
-    @Expose
-    var countryCode: String? = null
+    var userRef: String? = null,
 
     @SerializedName("fullName")
     @Expose
-    var fullName: String? = null
+    var fullName: String? = null,
 
     @SerializedName("email")
     @Expose
-    var email: String? = null
+    var email: String? = null,
+
+    @SerializedName("countryCode")
+    @Expose
+    var countryCode: String? = null,
 
     @SerializedName("phone")
     @Expose
-    var phone: String? = null
+    var phone: String? = null,
 
     @SerializedName("password")
     @Expose
-    var password: String? = null
-
-    @SerializedName("gender")
-    @Expose
-    var gender: String? = null
+    var password: String? = null,
 
     @SerializedName("notification")
     @Expose
-    var notification: String? = null
+    var notification: String? = null,
+
+    @SerializedName("donationsVisible")
+    @Expose
+    var donationsVisible: String? = null,
 
     @SerializedName("profilePic")
     @Expose
-    var profilePic: String? = null
+    var profilePic: String? = null,
+
+    @SerializedName("coverPhoto")
+    @Expose
+    var coverPhoto: String? = null,
 
     @SerializedName("role")
     @Expose
-    var role: String? = null
+    var role: String? = null,
+
+    @SerializedName("supporter")
+    @Expose
+    var supporter: String? = null,
+
+    @SerializedName("about")
+    @Expose
+    var about: String? = null,
+
+    @SerializedName("webUrl")
+    @Expose
+    var webUrl: String? = null,
 
     @SerializedName("deviceType")
     @Expose
-    var deviceType: String? = null
+    var deviceType: String? = null,
 
     @SerializedName("deviceToken")
     @Expose
-    var deviceToken: String? = null
+    var deviceToken: String? = null,
 
     @SerializedName("loginStatus")
     @Expose
-    var loginStatus: String? = null
+    var loginStatus: String? = null,
 
     @SerializedName("Is_Active")
     @Expose
-    var isActive: String? = null
+    var isActive: String? = null,
 
     @SerializedName("validationCode")
     @Expose
-    var validationCode: String? = null
+    var validationCode: String? = null,
 
     @SerializedName("created_at")
     @Expose
-    var createdAt: String? = null
+    var createdAt: String? = null,
 
     @SerializedName("updated_at")
     @Expose
     var updatedAt: String? = null
-}
+) : Parcelable

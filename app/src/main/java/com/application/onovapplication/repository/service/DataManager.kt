@@ -20,8 +20,12 @@ class DataManager {
         device_token: RequestBody,
         phoneCountryCode: RequestBody,
         mobileType: RequestBody,
-        image: MultipartBody.Part
-    ): Observable<RegisterResponse> {
+        image: MultipartBody.Part,
+        coverPhoto: MultipartBody.Part,
+        about: RequestBody,
+        webUrl: RequestBody,
+        support: RequestBody
+        ): Observable<RegisterResponse> {
         return apiManager.authService.register(
             name,
             email,
@@ -31,7 +35,12 @@ class DataManager {
             device_token,
             phoneCountryCode,
             mobileType,
-            image
+            image,
+            coverPhoto,
+            about,
+            webUrl,
+            support
+
         )
     }
 

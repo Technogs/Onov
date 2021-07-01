@@ -29,8 +29,12 @@ interface API {
         @Part("deviceToken") device_token: RequestBody,
         @Part("countryCode") countryCode: RequestBody,
         @Part("deviceType") mobileType: RequestBody,
-        @Part profile_image: MultipartBody.Part
-    ): Observable<RegisterResponse>
+        @Part profile_image: MultipartBody.Part,
+        @Part cover_photo: MultipartBody.Part,
+        @Part("about") about: RequestBody,
+        @Part("webUrl") webUrl: RequestBody,
+        @Part("supporter") support: RequestBody
+        ): Observable<RegisterResponse>
 
 
     @Multipart

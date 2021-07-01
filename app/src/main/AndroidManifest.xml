@@ -15,13 +15,27 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OnovApplication"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activities.common.AboutInfoActivity"></activity>
-        <activity android:name=".activities.common.ProfileActivity2" />
-        <activity android:name=".activities.EventPaymentActivity" />
+        <activity android:name=".activities.GovernmentScreenActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="fullSensor"
+            android:windowSoftInputMode="stateAlwaysHidden"/>
+        <activity android:name=".activities.common.AboutInfoActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="fullSensor"
+            android:windowSoftInputMode="stateAlwaysHidden"
+        />
+        <activity android:name=".activities.common.ProfileActivity2"
+            android:launchMode="singleTop"
+            android:screenOrientation="fullSensor"
+            android:windowSoftInputMode="stateAlwaysHidden"/>
+        <activity android:name=".activities.EventPaymentActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="fullSensor"
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name=".activities.common.AskDonationsActivity"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".activities.EventDetailsActivity"

@@ -51,9 +51,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Dummy Title"
+            android:textSize="18sp"
             android:layout_below="@+id/ivChatProfile"
-            android:fontFamily="@font/poppins"
+            android:fontFamily="@font/poppins_medium"
             android:layout_marginTop="10dp"
+            android:justificationMode="inter_word"
+
+            android:textColor="@color/black" />
+
+
+        <TextView
+            android:id="@+id/feedType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Feed type: Post"
+            android:textSize="16sp"
+            android:layout_below="@+id/feedTitle"
+            android:fontFamily="@font/poppins"
             android:justificationMode="inter_word"
 
             android:textColor="@color/black" />
@@ -62,7 +76,7 @@
             android:id="@+id/feedDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/feedTitle"
+            android:layout_below="@+id/feedType"
             android:fontFamily="@font/poppins"
             android:justificationMode="inter_word"
             android:text="Lorem Ipsum is simply dummy text ever since the type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the)."

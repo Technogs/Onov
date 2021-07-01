@@ -21,6 +21,8 @@ import com.application.onovapplication.R
 import com.application.onovapplication.utils.CustomSpinnerAdapter
 import com.application.onovapplication.viewModels.SignUpViewModel
 import com.bumptech.glide.Glide
+import kotlinx.android.synthetic.main.activity_about_info.*
+import kotlinx.android.synthetic.main.activity_profile2.*
 import kotlinx.android.synthetic.main.activity_register.*
 import java.io.File
 import java.io.IOException
@@ -31,14 +33,23 @@ class
 RegisterActivity : BaseAppCompatActivity(), View.OnClickListener {
 
     var mPhotoFile: File? = null
+    var mPhotoCoverFile: File? = null
     val REQUEST_TAKE_PHOTO = 101
     val REQUEST_GALLERY_PHOTO = 201
+
+    private val REQUEST_TAKE_COVER_PHOTO = 105
+    private val REQUEST_COVER_GALLERY_PHOTO = 205
+
     private var selectedRole: String = ""
+    private var selectedSupport: String = ""
     private val signUpViewModel by lazy {
         ViewModelProvider(this).get(SignUpViewModel::class.java)
     }
     private val rolesList =
         arrayOf("Select Role", "Citizens", "Politicians", "Organizations", "Entertainers", "lpa")
+
+    private val supportList =
+        arrayOf("Select Support", "Republican", "Democrat", "Independent")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -98,6 +109,34 @@ RegisterActivity : BaseAppCompatActivity(), View.OnClickListener {
                 selectedRole = parent?.getItemAtPosition(position).toString()
             }
         }
+
+
+        val spinnerAdapter2 = CustomSpinnerAdapter(
+            this,  // Use our custom adapter
+            R.layout.spinner_text, supportList
+        )
+
+
+        spinnerAdapter2.setDropDownViewResource(R.layout.simple_spinner_dropdown)
+        spSupport.adapter = spinnerAdapter2
+
+
+        spSupport.onItemSelectedListener = object :
+            AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+            }
+
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                selectedSupport = parent?.getItemAtPosition(position).toString()
+            }
+
+        }
     }
 
 
@@ -127,6 +166,18 @@ RegisterActivity : BaseAppCompatActivity(), View.OnClickListener {
                         setError(getString(R.string.role_error))
                     }
 
+                    checkEmpty(edWebsiteUrl) -> {
+                        setError("Website Url cannot be empty")
+                    }
+
+                    checkEmpty(etAboutMe) -> {
+                        setError("About me cannot be empty")
+                    }
+
+                    selectedRole == "Select Support" -> {
+                        setError("Please select support")
+                    }
+
                     else -> {
                         signUpViewModel.register(
                             this,
@@ -138,7 +189,12 @@ RegisterActivity : BaseAppCompatActivity(), View.OnClickListener {
                             mPhotoFile,
                             selectedRole,
                             "3223",
-                            "Android"
+                            "Android",
+                            etAboutMe.text.toString().trim(),
+                            edWebsiteUrl.text.toString().trim(),
+                            mPhotoCoverFile,
+                            selectedSupport
+
                         )
                         showDialog()
                     }
@@ -171,6 +227,26 @@ RegisterActivity : BaseAppCompatActivity(), View.OnClickListener {
                     showPictureDialog()
                 }
             }
+
+            R.id.coverPhoto -> {
+                if (ContextCompat.checkSelfPermission(
+                        this,
+                        Manifest.permission.CAMERA
+                    ) != PackageManager.PERMISSION_GRANTED
+                ) {
+                    ActivityCompat.requestPermissions(
+                        this,
+                        arrayOf(
+                            Manifest.permission.CAMERA,
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                            Manifest.permission.READ_EXTERNAL_STORAGE
+                        ),
+                        0
+                    )
+                } else {
+                    showCoverPictureDialog()
+                }
+            }
         }
     }
 
@@ -188,6 +264,59 @@ RegisterActivity : BaseAppCompatActivity(), View.OnClickListener {
         }
     }
 
+    private fun showCoverPictureDialog() {
+        val pictureDialog: AlertDialog.Builder = AlertDialog.Builder(this, R.style.TimePickerTheme)
+        pictureDialog.setTitle("Select Action")
+        val pictureDialogItems = arrayOf(
+            "Select image from gallery",
+            "Select image from camera"
+        )
+        pictureDialog.setItems(
+            pictureDialogItems
+        ) { _, which ->
+            when (which) {
+                0 -> dispatchCoverGalleryIntent()
+                1 -> dispatchTakeCoverPictureIntent()
+            }
+        }
+        pictureDialog.show()
+    }
+
+    private fun dispatchCoverGalleryIntent() {
+        val pickPhoto = Intent(
+            Intent.ACTION_PICK,
+            MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+        )
+        pickPhoto.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        startActivityForResult(
+            pickPhoto, REQUEST_COVER_GALLERY_PHOTO
+        )
+    }
+
+    private fun dispatchTakeCoverPictureIntent() {
+        val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        if (takePictureIntent.resolveActivity(packageManager) != null) {
+            // Create the File where the photo should go
+            var photoFile: File? = null
+            try {
+                photoFile = createImageFile()
+            } catch (ex: IOException) {
+                ex.printStackTrace()
+                // Error occurred while creating the File
+            }
+            if (photoFile != null) {
+                val photoURI = FileProvider.getUriForFile(
+                    this, "${BuildConfig.APPLICATION_ID}.provider",
+                    photoFile
+                )
+                mPhotoCoverFile = photoFile
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
+                startActivityForResult(
+                    takePictureIntent, REQUEST_TAKE_COVER_PHOTO
+                )
+            }
+        }
+    }
 
     private fun showPictureDialog() {
         val pictureDialog: AlertDialog.Builder = AlertDialog.Builder(this, R.style.TimePickerTheme)
@@ -277,13 +406,13 @@ RegisterActivity : BaseAppCompatActivity(), View.OnClickListener {
 
         if (requestCode == REQUEST_TAKE_PHOTO) {
 
-            //    Toast.makeText(this, "New Logo Added", Toast.LENGTH_SHORT).show()
+            //Toast.makeText(this, "New Logo Added", Toast.LENGTH_SHORT).show()
 
 
             Glide.with(this).load(mPhotoFile).into(ivRegister)
 
         } else if (requestCode == REQUEST_GALLERY_PHOTO) {
-            val selectedImage = data!!.data
+            val selectedImage = data?.data
             try {
 
                 Log.e("PRACHI", getRealPathFromUri(selectedImage)!!)
@@ -295,6 +424,24 @@ RegisterActivity : BaseAppCompatActivity(), View.OnClickListener {
                 e.printStackTrace()
             }
         }
+
+        if (requestCode == REQUEST_TAKE_COVER_PHOTO) {
+
+
+            Glide.with(this).load(mPhotoCoverFile).into(coverPhoto)
+
+        } else if (requestCode == REQUEST_COVER_GALLERY_PHOTO) {
+            val selectedImage = data?.data
+            try {
+                mPhotoCoverFile = File(getRealPathFromUri(selectedImage))
+                Glide.with(this).load(mPhotoCoverFile).into(coverPhoto)
+
+            } catch (e: IOException) {
+
+                e.printStackTrace()
+            }
+        }
+
 
     }
 }

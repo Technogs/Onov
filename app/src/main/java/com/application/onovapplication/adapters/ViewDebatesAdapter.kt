@@ -49,7 +49,8 @@ class ViewDebatesAdapter(
 
 
             0 -> {
-                holder.itemView.feedTitle.text = "This is a petition"
+                holder.itemView.feedTitle.text = "This is a petition Title"
+                holder.itemView.feedType.text = "Feed Type : Petition"
                 holder.itemView.feedDescription.text =
                     "This is a petition description. You can tap on the image to see the details of the petition."
             }
@@ -61,6 +62,9 @@ class ViewDebatesAdapter(
 
             1 -> {
                 holder.itemView.donateLayout.visibility = View.VISIBLE
+                holder.itemView.feedTitle.text = "This is a donation Title"
+                holder.itemView.feedType.text = "Feed Type : Donation"
+
             }
 
         }

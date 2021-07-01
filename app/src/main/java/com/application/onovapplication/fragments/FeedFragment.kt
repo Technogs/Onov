@@ -11,6 +11,7 @@ import com.application.onovapplication.R
 import com.application.onovapplication.activities.common.BaseAppCompatActivity
 import com.application.onovapplication.activities.common.HomeTabActivity
 import com.application.onovapplication.adapters.ViewDebatesAdapter
+import com.application.onovapplication.model.FeedData
 import com.application.onovapplication.viewModels.HomeViewModel
 import kotlinx.android.synthetic.main.fragment_feeds.*
 
@@ -26,6 +27,9 @@ class FeedFragment : Fragment() {
         ViewModelProvider(this).get(HomeViewModel::class.java)
     }
     var debatesAdapter: ViewDebatesAdapter? = null
+
+    val feedData: ArrayList<FeedData> = ArrayList()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,10 +51,19 @@ class FeedFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         tvRole.text = "Role: ".plus((activity as BaseAppCompatActivity).userPreferences.getRole())
-        (activity as HomeTabActivity).showDialog()
-        homeViewModel.getFeed(requireContext(), "c3Y1b1L6i1KvM")
-        observeViewModel()
+ //       (activity as HomeTabActivity).showDialog()
+    //    homeViewModel.getFeed(requireContext(), "c3Y1b1L6i1KvM")
+       // observeViewModel()
         // noDebateData.visibility = View.VISIBLE
+
+        debatesAdapter = ViewDebatesAdapter(
+            requireContext(),
+            feedData
+        )
+
+        rv_view_debates.adapter = debatesAdapter
+
+
     }
 
 

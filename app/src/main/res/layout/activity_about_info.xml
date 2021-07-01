@@ -162,7 +162,7 @@ android:fontFamily="@font/poppins"
             android:fontFamily="@font/poppins"
             android:text="@string/role_"
             android:textColor="@color/black"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/roleValue"
@@ -172,7 +172,7 @@ android:fontFamily="@font/poppins"
             android:fontFamily="@font/poppins"
             android:text="Citizen"
             android:textColor="@color/black"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -193,7 +193,7 @@ android:fontFamily="@font/poppins"
             android:fontFamily="@font/poppins"
             android:text="@string/total_donations"
             android:textColor="@color/black"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/donaionsValue"
@@ -201,9 +201,9 @@ android:fontFamily="@font/poppins"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:fontFamily="@font/poppins"
-            android:text="02"
+            android:text="00"
             android:textColor="@color/black"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
     </LinearLayout>
     </RelativeLayout>
 

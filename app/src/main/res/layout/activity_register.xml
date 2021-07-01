@@ -27,17 +27,40 @@
                 android:layout_gravity="center"
                 android:src="@drawable/onov_logo" />
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginTop="10dp"
-                android:id="@+id/ivRegister"
-                android:onClick="onClick"
-                android:layout_gravity="center"
-                android:elevation="10dp"
-                android:background="@drawable/register_profile_camera" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="20dp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/poppins"
+                    android:text="Tap to add cover photo"
+                    android:layout_height="wrap_content" />
 
+
+                <ImageView
+                    android:id="@+id/coverPhoto"
+                    android:layout_width="match_parent"
+                    android:scaleType="centerCrop"
+                    android:layout_height="150dp"
+                    android:background="@drawable/drawable_chat_background"
+                    android:onClick="onClick" />
+
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/ivRegister"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="100dp"
+                    android:background="@drawable/register_profile_camera"
+                    android:elevation="10dp"
+                    android:onClick="onClick" />
+
+            </RelativeLayout>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
@@ -220,17 +243,108 @@
 
             </RelativeLayout>
 
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:orientation="horizontal"
+                android:padding="5dp">
+
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/edWebsiteUrl"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:background="@null"
+                    android:fontFamily="@font/poppins"
+                    android:hint="@string/website_url"
+                    android:textSize="14sp" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/edit_text_background" />
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginTop="30dp"
+                android:orientation="horizontal">
+
+
+                <Spinner
+                    android:id="@+id/spSupport"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:background="@android:color/white"
+                    android:gravity="center"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:spinnerMode="dropdown" />
+
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="10dp"
+                    android:src="@drawable/ic_down_arrow" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_alignParentBottom="true"
+                    android:background="@color/edit_text_background" />
+
+            </RelativeLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="35dp"
+                app:boxBackgroundMode="none"
+                app:counterEnabled="true"
+                app:counterMaxLength="300"
+                app:counterTextColor="@color/black"
+                app:hintEnabled="false">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etAboutMe"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/drawable_chat_background"
+                    android:drawablePadding="14dp"
+                    android:fontFamily="@font/poppins"
+                    android:hint="@string/about_me"
+                    android:imeOptions="actionNext"
+                    android:inputType="textImeMultiLine"
+                    android:lines="3"
+                    android:maxLength="300"
+                    android:maxLines="3"
+                    android:padding="16dp"
+                    android:textSize="16sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btSignUp"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:onClick="onClick"
-                android:textAllCaps="false"
-                android:fontFamily="@font/poppins"
                 android:layout_below="@id/tvForgotPassword"
                 android:layout_marginTop="40dp"
                 android:background="@drawable/drawable_gradient_button_background"
+                android:fontFamily="@font/poppins"
+                android:onClick="onClick"
                 android:text="@string/sign_up"
+                android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="18sp" />
 
@@ -251,11 +365,11 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvLogin"
-                    android:onClick="onClick"
-                    android:fontFamily="@font/poppins"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
+                    android:fontFamily="@font/poppins"
+                    android:onClick="onClick"
                     android:text="@string/login"
                     android:textColor="@color/red"
                     android:textSize="14sp" />

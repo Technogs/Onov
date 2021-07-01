@@ -14,6 +14,7 @@ import com.application.onovapplication.activities.citizens.DebateRequestsActivit
 import com.application.onovapplication.activities.common.*
 import com.application.onovapplication.activities.lpa.CreateAnnouncementActivity
 import com.application.onovapplication.activities.DonationsActivity
+import com.application.onovapplication.activities.GovernmentScreenActivity
 import com.application.onovapplication.activities.politicians.CreateLawActivity
 import com.application.onovapplication.adapters.MoreScreenAdapter
 import com.application.onovapplication.model.MoreScreenData
@@ -30,15 +31,14 @@ class MoreFragment : Fragment(), MoreScreenAdapter.MoreItemListener {
     val dataList: ArrayList<MoreScreenData> = ArrayList()
     private var moreScreenAdapter: MoreScreenAdapter? = null
 
-    override fun onCreateView(
+     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_more, container, false)
     }
-
-
+    
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -123,7 +123,7 @@ class MoreFragment : Fragment(), MoreScreenAdapter.MoreItemListener {
         dataList.add(
             MoreScreenData(
                 "Petitions",
-                R.drawable.create_event
+                R.drawable.petition
             )
         )
 
@@ -554,7 +554,8 @@ class MoreFragment : Fragment(), MoreScreenAdapter.MoreItemListener {
             }
 
             8 -> {
-                //my govts
+                val intent = Intent(requireContext(), GovernmentScreenActivity::class.java)
+                startActivity(intent)
             }
 
             9 -> {
@@ -632,7 +633,8 @@ class MoreFragment : Fragment(), MoreScreenAdapter.MoreItemListener {
             }
 
             8 -> {
-                //my govts
+                val intent = Intent(requireContext(), GovernmentScreenActivity::class.java)
+                startActivity(intent)
             }
 
             9 -> {
@@ -757,8 +759,9 @@ class MoreFragment : Fragment(), MoreScreenAdapter.MoreItemListener {
             }
 
             6 -> {
-                //pending
-            }
+                val intent = Intent(requireContext(), GovernmentScreenActivity::class.java)
+                startActivity(intent)
+                        }
 
             7 -> {
                 val intent = Intent(requireContext(), AboutUsActivity::class.java)
@@ -810,8 +813,9 @@ class MoreFragment : Fragment(), MoreScreenAdapter.MoreItemListener {
             }
 
             5 -> {
-                //pending
-            }
+                val intent = Intent(requireContext(), GovernmentScreenActivity::class.java)
+                startActivity(intent)
+                        }
 
             6 -> {
                 val intent = Intent(requireContext(), AboutUsActivity::class.java)

@@ -17,10 +17,14 @@ import android.widget.EditText
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
+import androidx.lifecycle.ViewModelProvider
 import com.application.onovapplication.BuildConfig
 import com.application.onovapplication.R
 import com.application.onovapplication.adapters.ViewDebatesAdapter
 import com.application.onovapplication.model.FeedData
+import com.application.onovapplication.model.UserInfo
+import com.application.onovapplication.repository.BaseUrl
+import com.application.onovapplication.viewModels.ProfileViewModel
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_profile2.*
 import java.io.File
@@ -38,7 +42,12 @@ class ProfileActivity2 : BaseAppCompatActivity(), View.OnClickListener {
     private var type: String? = null
     private var debatesAdapter: ViewDebatesAdapter? = null
     val feedData: ArrayList<FeedData> = ArrayList()
+    private var userInfo: UserInfo? = null
 
+
+    private val profileViewModel by lazy {
+        ViewModelProvider(this).get(ProfileViewModel::class.java)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,15 +65,23 @@ class ProfileActivity2 : BaseAppCompatActivity(), View.OnClickListener {
 
         if (type == "user") {
             profileClick.visibility = View.VISIBLE
+            ivCoverPhoto.setOnClickListener(this)
             editName.visibility = View.VISIBLE
         } else {
             profileClick.visibility = View.GONE
+            ivCoverPhoto.setOnClickListener(null)
             editName.visibility = View.GONE
         }
 
         backBtn.setOnClickListener {
             finish()
         }
+
+
+        profileViewModel.getProfile(this, userPreferences.getUserREf())
+        showDialog()
+        observeViewModel()
+
     }
 
     override fun onClick(v: View?) {
@@ -90,6 +107,7 @@ class ProfileActivity2 : BaseAppCompatActivity(), View.OnClickListener {
 
             R.id.aboutInfo -> {
                 val intent = Intent(this, AboutInfoActivity::class.java)
+                intent.putExtra("user", userInfo)
                 startActivity(intent)
             }
 
@@ -119,7 +137,7 @@ class ProfileActivity2 : BaseAppCompatActivity(), View.OnClickListener {
 
             }
 
-            R.id.ivCoverPhoto->{
+            R.id.ivCoverPhoto -> {
                 if (ContextCompat.checkSelfPermission(
                         this,
                         Manifest.permission.CAMERA
@@ -140,6 +158,50 @@ class ProfileActivity2 : BaseAppCompatActivity(), View.OnClickListener {
             }
 
         }
+    }
+
+    private fun observeViewModel() {
+
+        profileViewModel.successful.observe(this, androidx.lifecycle.Observer {
+            dismissDialog()
+            if (it != null) {
+                if (it) {
+                    if (profileViewModel.status == "success") {
+                        userInfo = profileViewModel.userInfo
+                        setLayout(profileViewModel.userInfo!!)
+
+                    } else {
+                        setError(profileViewModel.message)
+                        finish()
+                    }
+                }
+            } else {
+                setError(profileViewModel.message)
+            }
+
+        })
+
+        profileViewModel.successfullyUpdated.observe(this, androidx.lifecycle.Observer {
+            dismissDialog()
+            if (it) {
+                if (profileViewModel.status == "success") {
+                    setError(profileViewModel.message)
+                    // userPreferences.savePhoto(profileViewModel.photoPath)
+                } else {
+                    setError(profileViewModel.message)
+                    finish()
+                }
+            } else {
+                setError(profileViewModel.message)
+            }
+        })
+    }
+
+    private fun setLayout(userInfo: UserInfo) {
+        profileName.setText(userInfo.fullName)
+        partyFollower.text = "(".plus(userInfo.supporter!!.first().toString()).plus(")")
+        Glide.with(this).load(BaseUrl.photoUrl + userInfo.profilePic).into(profileImage)
+        Glide.with(this).load(BaseUrl.photoUrl + userInfo.coverPhoto).into(ivCoverPhoto)
     }
 
 
@@ -243,43 +305,44 @@ class ProfileActivity2 : BaseAppCompatActivity(), View.OnClickListener {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        if (data?.data != null) {
 
-        if (requestCode == REQUEST_TAKE_PHOTO) {
+            if (requestCode == REQUEST_TAKE_PHOTO) {
 
 
-            Glide.with(this).load(mPhotoFile).into(profileImage)
-
-        } else if (requestCode == REQUEST_GALLERY_PHOTO) {
-            val selectedImage = data!!.data
-            try {
-                mPhotoFile = File(getRealPathFromUri(selectedImage)!!)
                 Glide.with(this).load(mPhotoFile).into(profileImage)
 
-            } catch (e: IOException) {
+            } else if (requestCode == REQUEST_GALLERY_PHOTO) {
+                val selectedImage = data.data
+                try {
+                    mPhotoFile = File(getRealPathFromUri(selectedImage))
+                    Glide.with(this).load(mPhotoFile).into(profileImage)
 
-                e.printStackTrace()
+                } catch (e: IOException) {
+
+                    e.printStackTrace()
+                }
             }
-        }
 
 
-        if (requestCode == REQUEST_TAKE_COVER_PHOTO) {
+            if (requestCode == REQUEST_TAKE_COVER_PHOTO) {
 
 
-            Glide.with(this).load(mPhotoFile).into(ivCoverPhoto)
-
-        } else if (requestCode == REQUEST_COVER_GALLERY_PHOTO) {
-            val selectedImage = data!!.data
-            try {
-                mPhotoFile = File(getRealPathFromUri(selectedImage)!!)
                 Glide.with(this).load(mPhotoFile).into(ivCoverPhoto)
 
-            } catch (e: IOException) {
+            } else if (requestCode == REQUEST_COVER_GALLERY_PHOTO) {
+                val selectedImage = data.data
+                try {
+                    mPhotoFile = File(getRealPathFromUri(selectedImage))
+                    Glide.with(this).load(mPhotoFile).into(ivCoverPhoto)
 
-                e.printStackTrace()
+                } catch (e: IOException) {
+
+                    e.printStackTrace()
+                }
             }
+
         }
-
-
     }
 
     private fun setFocusableFalse(editText: EditText) {

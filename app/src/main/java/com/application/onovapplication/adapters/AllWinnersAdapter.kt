@@ -30,12 +30,12 @@ class AllWinnersAdapter(
     }
 
     override fun getItemCount(): Int {
-        return allWinnersList.size
+        return 8
     }
 
     override fun onBindViewHolder(holder: RVHolder, position: Int) {
 
-        holder.bind(allWinnersList[position])
+//        holder.bind(allWinnersList[position])
     }
 
 

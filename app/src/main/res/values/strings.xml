@@ -176,6 +176,9 @@
     <string name="signatures_needed">Signatures Needed</string>
     <string name="signatures_received_34">Signatures Received: 34</string>
     <string name="views">Views</string>
+    <string name="state">State</string>
+    <string name="bio">Bio</string>
+    <string name="search">Search</string>
 
 
 </resources>
