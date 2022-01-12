@@ -108,7 +108,6 @@ Log.d("userinfo",""+userInfo)
           }
             R.id.update_info->{
 
-//                val returnIntent = Intent(this,ProfileActivity2::class.java)
                 val returnIntent = Intent()
                 returnIntent.putExtra("about", binding.etText.text.toString())
                 returnIntent.putExtra("weburl", binding.websiteLink.text.toString())
