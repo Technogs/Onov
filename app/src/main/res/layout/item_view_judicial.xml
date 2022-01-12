@@ -15,6 +15,7 @@
         android:layout_width="80dp"
         android:layout_height="100dp"
         android:gravity="center"
+        android:id="@+id/judicialPic"
         android:src="@drawable/dummy_image" />
     </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -28,27 +29,30 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins"
+            android:fontFamily="@font/poppins_regular"
             android:gravity="center"
             android:text="John roberts"
+            android:id="@+id/judiciaryName"
             android:textColor="@color/icon_tint_color"
             android:textSize="15dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins"
+            android:fontFamily="@font/poppins_regular"
             android:gravity="center"
             android:text="Jan 27,1995"
+            android:id="@+id/judiciaryJoining"
             android:textColor="@color/black"
             android:textSize="15dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins"
+            android:fontFamily="@font/poppins_regular"
             android:gravity="center"
             android:text="New York"
+            android:id="@+id/judiciaryPlace"
             android:textColor="@color/grey"
             android:textSize="15dp" />
 
@@ -68,9 +72,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins"
+            android:fontFamily="@font/poppins_regular"
             android:gravity="center"
             android:text="G.W Bush"
+            android:id="@+id/judiciaryAppointedBy"
             android:textColor="@color/icon_tint_color"
             android:textSize="15dp" />
 
@@ -87,9 +92,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:fontFamily="@font/poppins"
+            android:fontFamily="@font/poppins_regular"
             android:gravity="center"
             android:text="10-22"
+            android:id="@+id/judiciaryScv"
             android:textColor="@color/black"
             android:textSize="15sp"
             android:paddingLeft="10dp"
@@ -106,9 +112,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins"
+            android:fontFamily="@font/poppins_regular"
             android:gravity="center"
             android:text="72"
+            android:id="@+id/judiciaryAge"
             android:textColor="@color/black"
             android:textSize="15sp"
             android:paddingLeft="10dp"

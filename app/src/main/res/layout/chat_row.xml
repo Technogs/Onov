@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/llYourMessageLayout"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvYourMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_4sdp"
+            android:background="@drawable/light_red_color"
+            android:elevation="4dp"
+            app:fontFamily="@font/poppins_regular"
+            android:fontFamily="@font/poppins_regular"
+            android:gravity="center_vertical"
+            android:lineSpacingExtra="2dp"
+            android:paddingStart="10dp"
+            android:text="hello "
+            android:textSize="14sp" />
+
+        <ImageView
+            android:layout_width="@dimen/_140sdp"
+            android:id="@+id/yourImageView"
+            android:visibility="gone"
+            android:scaleType="centerCrop"
+            android:layout_height="@dimen/_95sdp"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvYourMessageTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:fontFamily="@font/poppins_regular"
+            app:fontFamily="@font/poppins_regular"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_8ssp" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/llMeMessageLayout"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginStart="50dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvMeMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@drawable/drawable_light_grey_curve"
+            android:fontFamily="@font/poppins_regular"
+            android:gravity="center_vertical"
+            android:padding="@dimen/_3sdp"
+            android:lineSpacingExtra="2dp"
+            app:fontFamily="@font/poppins_regular"
+            android:text="You can share your quesries with your doctor and medical reports here too"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:layout_width="150dp"
+            android:id="@+id/myImageView"
+            android:visibility="gone"
+            android:layout_height="100dp"/>
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvMeMessageTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:fontFamily="@font/poppins_regular"
+
+            app:fontFamily="@font/poppins_regular"
+            android:textColor="@color/grey"
+            android:textSize="10sp" />
+
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</androidx.appcompat.widget.LinearLayoutCompat>

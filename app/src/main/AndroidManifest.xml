@@ -4,10 +4,18 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
 
     <application
+        android:name=".debate.vlive.AgoraLiveApplication"
         android:allowBackup="true"
+        android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:requestLegacyExternalStorage="true"
@@ -15,27 +23,114 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OnovApplication"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activities.GovernmentScreenActivity"
+
+        <meta-data
+            android:name="com.google.android.gms.wallet.api.enabled"
+            android:value="true" />
+
+        <activity
+            android:name=".gpay.CheckoutActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activities.DonorsActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activities.PollResultActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activities.AddPollingResultActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activities.GovtDetailActivity"
+            android:exported="true" /> <!-- <activity -->
+        <!-- android:name=".debate.activity.SettingActivity" -->
+        <!-- android:exported="true" /> -->
+        <!-- <activity -->
+        <!-- android:name=".debate.activity.MainDebateActivity" -->
+        <!-- android:exported="true" /> -->
+        <!-- <activity -->
+        <!-- android:name=".debate.activity.RtcBaseActivity" -->
+        <!-- android:exported="true" /> -->
+        <!-- <activity -->
+        <!-- android:name=".debate.activity.RoleActivity" -->
+        <!-- android:exported="true" /> -->
+        <!-- <activity -->
+        <!-- android:name=".debate.activity.LiveActivity" -->
+        <!-- android:exported="true" /> -->
+        <!-- <activity -->
+        <!-- android:name=".debate.activity.BaseActivity" -->
+        <!-- android:exported="true" /> &lt;!&ndash; <activity &ndash;&gt; -->
+        <!-- android:name=".activities.AddTaskActivity" -->
+        <!-- android:exported="true" /> -->
+        <activity
+            android:name=".activities.PeopleActivity"
+            android:exported="true"
             android:launchMode="singleTop"
-            android:screenOrientation="fullSensor"
-            android:windowSoftInputMode="stateAlwaysHidden"/>
-        <activity android:name=".activities.common.AboutInfoActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+
+        <service
+            android:name=".chat.MyFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_launcher_foreground" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/app_color" />
+
+        <activity
+            android:name=".activities.CommentActivity"
+            android:exported="true"
             android:launchMode="singleTop"
-            android:screenOrientation="fullSensor"
-            android:windowSoftInputMode="stateAlwaysHidden"
-        />
-        <activity android:name=".activities.common.ProfileActivity2"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".activities.UsersActivity"
+            android:exported="true"
             android:launchMode="singleTop"
-            android:screenOrientation="fullSensor"
-            android:windowSoftInputMode="stateAlwaysHidden"/>
-        <activity android:name=".activities.EventPaymentActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".activities.FeedDetailActivity"
+            android:exported="true"
             android:launchMode="singleTop"
-            android:screenOrientation="fullSensor"
-            android:windowSoftInputMode="stateAlwaysHidden"/>
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".activities.common.AskToAddActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".activities.GovernmentScreenActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".activities.common.AboutInfoActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".activities.common.ProfileActivity2"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".activities.EventPaymentActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".activities.common.AskDonationsActivity"
             android:launchMode="singleTop"
-            android:screenOrientation="fullSensor"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".activities.EventDetailsActivity"
@@ -151,12 +246,11 @@
             android:name=".activities.common.NotificationsActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity
-            android:name=".activities.DonationsActivity"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden" /> <!-- <activity -->
+        <!-- android:name=".activities.DonationsActivity" -->
+        <!-- android:launchMode="singleTop" -->
+        <!-- android:screenOrientation="portrait" -->
+        <!-- android:windowSoftInputMode="stateAlwaysHidden" /> -->
         <activity
             android:name=".activities.common.CreateEventActivity"
             android:launchMode="singleTop"
@@ -202,6 +296,26 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".debate.vlive.ui.live.VirtualImageSelectActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".debate.vlive.ui.live.LivePrepareActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".debate.vlive.ui.live.MultiHostLiveActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".debate.vlive.ui.main.MainActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity android:name=".activities.common.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -211,18 +325,29 @@
         </activity>
 
         <meta-data
+            android:name="firebase_messaging_auto_init_enabled"
+            android:value="false" />
+        <meta-data
+            android:name="firebase_analytics_collection_enabled"
+            android:value="false" />
+        <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="${applicationId}.provider"
+            android:authorities="com.application.onovapplication.provider"
+
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
+
+
     </application>
 
 </manifest>
+
+<!--    android:authorities="${applicationId}.provider"-->

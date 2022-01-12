@@ -1,3 +1,4 @@
+
 package com.application.onovapplication.activities.common
 
 import android.os.Bundle
@@ -5,26 +6,37 @@ import android.view.MenuItem
 import android.view.View
 import androidx.fragment.app.Fragment
 import com.application.onovapplication.R
+import com.application.onovapplication.databinding.ActionBarLayout2Binding
+import com.application.onovapplication.databinding.ActionBarLayoutBinding
+import com.application.onovapplication.databinding.ActivityForgotPasswordOtpBinding
+import com.application.onovapplication.databinding.ActivityHomeTabBinding
 import com.application.onovapplication.fragments.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import kotlinx.android.synthetic.main.action_bar_layout.*
-import kotlinx.android.synthetic.main.activity_home_tab.*
+
 
 class HomeTabActivity : BaseAppCompatActivity(),
     BottomNavigationView.OnNavigationItemSelectedListener {
     var fragment: Fragment? = null
     var role: String? = null
+    private lateinit var binding: ActivityHomeTabBinding
+    private lateinit var incnv: BottomNavigationView
+    private lateinit var incBinding: ActionBarLayoutBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home_tab)
-        navigation.setOnNavigationItemSelectedListener(this)
+        binding = ActivityHomeTabBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
+         incBinding =binding.abHome
+        incnv  =binding.navigation
 
-        navigation.selectedItemId = R.id.navigation_home
+        incnv.setOnNavigationItemSelectedListener(this)
+
+        incnv.selectedItemId = R.id.navigation_home
 
         role = userPreferences.getRole()
-        backArrow.visibility = View.GONE
-        searchButton.visibility = View.VISIBLE
+        incBinding.backArrow.visibility = View.GONE
+        incBinding.searchButton.visibility = View.VISIBLE
     }
 
 
@@ -33,45 +45,56 @@ class HomeTabActivity : BaseAppCompatActivity(),
         role = userPreferences.getRole()
 
         if (!role.isNullOrEmpty() && role == "Citizens" || !role.isNullOrEmpty() && role == "citizens") {
-            navigation.menu.getItem(3).setIcon(R.drawable.vote_yea)
-            navigation.menu.getItem(3).title = getString(R.string.voting)
+            incnv.menu.getItem(3).setIcon(R.drawable.vote_yea)
+            incnv.menu.getItem(3).title = getString(R.string.polling)
 
         } else {
-            navigation.menu.getItem(3).setIcon(R.drawable.donate)
-            navigation.menu.getItem(3).title = getString(R.string.donations)
+            incnv.menu.getItem(3).setIcon(R.drawable.donate)
+            incnv.menu.getItem(3).title = getString(R.string.donations)
 
         }
 
         when (menuItem.itemId) {
             R.id.navigation_home -> {
-                ab_home.visibility = View.VISIBLE
+                //changed
+              // binding.abHome.visibility = View.VISIBLE
+                incBinding.searchButton.visibility = View.VISIBLE
                 fragment = FeedFragment()
             }
 
             R.id.navigation_chat -> {
-                ab_home.visibility = View.VISIBLE
-
+                //changed
+               // binding.abHome = View.VISIBLE
+                incBinding.searchButton.visibility = View.INVISIBLE
                 fragment = ChatFragment()
             }
 
             R.id.navigation_debate -> {
-                ab_home.visibility = View.GONE
-                fragment = CreatePostFragment()
+                //changed
+               // ab_home.visibility = View.GONE
+                incBinding.searchButton.visibility = View.VISIBLE
+                fragment = AskForMediaFragment()//CreatePostFragment()
             }
 
             R.id.navigation_voting -> {
                 if (!role.isNullOrEmpty() && role == "Citizens" || !role.isNullOrEmpty() && role == "citizens") {
-                    ab_home.visibility = View.VISIBLE
-                    fragment = VotingFragment()
+                    //changed
+                    //ab_home.visibility = View.VISIBLE
+                    incBinding.searchButton.visibility = View.VISIBLE
+                    fragment = PollingFragment() //VotingFragment()
                 }
                 else {
-                    ab_home.visibility = View.VISIBLE
+                   // ab_home.visibility = View.VISIBLE
+                  //  ab_home.visibility = View.VISIBLE
+                    incBinding.searchButton.visibility = View.VISIBLE
                     fragment = DonationsFragment()
                 }
             }
 
             R.id.navigation_more -> {
-                ab_home.visibility = View.VISIBLE
+                //changed
+               // ab_home.visibility = View.VISIBLE
+                incBinding.searchButton.visibility = View.VISIBLE
                 fragment = MoreFragment()
 
             }
@@ -82,8 +105,8 @@ class HomeTabActivity : BaseAppCompatActivity(),
 
     private fun loadFragment(fragment: Fragment?): Boolean {
         if (fragment != null) {
-            supportFragmentManager.beginTransaction().replace(R.id.homeTabContainer, fragment)
-                .commit()
+            supportFragmentManager.beginTransaction().
+            replace(R.id.homeTabContainer, fragment).commit()
             return true
         }
         return false

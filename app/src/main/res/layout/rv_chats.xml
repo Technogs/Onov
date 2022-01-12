@@ -26,56 +26,62 @@
             android:layout_marginEnd="10dp"
             android:src="@drawable/dummy_profile_image" />
 
-        <TextView
-            android:layout_width="12dp"
-            android:layout_height="12dp"
-            android:layout_marginTop="48dp"
-            android:layout_marginStart="-24dp"
-            android:layout_toEndOf="@+id/ivChatProfile"
-            android:background="@drawable/drawable_green_circle" />
-
-
-        <TextView
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:id="@+id/chat_lyt"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins"
-            android:layout_toEndOf="@+id/ivChatProfile"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="12dp"
-            android:text="Gulf Doe"
-            android:layout_marginEnd="5dp"
-            android:layout_toStartOf="@+id/tvChatDate"
-            android:id="@+id/chatUserName"
-            android:textColor="@color/black"
-            />
+            android:layout_marginStart="6dp"
+            android:layout_toEndOf="@+id/ivChatProfile">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins"
-            android:layout_toEndOf="@+id/ivChatProfile"
-            android:layout_marginStart="10dp"
-            android:text="Hi,How are you?"
-            android:singleLine="true"
-            android:layout_marginTop="2dp"
-            android:layout_marginEnd="20dp"
-            android:layout_below="@+id/chatUserName"
-            android:textColor="@color/navigation_color"
-            />
+            <TextView
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:layout_marginStart="-24dp"
+                android:layout_marginTop="48dp"
+                android:paddingHorizontal="@dimen/_3sdp"
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="10dp"
-            android:fontFamily="@font/poppins"
-            android:layout_marginTop="10dp"
-            android:id="@+id/tvChatDate"
-            android:textColor="@color/navigation_color"
-            android:text="5 Jan, 3:45pm"/>
+                android:background="@drawable/drawable_green_circle"
+                android:visibility="gone" />
 
 
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/chatUserName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="5dp"
+                android:fontFamily="@font/poppins_regular"
+                android:gravity="start"
+                android:text="Gulf Doe"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/cLastMessage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/chatUserName"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="20dp"
+                android:fontFamily="@font/poppins_regular"
+                android:paddingHorizontal="@dimen/_3sdp"
+                android:singleLine="true"
+                android:text="Tap to chat"
+                android:textColor="@color/navigation_color"
+                android:textStyle="italic" />
+
+            <TextView
+                android:id="@+id/tvChatDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:fontFamily="@font/poppins_regular"
+                android:text="5 Jan, 3:45pm"
+                android:textColor="@color/navigation_color" />
+
+
+        </RelativeLayout>   </RelativeLayout>
 
 
 </LinearLayout>

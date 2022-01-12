@@ -25,7 +25,8 @@
         android:layout_width="wrap_content"
         android:layout_margin="20dp"
         android:textColor="@color/black"
-        android:fontFamily="@font/poppins"
+        android:id="@+id/about_content"
+        android:fontFamily="@font/poppins_regular"
 android:gravity="center"
         android:text="dummy text dummy text dummy text dummy text dummy text dummy textdummy textdummy textvdummy textv dummy text dummy textvdummy text dummy text dummy textvv dummy text dummy textdummy text dummy text v v dummy text dummy text v dummy text "
         android:layout_height="wrap_content"/>

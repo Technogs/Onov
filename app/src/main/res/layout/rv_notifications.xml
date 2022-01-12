@@ -38,7 +38,7 @@
             android:layout_marginStart="18dp"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="10dp"
-            android:fontFamily="@font/poppins"
+            android:fontFamily="@font/poppins_regular"
             android:text="dummy comment dummy comment dummy comment dummy comment"
 
 
@@ -53,7 +53,7 @@
             android:text="23-05-2021"
             android:textSize="12sp"
             android:layout_marginBottom="10dp"
-            android:fontFamily="@font/poppins"
+            android:fontFamily="@font/poppins_regular"
             android:layout_alignParentEnd="true"
 
 

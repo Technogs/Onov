@@ -22,6 +22,9 @@ import com.application.onovapplication.R
 import com.application.onovapplication.prefs.PreferenceManager
 
 import com.google.android.material.snackbar.Snackbar
+import java.text.ParseException
+import java.text.SimpleDateFormat
+import java.util.*
 import android.view.MotionEvent as MotionEvent1
 
 
@@ -31,7 +34,7 @@ abstract class BaseAppCompatActivity : AppCompatActivity() {
         PreferenceManager(this)
     }
 
-    private val mDialog: Dialog by lazy {
+     val mDialog: Dialog by lazy {
         Dialog(this).apply {
             window?.requestFeature(Window.FEATURE_NO_TITLE)
             setContentView(R.layout.layout_progress_wheel)
@@ -72,6 +75,7 @@ abstract class BaseAppCompatActivity : AppCompatActivity() {
     fun showDialog() {
         if (!mDialog.isShowing) {
             mDialog.show()
+            mDialog.setCancelable(false)
         }
     }
 
@@ -151,5 +155,38 @@ abstract class BaseAppCompatActivity : AppCompatActivity() {
             metrics.scaledDensity = configuration.fontScale * metrics.density
             baseContext.resources.updateConfiguration(configuration, metrics)
         }
+    }
+
+    fun convertDateFormat(time: String?, inputType: String, outputType: String): String {
+        val inputPattern = inputType
+        val outputPattern = outputType
+        val inputFormat = SimpleDateFormat(inputPattern, Locale.ENGLISH)
+        val outputFormat = SimpleDateFormat(outputPattern, Locale.ENGLISH)
+        var date: Date? = null
+        var str: String? = null
+        try {
+            date = inputFormat.parse(time)
+
+            str = outputFormat.format(date)
+        } catch (e: ParseException) {
+            e.printStackTrace()
+        }
+        return str.toString()
+    }
+
+    fun getEpochDate(time: Long): String {
+        val format = "yyyy-MM-dd hh:mm:ss";
+        val sdf = SimpleDateFormat(format, Locale.getDefault());
+        sdf.timeZone = TimeZone.getDefault();
+        return sdf.format(Date(time * 1000));//format(Date(time * 1000));
+
+    }
+
+    fun getEpochTime(): Long {
+
+//        val currentTime = Calendar.getInstance().time
+        val millis = System.currentTimeMillis()
+        val seconds = millis / 1000
+        return seconds
     }
 }

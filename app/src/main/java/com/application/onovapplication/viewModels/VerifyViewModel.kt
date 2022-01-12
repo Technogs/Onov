@@ -97,8 +97,7 @@ class VerifyViewModel : ViewModel() {
     ) {
 
 
-        val email: RequestBody =
-            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), userEmail)
+        val email: RequestBody = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), userEmail)
 
 
 

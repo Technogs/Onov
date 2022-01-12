@@ -5,9 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/white"
     tools:context=".activities.politicians.PoliticianDebateRequestActivity">
 
-    <include layout="@layout/action_bar_layout_2" />
+    <include layout="@layout/action_bar_layout_2"
+        android:id="@+id/ab"/>
 
     <RelativeLayout
         android:id="@+id/noDebateDataPolitician"

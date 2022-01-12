@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/iv_sender_profile"
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_alignParentStart="true"
+        android:layout_centerInParent="true"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:src="@drawable/profile"
+        android:visibility="gone" />
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/ll_audio_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="end"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:layout_toEndOf="@+id/iv_sender_profile"
+        android:background="@drawable/msg_bkd"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:cardBackgroundColor="@color/app_color"
+        app:cardCornerRadius="@dimen/_10sdp"
+        app:cardUseCompatPadding="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingStart="8dp">
+
+
+            <FrameLayout
+                android:id="@+id/frame_audio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerInParent="true"
+                >
+
+                <ImageView
+                    android:id="@+id/iv_audio_play"
+                    android:layout_width="@dimen/_28sdp"
+                    android:layout_height="@dimen/_28sdp"
+                    android:src="@drawable/phone"
+                    android:padding="@dimen/_8sdp"
+                    android:visibility="visible" />
+
+                <ImageView
+                    android:id="@+id/iv_audio_pause"
+                    android:layout_width="@dimen/_28sdp"
+                    android:layout_height="@dimen/_28sdp"
+                    android:padding="@dimen/_8sdp"
+                    android:src="@drawable/phone"
+                    android:visibility="gone" />
+
+
+            </FrameLayout>
+
+
+<!--            <com.wizebrains.adventmingle.utils.custom.CustomBoldTextView-->
+<!--                android:id="@+id/tv_play_timer"-->
+<!--                android:layout_width="@dimen/_50sdp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_below="@+id/frame_audio"-->
+<!--                android:layout_alignParentStart="true"-->
+<!--                android:layout_marginTop="@dimen/_15sdp"-->
+<!--                android:padding="@dimen/_5sdp"-->
+<!--                android:paddingBottom="6dp"-->
+<!--                android:text="00:00"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:textSize="@dimen/_8ssp"-->
+<!--                android:textStyle="bold" />-->
+
+
+<!--            <com.warkiz.widget.IndicatorSeekBar-->
+<!--                android:id="@+id/seekbar_audio"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="@dimen/_30sdp"-->
+<!--                android:layout_centerInParent="true"-->
+<!--                android:layout_toEndOf="@+id/frame_audio"-->
+<!--                android:backgroundTint="@color/app_hint_color"-->
+<!--                app:isb_thumb_color="#CACBCC"-->
+<!--                app:isb_thumb_text_color="@color/app_hint_color"-->
+<!--                app:isb_track_progress_color="#CACBCC" />-->
+
+
+<!--            <com.wizebrains.adventmingle.utils.custom.CustomBoldTextView-->
+<!--                android:id="@+id/tv_audio_time"-->
+<!--                android:layout_width="@dimen/_50sdp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_below="@+id/frame_audio"-->
+<!--                android:layout_alignParentEnd="true"-->
+<!--                android:layout_marginTop="@dimen/_15sdp"-->
+<!--                android:paddingBottom="6dp"-->
+<!--                android:text="10:39 PM"-->
+<!--                android:paddingTop="@dimen/_4sdp"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:textSize="@dimen/_8ssp"-->
+<!--                android:textStyle="bold" />-->
+
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/ll_image_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_150sdp"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="end"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+     android:visibility="gone"
+        android:layout_toEndOf="@+id/iv_sender_profile"
+        android:background="@drawable/msg_bkd"
+        android:orientation="vertical"
+      android:layout_marginStart="@dimen/_50sdp"
+        app:cardCornerRadius="@dimen/_10sdp"
+        app:cardUseCompatPadding="true">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/linear_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/iv_pic"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_gravity="end"
+                    android:layout_weight="1"
+                    android:layout_margin="@dimen/_4sdp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/profile"
+                    android:visibility="visible"
+
+                    />
+
+                <TextView
+                    android:id="@+id/tv_image_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/app_color"
+                    android:layout_gravity="bottom|end"
+                   android:paddingHorizontal="@dimen/_10sdp"
+                    android:gravity="end|center_vertical"
+                    android:paddingBottom="6dp"
+                    android:text="10:39 PM"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_8ssp"
+                    android:textStyle="bold" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </RelativeLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/ll_video_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_150sdp"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="end"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+     android:visibility="gone"
+        android:layout_toEndOf="@+id/iv_sender_profile"
+        android:background="@drawable/msg_bkd"
+        android:orientation="vertical"
+      android:layout_marginStart="@dimen/_50sdp"
+        app:cardCornerRadius="@dimen/_10sdp"
+        app:cardUseCompatPadding="true">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/linear_video"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/iv_video"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_gravity="end"
+                    android:layout_weight="1"
+                    android:layout_margin="@dimen/_4sdp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/profile"
+                    android:visibility="gone"
+
+                    />
+                <com.google.android.exoplayer2.ui.SimpleExoPlayerView
+                    android:id="@+id/idExoVideoVIew"
+                    android:layout_width="match_parent"
+                    android:visibility="visible"
+                    app:resize_mode="fill"
+                    android:layout_height="@dimen/_200sdp" />
+                <TextView
+                    android:id="@+id/tv_video_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/app_color"
+                    android:layout_gravity="bottom|end"
+                   android:paddingHorizontal="@dimen/_10sdp"
+                    android:gravity="end|center_vertical"
+                    android:paddingBottom="6dp"
+                    android:text="10:39 PM"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_8ssp"
+                    android:textStyle="bold" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </RelativeLayout>
+
+
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/ll_feed_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="end"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+
+        android:layout_toEndOf="@+id/iv_sender_profile"
+        android:background="@drawable/msg_bkd"
+        android:orientation="vertical"
+        android:layout_marginStart="@dimen/_50sdp"
+        app:cardCornerRadius="@dimen/_10sdp"
+        app:cardUseCompatPadding="true">
+
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:id="@+id/feedlyt"
+        android:layout_marginHorizontal="@dimen/_4sdp"
+            android:layout_height="wrap_content">
+
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="4dp"
+                android:id="@+id/sender_rlyt"
+                android:paddingTop="8dp"
+                android:paddingEnd="4dp"
+                android:paddingBottom="8dp">
+
+                <TextView
+                    android:id="@+id/viewFeed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_9sdp"
+                    android:fontFamily="@font/poppins_bold"
+                    android:paddingHorizontal="@dimen/_9sdp"
+                    android:paddingVertical="@dimen/_5sdp"
+                    android:text="View"
+                    android:textColor="@color/text_blue"
+                    android:textSize="@dimen/_14ssp" />
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/ivChatProfile"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="10dp"
+                    android:src="@drawable/dummy_profile_image" />
+
+
+                <TextView
+                    android:id="@+id/userName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_toEndOf="@+id/ivChatProfile"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Gulf"
+                    android:textColor="@color/text_blue"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/feedTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dummy Title"
+                    android:textSize="18sp"
+                    android:layout_below="@+id/ivChatProfile"
+                    android:fontFamily="@font/poppins_medium"
+                    android:layout_marginTop="10dp"
+                    android:justificationMode="inter_word"
+
+                    android:textColor="@color/black" />
+
+
+                <TextView
+                    android:id="@+id/feedType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/feedTitle"
+                    android:fontFamily="@font/poppins_regular"
+                    android:justificationMode="inter_word"
+                    android:text="Feed type: Post"
+                    android:textColor="@color/black"
+
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/feedDescription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/feedType"
+                    android:fontFamily="@font/poppins_regular"
+                    android:justificationMode="inter_word"
+                    android:text="Lorem Ipsum is simply dummy text ever since the type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the)."
+                    android:textColor="@color/navigation_color" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:id="@+id/feedMedia"
+                android:layout_height="200dp">
+
+                <ImageView
+                    android:id="@+id/ivFeed"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_200sdp"
+                    android:background="@drawable/dummy_debate"
+                    android:scaleType="centerCrop" />
+
+                <VideoView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_200sdp"
+                    android:id="@+id/vvFeed"
+                    android:visibility="gone" />
+                <com.google.android.exoplayer2.ui.SimpleExoPlayerView
+                    android:id="@+id/idExoPlayerVIew"
+                    android:layout_width="match_parent"
+                    android:visibility="gone"
+                    android:layout_height="@dimen/_200sdp" />
+
+                <WebView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:id="@+id/wbFeed"
+                    android:visibility="gone" />
+
+            </RelativeLayout>
+            <TextView
+                android:id="@+id/tv_feed_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/app_color"
+                android:layout_gravity="bottom|end"
+                android:paddingHorizontal="@dimen/_10sdp"
+                android:gravity="end|center_vertical"
+                android:paddingBottom="6dp"
+                android:text="10:39 PM"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_8ssp"
+                android:textStyle="bold" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/ll_message_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="end"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginStart="@dimen/_40sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_toEndOf="@+id/iv_sender_profile"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/linear_chat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/msg_bkd"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_sender"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:background="@drawable/msg_bkd"
+                    android:paddingStart="@dimen/_16sdp"
+                    android:paddingTop="@dimen/_10sdp"
+                    android:paddingEnd="@dimen/_12sdp"
+                    android:paddingBottom="@dimen/_8sdp"
+                    android:text="You can share your quesries with your doctor and medical reports here too"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_12ssp" />
+
+                <TextView
+                    android:id="@+id/tv_time_sender"
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end|center"
+                    android:layout_marginTop="@dimen/_minus4sdp"
+                    android:gravity="center|center_vertical"
+                    android:paddingBottom="6dp"
+                    android:text="10:39 PM"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_8ssp" />
+
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+            <ImageView
+                android:layout_width="8dp"
+                android:layout_height="16dp"
+                android:layout_below="@+id/linear_chat"
+                android:layout_marginStart="@dimen/_minus10sdp"
+                android:layout_marginTop="@dimen/_minus5sdp"
+                android:layout_marginEnd="4.5dp"
+
+                android:layout_toEndOf="@+id/linear_chat"
+                android:background="@drawable/msg_bkd"
+                android:rotation="90"
+                android:visibility="gone" />
+
+        </RelativeLayout>
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+</RelativeLayout>

@@ -6,9 +6,10 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.application.onovapplication.R
 import com.application.onovapplication.adapters.NotificationsAdapter
+import com.application.onovapplication.databinding.ActivityLoginBinding
+import com.application.onovapplication.databinding.ActivityNotificationsBinding
 import com.application.onovapplication.model.NotificationList
 import com.application.onovapplication.viewModels.NotificationsViewModel
-import kotlinx.android.synthetic.main.activity_notifications.*
 
 class NotificationsActivity : BaseAppCompatActivity() {
     private var notificationsAdapter: NotificationsAdapter? = null
@@ -18,19 +19,21 @@ class NotificationsActivity : BaseAppCompatActivity() {
     }
 
     private val notificationsList: ArrayList<NotificationList> = ArrayList()
+    private lateinit var binding: ActivityNotificationsBinding
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_notifications)
-
+        binding = ActivityNotificationsBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
         observeViewModel()
 
         notificationsViewModel.getNotifications(this, userPreferences.getUserREf())
         showDialog()
 
         notificationsAdapter = NotificationsAdapter(this, notificationsList)
-        rv_notifications.adapter = notificationsAdapter
+     binding.rvNotifications.adapter = notificationsAdapter
     }
 
 
@@ -45,7 +48,7 @@ class NotificationsActivity : BaseAppCompatActivity() {
                     notificationsList.addAll(notificationsViewModel.notificationsResponse.notificationList!!)
 
                     if (notificationsList.isEmpty()) {
-                        noNotificationData.visibility = View.VISIBLE
+                        binding.noNotificationData.visibility = View.VISIBLE
                     } else {
                         notificationsAdapter?.notifyDataSetChanged()
                     }

@@ -33,7 +33,7 @@
             android:layout_gravity="center"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:fontFamily="@font/poppins"
+            android:fontFamily="@font/poppins_regular"
             android:textColor="@color/black"
             android:textSize="12sp" />
     </androidx.appcompat.widget.LinearLayoutCompat>

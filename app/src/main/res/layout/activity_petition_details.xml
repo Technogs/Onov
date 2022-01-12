@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/white"
     tools:context=".activities.PetitionDetailsActivity">
 
     <include layout="@layout/action_bar_layout"/>
@@ -35,7 +36,7 @@
             android:id="@+id/tv"
             android:textSize="16sp"
             android:textColor="@color/black"
-            android:fontFamily="@font/poppins"
+            android:fontFamily="@font/poppins_regular"
             android:layout_height="wrap_content"/>
 
         <TextView
@@ -46,7 +47,7 @@
             android:layout_marginStart="40dp"
             android:id="@+id/senderNameDetails"
             android:textColor="@color/text_blue"
-            android:fontFamily="@font/poppins"
+            android:fontFamily="@font/poppins_regular"
             android:layout_height="wrap_content"/>
 
         <TextView
@@ -57,7 +58,7 @@
             android:layout_below="@id/senderNameDetails"
             android:textColor="@color/black"
             android:textSize="16sp"
-            android:fontFamily="@font/poppins"
+            android:fontFamily="@font/poppins_regular"
             android:layout_height="wrap_content"/>
 
         <TextView
@@ -70,7 +71,7 @@
             android:layout_below="@+id/senderNameDetails"
             android:layout_marginStart="40dp"
             android:textColor="@color/text_blue"
-            android:fontFamily="@font/poppins"
+            android:fontFamily="@font/poppins_regular"
             android:layout_height="wrap_content"/>
 
 
@@ -82,7 +83,7 @@
             android:textSize="16sp"
             android:layout_below="@id/petitionTitleDetails"
             android:textColor="@color/black"
-            android:fontFamily="@font/poppins"
+            android:fontFamily="@font/poppins_regular"
             android:layout_height="wrap_content"/>
 
         <TextView
@@ -95,7 +96,7 @@
             android:layout_below="@+id/petitionTitleDetails"
             android:layout_marginStart="40dp"
             android:textColor="@color/text_blue"
-            android:fontFamily="@font/poppins"
+            android:fontFamily="@font/poppins_regular"
             android:layout_height="wrap_content"/>
 
         <TextView
@@ -106,7 +107,7 @@
             android:textSize="16sp"
             android:layout_below="@id/petitionDetails"
             android:textColor="@color/black"
-            android:fontFamily="@font/poppins"
+            android:fontFamily="@font/poppins_regular"
             android:layout_height="wrap_content"/>
 
         <TextView
@@ -119,7 +120,7 @@
             android:layout_below="@+id/petitionDetails"
             android:layout_marginStart="40dp"
             android:textColor="@color/text_blue"
-            android:fontFamily="@font/poppins"
+            android:fontFamily="@font/poppins_regular"
             android:layout_height="wrap_content"/>
 
 
@@ -131,7 +132,7 @@
             android:textSize="16sp"
             android:layout_below="@id/websiteLink"
             android:textColor="@color/black"
-            android:fontFamily="@font/poppins"
+            android:fontFamily="@font/poppins_regular"
             android:layout_height="wrap_content"/>
 
         <TextView
@@ -144,7 +145,7 @@
             android:layout_below="@+id/websiteLink"
             android:layout_marginStart="40dp"
             android:textColor="@color/text_blue"
-            android:fontFamily="@font/poppins"
+            android:fontFamily="@font/poppins_regular"
             android:layout_height="wrap_content"/>
 
 
@@ -158,13 +159,17 @@
         android:layout_marginTop="20dp"
         android:layout_height="200dp">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:id="@+id/ivFeed"
-        android:background="@drawable/dummy_debate"
-        android:scaleType="centerCrop"
-        />
+        <ImageView
+            android:id="@+id/ivFeed"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="@drawable/dummy_debate"
+            android:scaleType="centerCrop" />
+        <com.google.android.exoplayer2.ui.SimpleExoPlayerView
+            android:id="@+id/idExoPlayerVIew"
+            android:layout_width="match_parent"
+            android:visibility="gone"
+            android:layout_height="@dimen/_200sdp" />
 
     <VideoView
         android:layout_width="match_parent"
@@ -179,24 +184,25 @@
                 android:text="@string/signatures_received_34"
                 android:layout_marginTop="30dp"
                 android:textSize="16sp"
+                android:id="@+id/receiveSignCount"
                 android:layout_gravity="center"
                 android:layout_below="@id/websiteLink"
                 android:textColor="@color/black"
-                android:fontFamily="@font/poppins"
+                android:fontFamily="@font/poppins_regular"
                 android:layout_height="wrap_content"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/_30sdp"
         android:layout_gravity="center"
         android:textAllCaps="false"
         android:layout_marginBottom="30dp"
-        android:fontFamily="@font/poppins"
+        android:fontFamily="@font/poppins_regular"
         android:onClick="onClick"
         android:textColor="@color/white"
         android:id="@+id/signPetition"
         android:layout_marginTop="40dp"
-        android:background="@drawable/drawable_gradient_button_background"
+        android:background="@drawable/orange_circle"
         android:text="@string/sign_petition"
         android:paddingStart="50dp"
         android:paddingEnd="50dp"

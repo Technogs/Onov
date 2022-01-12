@@ -6,8 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.application.onovapplication.R
+import com.application.onovapplication.databinding.RvMoreBinding
+import com.application.onovapplication.databinding.RvNotificationsBinding
 import com.application.onovapplication.model.NotificationList
-import kotlinx.android.synthetic.main.rv_notifications.view.*
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -18,16 +19,10 @@ class NotificationsAdapter(
 ) : RecyclerView.Adapter<NotificationsAdapter.RVHolder>() {
 
 
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): RVHolder {
-        return RVHolder(
-            LayoutInflater.from(context).inflate(
-                R.layout.rv_notifications, parent,
-                false
-            )
-        )
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RVHolder {
+        val binding = RvNotificationsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+
+        return RVHolder(binding)
     }
 
     override fun getItemCount(): Int {
@@ -40,18 +35,18 @@ class NotificationsAdapter(
     }
 
 
-    inner class RVHolder(itemView: View) :
-        RecyclerView.ViewHolder(itemView) {
+    inner class RVHolder(val binding: RvNotificationsBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(notificationList: NotificationList) {
 
-            itemView.tvSubHeading.text = notificationList.notificationText
+            binding.tvSubHeading.text = notificationList.notificationText
 
             val formatter: DateFormat = SimpleDateFormat("dd-M-yyyy hh:mm:ss")
             val date: Date = formatter.parse(notificationList.updateAt!!) as Date
             val newFormat = SimpleDateFormat("dd-MM-yyyy")
             val finalString = newFormat.format(date)
 
-            itemView.tvDate.text = finalString
+            binding.tvDate.text = finalString
 
 
         }

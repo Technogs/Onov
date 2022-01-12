@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".activities.common.ProfileActivity">
 
 
@@ -34,7 +35,9 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
             android:src="@drawable/onov_logo_2"
-            android:tint="@color/white" />
+            app:tint="@color/white" />
+
+
 
 
         <LinearLayout
@@ -98,7 +101,7 @@
             android:visibility="gone"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
-            android:fontFamily="@font/poppins"
+            android:fontFamily="@font/poppins_regular"
             android:text="@string/update_profile"
             android:textColor="@color/white"
             android:textSize="16sp" />
@@ -143,7 +146,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:background="@color/white"
-            android:fontFamily="@font/poppins"
+            android:fontFamily="@font/poppins_regular"
             android:gravity="center"
             android:textSize="14sp"
             android:focusable="false"
@@ -168,20 +171,20 @@
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_marginTop="20dp"
         android:layout_height="match_parent"
-        android:layout_below="@+id/photoLayout">
+        android:layout_below="@+id/photoLayout"
+        android:layout_marginTop="20dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="20dp"
-            android:elevation="10dp"
-            android:layout_marginBottom="30dp"
-            android:background="@drawable/drawable_chat_background"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            android:orientation="vertical">
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/drawable_chat_background"
+            android:elevation="10dp"
+            android:orientation="vertical"
+            android:padding="20dp">
 
 
             <RelativeLayout
@@ -196,13 +199,13 @@
                     android:layout_height="40dp"
                     android:layout_alignParentStart="true"
                     android:layout_marginStart="10dp"
-                    android:focusable="false"
                     android:layout_marginEnd="10dp"
                     android:layout_toStartOf="@+id/emailEdit"
                     android:background="@null"
                     android:drawableStart="@drawable/mail"
                     android:drawablePadding="10dp"
-                    android:fontFamily="@font/poppins"
+                    android:focusable="false"
+                    android:fontFamily="@font/poppins_regular"
                     android:gravity="center_vertical"
                     android:hint="@string/email"
                     android:textSize="14sp" />
@@ -212,9 +215,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:onClick="onClick"
-
                     android:layout_centerVertical="true"
+
+                    android:onClick="onClick"
                     android:src="@drawable/edit" />
 
                 <View
@@ -246,9 +249,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:clickable="false"
                     android:layout_marginStart="5dp"
                     android:layout_toEndOf="@+id/icon"
+                    android:clickable="false"
                     android:textSize="14sp"
                     app:ccp_arrowColor="@color/black"
                     app:ccp_autoDetectCountry="true"
@@ -264,12 +267,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_marginStart="10dp"
-                    android:focusable="false"
                     android:layout_marginEnd="10dp"
                     android:layout_toStartOf="@+id/phoneEdit"
                     android:layout_toEndOf="@+id/ccPickerProfile"
                     android:background="@null"
-                    android:fontFamily="@font/poppins"
+                    android:focusable="false"
+                    android:fontFamily="@font/poppins_regular"
                     android:hint="@string/phone_no"
                     android:textSize="14sp" />
 
@@ -278,8 +281,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:onClick="onClick"
                     android:layout_centerVertical="true"
+                    android:onClick="onClick"
                     android:src="@drawable/edit" />
             </RelativeLayout>
 
@@ -293,8 +296,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:visibility="gone"
-                android:padding="5dp">
+                android:padding="5dp"
+                android:visibility="gone">
 
 
                 <androidx.appcompat.widget.AppCompatEditText
@@ -308,7 +311,7 @@
                     android:background="@null"
                     android:drawableStart="@drawable/ic_password"
                     android:drawablePadding="10dp"
-                    android:fontFamily="@font/poppins"
+                    android:fontFamily="@font/poppins_regular"
                     android:gravity="center_vertical"
                     android:hint="@string/password"
                     android:textSize="14sp" />
@@ -340,60 +343,60 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
                     android:layout_marginStart="10dp"
+                    android:layout_marginTop="30dp"
                     android:orientation="horizontal">
 
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:fontFamily="@font/poppins"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"
                         android:id="@+id/tv"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/role_" />
+                        android:fontFamily="@font/poppins_regular"
+                        android:text="@string/role_"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:fontFamily="@font/poppins"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"
                         android:id="@+id/roleValue"
-                        android:layout_marginStart="10dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Citizen" />
+                        android:layout_marginStart="10dp"
+                        android:fontFamily="@font/poppins_regular"
+                        android:text="Citizen"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
                 </LinearLayout>
 
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
-                    android:layout_marginEnd="10dp"
                     android:layout_alignParentEnd="true"
                     android:layout_gravity="center"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="10dp"
                     android:orientation="horizontal">
 
 
                     <TextView
                         android:layout_width="wrap_content"
-                        android:fontFamily="@font/poppins"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"
-                        android:layout_marginStart="10dp"
                         android:layout_height="wrap_content"
-                        android:text="@string/total_donations" />
+                        android:layout_marginStart="10dp"
+                        android:fontFamily="@font/poppins_regular"
+                        android:text="@string/total_donations"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:fontFamily="@font/poppins"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"
                         android:id="@+id/donaionsValue"
-                        android:layout_marginStart="10dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="02" />
+                        android:layout_marginStart="10dp"
+                        android:fontFamily="@font/poppins_regular"
+                        android:text="02"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
                 </LinearLayout>
 
             </RelativeLayout>
@@ -404,10 +407,11 @@
                 android:layout_height="40dp"
                 android:layout_marginStart="40dp"
                 android:layout_marginTop="30dp"
-                android:onClick="onClick"
                 android:layout_marginEnd="40dp"
+                android:gravity="center"
                 android:background="@drawable/drawable_gradient_button_background"
-                android:fontFamily="@font/poppins"
+                android:fontFamily="@font/poppins_regular"
+                android:onClick="onClick"
                 android:text="@string/update"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
@@ -415,19 +419,19 @@
 
 
             <TextView
-                android:layout_width="100dp"
-                android:layout_marginTop="30dp"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:textColor="@color/navigation_color"
-                android:text="@string/donate"
-                android:scaleType="fitCenter"
-                android:padding="5dp"
-                android:onClick="onClick"
                 android:id="@+id/donate"
-                android:visibility="gone"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
                 android:drawableTop="@drawable/donate"
-                android:layout_height="wrap_content"/>
+                android:gravity="center"
+                android:onClick="onClick"
+                android:padding="5dp"
+                android:scaleType="fitCenter"
+                android:text="@string/donate"
+                android:textColor="@color/navigation_color"
+                android:visibility="gone" />
 
         </LinearLayout>
 

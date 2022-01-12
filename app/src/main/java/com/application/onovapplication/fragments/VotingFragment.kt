@@ -7,7 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.application.onovapplication.R
 import com.application.onovapplication.adapters.VotingAdapter
-import kotlinx.android.synthetic.main.fragment_voting.*
+import com.application.onovapplication.databinding.FragmentMoreBinding
+import com.application.onovapplication.databinding.FragmentVotingBinding
 
 // TODO: Rename parameter arguments, choose names that match
 
@@ -15,6 +16,7 @@ class VotingFragment : Fragment() {
 
     var votingAdapter: VotingAdapter? = null
 
+    lateinit var binding: FragmentVotingBinding
 
 
     override fun onCreateView(
@@ -22,7 +24,8 @@ class VotingFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_voting, container, false)
+        binding = FragmentVotingBinding.inflate(inflater, container, false)
+        return binding.getRoot()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -30,7 +33,7 @@ class VotingFragment : Fragment() {
 
         votingAdapter = VotingAdapter(requireContext())
 
-        rv_voting.adapter = votingAdapter
+        binding.rvVoting.adapter = votingAdapter
     }
 
 }

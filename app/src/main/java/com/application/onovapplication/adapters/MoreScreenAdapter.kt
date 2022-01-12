@@ -5,8 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.application.onovapplication.R
+import com.application.onovapplication.databinding.ItemViewGovernmentImagesBinding
+import com.application.onovapplication.databinding.RvMoreBinding
 import com.application.onovapplication.model.MoreScreenData
-import kotlinx.android.synthetic.main.rv_more.view.*
 
 
 class MoreScreenAdapter(
@@ -16,16 +17,10 @@ class MoreScreenAdapter(
 ) : androidx.recyclerview.widget.RecyclerView.Adapter<MoreScreenAdapter.RVHolder>() {
 
 
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): RVHolder {
-        return RVHolder(
-            LayoutInflater.from(context).inflate(
-                R.layout.rv_more, parent,
-                false
-            )
-        )
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RVHolder {
+        val binding = RvMoreBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+
+        return RVHolder(binding)
     }
 
     override fun getItemCount(): Int {
@@ -43,12 +38,12 @@ class MoreScreenAdapter(
     }
 
 
-    inner class RVHolder(itemView: View) :
-        androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
+    inner class RVHolder(val binding: RvMoreBinding) :
+        androidx.recyclerview.widget.RecyclerView.ViewHolder(binding.root) {
 
         fun bind(dataItem: MoreScreenData) {
-            itemView.ivMore.setBackgroundResource(dataItem.image)
-            itemView.tvMore.text = dataItem.name
+            binding.ivMore.setBackgroundResource(dataItem.image)
+            binding.tvMore.text = dataItem.name
 
 
 

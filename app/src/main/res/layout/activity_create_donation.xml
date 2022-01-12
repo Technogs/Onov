@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/white"
     tools:context=".activities.common.CreateDonationActivity">
 
 
@@ -44,7 +45,7 @@
             android:background="@null"
             android:textColorHint="@color/black"
             android:textColor="@color/black"
-            android:fontFamily="@font/poppins"
+            android:fontFamily="@font/poppins_regular"
             android:hint="@string/receipt_id"
             android:textSize="14sp" />
     </androidx.appcompat.widget.LinearLayoutCompat>
@@ -78,7 +79,7 @@
             android:focusable="false"
             android:textColorHint="@color/black"
             android:textColor="@color/black"
-            android:fontFamily="@font/poppins"
+            android:fontFamily="@font/poppins_regular"
             android:hint="@string/transaction_date"
             android:textSize="14sp" />
     </androidx.appcompat.widget.LinearLayoutCompat>
@@ -111,7 +112,7 @@
             android:textColorHint="@color/black"
             android:textColor="@color/black"
             android:inputType="numberDecimal"
-            android:fontFamily="@font/poppins"
+            android:fontFamily="@font/poppins_regular"
             android:hint="@string/transaction_amount"
             android:textSize="14sp" />
     </androidx.appcompat.widget.LinearLayoutCompat>

@@ -2,6 +2,7 @@ package com.live.kicktraders.viewModel
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.application.onovapplication.R
@@ -77,10 +78,11 @@ class LoginViewModel : ViewModel() {
                     }
 
                     override fun onError(e: Throwable) {
+                        Log.d("error",e.message.toString())
                         when (e) {
                             is IOException -> {
-                                message = context
-                                    .getString(R.string.error_please_check_internet)
+
+                                message =e.message.toString() //context.getString(R.string.error_please_check_internet)
                             }
                             is TimeoutException -> {
                                 message = context
@@ -91,8 +93,7 @@ class LoginViewModel : ViewModel() {
                                 message = e.message.toString()
                             }
                             else -> {
-                                message = context
-                                    .getString(R.string.error_something_went_wrong)
+                                message = e.message.toString()//context .getString(R.string.error_something_went_wrong)
                             }
                         }
                         successful.value = false

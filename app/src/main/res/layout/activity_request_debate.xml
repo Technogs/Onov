@@ -5,19 +5,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/white"
     tools:context=".activities.politicians.RequestDebateActivity">
 
-    <include layout="@layout/action_bar_layout_2" />
+    <include layout="@layout/action_bar_layout_2"
+        android:id="@+id/ab"/>
 
 
     <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/etPostTitle"
+        android:id="@+id/rdTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/createPostLayout"
         android:layout_marginTop="10dp"
         android:background="@null"
-        android:fontFamily="@font/poppins"
+        android:fontFamily="@font/poppins_regular"
         android:hint="@string/debate_title"
         android:padding="15dp"
         android:textColor="@color/navigation_color"
@@ -36,9 +38,11 @@
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:layout_marginTop="20dp"
+        android:id="@+id/rd_date"
         android:layout_marginStart="15dp"
-        android:fontFamily="@font/poppins"
-        android:textSize="16sp"
+        android:fontFamily="@font/poppins_regular"
+        android:textSize="@dimen/_13ssp"
+        android:onClick="onClick"
         android:textColor="@color/navigation_color"
         android:text="@string/date" />
 
@@ -48,22 +52,38 @@
         android:layout_height="30dp"
         android:layout_marginTop="10dp"
         android:layout_marginStart="15dp"
-        android:textSize="16sp"
-        android:fontFamily="@font/poppins"
+        android:textSize="@dimen/_13ssp"
+        android:onClick="onClick"
+        android:id="@+id/rd_time"
+        android:fontFamily="@font/poppins_regular"
         android:textColor="@color/navigation_color"
         android:text="@string/time" />
 
-
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/etDebateMsg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/createPostLayout"
+        android:layout_marginTop="10dp"
+        android:background="@null"
+        android:fontFamily="@font/poppins_regular"
+        android:hint="@string/message"
+        android:padding="15dp"
+        android:textColor="@color/navigation_color"
+        android:textColorHint="@color/navigation_color" />
     <androidx.appcompat.widget.AppCompatButton
         android:layout_width="wrap_content"
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
-        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_height="@dimen/_30sdp"
         android:layout_marginTop="60dp"
         android:layout_gravity="center"
         android:text="@string/request"
+        android:onClick="onClick"
+        android:id="@+id/requestDebateBtn"
         android:textAllCaps="false"
-        android:fontFamily="@font/poppins"
+        android:fontFamily="@font/poppins_regular"
         android:textColor="@color/white"
         android:background="@drawable/drawable_gradient_button_background"
         />

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,7 +8,20 @@
     tools:context=".activities.common.ViewFollowersActivity">
 
 
-    <include layout="@layout/action_bar_layout_2" />
+    <include
+        android:id="@+id/ab"
+        layout="@layout/action_bar_layout_2" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_centerInParent="true"
+        android:textColor="@color/app_color"
+        android:fontFamily="@font/poppins_bold"
+        android:textSize="18sp"
+        android:visibility="gone"
+        android:id="@+id/noDataLayout"
+        android:text="@string/no_data_yet"
+        android:layout_height="wrap_content"/>
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -17,7 +30,8 @@
         android:layout_marginTop="10dp"
         android:orientation="vertical"
         android:id="@+id/rv_followers"
+        android:layout_below="@+id/ab"
         tools:listitem="@layout/rv_followers"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-</androidx.appcompat.widget.LinearLayoutCompat>
+</RelativeLayout>

@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".activities.EventDetailsActivity">
 
 <include layout="@layout/action_bar_layout_2"/>
@@ -25,6 +26,7 @@
         android:layout_height="wrap_content"
         android:text="Event Title"
         android:layout_marginTop="15dp"
+        android:id="@+id/event_title"
         android:layout_marginStart="10dp"
         android:fontFamily="@font/poppins_medium"
         android:textSize="18sp"
@@ -35,7 +37,8 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_marginTop="10dp"
-        android:background="@drawable/dummy_event" />
+        android:id="@+id/event_photo"
+        android:src="@drawable/ic__add" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -53,8 +56,9 @@
         android:layout_marginEnd="10dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/ivChatProfile"
-        android:fontFamily="@font/poppins"
+        android:fontFamily="@font/poppins_regular"
         android:layout_marginTop="5dp"
+        android:id="@+id/etDesc"
         android:justificationMode="inter_word"
         android:text="Lorem Ipsum is simply dummy text ever since the type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
         android:textColor="@color/navigation_color" />
@@ -70,21 +74,21 @@
         android:text="Event starts at:"
         android:textSize="16sp"
         android:id="@+id/tv1"
-        android:fontFamily="@font/poppins"
+        android:fontFamily="@font/poppins_regular"
         android:textColor="@color/black"
         android:layout_height="wrap_content"/>
 
 
     <TextView
-        android:layout_width="wrap_content"
-        android:text="23 April 21,  9:00pm"
-        android:textSize="16sp"
-        android:layout_toEndOf="@id/tv1"
-        android:layout_marginStart="10dp"
         android:id="@+id/tvEventStart"
-        android:fontFamily="@font/poppins"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_toEndOf="@id/tv1"
+        android:fontFamily="@font/poppins_regular"
+        android:text="23 April 21,  9:00pm"
         android:textColor="@color/black"
-        android:layout_height="wrap_content"/>
+        android:textSize="16sp" />
 
 </RelativeLayout>
 
@@ -101,7 +105,7 @@
                     android:text="Event ends at: "
                     android:textSize="16sp"
                     android:id="@+id/tv2"
-                    android:fontFamily="@font/poppins"
+                    android:fontFamily="@font/poppins_regular"
                     android:textColor="@color/black"
                     android:layout_height="wrap_content"/>
 
@@ -113,7 +117,7 @@
                     android:layout_toEndOf="@id/tv2"
                     android:layout_marginStart="10dp"
                     android:id="@+id/tvEventEnd"
-                    android:fontFamily="@font/poppins"
+                    android:fontFamily="@font/poppins_regular"
                     android:textColor="@color/black"
                     android:layout_height="wrap_content"/>
 
@@ -142,8 +146,9 @@
         android:layout_marginStart="15dp"
         android:layout_marginEnd="10dp"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins"
+        android:fontFamily="@font/poppins_regular"
         android:text="$25"
+        android:id="@+id/evPrice"
         android:textSize="16sp"
 android:layout_centerVertical="true"
         android:textColor="@color/black" />
@@ -163,8 +168,8 @@ android:layout_centerVertical="true"
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_centerVertical="true"
+            android:onClick="onClick"
             android:src="@drawable/ic_minus"
-
             android:id="@+id/btnSubtract"
             />
 
@@ -174,6 +179,7 @@ android:layout_centerVertical="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="3"
+            android:id="@+id/noOfEvent"
             android:textSize="16sp"
             android:textColor="@color/text_blue"
             android:layout_centerInParent="true"
@@ -186,7 +192,7 @@ android:layout_centerVertical="true"
             android:src="@drawable/ic__add"
             android:layout_centerVertical="true"
             android:id="@+id/btnAdd"
-
+            android:onClick="onClick"
             android:layout_alignParentEnd="true"
             />
     </RelativeLayout>
@@ -198,6 +204,7 @@ android:layout_centerVertical="true"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_gravity="center"
+                android:id="@+id/noPeople"
                 android:textColor="@color/grey"
                 android:text="50 People are going"
                 />
@@ -205,19 +212,21 @@ android:layout_centerVertical="true"
 
     <androidx.appcompat.widget.AppCompatButton
         android:layout_width="wrap_content"
-        android:background="@drawable/drawable_gradient_button_background"
+        android:background="@drawable/golden_circle"
         android:layout_marginTop="10dp"
         android:layout_gravity="center"
         android:paddingStart="20dp"
         android:id="@+id/payEventBtn"
         android:onClick="onClick"
         android:paddingEnd="20dp"
+        android:gravity="center"
+        android:textSize="@dimen/_12ssp"
         android:textAllCaps="false"
         android:layout_marginBottom="20dp"
-        android:fontFamily="@font/poppins"
+        android:fontFamily="@font/poppins_regular"
         android:textColor="@color/white"
         android:text="Proceed to Pay $75"
-        android:layout_height="wrap_content"/>
+        android:layout_height="@dimen/_30sdp"/>
 
 
         </androidx.appcompat.widget.LinearLayoutCompat>

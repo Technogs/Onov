@@ -35,7 +35,7 @@
             android:layout_marginStart="25dp"
             android:layout_marginTop="-5dp"
             android:textColor="@color/black"
-            android:fontFamily="@font/poppins"
+            android:fontFamily="@font/poppins_regular"
             android:text="Conservative Party"
             />
 
@@ -55,7 +55,7 @@
         android:layout_marginStart="4dp"
         android:layout_marginTop="5dp"
         android:layout_below="@+id/voterName"
-        android:fontFamily="@font/poppins"
+        android:fontFamily="@font/poppins_regular"
         android:text="212 votes"
         />
 </androidx.appcompat.widget.LinearLayoutCompat>

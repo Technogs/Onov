@@ -18,21 +18,21 @@ import androidx.core.content.FileProvider
 import androidx.lifecycle.ViewModelProvider
 import com.application.onovapplication.BuildConfig
 import com.application.onovapplication.R
+import com.application.onovapplication.databinding.ActivityProfile2Binding
+import com.application.onovapplication.databinding.ActivityRegisterBinding
+import com.application.onovapplication.model.UserInfo
 import com.application.onovapplication.utils.CustomSpinnerAdapter
 import com.application.onovapplication.viewModels.SignUpViewModel
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.activity_about_info.*
-import kotlinx.android.synthetic.main.activity_profile2.*
-import kotlinx.android.synthetic.main.activity_register.*
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 
-class
-RegisterActivity : BaseAppCompatActivity(), View.OnClickListener {
+class RegisterActivity : BaseAppCompatActivity(), View.OnClickListener {
 
     var mPhotoFile: File? = null
+    var userInfo:UserInfo?=null
     var mPhotoCoverFile: File? = null
     val REQUEST_TAKE_PHOTO = 101
     val REQUEST_GALLERY_PHOTO = 201
@@ -50,11 +50,13 @@ RegisterActivity : BaseAppCompatActivity(), View.OnClickListener {
 
     private val supportList =
         arrayOf("Select Support", "Republican", "Democrat", "Independent")
+    private lateinit var binding: ActivityRegisterBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_register)
-
+        binding = ActivityRegisterBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
         setSpinner()
 
         observeViewModel()
@@ -68,10 +70,14 @@ RegisterActivity : BaseAppCompatActivity(), View.OnClickListener {
 
                     val intent = Intent(this, ForgotPasswordOtpActivity::class.java)
                     userPreferences.saveUserRef(signUpViewModel.userInfo!!.userRef)
+                 userInfo?.userRef=signUpViewModel.userInfo?.userRef
+                 userInfo?.id=signUpViewModel.userInfo?.id
+                 userInfo?.profilePic=signUpViewModel.userInfo?.profilePic
+           userPreferences.setUserDetails(userInfo)
                     intent.putExtra("role", signUpViewModel.userInfo!!.role)
                     intent.putExtra("type", "verify")
                     intent.putExtra("otp", signUpViewModel.userInfo!!.validationCode.toString())
-                    intent.putExtra("email", edRegisterEmail.text.toString().trim())
+                    intent.putExtra("email", binding.edRegisterEmail.text.toString().trim())
                     startActivity(intent)
                     finish()
                 } else {
@@ -91,10 +97,10 @@ RegisterActivity : BaseAppCompatActivity(), View.OnClickListener {
 
 
         spinnerAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown)
-        spRegister.adapter = spinnerAdapter
+        binding.spRegister.adapter = spinnerAdapter
 
 
-        spRegister.onItemSelectedListener = object :
+        binding.spRegister.onItemSelectedListener = object :
             AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
 
@@ -118,10 +124,10 @@ RegisterActivity : BaseAppCompatActivity(), View.OnClickListener {
 
 
         spinnerAdapter2.setDropDownViewResource(R.layout.simple_spinner_dropdown)
-        spSupport.adapter = spinnerAdapter2
+        binding.spSupport.adapter = spinnerAdapter2
 
 
-        spSupport.onItemSelectedListener = object :
+        binding.spSupport.onItemSelectedListener = object :
             AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
 
@@ -146,19 +152,19 @@ RegisterActivity : BaseAppCompatActivity(), View.OnClickListener {
             R.id.btSignUp -> {
 
                 when {
-                    checkEmpty(edRegisterName) -> {
+                    checkEmpty(binding.edRegisterName) -> {
                         setError(getString(R.string.name_error))
                     }
 
-                    checkEmpty(edRegisterEmail) -> {
+                    checkEmpty(binding.edRegisterEmail) -> {
                         setError(getString(R.string.email_error))
                     }
 
-                    checkEmpty(edRegisterPhone) -> {
+                    checkEmpty(binding.edRegisterPhone) -> {
                         setError(getString(R.string.phone_error))
                     }
 
-                    checkEmpty(edRegisterPassword) -> {
+                    checkEmpty(binding.edRegisterPassword) -> {
                         setError(getString(R.string.password_error))
                     }
 
@@ -166,11 +172,11 @@ RegisterActivity : BaseAppCompatActivity(), View.OnClickListener {
                         setError(getString(R.string.role_error))
                     }
 
-                    checkEmpty(edWebsiteUrl) -> {
+                    checkEmpty(binding.edWebsiteUrl) -> {
                         setError("Website Url cannot be empty")
                     }
 
-                    checkEmpty(etAboutMe) -> {
+                    checkEmpty(binding.etAboutMe) -> {
                         setError("About me cannot be empty")
                     }
 
@@ -181,17 +187,17 @@ RegisterActivity : BaseAppCompatActivity(), View.OnClickListener {
                     else -> {
                         signUpViewModel.register(
                             this,
-                            edRegisterEmail.text.toString().trim(),
-                            edRegisterPassword.text.toString().trim(),
-                            edRegisterName.text.toString().trim(),
-                            edRegisterPhone.text.toString().trim(),
-                            ccPicker.selectedCountryCode,
+                            binding.edRegisterEmail.text.toString().trim(),
+                            binding.edRegisterPassword.text.toString().trim(),
+                            binding.edRegisterName.text.toString().trim(),
+                            binding.edRegisterPhone.text.toString().trim(),
+                            binding.ccPicker.selectedCountryCode,
                             mPhotoFile,
                             selectedRole,
                             "3223",
                             "Android",
-                            etAboutMe.text.toString().trim(),
-                            edWebsiteUrl.text.toString().trim(),
+                            binding.etAboutMe.text.toString().trim(),
+                            binding.edWebsiteUrl.text.toString().trim(),
                             mPhotoCoverFile,
                             selectedSupport
 
@@ -409,7 +415,7 @@ RegisterActivity : BaseAppCompatActivity(), View.OnClickListener {
             //Toast.makeText(this, "New Logo Added", Toast.LENGTH_SHORT).show()
 
 
-            Glide.with(this).load(mPhotoFile).into(ivRegister)
+            Glide.with(this).load(mPhotoFile).into(binding.ivRegister)
 
         } else if (requestCode == REQUEST_GALLERY_PHOTO) {
             val selectedImage = data?.data
@@ -417,7 +423,7 @@ RegisterActivity : BaseAppCompatActivity(), View.OnClickListener {
 
                 Log.e("PRACHI", getRealPathFromUri(selectedImage)!!)
                 mPhotoFile = File(getRealPathFromUri(selectedImage)!!)
-                Glide.with(this).load(mPhotoFile).into(ivRegister)
+                Glide.with(this).load(mPhotoFile).into(binding.ivRegister)
 
             } catch (e: IOException) {
 
@@ -428,13 +434,13 @@ RegisterActivity : BaseAppCompatActivity(), View.OnClickListener {
         if (requestCode == REQUEST_TAKE_COVER_PHOTO) {
 
 
-            Glide.with(this).load(mPhotoCoverFile).into(coverPhoto)
+            Glide.with(this).load(mPhotoCoverFile).into(binding.coverPhoto)
 
         } else if (requestCode == REQUEST_COVER_GALLERY_PHOTO) {
             val selectedImage = data?.data
             try {
                 mPhotoCoverFile = File(getRealPathFromUri(selectedImage))
-                Glide.with(this).load(mPhotoCoverFile).into(coverPhoto)
+                Glide.with(this).load(mPhotoCoverFile).into(binding.coverPhoto)
 
             } catch (e: IOException) {
 

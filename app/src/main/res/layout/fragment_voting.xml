@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".fragments.VotingFragment">
@@ -28,7 +29,7 @@
             android:layout_marginStart="12dp"
             android:layout_marginTop="8dp"
             android:layout_toEndOf="@+id/ivUserImage"
-            android:fontFamily="@font/poppins"
+            android:fontFamily="@font/poppins_regular"
             android:text="Mark John"
             android:textColor="@color/black" />
 
@@ -40,7 +41,7 @@
             android:layout_marginStart="12dp"
             android:layout_marginTop="-8dp"
             android:layout_toEndOf="@+id/ivUserImage"
-            android:fontFamily="@font/poppins"
+            android:fontFamily="@font/poppins_regular"
             android:text="10 mins ago" />
     </RelativeLayout>
 
@@ -52,7 +53,7 @@
         android:layout_marginTop="20dp"
         android:textSize="16sp"
         android:layout_toEndOf="@+id/ivUserImage"
-        android:fontFamily="@font/poppins"
+        android:fontFamily="@font/poppins_regular"
         android:text="@string/vote_by_clicking_on_the_candidate"
         android:textColor="@color/black" />
 

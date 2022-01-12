@@ -6,6 +6,7 @@
     android:layout_marginEnd="15dp"
     android:layout_marginTop="8dp"
     android:padding="10dp"
+    android:id="@+id/rltLyt"
     android:layout_marginBottom="8dp"
     android:elevation="8dp"
     android:background="@drawable/drawable_white_curved_border_layout">
@@ -19,30 +20,36 @@
         android:src="@drawable/dummy_profile_image" />
 
     <TextView
+        android:id="@+id/followUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins"
-        android:layout_toEndOf="@+id/ivFollowProfile"
         android:layout_centerVertical="true"
-        android:text="Gulf Doe"
-        android:textSize="18sp"
-
         android:layout_marginEnd="5dp"
-        android:id="@+id/followUsername"
-        android:textColor="@color/black" />
+        android:layout_toEndOf="@+id/ivFollowProfile"
+        android:fontFamily="@font/poppins_regular"
+
+        android:text="Gulf Doe"
+        android:textColor="@color/black"
+        android:textSize="18sp" />
 
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnText"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
+        android:background="@drawable/drawable_chat_background"
         android:text="Unfollow"
-        android:id="@+id/btnText"
         android:textAllCaps="false"
         android:textColor="@color/navigation_color"
-        android:background="@drawable/drawable_chat_background"
 
         />
-
+    <CheckBox
+        android:layout_width="30dp"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/checkbox"
+        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
+        android:layout_height="30dp"/>
 </RelativeLayout>

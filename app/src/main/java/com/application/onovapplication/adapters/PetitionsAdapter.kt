@@ -9,20 +9,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.application.onovapplication.R
 import com.application.onovapplication.activities.PetitionDetailsActivity
 
-class PetitionsAdapter(
-    val context: Context
+class PetitionsAdapter(val context: Context
 ) : RecyclerView.Adapter<PetitionsAdapter.RVHolder>() {
 
 
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): RVHolder {
-        return RVHolder(
-            LayoutInflater.from(context).inflate(
-                R.layout.rv_petitions, parent,
-                false
-            )
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RVHolder {
+        return RVHolder(LayoutInflater.from(context).inflate(R.layout.rv_petitions, parent, false)
         )
     }
 

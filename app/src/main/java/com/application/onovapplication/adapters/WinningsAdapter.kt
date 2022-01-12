@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.application.onovapplication.R
+import com.application.onovapplication.databinding.RvChatsBinding
+import com.application.onovapplication.databinding.RvFollowersBinding
+import com.application.onovapplication.databinding.RvStatsBinding
 import com.application.onovapplication.model.StatsDataList
-import kotlinx.android.synthetic.main.rv_stats.view.*
 
 class WinningsAdapter(
     val context: Context,
@@ -19,12 +21,9 @@ class WinningsAdapter(
         parent: ViewGroup,
         viewType: Int
     ): RVHolder {
-        return RVHolder(
-            LayoutInflater.from(context).inflate(
-                R.layout.rv_stats, parent,
-                false
-            )
-        )
+        val binding = RvStatsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+
+        return RVHolder(binding)
     }
 
     override fun getItemCount(): Int {
@@ -37,11 +36,11 @@ class WinningsAdapter(
     }
 
 
-    inner class RVHolder(itemView: View) :
-        RecyclerView.ViewHolder(itemView) {
+    inner class RVHolder(val binding: RvStatsBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(statsDataList: StatsDataList) {
-            itemView.tvStatsTitle.text = statsDataList.title
-            itemView.tvStatsVotes.text = statsDataList.createdAt
+            binding.tvStatsTitle.text = statsDataList.title
+            binding.tvStatsVotes.text = statsDataList.createdAt
         }
 
     }

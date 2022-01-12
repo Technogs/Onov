@@ -6,9 +6,10 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.application.onovapplication.R
 import com.application.onovapplication.adapters.StatsAdapter
+import com.application.onovapplication.databinding.ActivityStartPetitionBinding
+import com.application.onovapplication.databinding.ActivityStatsBinding
 import com.application.onovapplication.model.StatsDataList
 import com.application.onovapplication.viewModels.StatsViewModel
-import kotlinx.android.synthetic.main.activity_stats.*
 
 class StatsActivity : BaseAppCompatActivity() {
 
@@ -16,51 +17,54 @@ class StatsActivity : BaseAppCompatActivity() {
 
     private val statsList: ArrayList<StatsDataList> = ArrayList()
 
-//    private val statsViewModel by lazy {
-//        ViewModelProvider(this).get(StatsViewModel::class.java)
-//    }
+    private val statsViewModel by lazy {
+        ViewModelProvider(this).get(StatsViewModel::class.java)
+    }
 
+    private lateinit var binding: ActivityStatsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_stats)
+        binding = ActivityStatsBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
+
+        statsViewModel.getStats(this, userPreferences.getUserREf())
+        showDialog()
 
 
-//        statsViewModel.getStats(this, userPreferences.getUserREf())
-//        showDialog()
-//
-
-        statsAdapter = StatsAdapter(this, statsList)
-        rv_stats.adapter = statsAdapter
-
-       // observeViewModel()
+      observeViewModel()
     }
 
 
-//    private fun observeViewModel() {
-//
-//        statsViewModel.successful.observe(this, Observer {
-//            dismissDialog()
-//            if (it) {
-//                if (statsViewModel.status == "success") {
-//
-//                    statsList.addAll(statsViewModel.statsResponse.statsDataList!!)
-//
-//                    if (statsList.isEmpty()) {
-//                        noStatsData.visibility = View.VISIBLE
-//                    } else {
-//                        statsAdapter?.notifyDataSetChanged()
-//                    }
-//                }
-//                else{
-//                    setError(statsViewModel.message)
-//                }
-//            }
-//            else{
-//                setError(statsViewModel.message)
-//
-//            }
-//        })
+    private fun observeViewModel() {
 
-   // }
+        statsViewModel.successful.observe(this, Observer {
+            dismissDialog()
+            if (it) {
+                if (statsViewModel.status == "success") {
+
+                    statsList.addAll(statsViewModel.statsResponse.statsDataList!!)
+                    statsAdapter = StatsAdapter(this,
+                        statsViewModel.statsResponse.statsDataList as ArrayList<StatsDataList>
+                    )
+                 binding.rvStats.adapter = statsAdapter
+                    if (statsList.isEmpty()) {
+                        binding.noStatsData.visibility = View.VISIBLE
+                        binding.rvStats.visibility=View.GONE
+                    } else {
+                        statsAdapter?.notifyDataSetChanged()
+                    }
+                }
+                else{
+                    setError(statsViewModel.message)
+                }
+            }
+            else{
+                setError(statsViewModel.message)
+
+            }
+        })
+
+ }
 }

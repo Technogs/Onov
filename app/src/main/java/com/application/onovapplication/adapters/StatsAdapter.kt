@@ -6,43 +6,37 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.application.onovapplication.R
+import com.application.onovapplication.databinding.RvSearchFriendsBinding
+import com.application.onovapplication.databinding.RvStatsBinding
 import com.application.onovapplication.model.StatsDataList
-import kotlinx.android.synthetic.main.rv_stats.view.*
 
-class StatsAdapter(
-    val context: Context,
-    private val statsList: ArrayList<StatsDataList>
-) : RecyclerView.Adapter<StatsAdapter.RVHolder>() {
+class StatsAdapter(val context: Context, private val statsList: List<StatsDataList>)
+    : RecyclerView.Adapter<StatsAdapter.RVHolder>() {
 
 
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): RVHolder {
-        return RVHolder(
-            LayoutInflater.from(context).inflate(
-                R.layout.rv_stats, parent,
-                false
-            )
-        )
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RVHolder {
+        val binding = RvStatsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+
+        return RVHolder(binding)
     }
 
     override fun getItemCount(): Int {
-        return 6
+        return statsList.size
     }
 
     override fun onBindViewHolder(holder: RVHolder, position: Int) {
 
-//        holder.bind(statsList[position])
+        holder.bind(statsList[position])
     }
 
 
-    inner class RVHolder(itemView: View) :
-        RecyclerView.ViewHolder(itemView) {
+    inner class RVHolder(val binding: RvStatsBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(statsDataList: StatsDataList) {
 
-            itemView.tvStatsTitle.text = statsDataList.title
-            itemView.tvStatsVotes.text = statsDataList.voteCount
+            binding.tvStatsTitle.text = statsDataList.title
+            binding.tvStatsVotes.text = statsDataList.voteCount
+           // itemView.tvStatsViews.text = statsDataList.
         }
 
     }

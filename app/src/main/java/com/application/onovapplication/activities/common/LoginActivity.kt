@@ -2,60 +2,69 @@ package com.application.onovapplication.activities.common
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.util.Patterns
 import android.view.View
 import android.widget.AdapterView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.application.onovapplication.R
+import com.application.onovapplication.databinding.ActivityLoginBinding
 import com.application.onovapplication.utils.CustomSpinnerAdapter
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.iid.FirebaseInstanceId
 import com.live.kicktraders.viewModel.LoginViewModel
-import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : BaseAppCompatActivity(), View.OnClickListener {
 
+    private lateinit var binding: ActivityLoginBinding
+//    private lateinit var token:String
 
     private val loginViewModel by lazy {
         ViewModelProvider(this).get(LoginViewModel::class.java)
     }
 
-    var token = "32324"
+    var token = ""
     private var selectedRole: String = ""
 
 
     private val rolesList =
+
         arrayOf("Select Role", "Citizens", "Politicians", "Organizations", "Entertainers", "LPA")
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
-        tvSignUp.setOnClickListener(this)
+        binding = com.application.onovapplication.databinding.ActivityLoginBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
+        binding.tvSignUp.setOnClickListener(this)
         observeViewModel()
         setSpinner()
+        fbToken()
     }
 
 
     override fun onClick(clickEvent: View?) {
         when (clickEvent) {
-            tvSignUp -> {
+            binding.tvSignUp -> {
                 val intent = Intent(this, RegisterActivity::class.java)
                 startActivity(intent)
             }
 
-            btLogin -> {
+            binding.btLogin -> {
 
                 when {
-                    checkEmpty(etEmail) -> {
+                    checkEmpty( binding.etEmail) -> {
                         setError(getString(R.string.email_error))
                     }
 
-                    !Patterns.EMAIL_ADDRESS.matcher(etEmail.text.toString().trim())
+                    !Patterns.EMAIL_ADDRESS.matcher( binding.etEmail.text.toString().trim())
                         .matches() -> {
                         setError(getString(R.string.invalid_email_error))
                     }
 
-                    checkEmpty(etPassword) -> {
+                    checkEmpty( binding.etPassword) -> {
                         setError(getString(R.string.password_error))
                     }
 
@@ -67,10 +76,10 @@ class LoginActivity : BaseAppCompatActivity(), View.OnClickListener {
                     else -> {
                         loginViewModel.login(
                             this,
-                            etEmail.text.toString().trim(),
-                            etPassword.text.toString().trim(),
+                            binding.etEmail.text.toString().trim(),
+                            binding.etPassword.text.toString().trim(),
                              "Android",
-                            token
+                          token
                         )
                         showDialog()
                     }
@@ -78,7 +87,28 @@ class LoginActivity : BaseAppCompatActivity(), View.OnClickListener {
             }
         }
     }
+    fun fbToken(){
 
+
+        // 1
+        FirebaseInstanceId.getInstance().instanceId
+            .addOnCompleteListener(OnCompleteListener { task ->
+                // 2
+                if (!task.isSuccessful) {
+                    Log.w("TAG token failed", "getInstanceId failed", task.exception)
+                    return@OnCompleteListener
+                }
+                // 3
+               token = task.result?.token.toString()
+
+                // 4
+                val msg = token
+                Log.d("TAG token", msg.toString())
+                userPreferences.saveUserToken(msg.toString())
+//                Toast.makeText(this, userPreferences.getUserToken(), Toast.LENGTH_SHORT).show()
+
+                //   Toast.makeText(baseContext, msg, Toast.LENGTH_LONG).show()
+            }) }
     private fun observeViewModel() {
 
         loginViewModel.successful.observe(this, Observer {
@@ -89,7 +119,7 @@ class LoginActivity : BaseAppCompatActivity(), View.OnClickListener {
 
                     userPreferences.saveUserRef(loginViewModel.userInfo.userRef)
                     userPreferences.saveRole(loginViewModel.userInfo.role)
-
+userPreferences.setUserDetails(loginViewModel.userInfo)
                     val intent = Intent(this@LoginActivity, HomeTabActivity::class.java)
                     intent.putExtra("role", loginViewModel.userInfo.role)
                     startActivity(intent)
@@ -112,10 +142,10 @@ class LoginActivity : BaseAppCompatActivity(), View.OnClickListener {
 
 
         spinnerAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown)
-        spinner_login.adapter = spinnerAdapter
+        binding.spinnerLogin.adapter = spinnerAdapter
 
 
-        spinner_login.onItemSelectedListener = object :
+        binding.spinnerLogin.onItemSelectedListener = object :
             AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }

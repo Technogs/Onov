@@ -9,5 +9,5 @@
     android:paddingLeft="10dp"
     android:paddingRight="10dp"
     android:paddingTop="5dp"
-    android:fontFamily="@font/poppins"
+    android:fontFamily="@font/poppins_regular"
     android:singleLine="true" />

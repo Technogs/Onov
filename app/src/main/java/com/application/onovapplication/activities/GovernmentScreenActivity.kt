@@ -3,16 +3,26 @@ package com.application.onovapplication.activities
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.AdapterView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.application.onovapplication.R
 import com.application.onovapplication.activities.common.BaseAppCompatActivity
+import com.application.onovapplication.api.ApiClient
+import com.application.onovapplication.api.ApiInterface
 import com.application.onovapplication.fragments.CongressFragment
+import com.application.onovapplication.fragments.ConstitutionFragment
 import com.application.onovapplication.fragments.ExecutiveFragment
 import com.application.onovapplication.fragments.JudicialFragment
+import com.application.onovapplication.model.SenateResponse
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import java.io.IOException
 
 
 class GovernmentScreenActivity : BaseAppCompatActivity(), View.OnClickListener {
@@ -22,13 +32,12 @@ class GovernmentScreenActivity : BaseAppCompatActivity(), View.OnClickListener {
     lateinit var tvCongress: TextView
     lateinit var tvJudicial: TextView
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_government_screen)
 
         initViews()
-        replaceFragment(CongressFragment())
+        replaceFragment(CongressFragment("Congress"))
         tvCongress.setBackgroundResource(R.drawable.background_gradient_square)
         tvCongress.setTextColor(ContextCompat.getColor(this, R.color.white))
 
@@ -82,7 +91,7 @@ class GovernmentScreenActivity : BaseAppCompatActivity(), View.OnClickListener {
                 tvCongress.setTextColor(ContextCompat.getColor(this, R.color.grey))
                 tvJudicial.setBackgroundResource(R.color.white)
                 tvJudicial.setTextColor(ContextCompat.getColor(this, R.color.grey))
-                replaceFragment(CongressFragment())
+                replaceFragment(CongressFragment("Senate"))
             }
             R.id.tvLegislation -> {
                 tvExecutive.setBackgroundResource(R.color.white)
@@ -95,7 +104,9 @@ class GovernmentScreenActivity : BaseAppCompatActivity(), View.OnClickListener {
                 tvCongress.setTextColor(ContextCompat.getColor(this, R.color.grey))
                 tvJudicial.setBackgroundResource(R.color.white)
                 tvJudicial.setTextColor(ContextCompat.getColor(this, R.color.grey))
-                replaceFragment(CongressFragment())
+
+                replaceFragment(ConstitutionFragment())
+//                replaceFragment(CongressFragment("legislation"))
             }
             R.id.tvCongress -> {
                 tvExecutive.setBackgroundResource(R.color.white)
@@ -108,7 +119,7 @@ class GovernmentScreenActivity : BaseAppCompatActivity(), View.OnClickListener {
                 tvCongress.setTextColor(ContextCompat.getColor(this, R.color.white))
                 tvJudicial.setBackgroundResource(R.color.white)
                 tvJudicial.setTextColor(ContextCompat.getColor(this, R.color.grey))
-                replaceFragment(CongressFragment())
+                replaceFragment(CongressFragment("Congress"))
             }
             R.id.tvJudicial -> {
                 tvExecutive.setBackgroundResource(R.color.white)
@@ -126,4 +137,6 @@ class GovernmentScreenActivity : BaseAppCompatActivity(), View.OnClickListener {
 
         }
     }
+
+
 }

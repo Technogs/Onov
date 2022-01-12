@@ -1,184 +1,617 @@
 <resources>
-    <string name="app_name">OnovApplication</string>
-    <string name="login">Login</string>
-    <string name="email">Email</string>
-    <string name="password">Password</string>
-    <string name="old_password">Old Password</string>
-    <string name="forgot_password">Forgot Password?</string>
-    <string name="don_t_have_account">Don\'t have account?</string>
-    <string name="sign_up">Signup</string>
-    <string name="already_account">Already have an account?</string>
-    <string name="name">Name</string>
-    <string name="phone_no">Phone no.</string>
-    <string name="profile_picture">Profile Picture</string>
-    <string name="home">Home</string>
-    <string name="create_debate">Create Debate</string>
+    <string name="app_name">Onov Application</string>
+<!--    <string name="bugly_app_id">30565fe82361456d85800fd8b9b492d2</string>-->
+    <string name="bugly_app_id">b0cdd2e446454bdca42b3cc0b3b83417</string>
+    <!--b0cdd2e446454bdca42b3cc0b3b83417-->
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="create_post">Create Post</string>
-    <string name="what_s_on_your_mind">What\'s on your mind?</string>
-    <string name="description">Description..</string>
-    <string name="upload_picture">Upload Picture</string>
-    <string name="upload_video">Upload Video</string>
-    <string name="stats">Stats</string>
-    <string name="all_winners">All Winners</string>
-    <string name="create_event">Create Event</string>
-    <string name="about_app">About App</string>
-    <string name="privacy_policy">Privacy Policy</string>
-    <string name="total_winning">Total Winning</string>
-    <string name="profile">Profile</string>
-    <string name="debate_requests">Debate Requests</string>
-    <string name="donation">Donation</string>
-    <string name="setting">Setting</string>
-    <string name="terms_amp_conditions"><![CDATA[Terms & Conditions]]></string>
-    <string name="more">More</string>
-    <string name="no_debates_yet">No Feed Yet</string>
-    <string name="like">Like</string>
-    <string name="comment">Comment</string>
-    <string name="voting">Voting</string>
-    <string name="share">Share</string>
-    <string name="donate">Donate</string>
-    <string name="status">Status</string>
-    <string name="message">Message</string>
-    <string name="no_stats_yet">No stats yet</string>
-    <string name="debate_title">Debate title</string>
-    <string name="votes">Votes</string>
-    <string name="date">Date</string>
-    <string name="winnings">Winnings</string>
-    <string name="no_winnings_yet">No Debates yet</string>
-    <string name="user">User</string>
-    <string name="rank">Rank</string>
-    <string name="no_winners_yet">No winners yet</string>
-    <string name="update_profile">Update Profile</string>
-    <string name="update">Update</string>
-    <string name="event_title">Event Title</string>
-    <string name="donations">Donations</string>
-    <string name="received_from">Received From</string>
-    <string name="no_donations_yet">No Donations yet</string>
-    <string name="notification">Notification</string>
-    <string name="there_are_no_notifications_yet">There are no Notifications yet</string>
-    <string name="receive_anonymous_donations">Receive anonymous donations</string>
-    <string name="reset_password">Reset Password</string>
-    <string name="no_debate_requests_yet">No Debate Requests yet</string>
+    <!-- Application -->
+    <string name="title_home">Home</string>
+    <string name="title_rooms">Rooms</string>
+    <string name="title_me">Me</string>
+    <string name="permission_not_granted">Necessary permissions not granted</string>
+    <string name="stripe_publishable_key">pk_test_51K7DgkCqEZCeL0aJqIG6IlKvuxg1HAY0OBDIR8mlzJ1hEPw94X0WSjkloVavG1V0mc6Xa4sFGR0D7XZOxhNdMYJf00TBWfzH0M</string>
+    <string name="payments_show_name" translatable="false">Successfully received payment data for %s!</string>
+
+    <!-- Home Fragment -->
+    <string name="home_category_title_multi">Multi Hosts</string>
+    <string name="start_Debate">Start Debate</string>
+    <!--    <string name="start_Debate">Start Debate</string>-->
+    <string name="home_category_title_single">Solo Host</string>
+    <string name="home_category_title_pk">PK Host-in</string>
+    <string name="home_category_title_virtual_host">Virtual Host</string>
+    <string name="home_category_title_ecommerce">Live Shopping</string>
+
+    <string name="home_category_desp_multi">Invite others to co-host in broadcasting channel</string>
+    <string name="invite_multi">Invite others to join Debate</string>
+    <string name="home_category_desp_single">Live streaming by single host</string>
+    <string name="home_category_desp_pk">Merge streams from 2 channels for broadcasting</string>
+    <string name="home_category_desp_virtual_host">Avatar-based simulation for call or broadcasting</string>
+    <string name="home_category_desp_ecommerce">Engage audience and other hosts in online shopping</string>
+
+    <string name="room_list_no_data_hint">Please Create a Room</string>
+    <string name="room_list_fail_to_obtain_data_hint">Loading Data failed, please try later</string>
+    <string name="room_list_network_error_title">Network failure</string>
+    <string name="room_list_network_error_message">The network connection is not available, please try later.</string>
+
+    <!-- My Profile Fragment -->
+    <string name="profile_item_title_avatar">Profile</string>
+    <string name="profile_item_title_nickname">Name</string>
+    <string name="modify_user_title">Edit Name</string>
+    <string name="about_title">About</string>
+    <string name="privacy_policy_title">Privacy Policy</string>
+    <string name="privacy_website_link">https://www.agora.io/en/privacy-policy/</string>
+    <string name="terms_service_title">Terms of Services</string>
+    <string name="terms_service_link">https://www.agora.io/en/terms-of-service/</string>
+
+    <string name="disclaimer_title">Test Product Disclaimer</string>
+    <string name="disclaimer_content">&#160;&#160;&#160;&#160;Agora Live ("this product") is a test product provided by Agora. Agora enjoys the copyright and ownership of this product. It is hereby granted free of charge to anyone who obtains a copy of this product and related documentation (hereinafter referred to as "software") to try the software without limitation, including but not limited to trial, copy, modify, merge, publish, distribute, but this product shall not be used For any commercial use, you may not sublicense and/or sell copies of the software.\n\n &#160;&#160;&#160;&#160;This product is provided "as is" without any express warranty, including but not limited to guarantees of suitability, suitability for specific purposes, and non-infringement. Whether it is due to any contract, infringement or other forms of conduct related to this product or the trial of this product or other methods, Agora will not be responsible for any claims, damages or other liabilities.\n\n &#160;&#160;&#160;&#160;You are free to choose whether to try the services provided by this product. If you download, install, or try the services provided in this product, it means that you trust the owner of the product, and Agora shall not be responsible for any form of loss or injury caused by yourself or others when you try the services provided in this product for any reason.</string>
+
+    <string name="sign_up_agora_title">Sign Up Agora.io</string>
+    <string name="sign_up_website_link">https://sso.agora.io/en/signup</string>
+
+    <string name="version_title">Versions</string>
+    <string name="agoralive_version_title">AgoraLive Version</string>
+    <string name="agoralive_release_time_title">Release</string>
+    <string name="agoralive_release_time" translatable="false">2021.07.12</string>
+    <string name="agoralive_media_sdk_version_title">Media SDK Version</string>
+    <string name="agoralive_media_sdk_version">Ver 3.0.1.1</string>
+
+    <!-- Live Prepare Activity -->
+    <string name="live_prepare_hint">Channel Name</string>
+    <!--    <string name="debate_Title">Debate Title</string>-->
+    <string name="go_live_text">Go Live</string>
+    <string name="live_prepare_name_too_long_toast_format">Room name cannot be longer than %d characters</string>
+    <string name="live_prepare_no_room_name">Please enter your room name</string>
+    <string name="no_fu_auth_notice">No FaceUnity authentication found</string>
+
+    <!-- Live -->
+    <string name="live_bottom_edit_hint">Say something &#8230;</string>
+    <string name="live_send_empty_message">Empty messages are not sent</string>
+
+    <string name="live_host_in_room_name_hint">Channel&#160;&#160;</string>
+    <string name="live_host_in_seat_state_open_audience">Become Host</string>
+    <string name="live_host_in_seat_state_open_host">Invite Host</string>zx
+    <string name="live_host_in_seat_state_blocked">Blocked</string>
+
+    <string name="live_system_notification_member_joined">has joined</string>
+    <string name="live_system_notification_member_left">has left</string>
+
+    <string-array name="live_host_in_seat_operations">
+        <item>Mute</item>
+        <item>Unmute</item>
+        <item>Leave</item>
+        <item>Open</item>
+        <item>close</item>
+    </string-array>
+
+    <!-- Virtual Host -->
+    <string name="live_virtual_image_select_title">Select Image</string>
+    <string name="live_virtual_image_select_confirm">Confirm</string>
+    <string name="live_virtual_image_invite">Invite</string>
+    <string name="live_virtual_image_stop_invite">Leave</string>
+    <string name="live_virtual_image_stop_invite_message">Do you want to leave the chat?</string>
+
+    <string name="live_pk_host_remaining_time_hint">PK left:</string>
+
+    <!-- E Commerce -->
+    <string name="product_detail_buy_now">Buy Now</string>
+    <string name="product_promote_title">抢 9 期免息券</string>
+    <string name="product_promote_date">6.11 - 6.18</string>
+    <string name="product_promote_actual_price_title">到手价</string>
+    <string name="product_promote_actual_price">6599</string>
+
+    <string name="product_default_description">Apple iPad Pro 11英寸平板电脑 2020年新款(256G WLAN版/全面屏/A12Z/FaceID/MXDC2CH/A) 深空灰色</string>
+
+    <string name="product_name_1">Lipstick</string>
+    <string name="product_name_2">Rucksack</string>
+    <string name="product_name_3">iPad</string>
+    <string name="product_name_4">Pants</string>
+
+    <string name="product_desp_1">Revlon Super Lustrous Lipstick, High Impact Lipcolor</string>
+    <string name="product_desp_2">Keepall 55 Monogram Eclipse Canvas M40605</string>
+    <string name="product_desp_3">New Apple iPad Pro (12.9-inch, Wi-Fi, 128GB) - Silver </string>
+    <string name="product_desp_4">Men\'s K87 Workwear Pocket Short Sleeve T-Shirt </string>
+
+    <!-- Messages -->
+    <string name="live_message_gift_send">has sent out</string>
+
+    <!-- Action Sheet -->
+    <string name="live_room_setting_action_sheet_title">Setting</string>
+    <string name="live_room_setting_title_resolution">Resolution</string>
+    <string name="live_room_setting_title_framerate">Frame Rate</string>
+    <string name="live_room_setting_title_bitrate">Bitrate</string>
+    <string name="live_room_setting_bitrate_value_format" translatable="false">%d kbps</string>
+    <string name="live_room_setting_bitrate_value_default">Default</string>
+
+    <string name="live_room_beauty_action_sheet_title">Beauty</string>
+    <string name="live_room_beauty_action_sheet_blur">Blur</string>
+    <string name="live_room_beauty_action_sheet_color">Brighten</string>
+    <string name="live_room_beauty_action_sheet_cheek_thinning">Thinning</string>
+    <string name="live_room_beauty_action_sheet_eye_enlarge">Eye</string>
+
+    <string name="live_room_bg_music_action_sheet_title">Background Music</string>
+    <string name="live_room_bg_music_action_sheet_credit_hint">Music:&#160;&#160;</string>
+    <string name="live_room_bg_music_action_sheet_credit_link">https://www.bensound.com</string>
+
+    <string name="live_room_gift_action_sheet_title">Presents</string>
+    <string name="live_room_gift_action_sheet_send">Send</string>
+    <string name="live_room_gift_action_sheet_value_format">(%d Coins)</string>
+
+    <string name="live_room_pk_room_list_title_format">Room List (%d)</string>
+
+    <string-array name="gift_names">
+        <item>Bell</item>
+        <item>Ice Cream</item>
+        <item>Wine</item>
+        <item>Cake</item>
+        <item>Ring</item>
+        <item>Watch</item>
+        <item>Diamond</item>
+        <item>Rocket</item>
+    </string-array>
+
+    <string name="live_room_gift_channel_message">has sent %s a gift</string>
+
+    <string name="live_room_tool_action_sheet_title">Tool</string>
+    <string-array name="live_room_action_sheet_tool_names">
+        <item>Data</item>
+        <item>Speaker</item>
+        <item>EarMonitor</item>
+        <item>Setting</item>
+        <item>Rotate</item>
+        <item>Camera</item>
+    </string-array>
+
+    <string name="live_room_tool_action_sheet_title_setting">setting</string>
+    <string name="live_room_tool_action_sheet_title_data">Data</string>
+    <string name="live_room_tool_action_sheet_title_beauty">Beauty</string>
+    <string name="live_room_tool_action_sheet_title_music">Music</string>
+    <string name="live_room_tool_action_sheet_title_rotate">Rotate</string>
+    <string name="live_room_tool_action_sheet_title_camera">Camera</string>
+    <string name="live_room_tool_action_sheet_title_speaker">Speaker</string>
+    <string name="live_room_tool_action_sheet_title_inear">EarMonitor</string>
+    <string name="live_room_tool_action_sheet_title_apply">Apply</string>
+
+    <string name="live_room_voice_action_sheet_title">Voice</string>
+    <string name="live_room_voice_action_sheet_headphone">Headphone</string>
+    <string name="live_room_voice_action_sheet_loudspeaker">Loudspeaker</string>
+    <string name="live_room_voice_action_sheet_others">Others</string>
+
+    <string name="live_room_host_in_invite_user_list_action_sheet_title">Invite</string>
+    <string name="live_room_all_online_user_action_sheet_title">Member Listing</string>
+    <string name="live_room_host_in_audience_apply_title">Apply</string>
+    <string name="live_room_host_in_audience_apply_message">Do you want to apply to be a host?</string>
+    <string name="live_room_host_in_audience_apply_owner_message">"%s" want to apply seat %d, do you accept？</string>
+    <string name="live_room_host_in_audience_apply_owner_message_simple">"%s" want to be a host, do you accept？</string>
+    <string name="live_room_host_in_invited_by_owner">"%s" invites you to seat %d，do you accept？</string>
+    <string name="live_room_host_in_invited_by_owner_simple">"%s" invites you to be a host， do you accept？</string>
+    <string name="live_room_host_in_invite_rejected">Invitation Rejected</string>
+    <string name="live_room_host_in_invite_rejected_message">Your invitation has been\nrejected by "%s"</string>
+    <string name="live_room_host_in_apply_rejected">Rejected</string>
+    <string name="live_room_host_in_apply_rejected_message">Your application has been\nrejected by "%s"</string>
+
+    <string name="live_room_pk_room_list_button_text">Invite PK</string>
+
+    <string name="live_room_pk_room_receive_pk_request_title">PK Received</string>
+    <string name="live_room_pk_room_receive_pk_request_message">%s invited you to his PK room,\n do you accept?</string>
+
+    <string name="live_room_virtual_image_invited_message">"%s" invites to chat，do you accept？</string>
+
+    <string name="live_room_product_list_title">Product List</string>
+    <string name="live_room_action_sheet_type_unlisted_title">Retired</string>
+    <string name="live_room_action_sheet_type_listed_title">Launched</string>
+    <string name="live_room_action_sheet_product_price_format">￥ %d</string>
+    <string name="live_room_action_sheet_product_action_detail">Detail</string>
+    <string name="live_room_action_sheet_product_action_list">Launch</string>
+    <string name="live_room_action_sheet_product_action_unlisted">Retire</string>
+
+    <string name="live_room_online_user_invite_call_btn">Invite</string>
+    <string name="live_room_online_user_invited_btn">Inviting</string>
+    <string name="live_room_online_user_call_agree">Agree</string>
+    <string name="live_room_online_user_call_reject">Reject</string>
+    <string name="live_room_online_user_tab_all">All Users</string>
+    <string name="live_room_online_user_tab_application">Applications</string>
+
+    <!-- dialog -->
+    <string name="dialog_negative_button">Cancel</string>
+    <string name="dialog_positive_button">Confirm</string>
+    <string name="dialog_positive_button_accept">Accept</string>
+    <string name="dialog_negative_button_refuse">Refuse</string>
+
+    <string name="end_live_streaming_title_owner">End Live Streaming</string>
+    <string name="end_live_streaming_message_owner">Do you want to end this live streaming?</string>
+
+    <string name="finish_broadcast_title_audience">Leave Room</string>
+    <string name="finish_broadcast_message_audience">Do you want to leave this room?</string>
+
+    <string name="dialog_multi_host_open_seat_title">Reopen</string>
+    <string name="dialog_multi_host_open_seat_message">Do you want to reopen this seat?</string>
+
+    <string name="dialog_multi_host_block_seat_title">Block</string>
+    <string name="dialog_multi_host_block_seat_message">Block the seat. If it is taken,\n the user will be forced to leave.</string>
+
+    <string name="dialog_multi_host_mute_title">Mute</string>
+    <string name="dialog_multi_host_mute_message">Forbid "%s" of speaking？</string>
+
+    <string name="dialog_multi_host_unmute_title">Unmute</string>
+    <string name="dialog_multi_host_unmute_message">Allow "%s" to speak？</string>
+
+    <string name="dialog_multi_host_leave_title">Leave</string>
+    <string name="dialog_multi_host_leave_message_owner">Do you want "%s" to leave？</string>
+    <string name="dialog_multi_host_leave_message_host">Do you want to leave？</string>
+
+    <string name="dialog_ecommerce_end_call_title">End Call</string>
+    <string name="dialog_ecommerce_end_call_message">End the call with "%s"?</string>
+    <string name="dialog_ecommerce_end_call_message_and_quit">End the call with "%s",\n and leave this room?</string>
+
+    <string name="dialog_ecommerce_duplicate_call_request">You are already calling</string>
+
+    <string name="dialog_pk_force_quit_title">End PK</string>
+    <string name="dialog_pk_force_quit_message">End PK with "%s",\n and leave this room?</string>
+
+    <!-- Toasts -->
+    <string name="apply_seat_success">Apply Successfully</string>
+    <string name="invite_success">Invite Successfully</string>
+
+    <string name="live_room_pk_room_pk_invitation_accepted">Your PK invitation has been accepted</string>
+    <string name="live_room_pk_room_pk_invitation_rejected">Your PK invitation has been rejected</string>
+
+    <string name="modify_user_name_too_long">User name should not be longer than 15 letters</string>
+    <string name="modify_user_name_empty">User name cannot be empty</string>
+    <string name="modify_user_name_error">Modify user name failed</string>
+
+    <string name="in_ear_monitoring_failed">Please use wired headsets</string>
+
+    <string name="pk_ends">PK Ends</string>
+
+    <string name="agora_app_id_failed">Agora app id not found, please check your network</string>
+
+    <string name="product_list_success">Product has been launched</string>
+    <string name="product_unlist_success">Product is no longer available</string>
+
+    <string name="product_purchase_success">Purchase product success</string>
+    <string name="product_purchase_fail">Purchase product fail</string>
+
+    <string name="cannot_pk_while_calling">You cannot start PK while calling</string>
+    <string name="cannot_pk_while_already_pk_with_someone">You are already in PK with another host</string>
+    <string name="cannot_call_while_pk_with_someone">You cannot start a call with audience because you are already in PK with another host</string>
+
+    <string-array name="random_channel_names">
+        <item>Cheer</item>
+        <item>Vibe</item>
+        <item>Devine</item>
+        <item>Duo</item>
+        <item>Ablaze</item>
+        <item>Amaze</item>
+        <item>Harmony</item>
+        <item>Verse</item>
+        <item>Vigilant</item>
+        <item>Contender</item>
+        <item>Vista</item>
+        <item>Wander</item>
+        <item>Collections</item>
+        <item>Moon</item>
+        <item>Boho</item>
+        <item>Everest</item>
+    </string-array>
+
+    <string-array name="random_surnames">
+        <item>Atkinson</item>
+        <item>Edwards</item>
+        <item>Gibson</item>
+        <item>Holmes</item>
+        <item>Kelvin</item>
+        <item>Lloyd</item>
+        <item>Payne</item>
+        <item>White</item>
+    </string-array>
+
+    <string-array name="random_names">
+        <item>Alexander</item>
+        <item>Halley</item>
+        <item>Rickey</item>
+        <item>Xavior</item>
+        <item>Yolanda</item>
+        <item>Corynn</item>
+        <item>Daniel</item>
+        <item>Kelly</item>
+        <item>Lauren</item>
+    </string-array>
+
+    <string name="button_text_done">Done</string>
+
+    <string name="rtc_stats_format">Downstream Bitrate: %.2f kbps%nDownstream Loss Rate: %.2f%% %nUpstream Bitrate: %.2f kbps%nUpstream Loss Rate: %.2f%%</string>
+
+    <!-- Network status detection -->
+    <string name="network_unavailable">Network is unavailable, please try later</string>
+    <string name="network_switch_to_wifi">You are in WIFI network</string>
+    <string name="network_switch_to_mobile">You are in the mobile network, you may pay for the mobile data usage if you continue.</string>
+
+    <!-- Policies -->
+    <string name="live_prepare_room_restriction">This is a testing product. Please refrain from using it commercially. The max duration per session is 10 minutes, and the max number of participants per channel is 10. </string>
+
+    <string name="official_website">www.agora.io</string>
     <string name="title">Title</string>
-    <string name="date_">Date:</string>
-    <string name="time_">Time:</string>
     <string name="view">View</string>
-    <string name="debate_details">Debate Details</string>
-    <string name="created_by_">Created by:</string>
-    <string name="vote">Vote</string>
-    <string name="no_petitions_yet">No Petitions yet</string>
-    <string name="no_events_yet">No Events yet</string>
-    <string name="events">Events</string>
-    <string name="about_us">About Us</string>
-    <string name="create_">Create +</string>
-    <string name="announcements">Announcements</string>
-    <string name="no_announcements_yet">No Announcements yet</string>
-    <string name="create_announcements">Create Announcements</string>
-    <string name="sent_to">Sent to</string>
-    <string name="no_donations_sent">No donations Sent</string>
-    <string name="no_donations_received">No donations Received</string>
-    <string name="status_">Status:</string>
-    <string name="time">Time</string>
-    <string name="request_debate">Request Debate</string>
-    <string name="request">Request</string>
-    <string name="law_title">Law Title</string>
-    <string name="new_law">New Law</string>
-    <string name="error_please_check_internet">Please check your internet connection</string>
-    <string name="error_request_timed_out">Request timed out</string>
-    <string name="error_something_went_wrong">Something went wrong</string>
-    <string name="email_error">Email cannot be empty</string>
-    <string name="phone_error">Phone cannot be empty</string>
-    <string name="name_error">Name cannot be empty</string>
-    <string name="password_error">Password cannot be empty</string>
-    <string name="role_error">Role cannot be empty</string>
-    <string name="invalid_email_error">Invalid email</string>
-    <string name="role_">Role :</string>
-    <string name="continue_">Continue</string>
-    <string name="enter_your_email_verification_code">Enter the verification code sent to your email address</string>
-    <string name="verify">Verify</string>
-    <string name="forgot_password_">Forgot password</string>
-    <string name="set_a_new_password_for_your_account">Set a new password for your account</string>
-    <string name="new_password">New Password</string>
-    <string name="confirm_password">Confirm Password</string>
-    <string name="reset">Reset</string>
-    <string name="otp_valid_error">Please enter a valid OTP</string>
-    <string name="unmatch_password_error">Passwords do not match</string>
-    <string name="password_length_error">Password should be at least 8 character long</string>
-    <string name="new_password_error">New Password cannot be empty</string>
-    <string name="confirm_password_error">Confirm Password cannot be empty</string>
-    <string name="settings">Settings</string>
-    <string name="change_password">Change Password</string>
-    <string name="vote_by_clicking_on_the_candidate">Vote by clicking on the candidate</string>
-    <string name="add_friend">Add Friend</string>
-    <string name="follow">Follow</string>
-    <string name="receipt_id">Receipt Id</string>
+    <string name="time_">Time</string>
+    <string name="date_">Date</string>
+
+    <!--    new-->
+    <string name="donation_goal_in">Donation goal</string>
+    <string name="upload_picture">Upload Photo</string>
+    <string name="upload_video">Upload Video</string>
+    <string name="upload_filw">Upload File</string>
+    <string name="description">Description</string>
+    <string name="donation_title">Donation Title</string>
+    <string name="post">Post</string>
+    <string name="create_post">Create Post</string>
+    <string name="create">Create</string>
+    <string name="announcement_title">Create Announcement</string>
+    <string name="donate">Donate</string>
     <string name="transaction_amount">Transaction Amount</string>
     <string name="transaction_date">Transaction Date</string>
-    <string name="petition">Petition</string>
-    <string name="amount">Amount</string>
-    <string name="sent_from">Sent From</string>
-    <string name="start_petition">Start Petition</string>
-    <string name="post">Post</string>
-    <string name="announcement_title">Announcement Title</string>
-    <string name="create_donations">Create Donations</string>
-    <string name="create_petitions">Create Petitions</string>
-    <string name="dislike">Dislike</string>
-    <string name="tap_to_view_details">Tap to view details</string>
-    <string name="title_">Title:</string>
-    <string name="petition_1">Petition 1</string>
-    <string name="total_signatures">Total Signatures:</string>
-    <string name="description_">Description:</string>
-    <string name="sign_petition">Sign Petition</string>
-    <string name="upload_filw">Upload Document</string>
-    <string name="total_donations">Total Donations</string>
-    <string name="followers">Followers</string>
-    <string name="following">Following</string>
-    <string name="remove">Remove</string>
-    <string name="unfollow">Unfollow</string>
-    <string name="price">Price:</string>
-    <string name="event_details">Event Details</string>
-    <string name="start_date">Start Date</string>
-    <string name="start_time">Start Time</string>
+    <string name="receipt_id">Receipt id</string>
     <string name="end_time">End Time</string>
-    <string name="event_price">Event Price ($)</string>
-    <string name="_02_donors">02 Donors</string>
-    <string name="donors">Donors</string>
+    <string name="start_time">Start Time</string>
+    <string name="start_date">Start Date</string>
+    <string name="start_debate">Start Dabate</string>
+    <string name="event_price">Price</string>
+    <string name="event_title">Title</string>
+    <string name="law_title">Title</string>
+    <string name="reject">Reject</string>
+    <string name="debate_details">Debate Detail</string>
+    <string name="no_debate_requests_yet">No Debate Request</string>
+    <string name="create_debate">Create Debate</string>
+    <string name="debate_requests">Debate Requests</string>
+    <string name="donations">Donations</string>
+    <string name="amount">Amount</string>
+    <string name="received_from">Received From</string>
+    <string name="no_donations_yet">No Donations Yet</string>
+    <string name="date">Date</string>
+    <string name="no_data_yet">No Data Yet</string>
+    <string name="no_data_state">No Data for this state</string>
     <string name="ask_for_donations">Ask for Donations</string>
-    <string name="donation_title">Donation Title</string>
-    <string name="add_your_donation_amount">Add your Donation Amount</string>
-    <string name="submit">Submit</string>
-    <string name="cancel">Cancel</string>
-    <string name="view_people_going">View Event Attendees</string>
+    <string name="no_donations_received">No Donation Received</string>
+    <string name="no_donations_sent">No Donation sent</string>
+    <string name="sent_to">Sent to</string>
+    <string name="price">Price</string>
+    <string name="description_">Description</string>
     <string name="close">Close</string>
-    <string name="donation_goal_in">Donation Goal($)</string>
-    <string name="change_phone_number">Change Phone Number</string>
-    <string name="change_email">Change Email</string>
-    <string name="petition_duration">Petition Duration</string>
-    <string name="petition_description">Petition Description</string>
-    <string name="max_12_months">Max (12 months)</string>
-    <string name="petition_signature_count">Signature Count</string>
+    <string name="view_people_going">View People</string>
+    <string name="create_event">Create Event</string>
+    <string name="no_events_yet">No Event Yet</string>
+    <string name="continue_">Continue</string>
+    <string name="enter_your_email_verification_code">Enter Your Email Verification Code</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="don_t_have_account">Don\'t have Password</string>
+    <string name="login">Login</string>
+    <string name="forgot_password">Forgot Password</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="there_are_no_notifications_yet">No Notification Yet</string>
+    <string name="notification">Notifications</string>
+    <string name="sign_petition">Sign Petition</string>
+    <string name="signatures_received_34">Signature Received</string>
+    <string name="signatures_needed">Signature Needed</string>
     <string name="website_link">Website Link</string>
-    <string name="petition_title">Petition Title</string>
-    <string name="total_wins">Total Wins:</string>
-    <string name="total_losses">Total Losses:</string>
-    <string name="total_views">Total Views:</string>
-    <string name="last">Last</string>
-    <string name="live">Live</string>
-    <string name="upcoming">Upcoming</string>
-    <string name="about_info">About Info</string>
+    <string name="petition_1">Petition</string>
+    <string name="update">Update</string>
+    <string name="total_donations">Total Donations</string>
+    <string name="role_">Role</string>
+    <string name="phone_no">Phone No.</string>
+    <string name="update_profile">Update Profile</string>
+    <string name="_02_donors">Donors</string>
+    <string name="already_account">Already Have Account</string>
+    <string name="about_me">About Us</string>
     <string name="website_url">Website Url</string>
-    <string name="about_me">About Me</string>
-    <string name="supports">Supports</string>
-    <string name="about_info_details">Click for About Info</string>
+    <string name="name">Name</string>
+    <string name="profile_picture">Profile Picture</string>
+    <string name="request">Request Debate</string>
+    <string name="message">Message</string>
+    <string name="time">Time</string>
+    <string name="debate_title">Debate Title</string>
+    <string name="reset">Reset Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="new_password">New Password</string>
+    <string name="set_a_new_password_for_your_account">Set new Password for Your Account</string>
+    <string name="change_phone_number">"Change Phone Number "</string>
+    <string name="change_email">Change Email</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="receive_anonymous_donations">Received Donations</string>
+    <string name="setting">Settings</string>
     <string name="submit_signature">Submit Signature</string>
-    <string name="signatures_needed">Signatures Needed</string>
-    <string name="signatures_received_34">Signatures Received: 34</string>
+    <string name="petition">Petition</string>
+    <string name="petition_signature_count">Signature Count</string>
+    <string name="max_12_months">max 12 months</string>
+    <string name="petition_duration">Petition Duration</string>
+    <string name="duration">Duration</string>
+    <string name="sent_from">Sent From</string>
+    <string name="petition_title">Petition Title</string>
+    <string name="no_stats_yet">No Stats Yet</string>
+    <string name="votes">Votes</string>
+    <string name="vote">Vote</string>
     <string name="views">Views</string>
+    <string name="total_losses">total Losses</string>
+    <string name="total_wins">Total Wins</string>
+    <string name="stats">Stats</string>
+    <string name="search">Search</string>
+    <string name="users">Users</string>
+    <string name="add_your_donation_amount">Add Donation Amount</string>
+    <string name="cancel">Cancel</string>
+    <string name="submit">Submit</string>
+    <string name="what_s_on_your_mind">What is on your mind</string>
     <string name="state">State</string>
     <string name="bio">Bio</string>
-    <string name="search">Search</string>
+    <string name="about_info">About</string>
+    <string name="comment">Comment</string>
+    <string name="edit">Edit</string>
+    <string name="supports">Support</string>
+    <string name="share">Share</string>
+    <string name="dislike">Dislike</string>
+    <string name="like">Like</string>
+    <string name="home">Home</string>
+    <string name="more">More</string>
+    <string name="tap_to_view_details">View Detail</string>
+    <string name="total_signatures">Total Signature</string>
+    <string name="vote_by_clicking_on_the_candidate">Click to vote</string>
+    <string name="status_">Status</string>
+    <string name="title_">Title</string>
+    <string name="no_debates_yet">No Debates Yet</string>
+    <string name="no_winnings_yet">No Winner Yet</string>
+    <string name="upcoming">Upcoming</string>
+    <string name="live">Live</string>
+    <string name="last">Past</string>
+    <string name="old_password">Old Password</string>
+    <string name="about_info_details">About</string>
+    <string name="no_announcements_yet">No Announcements Yet</string>
+    <string name="all_winners">All Winners</string>
+    <string name="user">User</string>
+    <string name="rank">Rank</string>
+    <string name="no_winners_yet">No Winner Yet</string>
+    <string name="event_details">Event Details</string>
+    <string name="about_us">About Us</string>
+    <string name="terms_and_conditions"><![CDATA[Terms & Conditions]]></string>
+    <string name="change_password">Change Password</string>
+    <string name="new_password_error">Enter Valid Password</string>
+    <string name="password_length_error">Password should be more then 6</string>
+    <string name="select_action">Select</string>
+    <string name="select_image_from_gallery">Select From Gallery</string>
+    <string name="select_image_from_camera">Capture from Camera</string>
+    <string name="title_error">Enter title</string>
+    <string name="event_price_error">Enter Event Price</string>
+    <string name="start_date_error">Enter Start Date</string>
+    <string name="end_date_error">Enter End Date</string>
+    <string name="start_time_error">Select Start time</string>
+    <string name="end_time_error">Select End Time</string>
+    <string name="description_error">Enter Description</string>
+    <string name="photo_error">Add photo</string>
+    <string name="video_error">Please Add Video</string>
+    <string name="verify">Verify</string>
+    <string name="forgot_password_">Forgot Password</string>
+    <string name="otp_valid_error">Enter a valid Otp</string>
+    <string name="voting">Voting</string>
+    <string name="polling">Polling</string>
+    <string name="email_error">Enter valid email Address</string>
+    <string name="invalid_email_error">Email is invalid</string>
+    <string name="password_error">Password should not be empty</string>
+    <string name="name_error">Enter a Name</string>
+    <string name="phone_error">Enter Phone Number</string>
+    <string name="role_error">Select Role</string>
+    <string name="confirm_password_error">Confirm Your Password </string>
+    <string name="unmatch_password_error">Password Mismatch</string>
+    <string name="settings">Settings</string>
+    <string name="duration_error">Duration should not more than 12 months</string>
+    <string name="sg_count_error">Enter Signature count</string>
+    <string name="support">Support</string>
+    <string name="followers">Followers</string>
+    <string name="unfollow">Unfollow</string>
+    <string name="remove">Remove</string>
+    <string name="donors">Donors</string>
+    <string name="announcements">Announcements</string>
+    <string name="create_announcements">Create Announcements</string>
+    <string name="new_law">New Law</string>
+    <string name="document_error">Add Document</string>
+    <string name="request_debate">Request Debate</string>
+    <string name="new_msg">New Message</string>
+    <string name="action_device_token">Device Token</string>
+    <string name="error_please_check_internet">Check Your Internet Connection</string>
+    <string name="error_request_timed_out">Request Time Out</string>
+    <string name="error_something_went_wrong" translatable="false">Something went wrong</string>
+    <string name="nice_html" translatable="false">
+<![CDATA[
 
 
+<h1 style="color:blue;">US Constitution</h1></br></br>
+<h1 style="color:blue;text-align: center;">The Constitution Of The United States​</h1></br></br>
+<h2 style="color:blue;">Bill of Rights & All Amendments​</h2></br></br>
+<p>A highly accessible, easy-to-use online version full-text transcript of the US Constitution including Bill of Rights and the 27 Amendments.</p></br></br>
+
+
+
+<p>This text of the US Constitution follows the engrossed copy signed by Gen. Washington and the deputies from 12 States. The Arabic Numerals and Roman Numerals preceding the paragraphs designate Clauses, and were not printed (but are referred to) in the original.</p></br></br>
+
+<h1 style="color:blue;">Preamble to the US Constitution</h1></br></br>
+<p>The preamble to the US Constitution starts off with the famous words “We the People”.</p></br></br>
+
+<p>Find out exactly why these words We the People were used in the constitution and what their significance is.</p></br></br>
+
+<h1 style="color:blue;">We the People</h1></br></br>
+<p><bold>We the People</bold> of the United States, in Order to form a more perfect Union, establish Justice, insure domestic Tranquility, provide for the common defence, promote the general Welfare, and secure the Blessings of Liberty to ourselves and our Posterity, do ordain and establish this Constitution for the United States of America.</p></br></br>
+
+<h1 style="color:blue;">Article I (Article 1 - Legislative)</h1></br></br>
+<h3 style="color:red;">Article 1 of the Constitution Summary and Simplified Explanation</h3></br></br>
+
+<h2 style="color:blue;">Article 1, Section 1</h2></br></br>
+<p>All legislative Powers herein granted shall be vested in a Congress of the United States, which shall consist of a Senate and House of Representatives.</p></br></br>
+<h2 style="color:blue;">Article 1, Section 2</h2></br></br>
+<p><ol><li>The House of Representatives shall be composed of Members chosen every second Year by the People of the several States, and the Electors in each State shall have the Qualifications requisite for Electors of the most numerous Branch of the State Legislature.</li>
+<li>No Person shall be a Representative who shall not have attained to the Age of twenty five Years, and been seven Years a Citizen of the United States, and who shall not, when elected, be an Inhabitant of that State in which he shall be chosen.</li>
+<li>Representatives and direct Taxes shall be apportioned among the several States which may be included within this Union, according to their respective Numbers, which shall be determined by adding to the whole Number of free Persons, including those bound to Service for a Term of Years, and excluding Indians not taxed, three fifths of all other Persons.  The actual Enumeration shall be made within three Years after the first Meeting of the Congress of the United States, and within every subsequent Term of ten Years, in such Manner as they shall by Law direct. The Number of Representatives shall not exceed one for every thirty Thousand, but each State shall have at Least one Representative; and until such enumeration shall be made, the State of New Hampshire shall be entitled to chuse three, Massachusetts eight, Rhode-Island and Providence Plantations one, Connecticut five, New-York six, New Jersey four, Pennsylvania eight, Delaware one, Maryland six, Virginia ten, North Carolina five, South Carolina five, and Georgia three.</li>
+<li>When vacancies happen in the Representation from any State, the Executive Authority thereof shall issue Writs of Election to fill such Vacancies.</li>
+<li>The House of Representatives shall chuse their Speaker and other Officers; and shall have the sole Power of Impeachment.</li></ol></p></br></br>
+<h3 style="color:blue;"><bold>NOTE: The part of Article 1 Section 2 Clause 3 relating to the mode of apportionment of representatives among the several States has been affected by 14th Amendment Section 2, and as to taxes on incomes without apportionment by 16th Amendment.</bold></h2></br></br>
+<h2 style="color:blue;">Article 1, Section 3</h2></br></br>
+<p><ol><li>The Senate of the United States shall be composed of two Senators from each State, chosen by the Legislature thereof, for six Years; and each Senator shall have one Vote.</li>
+<li>Immediately after they shall be assembled in Consequence of the first Election, they shall be divided as equally as may be into three Classes. The Seats of the Senators of the first Class shall be vacated at the Expiration of the second Year, of the second Class at the Expiration of the fourth Year, and of the third Class at the Expiration of the sixth Year, so that one third may be chosen every second Year; and if Vacancies happen by Resignation, or otherwise, during the Recess of the Legislature of any State, the Executive thereof may make temporary Appointments until the next Meeting of the Legislature, which shall then fill such Vacancies.</li>
+<li>No Person shall be a Senator who shall not have attained to the Age of thirty Years, and been nine Years a Citizen of the United States, and who shall not, when elected, be an Inhabitant of that State for which he shall be chosen.</li>
+<li>The Vice President of the United States shall be President of the Senate, but shall have no Vote, unless they be equally divided.</li>
+<li>The Senate shall chuse their other Officers, and also a President pro tempore, in the Absence of the Vice President, or when he shall exercise the Office of President of the United States.</li>
+<li>The Senate shall have the sole Power to try all Impeachments. When sitting for that Purpose, they shall be on Oath or Affirmation. When the President of the United States is tried, the Chief Justice shall preside: And no Person shall be convicted without the Concurrence of two thirds of the Members present.</li>
+<li>Judgment in Cases of impeachment shall not extend further than to removal from Office, and disqualification to hold and enjoy any Office of honor, Trust or Profit under the United States: but the Party convicted shall nevertheless be liable and subject to Indictment, Trial, Judgment and Punishment, according to Law.</li></ol></p></br></br>
+<h3><bold>NOTE: Article 1 Section 3 Clause 1 has been affected by 17th Amendment Section 1.</bold></h3></br>
+<h3><bold>NOTE: Article 1 Section 3 Clause 2 has been affected by 17th Amendment Section 2.</bold></h3></br>
+<h2 style="color:blue;">Article 1, Section 4</h2></br></br>
+<p><ol><li>The Times, Places and Manner of holding Elections for Senators and Representatives, shall be prescribed in each State by the Legislature thereof; but the Congress may at any time by Law make or alter such Regulations, except as to the Places of chusing Senators.</li>
+<li>The Congress shall assemble at least once in every Year, and such Meeting shall be on the first Monday in December, unless they shall by Law appoint a different Day.</li></ol></p></br>
+<h3><bold>NOTE: Article 1 Section 4 Clause 2 has been affected by 20th Amendment.</bold></h3></br></br>
+<h2 style="color:blue;">Article 1, Section 5</h2></br></br>
+<p><ol><li>Each House shall be the Judge of the Elections, Returns and Qualifications of its own Members, and a Majority of each shall constitute a Quorum to do Business; but a smaller Number may adjourn from day to day, and may be authorized to compel the Attendance of absent Members, in such Manner, and under such Penalties as each House may provide.</li>
+<li>Each House may determine the Rules of its Proceedings, punish its Members for disorderly Behaviour, and, with the Concurrence of two thirds, expel a Member.</li>
+<li>Each House shall keep a Journal of its Proceedings, and from time to time publish the same, excepting such Parts as may in their Judgment require Secrecy; and the Yeas and Nays of the Members of either House on any question shall, at the Desire of one fifth of those Present, be entered on the Journal.</li>
+<li>Neither House, during the Session of Congress, shall, without the Consent of the other, adjourn for more than three days, nor to any other Place than that in which the two Houses shall be sitting.</li></ol></p></br>
+<h2 style="color:blue;">Article 1, Section 6</h2></br></br>
+<p><ol><li>The Senators and Representatives shall receive a Compensation for their Services, to be ascertained by Law, and paid out of the Treasury of the United States.  They shall in all Cases, except Treason, Felony and Breach of the Peace, be privileged from Arrest during their Attendance at the Session of their respective Houses, and in going to and returning from the same; and for any Speech or Debate in either House, they shall not be questioned in any other Place.</li>
+<li>No Senator or Representative shall, during the Time for which he was elected, be appointed to any civil Office under the Authority of the United States, which shall have been created, or the Emoluments whereof shall have been encreased during such time; and no Person holding any Office under the United States, shall be a Member of either House during his Continuance in Office.</li></ol></p></br>
+<h3><bold>NOTE: Article 1 Section 6 Clause 1 has been affected by 27th Amendment.</bold></h3></br></br>
+<h2 style="color:blue;">Article 1, Section 7</h2></br></br>
+<p><ol><li>All Bills for raising Revenue shall originate in the House of Representatives; but the Senate may propose or concur with Amendments as on other Bills.</li>
+<li>Every Bill which shall have passed the House of Representatives and the Senate, shall, before it become a Law, be presented to the President of the United States; If he approve he shall sign it, but if not he shall return it, with his Objections to that House in which it shall have originated, who shall enter the Objections at large on their Journal, and proceed to reconsider it. If after such Reconsideration two thirds of that House shall agree to pass the Bill, it shall be sent, together with the Objections, to the other House, by which it shall likewise be reconsidered, and if approved by two thirds of that House, it shall become a Law. But in all such Cases the Votes of both Houses shall be determined by yeas and Nays, and the Names of the Persons voting for and against the Bill shall be entered on the Journal of each House respectively. If any Bill shall not be returned by the President within ten Days (Sundays excepted) after it shall have been presented to him, the Same shall be a Law, in like Manner as if he had signed it, unless the Congress by their Adjournment prevent its Return, in which Case it shall not be a Law.</li>
+<li>Every Order, Resolution, or Vote to which the Concurrence of the Senate and House of Representatives may be necessary (except on a question of Adjournment) shall be presented to the President of the United States; and before the Same shall take Effect, shall be approved by him, or being disapproved by him, shall be repassed by two thirds of the Senate and House of Representatives, according to the Rules and Limitations prescribed in the Case of a Bill.</li>
+<h2 style="color:blue;">Article 1, Section 8</h2></br></br>
+<p><ol><li>The Congress shall have Power To lay and collect Taxes, Duties, Imposts and Excises, to pay the Debts and provide for the common Defence and general Welfare of the United States; but all Duties, Imposts and Excises shall be uniform throughout the United States;</li>
+<li>To borrow Money on the credit of the United States;</li>
+<li>To regulate Commerce with foreign Nations, and among the several States, and with the Indian Tribes;</li>
+<li>To establish an uniform Rule of Naturalization, and uniform Laws on the subject of Bankruptcies throughout the United States;</li>
+<li>To coin Money, regulate the Value thereof, and of foreign Coin, and fix the Standard of Weights and Measures;</li>
+<li>To provide for the Punishment of counterfeiting the Securities and current Coin of the United States;</li>
+<li>To establish Post Offices and post Roads;</li>
+<li>To promote the Progress of Science and useful Arts, by securing for limited Times to Authors and Inventors the exclusive Right to their respective Writings and Discoveries;</li>
+<li>To constitute Tribunals inferior to the supreme Court;</li>
+<li>To define and punish Piracies and Felonies committed on the high Seas, and Offences against the Law of Nations;</li>
+<li>To declare War, grant Letters of Marque and Reprisal, and make Rules concerning Captures on Land and Water;</li>
+<li>To raise and support Armies, but no Appropriation of Money to that Use shall be for a longer Term than two Years;</li>
+<li>To provide and maintain a Navy;</li>
+<li>To make Rules for the Government and Regulation of the land and naval Forces;</li>
+<li>To provide for calling forth the Militia to execute the Laws of the Union, suppress Insurrections and repel Invasions;</li>
+<li>To provide for organizing, arming, and disciplining, the Militia, and for governing such Part of them as may be employed in the Service of the United States, reserving to the States respectively, the Appointment of the Officers, and the Authority of training the Militia according to the discipline prescribed by Congress;</li>
+<li>To exercise exclusive Legislation in all Cases whatsoever, over such District (not exceeding ten Miles square) as may, by Cession of particular States, and the Acceptance of Congress, become the Seat of the Government of the United States, and to exercise like Authority over all Places purchased by the Consent of the Legislature of the State in which the Same shall be, for the Erection of Forts, Magazines, Arsenals, dock-Yards, and other needful Buildings;—And</li>
+<li>To make all Laws which shall be necessary and proper for carrying into Execution the foregoing Powers, and all other Powers vested by this Constitution in the Government of the United States, or in any Department or Officer thereof.</li></ol></p></br></br>
+<h2 style="color:blue;">Article 1, Section 9</h2></br></br>
+<p><ol><li>The Migration or Importation of such Persons as any of the States now existing shall think proper to admit, shall not be prohibited by the Congress prior to the Year one thousand eight hundred and eight, but a Tax or duty may be imposed on such Importation, not exceeding ten dollars for each Person.</li>
+<li>The Privilege of the Writ of Habeas Corpus shall not be suspended, unless when in Cases of Rebellion or Invasion the public Safety may require it.</li>
+<li>No Bill of Attainder or ex post facto Law shall be passed.</li>
+<li>No Capitation, or other direct, Tax shall be laid, unless in Proportion to the Census or Enumeration herein before directed to be taken.</li>
+<li>No Tax or Duty shall be laid on Articles exported from any State.</li>
+<li>No Preference shall be given by any Regulation of Commerce or Revenue to the Ports of one State over those of another: nor shall Vessels bound to, or from, one State, be obliged to enter, clear, or pay Duties in another.</li>
+<li>No Money shall be drawn from the Treasury, but in Consequence of Appropriations made by Law; and a regular Statement and Account of the Receipts and Expenditures of all public Money shall be published from time to time.</li>
+<li>No Title of Nobility shall be granted by the United States: And no Person holding any Office of Profit or Trust under them, shall, without the Consent of the Congress, accept of any present, Emolument, Office, or Title, of any kind whatever, from any King, Prince, or foreign State.</li></ol></p></br>
+<h3><bold>NOTE: Article 1 Section 9 Clause 4 has been affected by 26th Amendment.</bold></h3></br></br>
+<h2 style="color:blue;">Article 1, Section 10</h2></br></br>
+<p><ol><li>No State shall enter into any Treaty, Alliance, or Confederation; grant Letters of Marque and Reprisal; coin Money; emit Bills of Credit; make any Thing but gold and silver Coin a Tender in Payment of Debts; pass any Bill of Attainder, ex post facto Law, or Law impairing the Obligation of Contracts, or grant any Title of Nobility.</li>
+<li>No State shall, without the Consent of the Congress, lay any Imposts or Duties on Imports or Exports, except what may be absolutely necessary for executing it’s inspection Laws: and the net Produce of all Duties and Imposts, laid by any State on Imports or Exports, shall be for the Use of the Treasury of the United States; and all such Laws shall be subject to the Revision and Controul of the Congress.</li>
+<li>No State shall, without the Consent of Congress, lay any Duty of Tonnage, keep Troops, or Ships of War in time of Peace, enter into any Agreement or Compact with another State, or with a foreign Power, or engage in War, unless actually invaded, or in such imminent Danger as will not admit of delay.</li></ol></p></br></br>
+]]>
+</string>
+    <!--    <string name="time_">Time</string>-->
+    <!--    <string name="date_">Date</string>-->
 </resources>

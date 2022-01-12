@@ -17,9 +17,10 @@ import com.application.onovapplication.activities.DonationsActivity
 import com.application.onovapplication.activities.GovernmentScreenActivity
 import com.application.onovapplication.activities.politicians.CreateLawActivity
 import com.application.onovapplication.adapters.MoreScreenAdapter
+import com.application.onovapplication.databinding.FragmentFeedsBinding
+import com.application.onovapplication.databinding.FragmentMoreBinding
 import com.application.onovapplication.model.MoreScreenData
 import com.application.onovapplication.viewModels.LogoutViewModel
-import kotlinx.android.synthetic.main.fragment_more.*
 
 
 class MoreFragment : Fragment(), MoreScreenAdapter.MoreItemListener {
@@ -27,6 +28,7 @@ class MoreFragment : Fragment(), MoreScreenAdapter.MoreItemListener {
     private val logoutViewModel by lazy {
         ViewModelProvider(this).get(LogoutViewModel::class.java)
     }
+    lateinit var binding: FragmentMoreBinding
 
     val dataList: ArrayList<MoreScreenData> = ArrayList()
     private var moreScreenAdapter: MoreScreenAdapter? = null
@@ -36,8 +38,8 @@ class MoreFragment : Fragment(), MoreScreenAdapter.MoreItemListener {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_more, container, false)
-    }
+         binding = FragmentMoreBinding.inflate(inflater, container, false)
+         return binding.getRoot()    }
     
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -69,8 +71,8 @@ class MoreFragment : Fragment(), MoreScreenAdapter.MoreItemListener {
 
 
         moreScreenAdapter = MoreScreenAdapter(requireContext(), dataList, this)
-        
-        rv_more.adapter = moreScreenAdapter
+
+        binding.rvMore.adapter = moreScreenAdapter
 
     }
 
@@ -544,7 +546,8 @@ class MoreFragment : Fragment(), MoreScreenAdapter.MoreItemListener {
             }
 
             6 -> {
-                val intent = Intent(requireContext(), StartPetition::class.java)
+                val intent = Intent(requireContext(), AskToAddActivity::class.java)
+                intent.putExtra("activity","petition")
                 startActivity(intent)
             }
 
@@ -614,6 +617,8 @@ class MoreFragment : Fragment(), MoreScreenAdapter.MoreItemListener {
             4 -> {
                 val intent = Intent(requireContext(), EventsActivity::class.java)
                 startActivity(intent)
+
+
             }
 
             5 -> {
@@ -623,7 +628,8 @@ class MoreFragment : Fragment(), MoreScreenAdapter.MoreItemListener {
             }
 
             6 -> {
-                val intent = Intent(requireContext(), StartPetition::class.java)
+                val intent = Intent(requireContext(), AskToAddActivity::class.java)
+                        intent.putExtra("activity", "petition")
                 startActivity(intent)
             }
 
@@ -852,7 +858,7 @@ class MoreFragment : Fragment(), MoreScreenAdapter.MoreItemListener {
 
                 logoutViewModel.logout(
                     requireContext(),
-                    (activity!! as HomeTabActivity).userPreferences.getUserREf()
+                    (requireActivity() as HomeTabActivity).userPreferences.getUserREf()
                 )
 
                 (activity as HomeTabActivity).showDialog()
@@ -870,7 +876,7 @@ class MoreFragment : Fragment(), MoreScreenAdapter.MoreItemListener {
 
     private fun observeViewModel() {
 
-        logoutViewModel.successful.observe(activity!!, Observer {
+        logoutViewModel.successful.observe(requireActivity(), Observer {
             if (!isAdded) {
                 return@Observer
             }
@@ -885,7 +891,7 @@ class MoreFragment : Fragment(), MoreScreenAdapter.MoreItemListener {
                     val intent =
                         Intent(requireContext(), LoginActivity::class.java)
                     startActivity(intent)
-                    activity!!.finish()
+                    requireActivity().finish()
 
                 } else {
                     (activity as HomeTabActivity).setError(logoutViewModel.message)

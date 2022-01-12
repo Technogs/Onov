@@ -33,7 +33,7 @@ class LoginResponse {
 data class UserInfo(
     @SerializedName("id")
     @Expose
-    var id: String? = null,
+    var id: String? = "",
 
     @SerializedName("userRef")
     @Expose

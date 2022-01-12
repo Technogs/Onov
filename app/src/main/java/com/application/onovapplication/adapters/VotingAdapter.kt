@@ -24,7 +24,7 @@ class VotingAdapter(val context: Context
     }
 
     override fun getItemCount(): Int {
-        return 6
+        return 2
     }
 
     override fun onBindViewHolder(holder: RVHolder, position: Int) {

@@ -1,2 +1,3 @@
-include ':app'
+include ':app', ':Faceunity', ':stripepayment'
 rootProject.name = "OnovApplication"
+include ':framework'

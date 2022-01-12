@@ -3,12 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical"
     tools:context=".activities.lpa.CreateAnnouncementActivity">
 
 
 
-    <include layout="@layout/action_bar_layout_2" />
+    <include layout="@layout/action_bar_layout_2"
+        android:id="@+id/ab"/>
 
 
     <androidx.appcompat.widget.AppCompatButton
@@ -30,7 +32,7 @@
         android:layout_below="@+id/createPostLayout"
         android:layout_marginTop="10dp"
         android:background="@null"
-        android:fontFamily="@font/poppins"
+        android:fontFamily="@font/poppins_regular"
         android:hint="@string/announcement_title"
         android:padding="15dp"
         android:textColor="@color/navigation_color"
@@ -50,7 +52,7 @@
         android:layout_below="@+id/createPostLayout"
         android:background="@null"
         android:layout_marginTop="10dp"
-        android:fontFamily="@font/poppins"
+        android:fontFamily="@font/poppins_regular"
         android:hint="@string/description"
         android:padding="15dp"
         android:textColor="@color/navigation_color"
@@ -90,7 +92,7 @@
                 android:layout_marginEnd="5dp"
                 android:layout_alignParentBottom="true"
                 android:layout_marginBottom="15dp"
-                android:fontFamily="@font/poppins"
+                android:fontFamily="@font/poppins_regular"
                 android:text="@string/upload_picture"
                 android:textColor="@color/navigation_color"
                 android:textSize="12sp" />
@@ -130,7 +132,7 @@
                 android:layout_marginEnd="5dp"
                 android:layout_alignParentBottom="true"
                 android:layout_marginBottom="15dp"
-                android:fontFamily="@font/poppins"
+                android:fontFamily="@font/poppins_regular"
                 android:text="@string/upload_video"
                 android:textColor="@color/navigation_color"
                 android:textSize="12sp" />

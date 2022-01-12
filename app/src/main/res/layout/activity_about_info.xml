@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:orientation="vertical"
+    android:background="@color/white"
     android:layout_height="match_parent"
     tools:context=".activities.common.AboutInfoActivity">
 
@@ -17,7 +18,7 @@
     android:layout_marginTop="15dp"
     android:text="@string/about_info"
     android:textSize="18sp"
-android:fontFamily="@font/poppins"
+android:fontFamily="@font/poppins_regular"
     android:textColor="@color/black"
     android:layout_height="wrap_content"/>
 
@@ -28,7 +29,7 @@ android:fontFamily="@font/poppins"
         android:text="@string/about_me"
         android:textSize="14sp"
         android:layout_marginStart="20dp"
-        android:fontFamily="@font/poppins"
+        android:fontFamily="@font/poppins_regular"
         android:textColor="@color/black"
         android:layout_height="wrap_content"/>
 
@@ -50,8 +51,9 @@ android:fontFamily="@font/poppins"
             android:layout_height="wrap_content"
             android:background="@drawable/drawable_chat_background"
             android:drawablePadding="14dp"
-            android:fontFamily="@font/poppins"
+            android:fontFamily="@font/poppins_regular"
             android:hint="@string/comment"
+            android:focusable="false"
             android:imeOptions="actionNext"
             android:inputType="textImeMultiLine"
             android:maxLines="3"
@@ -70,7 +72,7 @@ android:fontFamily="@font/poppins"
         android:text="@string/website_url"
         android:textSize="14sp"
         android:layout_marginStart="20dp"
-        android:fontFamily="@font/poppins"
+        android:fontFamily="@font/poppins_regular"
         android:textColor="@color/black"
         android:layout_height="wrap_content"/>
 
@@ -84,9 +86,9 @@ android:fontFamily="@font/poppins"
         android:paddingEnd="10dp"
         android:layout_marginTop="10dp"
         android:paddingTop="5dp"
-        android:fontFamily="@font/poppins"
+        android:fontFamily="@font/poppins_regular"
         android:gravity="center"
-        android:text="www.abc.com"
+        android:hint="www.abc.com"
         android:textSize="14sp"
         android:paddingBottom="5dp"
         android:background="@drawable/drawable_chat_background"
@@ -102,7 +104,7 @@ android:fontFamily="@font/poppins"
         android:text="@string/supports"
         android:textSize="14sp"
         android:layout_marginStart="20dp"
-        android:fontFamily="@font/poppins"
+        android:fontFamily="@font/poppins_regular"
         android:textColor="@color/black"
         android:layout_height="wrap_content"/>
 
@@ -116,19 +118,19 @@ android:fontFamily="@font/poppins"
         android:orientation="horizontal">
 
 
-    <Spinner
-        android:id="@+id/spAbout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_gravity="center"
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="5dp"
-        android:background="@android:color/white"
-        android:gravity="center"
-        android:paddingLeft="8dp"
-        android:paddingRight="8dp"
-        android:spinnerMode="dropdown" />
+        <Spinner
+            android:id="@+id/spAbout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:background="@android:color/white"
+            android:gravity="center"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:spinnerMode="dropdown" />
 
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -159,7 +161,7 @@ android:fontFamily="@font/poppins"
             android:id="@+id/tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins"
+            android:fontFamily="@font/poppins_regular"
             android:text="@string/role_"
             android:textColor="@color/black"
             android:textSize="14sp" />
@@ -169,7 +171,7 @@ android:fontFamily="@font/poppins"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:fontFamily="@font/poppins"
+            android:fontFamily="@font/poppins_regular"
             android:text="Citizen"
             android:textColor="@color/black"
             android:textSize="14sp" />
@@ -190,7 +192,7 @@ android:fontFamily="@font/poppins"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:fontFamily="@font/poppins"
+            android:fontFamily="@font/poppins_regular"
             android:text="@string/total_donations"
             android:textColor="@color/black"
             android:textSize="14sp" />
@@ -200,11 +202,35 @@ android:fontFamily="@font/poppins"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:fontFamily="@font/poppins"
+            android:fontFamily="@font/poppins_regular"
             android:text="00"
             android:textColor="@color/black"
             android:textSize="14sp" />
     </LinearLayout>
     </RelativeLayout>
-
+<TextView
+    android:layout_width="match_parent"
+    android:layout_marginHorizontal="20dp"
+    android:layout_marginTop="40dp"
+    android:text="@string/edit"
+    android:textSize="15sp"
+android:id="@+id/edit_info"
+    android:fontFamily="@font/poppins_bold"
+    android:gravity="center"
+    android:textColor="@color/white"
+    android:background="@drawable/background_gradient_square"
+    android:layout_height="40dp"/>
+    <TextView
+    android:layout_width="match_parent"
+    android:layout_marginHorizontal="20dp"
+    android:layout_marginTop="40dp"
+    android:text="Update"
+        android:visibility="gone"
+        android:id="@+id/update_info"
+    android:textSize="15sp"
+    android:fontFamily="@font/poppins_bold"
+    android:gravity="center"
+    android:textColor="@color/white"
+    android:background="@drawable/background_gradient_square"
+    android:layout_height="40dp"/>
 </androidx.appcompat.widget.LinearLayoutCompat>

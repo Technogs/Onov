@@ -38,8 +38,37 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
             android:src="@drawable/onov_logo_2"
-            android:tint="@color/white" />
+            app:tint="@color/white" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="Edit"
+            android:id="@+id/button_edit"
+            android:textColor="@color/black"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/drawable_light_grey_curve"
+            android:paddingHorizontal="10dp"
+            android:onClick="onClick"
+            android:paddingVertical="3dp"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/poppins_bold"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="Save"
+            android:visibility="gone"
 
+            android:onClick="onClick"
+            android:id="@+id/button_save"
+            android:background="@drawable/drawable_light_grey_curve"
+            android:textColor="@color/black"
+            android:paddingVertical="3dp"
+            android:paddingHorizontal="10dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/poppins_bold"
+            android:layout_height="wrap_content"/>
         <TextView
             android:id="@+id/saveProfile"
             android:layout_width="wrap_content"
@@ -48,7 +77,7 @@
             android:layout_alignParentEnd="true"
             android:onClick="onClick"
             android:gravity="center"
-            android:fontFamily="@font/poppins"
+            android:fontFamily="@font/poppins_regular"
             android:paddingStart="10dp"
             android:visibility="gone"
             android:paddingEnd="15dp"
@@ -64,7 +93,7 @@
             android:layout_below="@+id/saveProfile"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
-            android:fontFamily="@font/poppins"
+            android:fontFamily="@font/poppins_regular"
             android:text="@string/update_profile"
             android:textColor="@color/white"
             android:textSize="16sp"
@@ -126,7 +155,7 @@
             android:layout_marginTop="5dp"
             android:background="@color/white"
             android:focusable="false"
-            android:fontFamily="@font/poppins"
+            android:fontFamily="@font/poppins_regular"
             android:gravity="center"
             android:text="Jenifer"
             android:textColor="@color/text_blue"
@@ -143,17 +172,17 @@
             android:src="@drawable/edit" />
 
         <TextView
-            android:layout_width="wrap_content"
-android:layout_centerHorizontal="true"
-            android:layout_below="@+id/profileName"
-            android:layout_marginTop="10dp"
-            android:text="@string/about_info_details"
-            android:textSize="14sp"
-            android:onClick="onClick"
             android:id="@+id/aboutInfo"
-            android:fontFamily="@font/poppins"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_below="@+id/profileName"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/poppins_regular"
+            android:onClick="onClick"
+            android:text="@string/about_info_details"
             android:textColor="@color/black"
-            android:layout_height="40dp"/>
+            android:textSize="14sp" />
 
 
 
@@ -185,14 +214,15 @@ android:layout_centerHorizontal="true"
         android:orientation="horizontal">
 
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/followers"
+        <TextView
+            android:id="@+id/tv_followers"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginStart="25dp"
             android:layout_marginEnd="25dp"
             android:background="@drawable/drawable_chat_background"
             android:onClick="onClick"
+            android:gravity="center"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
             android:text="20 Citizens"
@@ -200,12 +230,13 @@ android:layout_centerHorizontal="true"
             android:textColor="@color/black" />
 
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/following"
+        <TextView
+            android:id="@+id/tv_following"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:background="@drawable/drawable_chat_background"
             android:onClick="onClick"
+            android:gravity="center"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
             android:text="10 Support"
@@ -213,10 +244,11 @@ android:layout_centerHorizontal="true"
             android:textColor="@color/black" />
 
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/donors"
+        <TextView
+            android:id="@+id/tv_donors"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
+            android:gravity="center"
             android:layout_marginStart="25dp"
             android:layout_marginEnd="25dp"
             android:background="@drawable/drawable_chat_background"

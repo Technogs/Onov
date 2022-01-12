@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black">
+
+    <RelativeLayout
+        android:id="@+id/relative_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize">
+
+
+        <ImageView
+            android:id="@+id/btnIvClose"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
+            android:layout_alignParentStart="true"
+            android:layout_centerInParent="true"
+            android:visibility="gone"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:gravity="center"
+            android:padding="@dimen/_5sdp"
+            android:src="@drawable/back_arrow"
+            app:tint="@color/white" />
+
+        <TextView
+            android:id="@+id/tv_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_centerInParent="true"
+            android:text="user_naem"
+            android:textSize="@dimen/_14ssp"
+            android:textColor="@color/white"
+            android:layout_marginEnd="@dimen/_25sdp"
+            android:layout_toRightOf="@+id/btnIvClose"
+
+            />
+
+
+
+
+
+
+
+    </RelativeLayout>
+
+
+    <ImageView
+        android:id="@+id/iv_preview_image"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_300sdp"
+        android:layout_centerInParent="true" />
+
+
+
+
+</RelativeLayout>

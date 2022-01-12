@@ -8,9 +8,11 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.application.onovapplication.R
+import com.application.onovapplication.databinding.ActionBarLayout2Binding
+import com.application.onovapplication.databinding.ActivityDebateDetailsBinding
+import com.application.onovapplication.databinding.ActivityForgotPasswordOtpBinding
 import com.application.onovapplication.viewModels.VerifyViewModel
-import kotlinx.android.synthetic.main.action_bar_layout_2.*
-import kotlinx.android.synthetic.main.activity_forgot_password_otp.*
+
 
 
 class ForgotPasswordOtpActivity : BaseAppCompatActivity(), View.OnClickListener {
@@ -21,14 +23,17 @@ class ForgotPasswordOtpActivity : BaseAppCompatActivity(), View.OnClickListener 
     var role: String? = null
     var email: String? = null
     var otp_recieved: String? = null
+    private lateinit var binding: ActivityForgotPasswordOtpBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_forgot_password_otp)
+        binding = ActivityForgotPasswordOtpBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
+        val incBinding: ActionBarLayout2Binding =binding.ab
 
 
-
-        otp_view?.otpListener = object : OTPListener {
+       binding.otpView.otpListener = object : OTPListener {
             override fun onInteractionListener() {
 
             }
@@ -55,13 +60,13 @@ class ForgotPasswordOtpActivity : BaseAppCompatActivity(), View.OnClickListener 
 
 
         if (type == "verify") {
-            tvScreenTitle.text = getString(R.string.verify)
+            incBinding.tvScreenTitle.text = getString(R.string.verify)
             otp_recieved = intent.getStringExtra("otp")
 
-            otp_view.setOTP(otp_recieved!!)
+            binding.otpView.setOTP(otp_recieved!!)
 
         } else {
-            tvScreenTitle.text = getString(R.string.forgot_password_)
+            incBinding.tvScreenTitle.text = getString(R.string.forgot_password_)
 
             verifyViewModel.forgetPassword(this, email!!)
             showDialog()
@@ -83,7 +88,7 @@ class ForgotPasswordOtpActivity : BaseAppCompatActivity(), View.OnClickListener 
                         Intent(this@ForgotPasswordOtpActivity, HomeTabActivity::class.java)
                     intent.putExtra("role", role)
                     startActivity(intent)
-                    finish()
+                    finishAffinity()
                 } else {
                     val intent =
                         Intent(this@ForgotPasswordOtpActivity, ResetPasswordActivity::class.java)

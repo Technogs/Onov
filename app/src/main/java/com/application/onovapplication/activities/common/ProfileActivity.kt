@@ -20,14 +20,17 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.application.onovapplication.BuildConfig
+import androidx.multidex.BuildConfig
+//import com.application.onovapplication.BuildConfig
 import com.application.onovapplication.R
+import com.application.onovapplication.databinding.ActivityNotificationsBinding
+import com.application.onovapplication.databinding.ActivityProfileBinding
+import com.application.onovapplication.databinding.DonateDialogBinding
 import com.application.onovapplication.model.UserInfo
 import com.application.onovapplication.repository.BaseUrl
 import com.application.onovapplication.viewModels.ProfileViewModel
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.activity_profile.*
-import kotlinx.android.synthetic.main.donate_dialog.*
+
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
@@ -43,35 +46,37 @@ class ProfileActivity : BaseAppCompatActivity(), View.OnClickListener {
     private val profileViewModel by lazy {
         ViewModelProvider(this).get(ProfileViewModel::class.java)
     }
+    private lateinit var binding: ActivityProfileBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_profile)
-
+        binding = ActivityProfileBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
         type = intent.getStringExtra("type")
 
         if (type == "user") {
-            donate.visibility = View.GONE
-            btnUpdateProfile.visibility = View.VISIBLE
-            profileClick.visibility = View.VISIBLE
-            editName.visibility = View.VISIBLE
-            emailEdit.visibility = View.VISIBLE
-            phoneEdit.visibility = View.VISIBLE
+            binding.donate.visibility = View.GONE
+            binding.btnUpdateProfile.visibility = View.VISIBLE
+            binding.profileClick.visibility = View.VISIBLE
+            binding.editName.visibility = View.VISIBLE
+            binding.emailEdit.visibility = View.VISIBLE
+            binding.phoneEdit.visibility = View.VISIBLE
         } else {
-            donate.visibility = View.VISIBLE
-            btnUpdateProfile.visibility = View.GONE
-            profileClick.visibility = View.GONE
-            editName.visibility = View.INVISIBLE
-            emailEdit.visibility = View.INVISIBLE
-            phoneEdit.visibility = View.INVISIBLE
+            binding.donate.visibility = View.VISIBLE
+            binding.btnUpdateProfile.visibility = View.GONE
+            binding.profileClick.visibility = View.GONE
+            binding.editName.visibility = View.INVISIBLE
+            binding.emailEdit.visibility = View.INVISIBLE
+            binding.phoneEdit.visibility = View.INVISIBLE
         }
 
         profileViewModel.getProfile(this, userPreferences.getUserREf())
         showDialog()
         observeViewModel()
 
-        backBtn.setOnClickListener {
+        binding.backBtn.setOnClickListener {
             finish()
         }
     }
@@ -113,12 +118,12 @@ class ProfileActivity : BaseAppCompatActivity(), View.OnClickListener {
     }
 
     private fun setLayout(userInfo: UserInfo) {
-        edProfileEmail.setText(userInfo.email)
-        edProfilePhone.setText(userInfo.phone)
-        roleValue.text = userInfo.role
-        profileName.setText(userInfo.fullName)
-        ccPickerProfile.setCountryForPhoneCode(userInfo.countryCode!!.toInt())
-        Glide.with(this).load(BaseUrl.photoUrl + userInfo.profilePic).into(profileImage)
+        binding.edProfileEmail.setText(userInfo.email)
+        binding.edProfilePhone.setText(userInfo.phone)
+        binding.roleValue.text = userInfo.role
+        binding.profileName.setText(userInfo.fullName)
+        binding.ccPickerProfile.setCountryForPhoneCode(userInfo.countryCode!!.toInt())
+        Glide.with(this).load(BaseUrl.photoUrl + userInfo.profilePic).into(binding.profileImage)
     }
 
     override fun onRequestPermissionsResult(
@@ -225,13 +230,13 @@ class ProfileActivity : BaseAppCompatActivity(), View.OnClickListener {
         if (requestCode == REQUEST_TAKE_PHOTO) {
 
 
-            Glide.with(this).load(mPhotoFile).into(profileImage)
+            Glide.with(this).load(mPhotoFile).into(binding.profileImage)
 
         } else if (requestCode == REQUEST_GALLERY_PHOTO) {
             val selectedImage = data!!.data
             try {
                 mPhotoFile = File(getRealPathFromUri(selectedImage)!!)
-                Glide.with(this).load(mPhotoFile).into(profileImage)
+                Glide.with(this).load(mPhotoFile).into(binding.profileImage)
 
             } catch (e: IOException) {
 
@@ -302,34 +307,34 @@ class ProfileActivity : BaseAppCompatActivity(), View.OnClickListener {
             }
 
             R.id.editName -> {
-                setFocusableTrue(profileName)
+                setFocusableTrue(binding.profileName)
             }
 
             R.id.emailEdit -> {
-                setFocusableTrue(edProfileEmail)
+                setFocusableTrue(binding.edProfileEmail)
             }
 
 
             R.id.phoneEdit -> {
-                setFocusableTrue(edProfilePhone)
-                ccPickerProfile.isClickable = true
+                setFocusableTrue(binding.edProfilePhone)
+                binding.ccPickerProfile.isClickable = true
             }
 
             R.id.btnUpdateProfile -> {
-                setFocusableFalse(profileName)
-                setFocusableFalse(edProfileEmail)
-                setFocusableFalse(edProfilePhone)
-                ccPickerProfile.isClickable = true
+                setFocusableFalse(binding.profileName)
+                setFocusableFalse(binding.edProfileEmail)
+                setFocusableFalse(binding.edProfilePhone)
+                binding.ccPickerProfile.isClickable = true
 
-                profileViewModel.editProfile(
-                    this,
-                    profileName.text.toString().trim(),
-                    edProfileEmail.text.toString().trim(),
-                    edProfilePhone.text.toString().trim(),
-                    userPreferences.getUserREf(),
-                    ccPickerProfile.selectedCountryCode,
-                    mPhotoFile
-                )
+//                profileViewModel.editProfile(
+//                    this,
+//                    profileName.text.toString().trim(),
+//                    edProfileEmail.text.toString().trim(),
+//                    edProfilePhone.text.toString().trim(),
+//                    userPreferences.getUserREf(),
+//                    ccPickerProfile.selectedCountryCode,
+//                    mPhotoFile
+//                )
                 showDialog()
             }
         }
@@ -339,16 +344,20 @@ class ProfileActivity : BaseAppCompatActivity(), View.OnClickListener {
         val dialog = Dialog(this)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setCancelable(true)
-        dialog.setContentView(R.layout.donate_dialog)
+        val dialogb:DonateDialogBinding
+        dialogb = DonateDialogBinding.inflate(layoutInflater)
+        val view = binding.root
+        dialog.setContentView(view)
+        ///dialog.setContentView(R.layout.donate_dialog)
         dialog.window!!.setBackgroundDrawableResource(android.R.color.transparent);
         dialog.show()
 
 
-        dialog.submitDonation.setOnClickListener {
+        dialogb.submitDonation.setOnClickListener {
             dialog.dismiss()
         }
 
-        dialog.cancelDonation.setOnClickListener {
+        dialogb.cancelDonation.setOnClickListener {
             dialog.dismiss()
 
         }

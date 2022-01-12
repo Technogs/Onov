@@ -2,6 +2,10 @@ package com.application.onovapplication.prefs
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.application.onovapplication.model.DebateJoinerResponse
+import com.application.onovapplication.model.LiveDebate
+import com.application.onovapplication.model.UserInfo
+import com.google.gson.Gson
 
 private const val PREFS_FILE_NAME = "Kick Traders App"
 
@@ -63,6 +67,43 @@ class PreferenceManager(context: Context) {
     }
     fun getUserPhoto(): String {
         return sharedPreferences.getString(PHOTO, "")!!
+    }
+
+
+    fun setUserDetails(selfDetails: UserInfo?) {
+        val gson = Gson()
+        val json = gson.toJson(selfDetails)
+        mEditor.putString("user_details", json)
+        mEditor.commit()
+    }
+
+    fun getuserDetails(): UserInfo? {
+        val user_data = sharedPreferences.getString("user_details", "")
+        return Gson().fromJson(user_data, UserInfo::class.java)
+    }
+
+    fun setDebateDetails(debateDetails: LiveDebate?) {
+        val gson = Gson()
+        val json = gson.toJson(debateDetails)
+        mEditor.putString("debate_details", json)
+        mEditor.commit()
+    }
+
+    fun getDebateDetails(): LiveDebate? {
+        val debate_data = sharedPreferences.getString("debate_details", "")
+        return Gson().fromJson(debate_data, LiveDebate::class.java)
+    }
+
+    fun setDebateJoiner(debateDetails: DebateJoinerResponse?) {
+        val gson = Gson()
+        val json = gson.toJson(debateDetails)
+        mEditor.putString("debate_Joiner", json)
+        mEditor.commit()
+    }
+
+    fun getDebateJoiner(): DebateJoinerResponse? {
+        val debate_data = sharedPreferences.getString("debate_Joiner", "")
+        return Gson().fromJson(debate_data, DebateJoinerResponse::class.java)
     }
 
 }

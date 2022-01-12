@@ -6,8 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.application.onovapplication.R
+import com.application.onovapplication.databinding.RvNotificationsBinding
+import com.application.onovapplication.databinding.RvPredefinedTextsBinding
 import com.application.onovapplication.model.PredefinedTextsModel
-import kotlinx.android.synthetic.main.rv_predefined_texts.view.*
 
 class PredefinedTextsAdapter(
     val context: Context,
@@ -16,16 +17,10 @@ class PredefinedTextsAdapter(
 ) : RecyclerView.Adapter<PredefinedTextsAdapter.RVHolder>() {
 
 
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): RVHolder {
-        return RVHolder(
-            LayoutInflater.from(context).inflate(
-                R.layout.rv_predefined_texts, parent,
-                false
-            )
-        )
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RVHolder {
+        val binding = RvPredefinedTextsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+
+        return RVHolder(binding)
     }
 
     override fun getItemCount(): Int {
@@ -37,10 +32,10 @@ class PredefinedTextsAdapter(
     }
 
 
-    inner class RVHolder(itemView: View) :
-        RecyclerView.ViewHolder(itemView) {
+    inner class RVHolder(val binding: RvPredefinedTextsBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(predefinedTextsModel: PredefinedTextsModel) {
-            itemView.text.text = predefinedTextsModel.text
+            binding.text.text = predefinedTextsModel.text
 
 
             itemView.setOnClickListener {

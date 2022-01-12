@@ -8,19 +8,26 @@ import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.application.onovapplication.R
+import com.application.onovapplication.databinding.ActionBarLayout2Binding
+import com.application.onovapplication.databinding.ActionBarLayoutBinding
+import com.application.onovapplication.databinding.ActivityRegisterBinding
+import com.application.onovapplication.databinding.ActivityResetPasswordBinding
 import com.application.onovapplication.viewModels.NewPasswordViewModel
-import kotlinx.android.synthetic.main.action_bar_layout_2.*
-import kotlinx.android.synthetic.main.activity_reset_password.*
+
 
 class ResetPasswordActivity : BaseAppCompatActivity(), View.OnClickListener {
     private val newPasswordViewModel by lazy {
         ViewModelProvider(this).get(NewPasswordViewModel::class.java)
     }
+    private lateinit var binding: ActivityResetPasswordBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_reset_password)
-        tvScreenTitle.text = getString(R.string.reset_password)
+        binding = ActivityResetPasswordBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
+        val incBinding: ActionBarLayout2Binding =binding.ab
+        incBinding.tvScreenTitle.text = getString(R.string.reset_password)
         observeViewModel()
     }
 
@@ -56,19 +63,19 @@ class ResetPasswordActivity : BaseAppCompatActivity(), View.OnClickListener {
             R.id.btnResetPassword -> {
                 when {
 
-                    checkEmpty(edNewPassword) -> {
+                    checkEmpty(binding.edNewPassword) -> {
                         setError(getString(R.string.new_password_error))
                     }
 
-                    checkEmpty(edConfirmPassword) -> {
+                    checkEmpty(binding.edConfirmPassword) -> {
                         setError(getString(R.string.confirm_password_error))
                     }
 
-                    edNewPassword.text.toString().length < 8 -> {
+                    binding.edNewPassword.text.toString().length < 8 -> {
                         setError(getString(R.string.password_length_error))
                     }
 
-                    edNewPassword.text.toString() != edConfirmPassword.text.toString() -> {
+                    binding.edNewPassword.text.toString() != binding.edConfirmPassword.text.toString() -> {
                         setError(getString(R.string.unmatch_password_error))
 
                     }
@@ -77,7 +84,7 @@ class ResetPasswordActivity : BaseAppCompatActivity(), View.OnClickListener {
                         newPasswordViewModel.createNewPassword(
                             this,
                             intent.getStringExtra("mobile")!!,
-                            edNewPassword.text.toString()
+                            binding.edNewPassword.text.toString()
                         )
 
                         showDialog()

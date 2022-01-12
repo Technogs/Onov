@@ -2,25 +2,44 @@ package com.application.onovapplication.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.application.onovapplication.R
+import com.application.onovapplication.databinding.ItemViewJudicialBinding
+import com.application.onovapplication.model.JudicialData
+import com.application.onovapplication.repository.BaseUrl
+import com.bumptech.glide.Glide
 
-class JudicialAdapter(var context: Context) : RecyclerView.Adapter<JudicialAdapter.JudicialViewHolder>() {
+class JudicialAdapter(val context: Context,var judicialList: List<JudicialData>) : RecyclerView.Adapter<JudicialAdapter.JudicialViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): JudicialViewHolder {
-        val v = LayoutInflater.from(parent.context).inflate(R.layout.item_view_judicial, parent, false)
-        return JudicialViewHolder(v)
+        val binding = ItemViewJudicialBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+
+        return JudicialViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: JudicialViewHolder, position: Int) {
-
+holder.bind(judicialList[position])
+        Glide.with(context).load( BaseUrl.photoUrl+judicialList[position].memberPic).into(
+            holder.binding.judicialPic)
     }
     override fun getItemCount(): Int {
-        return 12
+        return judicialList.size
     }
 
-    class JudicialViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class JudicialViewHolder(val binding: ItemViewJudicialBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(judicialData: JudicialData) {
 
+//            Glide.with(context).load( BaseUrl.photoUrl+judicialData.memberPic).into(
+//                binding.judicialPic)
+
+            binding.judiciaryAge.text = judicialData.age
+            binding.judiciaryJoining.text = judicialData.appointmentDate
+            binding.judiciaryName.text = judicialData.name
+//            binding.judiciaryPlace.text = judicialData.
+            binding.judiciaryScv.text = judicialData.scv
+//            binding.judiciaryAge.text = judicialData.age
+            binding.judiciaryAppointedBy.text = judicialData.appointmentBy
+
+
+        }
     }
 }

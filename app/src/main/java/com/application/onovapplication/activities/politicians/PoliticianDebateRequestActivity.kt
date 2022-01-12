@@ -5,20 +5,26 @@ import android.os.Bundle
 import com.application.onovapplication.R
 import com.application.onovapplication.adapters.DebateRequestsAdapter
 import com.application.onovapplication.adapters.DebateRequestsPoliticianAdapter
-import kotlinx.android.synthetic.main.action_bar_layout_2.*
-import kotlinx.android.synthetic.main.activity_politician_debate_request.*
+import com.application.onovapplication.databinding.ActionBarLayout2Binding
+import com.application.onovapplication.databinding.ActivityCreateLawBinding
+import com.application.onovapplication.databinding.ActivityPoliticianDebateRequestBinding
+
 
 class PoliticianDebateRequestActivity : AppCompatActivity() {
     private var debateRequestsAdapter: DebateRequestsPoliticianAdapter? = null
+    private lateinit var binding: ActivityPoliticianDebateRequestBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_politician_debate_request)
+        binding = ActivityPoliticianDebateRequestBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
+        val incBinding: ActionBarLayout2Binding =binding.ab
 
-        tvScreenTitle.text = getString(R.string.debate_requests)
+        incBinding.tvScreenTitle.text = getString(R.string.debate_requests)
 
         debateRequestsAdapter = DebateRequestsPoliticianAdapter(this)
-        rv_debate_requests_politicians.adapter = debateRequestsAdapter
+      binding.rvDebateRequestsPoliticians.adapter = debateRequestsAdapter
 
     }
 }

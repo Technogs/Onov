@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:anim="http://schemas.android.com/apk/res-auto"
+    tools:context=".activities.CommentActivity">
+    <RelativeLayout
+        android:id="@+id/ab"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:background="@color/white"
+        android:elevation="10dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="15dp"
+            android:onClick="backBtnPressed"
+            android:src="@drawable/back_arrow"
+
+            />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginEnd="20dp"
+            android:clipChildren="true"
+            android:visibility="gone"
+            android:elevation="10dp"
+            android:padding="8dp"
+            app:cardCornerRadius="5dp">
+
+
+            <ImageView
+                android:id="@+id/userPhoto"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:onClick="onClick"
+                android:src="@drawable/dummy_profile_image" />
+        </androidx.cardview.widget.CardView>
+
+
+        <TextView
+            android:id="@+id/userName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Jennie Doe"
+            android:textColor="@color/app_color"
+            android:textSize="16sp" />
+
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_comment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_above="@+id/horizontalLoader"
+        android:layout_below="@+id/ab"
+
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+    <com.application.onovapplication.chat.ChatRecyclerView
+        android:id="@+id/recycler_chat"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_below="@+id/ab"
+        android:layout_above="@+id/horizontalLoader"
+        android:layout_marginBottom="4dp"
+        android:visibility="gone"
+        android:paddingBottom="2dp"
+        anim:layout_constraintLeft_toLeftOf="parent"
+        anim:layout_constraintRight_toRightOf="parent"
+        anim:layout_constraintTop_toTopOf="parent" />
+
+
+    <com.eyalbira.loadingdots.LoadingDots
+        android:id="@+id/horizontalLoader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/send_chat"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="10dp"
+        android:visibility="gone"
+        app:LoadingDots_auto_play="true"
+        app:LoadingDots_dots_color="@color/app_color"
+        app:LoadingDots_dots_count="4"
+        app:LoadingDots_dots_size="6dp"
+        app:LoadingDots_dots_space="2dp"
+
+        app:LoadingDots_jump_duration="200"
+        app:LoadingDots_jump_height="4dp"
+
+        app:LoadingDots_loop_duration="800"
+        app:LoadingDots_loop_start_delay="200" />
+
+    <RelativeLayout
+        android:id="@+id/send_chat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="15dp">
+
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_toStartOf="@+id/sendCardview"
+            android:background="@drawable/chat_background"
+            android:orientation="horizontal"
+            android:paddingTop="5dp"
+
+            android:paddingBottom="5dp">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/etCommentBox"
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:layout_gravity="center"
+
+                android:layout_weight="1"
+                android:background="@null"
+                android:hint="Write your comment"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/attachment"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical"
+                android:onClick="onClick"
+                android:src="@drawable/ic_chat_attachment"
+                android:visibility="gone" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/sendCardview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:clipChildren="true"
+            android:elevation="20dp"
+            android:onClick="onClick"
+            android:padding="20dp"
+            app:cardCornerRadius="15dp">
+
+
+            <ImageView
+                android:id="@+id/send_cmnt"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:onClick="onClick"
+                android:scaleType="center"
+                android:src="@drawable/ic_baseline_send_24" />
+
+
+        </androidx.cardview.widget.CardView>
+
+    </RelativeLayout>
+</RelativeLayout>

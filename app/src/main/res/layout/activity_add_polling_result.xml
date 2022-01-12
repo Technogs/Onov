@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".activities.AddPollingResultActivity">
+    <include layout="@layout/action_bar_layout"/>
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/etPollingTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:background="@null"
+        android:clickable="true"
+        android:fontFamily="@font/poppins_regular"
+        android:hint="@string/time"
+        android:layout_marginVertical="@dimen/_10sdp"
+        android:inputType="number"
+        android:padding="15dp"
+        android:textColor="@color/navigation_color"
+        android:textColorHint="@color/navigation_color" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_addpolling"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_200sdp"
+        android:layout_marginTop="10dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:itemCount="2"
+        tools:listitem="@layout/polling_submit" />
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/submitPoll"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_32sdp"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:background="@drawable/drawable_gradient_button_background"
+        android:fontFamily="@font/poppins_medium"
+        android:paddingHorizontal="@dimen/_10sdp"
+        android:text="@string/submit"
+        android:textAllCaps="false"
+        android:textColor="@color/white" />
+</LinearLayout>

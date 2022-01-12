@@ -14,7 +14,7 @@
         android:paddingEnd="10dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="4dp"
-        android:fontFamily="@font/poppins"
+        android:fontFamily="@font/poppins_regular"
         android:textColor="@color/black"
         android:layout_below="@+id/etPostTitle"
         android:background="@drawable/drawable_blue_curve"

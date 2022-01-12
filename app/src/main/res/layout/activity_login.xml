@@ -14,6 +14,7 @@
         android:paddingStart="40dp"
         android:paddingTop="10dp"
         android:paddingEnd="40dp"
+        android:gravity="center"
         android:paddingBottom="20dp">
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -53,8 +54,9 @@
                 android:layout_height="match_parent"
                 android:layout_marginStart="10dp"
                 android:background="@null"
-                android:fontFamily="@font/poppins"
+                android:fontFamily="@font/poppins_regular"
                 android:hint="@string/email"
+                android:textColor="@color/black"
                 android:textSize="14sp" />
         </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -81,8 +83,9 @@
                 android:layout_height="match_parent"
                 android:layout_marginStart="10dp"
                 android:background="@null"
-                android:fontFamily="@font/poppins"
+                android:fontFamily="@font/poppins_regular"
                 android:hint="@string/password"
+                android:textColor="@color/black"
                 android:inputType="textPassword"
                 android:textSize="14sp" />
         </androidx.appcompat.widget.LinearLayoutCompat>
@@ -141,7 +144,7 @@
             android:layout_alignParentEnd="true"
             android:layout_gravity="end"
             android:layout_marginTop="20dp"
-            android:fontFamily="@font/poppins"
+            android:fontFamily="@font/poppins_regular"
             android:text="@string/forgot_password"
             android:textColor="@color/black"
             android:textSize="14sp" />
@@ -152,8 +155,9 @@
             android:layout_height="45dp"
             android:layout_below="@id/tvForgotPassword"
             android:layout_marginTop="40dp"
+            android:gravity="center"
             android:background="@drawable/drawable_gradient_button_background"
-            android:fontFamily="@font/poppins"
+            android:fontFamily="@font/poppins_regular"
             android:onClick="onClick"
             android:text="@string/login"
             android:textAllCaps="false"
@@ -170,7 +174,7 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins"
+                android:fontFamily="@font/poppins_regular"
                 android:text="@string/don_t_have_account"
                 android:textColor="@color/black"
                 android:textSize="14sp" />
@@ -180,7 +184,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
-                android:fontFamily="@font/poppins"
+                android:fontFamily="@font/poppins_regular"
                 android:onClick="onClick"
                 android:text="@string/sign_up"
                 android:textColor="@color/red"

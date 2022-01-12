@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.DonorsActivity">
+
+    <include
+        android:id="@+id/ab"
+        layout="@layout/action_bar_layout_2" />
+
+    <TextView
+        android:id="@+id/submit"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_below="@+id/ab"
+        android:layout_alignParentEnd="true"
+        android:layout_centerInParent="true"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:layout_marginVertical="@dimen/_5sdp"
+        android:background="@drawable/drawable_gradient_button_background"
+        android:fontFamily="@font/poppins_bold"
+        android:gravity="center"
+        android:onClick="onClick"
+        android:paddingHorizontal="@dimen/_8sdp"
+        android:paddingVertical="@dimen/_5sdp"
+        android:text="@string/submit"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_14ssp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_centerInParent="true"
+        android:textColor="@color/app_color"
+        android:fontFamily="@font/poppins_bold"
+        android:textSize="18sp"
+        android:visibility="gone"
+        android:id="@+id/noDataLayout"
+        android:text="@string/no_data_yet"
+        android:layout_height="wrap_content"/>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
+        android:id="@+id/rv_followers"
+        android:layout_below="@+id/submit"
+        tools:listitem="@layout/rv_followers"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+</RelativeLayout>

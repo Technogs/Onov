@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".activities.common.StatsActivity">
 
     <include
@@ -37,7 +38,7 @@
             android:id="@+id/tv_"
             android:textSize="16sp"
             android:textColor="@color/black"
-            android:fontFamily="@font/poppins"
+            android:fontFamily="@font/poppins_regular"
             android:layout_height="wrap_content"/>
 
         <TextView
@@ -59,7 +60,7 @@
             android:layout_below="@id/senderNameDetails"
             android:textColor="@color/black"
             android:textSize="16sp"
-            android:fontFamily="@font/poppins"
+            android:fontFamily="@font/poppins_regular"
             android:layout_height="wrap_content"/>
 
         <TextView

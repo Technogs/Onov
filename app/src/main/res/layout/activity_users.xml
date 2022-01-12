@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:padding="10dp"
+    tools:context=".activities.UsersActivity">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_medium"
+        android:text="@string/no_data_yet"
+        android:id="@+id/noChatData"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        android:drawablePadding="@dimen/_5sdp"
+        android:background="@drawable/drawable_blue_curve"
+        android:textColor="@color/app_color"
+        android:textSize="@dimen/_16ssp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_35sdp"
+            android:gravity="center_vertical"
+            android:paddingStart="@dimen/_11sdp"
+            android:visibility="gone"
+            android:fontFamily="@font/poppins_medium"
+            android:text="@string/search"
+            android:drawablePadding="@dimen/_5sdp"
+            android:drawableLeft="@drawable/ic_baseline_search_24"
+            android:background="@drawable/drawable_blue_curve"
+            android:textColor="@color/navigation_color"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_30sdp"
+            android:gravity="center_vertical"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Share to Feed"
+            android:id="@+id/shareFeed"
+            android:layout_gravity="end"
+            android:paddingHorizontal="@dimen/_11sdp"
+            android:background="@drawable/drawable_gradient_button_background"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_11ssp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_medium"
+            android:text="@string/users"
+            android:textColor="@color/navigation_color"
+            android:textSize="18sp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:background="@color/white"
+            android:elevation="5dp"
+            android:visibility="gone"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="@string/message"
+            android:visibility="gone"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_chat_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+    </LinearLayout>
+</RelativeLayout>

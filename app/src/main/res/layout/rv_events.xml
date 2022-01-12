@@ -4,31 +4,42 @@
     android:layout_height="wrap_content"
     android:layout_marginStart="15dp"
     android:layout_marginEnd="15dp"
+
     android:layout_marginTop="10dp"
-    android:background="@drawable/drawable_chat_background"
+    android:background="@color/white"
     android:elevation="10dp"
     android:orientation="vertical"
     android:paddingBottom="10dp">
 
-
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+android:id="@+id/event_lyt"
+        android:background="@drawable/drawable_chat_background"
+        android:elevation="10dp"
+        android:orientation="vertical"
+     >
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Event Title"
         android:layout_marginTop="15dp"
         android:layout_marginStart="10dp"
+        android:id="@+id/event_title"
         android:fontFamily="@font/poppins_medium"
         android:textSize="18sp"
         android:textColor="@color/black"
         />
     
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_marginTop="10dp"
-        android:background="@drawable/dummy_event" />
+        android:id="@+id/event_pic"
+        android:background="@color/cardview_dark_background"/>
 
 
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 
     <androidx.appcompat.widget.LinearLayoutCompat
@@ -43,10 +54,11 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
+            android:id="@+id/event_like_lyt"
             android:gravity="center">
 
             <ImageView
-                android:id="@+id/icon1"
+                android:id="@+id/likeEvt"
                 android:layout_width="30dp"
                 android:layout_height="40dp"
                 android:src="@drawable/ic_like" />
@@ -56,8 +68,8 @@
                 android:id="@+id/tvEventLikeText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/icon1"
-                android:fontFamily="@font/poppins"
+                android:layout_below="@+id/likeEvt"
+                android:fontFamily="@font/poppins_regular"
                 android:text="@string/like"
                 android:textColor="@color/app_color"
                 android:textSize="10sp" />
@@ -66,7 +78,7 @@
                 android:id="@+id/tvEventLikeCount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/icon1"
+                android:layout_below="@+id/likeEvt"
 
                 android:layout_marginStart="2dp"
                 android:layout_toEndOf="@+id/tvEventLikeText"
@@ -82,10 +94,12 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
+            android:id="@+id/event_dislike_lyt"
+
             android:gravity="center">
 
             <ImageView
-                android:id="@+id/icon3"
+                android:id="@+id/dislikeevt"
                 android:layout_width="30dp"
                 android:layout_height="40dp"
                 android:src="@drawable/ic_dislike" />
@@ -95,8 +109,9 @@
                 android:id="@+id/tvEventDislikeText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/icon3"
-                android:fontFamily="@font/poppins"
+                android:layout_below="@+id/dislikeevt"
+
+                android:fontFamily="@font/poppins_regular"
                 android:text="@string/dislike"
                 android:textColor="@color/app_color"
                 android:textSize="10sp" />
@@ -105,7 +120,7 @@
                 android:id="@+id/tvEventDisLikeCount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/icon3"
+                android:layout_below="@+id/dislikeevt"
 
                 android:layout_marginStart="2dp"
                 android:layout_toEndOf="@+id/tvEventDislikeText"
@@ -121,6 +136,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
+            android:id="@+id/event_cmnt_lyt"
+
             android:gravity="center">
 
             <ImageView
@@ -137,7 +154,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/icon2"
                 android:layout_centerHorizontal="true"
-                android:fontFamily="@font/poppins"
+                android:fontFamily="@font/poppins_regular"
                 android:text="@string/comment"
                 android:textColor="@color/app_color"
                 android:textSize="10sp" />
@@ -161,12 +178,15 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
+            android:id="@+id/event_share_lyt"
             android:gravity="center">
 
             <ImageView
                 android:id="@+id/icon4"
                 android:layout_width="30dp"
                 android:layout_height="40dp"
+
+
                 android:layout_centerHorizontal="true"
                 android:src="@drawable/share" />
 
@@ -177,7 +197,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/icon4"
                 android:layout_centerHorizontal="true"
-                android:fontFamily="@font/poppins"
+                android:fontFamily="@font/poppins_regular"
                 android:text="@string/share"
                 android:textColor="@color/app_color"
                 android:textSize="10sp" />
@@ -191,10 +211,10 @@
                 android:layout_toEndOf="@+id/tvShareText"
                 android:fontFamily="@font/poppins_medium"
                 android:text="20"
+                android:visibility="gone"
                 android:textColor="@color/red"
                 android:textSize="10sp" />
 
         </RelativeLayout>
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
-</androidx.appcompat.widget.LinearLayoutCompat>
+</androidx.appcompat.widget.LinearLayoutCompat></androidx.appcompat.widget.LinearLayoutCompat>

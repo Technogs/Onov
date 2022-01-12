@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    tools:context=".gpay.CheckoutActivity">-->
+
+<!--</androidx.constraintlayout.widget.ConstraintLayout>-->
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:background="#fff"
+android:fillViewport="true"
+tools:context=".gpay.CheckoutActivity">
+
+<!--<LinearLayout-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    android:orientation="vertical"-->
+<!--    android:visibility="gone"-->
+<!--    android:layout_marginStart="20dp"-->
+<!--    android:layout_marginEnd="20dp">-->
+
+<!--    <ImageView-->
+<!--        android:id="@+id/detailImage"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="350dp"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:src="@drawable/ts_10_11019a"/>-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/detailTitle"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="15dp"-->
+<!--        android:text="Men's Tech Shell Full-Zip"-->
+<!--        android:textColor="#333333"-->
+<!--        android:textSize="20sp"-->
+<!--        android:textStyle="bold" />-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/detailPrice"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="5dp"-->
+<!--        android:textColor="#777777"-->
+<!--        android:text="$50.20"/>-->
+
+<!--    <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="15dp"-->
+<!--        android:text="Description"-->
+<!--        android:textColor="#333333"-->
+<!--        android:textStyle="bold" />-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/detailDescription"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="5dp"-->
+<!--        android:layout_marginBottom="15dp"-->
+<!--        android:textColor="#777777"-->
+<!--        android:text="A versatile full-zip that you can wear all day long and even..."/>-->
+
+<!--    <include-->
+<!--        android:id="@+id/googlePayButton"-->
+<!--        layout="@layout/buy_with_googlepay_button"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="@dimen/_40sdp"-->
+<!--        android:layout_marginBottom="20dp"-->
+<!--       />-->
+<!--&lt;!&ndash;    <RelativeLayout&ndash;&gt;-->
+<!--&lt;!&ndash;        android:clickable="true"&ndash;&gt;-->
+<!--&lt;!&ndash;        android:focusable="true"&ndash;&gt;-->
+<!--&lt;!&ndash;        android:layout_width="match_parent"&ndash;&gt;-->
+<!--&lt;!&ndash;        android:layout_height="48sp"&ndash;&gt;-->
+<!--&lt;!&ndash;        android:layout_gravity="bottom"&ndash;&gt;-->
+<!--&lt;!&ndash;        android:background="@drawable/googlepay_button_no_shadow_background"&ndash;&gt;-->
+<!--&lt;!&ndash;        android:padding="2sp"&ndash;&gt;-->
+<!--&lt;!&ndash;        android:contentDescription="Buy with GPay">&ndash;&gt;-->
+
+<!--&lt;!&ndash;        <LinearLayout&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_width="match_parent"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_height="match_parent"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:duplicateParentState="true"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:id="@+id/buttonGpay"&ndash;&gt;-->
+
+<!--&lt;!&ndash;            android:gravity="center_vertical"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:orientation="vertical"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:weightSum="2">&ndash;&gt;-->
+
+<!--&lt;!&ndash;            <ImageView&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_width="match_parent"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_height="0dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_weight="1"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:duplicateParentState="true"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:scaleType="fitCenter"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:src="@drawable/buy_with_googlepay_button_content" />&ndash;&gt;-->
+<!--&lt;!&ndash;        </LinearLayout>&ndash;&gt;-->
+<!--&lt;!&ndash;        <ImageView&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_width="match_parent"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_height="match_parent"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:scaleType="fitXY"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:duplicateParentState="true"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:src="@drawable/googlepay_button_overlay"/>&ndash;&gt;-->
+<!--&lt;!&ndash;    </RelativeLayout>&ndash;&gt;-->
+<!--</LinearLayout>-->
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_marginStart="20dp"
+    android:layout_marginEnd="20dp">
+
+        <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/_15sdp"
+            android:id="@+id/amount"
+        android:text=""
+            android:layout_gravity="center"
+        android:textColor="#333333"
+        android:textStyle="bold" />
+        <include
+        android:id="@+id/googlePayButton"
+        layout="@layout/buy_with_googlepay_button"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginBottom="20dp"
+       />
+<!--    <RelativeLayout-->
+<!--        android:clickable="true"-->
+<!--        android:focusable="true"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="48sp"-->
+<!--        android:layout_gravity="bottom"-->
+<!--        android:background="@drawable/googlepay_button_no_shadow_background"-->
+<!--        android:padding="2sp"-->
+<!--        android:contentDescription="Buy with GPay">-->
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:duplicateParentState="true"-->
+<!--            android:id="@+id/buttonGpay"-->
+
+<!--            android:gravity="center_vertical"-->
+<!--            android:orientation="vertical"-->
+<!--            android:weightSum="2">-->
+
+<!--            <ImageView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="0dp"-->
+<!--                android:layout_weight="1"-->
+<!--                android:duplicateParentState="true"-->
+<!--                android:scaleType="fitCenter"-->
+<!--                android:src="@drawable/buy_with_googlepay_button_content" />-->
+<!--        </LinearLayout>-->
+<!--        <ImageView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:scaleType="fitXY"-->
+<!--            android:duplicateParentState="true"-->
+<!--            android:src="@drawable/googlepay_button_overlay"/>-->
+<!--    </RelativeLayout>-->
+</LinearLayout>
+
+</ScrollView>

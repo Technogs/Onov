@@ -1,15 +1,17 @@
 package com.application.onovapplication.activities.common
 
 import android.os.Bundle
+import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import com.application.onovapplication.R
+import com.application.onovapplication.databinding.ActionBarLayout2Binding
+import com.application.onovapplication.databinding.ActivitySearchFriendsBinding
+import com.application.onovapplication.databinding.ActivitySettingsBinding
 import com.application.onovapplication.viewModels.SettingsViewModel
-import kotlinx.android.synthetic.main.action_bar_layout_2.*
-import kotlinx.android.synthetic.main.activity_settings.*
 
-class SettingsActivity : BaseAppCompatActivity() {
+
+class SettingsActivity : BaseAppCompatActivity(),View.OnClickListener {
 
     var donationStatus = ""
     var notificationStatus = ""
@@ -17,17 +19,20 @@ class SettingsActivity : BaseAppCompatActivity() {
     private val settingsViewModel by lazy {
         ViewModelProvider(this).get(SettingsViewModel::class.java)
     }
+    private lateinit var binding: ActivitySettingsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_settings)
-
+        binding = ActivitySettingsBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
+        val incBinding:ActionBarLayout2Binding=binding.ab
         userRef = userPreferences.getUserREf()
 
         settingsViewModel.getSettings(this, userRef)
         showDialog()
 
-        tvScreenTitle.text = getString(R.string.settings)
+        incBinding.tvScreenTitle.text = getString(R.string.settings)
 
         setSwitchEventListener()
         observeViewModel()
@@ -38,7 +43,7 @@ class SettingsActivity : BaseAppCompatActivity() {
             dismissDialog()
             if (successful != null) {
                 if (successful) {
-//
+
                     if (settingsViewModel.getSettingsStatus == "success") {
 
                         donationStatus =
@@ -64,7 +69,7 @@ class SettingsActivity : BaseAppCompatActivity() {
 
             dismissDialog()
             if (it) {
-//
+
                 if (settingsViewModel.status == "success") {
                     setError(settingsViewModel.message)
                 } else {
@@ -80,13 +85,13 @@ class SettingsActivity : BaseAppCompatActivity() {
     }
 
     private fun setSwitch(donationStatus: String, notificationStatus: String) {
-        switchDonation.isChecked = donationStatus != "0"
-        switchNotification.isChecked = notificationStatus != "0"
+        binding.switchDonation.isChecked = donationStatus != "0"
+        binding.switchNotification.isChecked = notificationStatus != "0"
     }
 
     private fun setSwitchEventListener() {
-        switchNotification.setOnClickListener {
-            notificationStatus = if (switchNotification.isChecked) {
+        binding.switchNotification.setOnClickListener {
+            notificationStatus = if (binding.switchNotification.isChecked) {
                 "1"
             } else {
                 "0"
@@ -97,8 +102,8 @@ class SettingsActivity : BaseAppCompatActivity() {
 
 
 
-        switchDonation.setOnClickListener {
-            donationStatus = if (switchDonation.isChecked) {
+        binding.switchDonation.setOnClickListener {
+            donationStatus = if (binding.switchDonation.isChecked) {
                 "1"
             } else {
                 "0"
@@ -107,5 +112,16 @@ class SettingsActivity : BaseAppCompatActivity() {
             showDialog()
         }
 
+    }
+
+    override fun onClick(v: View?) {
+     when(v?.id){
+         R.id.emailEdit->{
+
+         }
+         R.id.phoneEdit->{
+
+         }
+     }
     }
 }

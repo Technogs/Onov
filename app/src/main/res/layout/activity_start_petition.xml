@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/white"
     tools:context=".activities.common.StartPetition">
 
     <include
@@ -12,9 +13,24 @@
         layout="@layout/action_bar_layout" />
 
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/progressBarLayout"
+        android:visibility="gone"
+        android:layout_height="match_parent">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
+
+
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
@@ -35,25 +51,26 @@
 
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/create_event"
+        android:id="@+id/create_pt"
         android:layout_width="wrap_content"
         android:layout_height="36dp"
         android:layout_gravity="end"
         android:layout_marginTop="10sp"
         android:layout_marginEnd="10sp"
-        android:background="@drawable/drawable_gradient_button_background"
+        android:background="@drawable/orange_circle"
         android:fontFamily="@font/poppins_medium"
         android:text="@string/post"
         android:textAllCaps="false"
+        android:onClick="onClick"
         android:textColor="@color/white" />
 
     <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/etEventTitle"
+        android:id="@+id/etptTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:background="@null"
-        android:fontFamily="@font/poppins"
+        android:fontFamily="@font/poppins_regular"
         android:hint="@string/petition_title"
         android:padding="15dp"
         android:textColor="@color/navigation_color"
@@ -89,7 +106,7 @@
             android:layout_height="match_parent"
             android:layout_marginStart="15dp"
             android:background="@null"
-            android:fontFamily="@font/poppins"
+            android:fontFamily="@font/poppins_regular"
             android:hint="@string/sent_from"
             android:inputType="numberDecimal"
             android:textColor="@color/black"
@@ -100,12 +117,12 @@
 
 
     <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/etPostDescription"
+        android:id="@+id/etPtDescription"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_marginTop="20dp"
         android:background="@null"
-        android:fontFamily="@font/poppins"
+        android:fontFamily="@font/poppins_regular"
         android:gravity="start"
         android:hint="@string/description"
         android:padding="15dp"
@@ -126,7 +143,8 @@
         android:layout_below="@+id/createPostLayout"
         android:background="@null"
         android:layout_marginTop="10dp"
-        android:fontFamily="@font/poppins"
+        android:id="@+id/pteWbLink"
+        android:fontFamily="@font/poppins_regular"
         android:hint="@string/website_link"
         android:padding="15dp"
         android:textColor="@color/navigation_color"
@@ -153,9 +171,9 @@
             android:background="@drawable/drawable_chat_background"
             android:gravity="center"
             android:hint="@string/petition_duration"
+            android:inputType="number"
             android:onClick="onClick"
             android:paddingStart="15dp"
-            android:inputType="number"
             android:paddingTop="8dp"
             android:paddingEnd="15dp"
             android:paddingBottom="8dp"
@@ -237,8 +255,11 @@ android:layout_marginBottom="20dp"
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="80dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginStart="50dp">
+            android:id="@+id/petition_pic"
+            android:onClick="onClick"
+            android:visibility="gone"
+            android:layout_marginTop="@dimen/_10sdp"
+          >
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="wrap_content"
@@ -256,7 +277,7 @@ android:layout_marginBottom="20dp"
                 android:layout_marginEnd="5dp"
                 android:layout_alignParentBottom="true"
                 android:layout_marginBottom="15dp"
-                android:fontFamily="@font/poppins"
+                android:fontFamily="@font/poppins_regular"
                 android:text="@string/upload_picture"
                 android:textColor="@color/navigation_color"
                 android:textSize="12sp" />
@@ -266,38 +287,37 @@ android:layout_marginBottom="20dp"
             android:layout_width="1dp"
             android:layout_height="80dp"
             android:layout_marginTop="8dp"
+            android:visibility="gone"
             android:layout_centerHorizontal="true"
             android:background="@color/text_blue"
 
             />
 
         <RelativeLayout
+            android:id="@+id/petition_video"
             android:layout_width="wrap_content"
             android:layout_height="80dp"
-
-            android:layout_marginTop="20dp"
             android:layout_alignParentEnd="true"
-            android:layout_marginEnd="50dp"
-            android:layout_marginStart="50dp">
+            android:layout_marginTop="@dimen/_10sdp"
+            android:onClick="onClick">
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="wrap_content"
-                android:src="@drawable/video_transparent"
                 android:id="@+id/upload_video"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-
-                android:layout_height="wrap_content" />
+                android:src="@drawable/video_transparent" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="10dp"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
                 android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="5dp"
                 android:layout_marginBottom="15dp"
-                android:fontFamily="@font/poppins"
+                android:fontFamily="@font/poppins_regular"
                 android:text="@string/upload_video"
                 android:textColor="@color/navigation_color"
                 android:textSize="12sp" />

@@ -9,11 +9,14 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.application.onovapplication.R
+import com.application.onovapplication.databinding.ActionBarLayout2Binding
+import com.application.onovapplication.databinding.ActivityAskDonationsBinding
+import com.application.onovapplication.databinding.ActivityChangePasswordBinding
 import com.application.onovapplication.viewModels.NewPasswordViewModel
-import kotlinx.android.synthetic.main.action_bar_layout_2.*
-import kotlinx.android.synthetic.main.activity_change_password.*
+
 
 class ChangePasswordActivity : BaseAppCompatActivity(), View.OnClickListener {
+    private lateinit var binding: ActivityChangePasswordBinding
 
     private val newPasswordViewModel by lazy {
         ViewModelProvider(this).get(NewPasswordViewModel::class.java)
@@ -21,8 +24,11 @@ class ChangePasswordActivity : BaseAppCompatActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_change_password)
-        tvScreenTitle.text = getString(R.string.change_password)
+        binding = ActivityChangePasswordBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
+        val incBinding: ActionBarLayout2Binding =binding.inc
+        incBinding.tvScreenTitle.text = getString(R.string.change_password)
 
         observeViewModel()
 
@@ -34,10 +40,10 @@ class ChangePasswordActivity : BaseAppCompatActivity(), View.OnClickListener {
             R.id.btnChangePassword -> {
 
                 when {
-                    edNewCHangedPassword.text.toString().trim().isEmpty() -> {
+                    binding.edNewCHangedPassword.text.toString().trim().isEmpty() -> {
                         setError(getString(R.string.new_password_error))
                     }
-                    edNewCHangedPassword.text.toString().trim().length < 8 -> {
+                    binding.edNewCHangedPassword.text.toString().trim().length < 8 -> {
 
                         setError(getString(R.string.password_length_error))
                     }
@@ -45,8 +51,8 @@ class ChangePasswordActivity : BaseAppCompatActivity(), View.OnClickListener {
                         newPasswordViewModel.changePassword(
                             this,
                             userPreferences.getUserREf(),
-                            edOldPassword.text.toString().trim(),
-                            edNewCHangedPassword.text.toString().trim()
+                            binding.edOldPassword.text.toString().trim(),
+                            binding.edNewCHangedPassword.text.toString().trim()
                         )
 
                         showDialog()

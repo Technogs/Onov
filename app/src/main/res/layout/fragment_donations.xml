@@ -6,7 +6,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".fragments.DonationsFragment">
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:layout_centerInParent="true"
+        android:fontFamily="@font/poppins_medium"
+        android:text="@string/no_data_yet"
+        android:id="@+id/no_dn_data"
+        android:textColor="@color/app_color"
+        android:textSize="@dimen/_16ssp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -40,10 +50,10 @@ android:layout_centerHorizontal="true"
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_below="@+id/tv"
+        android:layout_height="match_parent"
         android:layout_above="@+id/btnCreateDonation"
-        android:layout_marginBottom="20dp"
-        android:layout_height="match_parent">
+        android:layout_below="@+id/tv"
+        android:layout_marginBottom="20dp">
 
 
         <androidx.appcompat.widget.LinearLayoutCompat
@@ -51,183 +61,191 @@ android:layout_centerHorizontal="true"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_marginStart="15dp"
-                android:text="Sent(300$)"
-                android:fontFamily="@font/poppins_bold"
-                android:textSize="16sp"
-                android:layout_marginTop="10dp"
-                android:textColor="@color/text_blue"
-                android:layout_height="wrap_content"/>
-
             <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/donor_lyt"
+android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginEnd="25dp"
-                android:weightSum="3">
+                android:orientation="vertical">
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    android:layout_marginStart="15dp"
                     android:layout_marginTop="10dp"
-                    android:layout_weight="1.2"
                     android:fontFamily="@font/poppins_bold"
-                    android:text="@string/sent_to"
-                    android:textColor="@color/black"
+                    android:text="Sent(300$)"
+                    android:textColor="@color/text_blue"
                     android:textSize="16sp" />
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="25dp"
+                    android:weightSum="3">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="1.2"
+                        android:fontFamily="@font/poppins_bold"
+                        android:text="@string/sent_to"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="0.9"
+                        android:fontFamily="@font/poppins_bold"
+                        android:gravity="center"
+                        android:text="@string/amount"
+
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="0.9"
+                        android:fontFamily="@font/poppins_bold"
+                        android:gravity="center"
+                        android:text="@string/date"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:id="@+id/noDonationsSent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="0.9"
-                    android:fontFamily="@font/poppins_bold"
-                    android:gravity="center"
-                    android:text="@string/amount"
+                    android:layout_marginTop="30dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="@string/no_donations_sent"
+                    android:textColor="@color/text_blue"
+                    android:textSize="16sp"
+                    android:visibility="gone" />
 
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
 
-                <TextView
-                    android:layout_width="0dp"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvSentDonations"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="0.9"
-                    android:fontFamily="@font/poppins_bold"
-                    android:gravity="center"
-                    android:text="@string/date"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="30dp"
-                android:text="@string/no_donations_sent"
-                android:textSize="16sp"
-                android:visibility="gone"
-                android:id="@+id/noDonationsSent"
-                android:fontFamily="@font/poppins_medium"
-                android:textColor="@color/text_blue"
-                />
-
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:id="@+id/rvSentDonations"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                android:layout_height="wrap_content"/>
-
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_marginStart="15dp"
-                android:text="Received(400$)"
-                android:fontFamily="@font/poppins_bold"
-                android:textSize="16sp"
-                android:layout_marginTop="20dp"
-                android:textColor="@color/text_blue"
-                android:layout_height="wrap_content"/>
-
             <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/receiver_lyt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginEnd="25dp"
-                android:weightSum="3">
+                android:orientation="vertical"
+                android:visibility="gone">
+
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="1.2"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="20dp"
                     android:fontFamily="@font/poppins_bold"
-                    android:text="@string/received_from"
-                    android:textColor="@color/black"
+                    android:text="Received(400$)"
+                    android:textColor="@color/text_blue"
                     android:textSize="16sp" />
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="25dp"
+                    android:weightSum="3">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="1.2"
+                        android:fontFamily="@font/poppins_bold"
+                        android:text="@string/received_from"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="0.9"
+                        android:fontFamily="@font/poppins_bold"
+                        android:gravity="center"
+                        android:text="@string/amount"
+
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="0.9"
+                        android:fontFamily="@font/poppins_bold"
+                        android:gravity="center"
+                        android:text="@string/date"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:id="@+id/noDonationsReceived"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="0.9"
-                    android:fontFamily="@font/poppins_bold"
-                    android:gravity="center"
-                    android:text="@string/amount"
+                    android:layout_marginTop="30dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="@string/no_donations_received"
+                    android:textColor="@color/text_blue"
+                    android:textSize="16sp"
+                    android:visibility="gone" />
 
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
 
-                <TextView
-                    android:layout_width="0dp"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvReceivedDonations"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="0.9"
-                    android:fontFamily="@font/poppins_bold"
-                    android:gravity="center"
-                    android:text="@string/date"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="30dp"
-                android:text="@string/no_donations_received"
-                android:textSize="16sp"
-                android:visibility="gone"
-                android:id="@+id/noDonationsReceived"
-                android:fontFamily="@font/poppins_medium"
-                android:textColor="@color/text_blue"
-                />
-
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:id="@+id/rvReceivedDonations"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                android:layout_height="wrap_content"/>
-
-
-
-
-
 
         </androidx.appcompat.widget.LinearLayoutCompat>
-
-
 
 
     </androidx.core.widget.NestedScrollView>
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnCreateDonation"
         android:layout_width="match_parent"
+        android:layout_height="40dp"
+
+        android:layout_alignParentBottom="true"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="20dp"
-        android:textColor="@color/white"
+        android:background="@drawable/drawable_gradient_button_background"
         android:text="@string/ask_for_donations"
         android:textAllCaps="false"
-        android:id="@+id/btnCreateDonation"
-        android:background="@drawable/drawable_gradient_button_background"
-        android:layout_height="40dp"
-        android:layout_alignParentBottom="true"
-        />
+        android:textColor="@color/white" />
 
 </RelativeLayout>

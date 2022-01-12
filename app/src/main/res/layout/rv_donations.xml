@@ -18,7 +18,8 @@
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:layout_weight="1.2"
-            android:fontFamily="@font/poppins"
+            android:id="@+id/receivedFrom"
+            android:fontFamily="@font/poppins_regular"
             android:text="@string/received_from"
             android:textColor="@color/navigation_color"
             android:textSize="14sp" />
@@ -29,10 +30,10 @@
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:layout_weight="0.9"
-            android:fontFamily="@font/poppins"
+            android:fontFamily="@font/poppins_regular"
             android:gravity="center"
             android:text="@string/amount"
-
+android:id="@+id/donationAmount"
             android:textColor="@color/navigation_color"
             android:textSize="14sp" />
 
@@ -42,7 +43,8 @@
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:layout_weight="0.9"
-            android:fontFamily="@font/poppins"
+            android:id="@+id/donationDate"
+            android:fontFamily="@font/poppins_regular"
             android:gravity="center"
             android:text="@string/date"
             android:textColor="@color/navigation_color"

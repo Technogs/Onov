@@ -6,36 +6,44 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.application.onovapplication.R
+import com.application.onovapplication.databinding.RvDebateRequestsBinding
+import com.application.onovapplication.databinding.RvDonationsBinding
+import com.application.onovapplication.model.ReceivedList
 
-class DonationsAdapter (
-    val context: Context
-) : RecyclerView.Adapter<DonationsAdapter.RVHolder>() {
+class DonationsAdapter (val context: Context,val type: String,val donorlist:List<ReceivedList>)
+    : RecyclerView.Adapter<DonationsAdapter.RVHolder>() {
 
 
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): RVHolder {
-        return RVHolder(
-            LayoutInflater.from(context).inflate(
-                R.layout.rv_donations, parent,
-                false
-            )
-        )
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RVHolder {
+        val binding = RvDonationsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+
+        return RVHolder(binding)
     }
 
     override fun getItemCount(): Int {
-        return 4
+        return donorlist.size
     }
 
     override fun onBindViewHolder(holder: RVHolder, position: Int) {
+        holder.bind(donorlist[position])
 
     }
 
 
-    inner class RVHolder(itemView: View) :
-        RecyclerView.ViewHolder(itemView) {
+    inner class RVHolder(val binding: RvDonationsBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+fun bind(dataitem:ReceivedList){
+    if (type=="donate"){
+        binding.receivedFrom.text=dataitem.donateTo
+    }else{
+        binding.receivedFrom.text=dataitem.donateFrom
 
+    }
+    binding.donationAmount.text=dataitem.amount
+    binding.donationDate.text=dataitem.created_at
+
+
+}
     }
 
 }

@@ -42,7 +42,8 @@ class FeedData{
     @SerializedName("title")
     @Expose
     var title: String? = null
-
+    var like: Boolean?=false
+    var dislike: Boolean?=false
     @SerializedName("description")
     @Expose
     var description: String? = null
@@ -62,4 +63,7 @@ class FeedData{
     @SerializedName("created_at")
     @Expose
     var createdAt: String? = null
+
+    constructor()   // **Add this**
+
 }

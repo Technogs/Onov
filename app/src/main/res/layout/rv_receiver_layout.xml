@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/iv_receiver_profile"
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_50sdp"
+
+        android:layout_alignParentEnd="true"
+        android:layout_centerInParent="true"
+        android:src="@drawable/profile"
+        android:visibility="gone" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/ll_main"
+        android:layout_width="match_parent"
+
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!--        <com.google.android.material.card.MaterialCardView-->
+        <!--            android:id="@+id/ll_audio_layout"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_alignParentStart="true"-->
+        <!--            android:layout_gravity="start"-->
+        <!--            android:layout_marginTop="@dimen/_10sdp"-->
+        <!--            android:layout_marginEnd="@dimen/_20sdp"-->
+        <!--            android:layout_toStartOf="@+id/iv_receiver_profile"-->
+        <!--            android:orientation="vertical"-->
+        <!--            android:visibility="gone"-->
+        <!--            app:cardBackgroundColor="#E1E1E1"-->
+        <!--            app:cardCornerRadius="@dimen/_10sdp"-->
+        <!--            app:cardUseCompatPadding="true">-->
+
+        <!--            <RelativeLayout-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="match_parent"-->
+        <!--                android:paddingStart="8dp">-->
+
+
+        <!--                <FrameLayout-->
+        <!--                    android:id="@+id/frame_audio"-->
+        <!--                    android:layout_width="wrap_content"-->
+        <!--                    android:layout_height="wrap_content"-->
+        <!--                    android:layout_alignParentStart="true"-->
+        <!--                    android:layout_centerInParent="true">-->
+
+        <!--                    <ImageView-->
+        <!--                        android:id="@+id/iv_audio_play"-->
+        <!--                        android:layout_width="@dimen/_28sdp"-->
+        <!--                        android:layout_height="@dimen/_28sdp"-->
+        <!--                        android:padding="@dimen/_8sdp"-->
+        <!--                        android:src="@drawable/ic_play"-->
+        <!--                        android:visibility="visible"-->
+        <!--                        app:tint="#676767" />-->
+
+        <!--                    <ImageView-->
+        <!--                        android:id="@+id/iv_audio_pause"-->
+        <!--                        android:layout_width="@dimen/_28sdp"-->
+        <!--                        android:layout_height="@dimen/_28sdp"-->
+        <!--                        android:padding="@dimen/_8sdp"-->
+        <!--                        android:src="@drawable/ic_baseline_pause_24"-->
+        <!--                        android:visibility="gone"-->
+        <!--                        app:tint="#676767" />-->
+
+
+        <!--                </FrameLayout>-->
+
+
+        <!--                <com.wizebrains.adventmingle.utils.custom.CustomBoldTextView-->
+        <!--                    android:id="@+id/tv_play_timer"-->
+        <!--                    android:layout_width="@dimen/_50sdp"-->
+        <!--                    android:layout_height="wrap_content"-->
+        <!--                    android:layout_below="@+id/frame_audio"-->
+        <!--                    android:layout_alignParentStart="true"-->
+        <!--                    android:layout_marginTop="@dimen/_15sdp"-->
+        <!--                    android:padding="@dimen/_5sdp"-->
+        <!--                    android:paddingBottom="6dp"-->
+        <!--                    android:text="00:00"-->
+        <!--                    android:textColor="#676767"-->
+        <!--                    android:textSize="@dimen/_8ssp"-->
+        <!--                    android:textStyle="bold" />-->
+
+
+        <!--                <com.warkiz.widget.IndicatorSeekBar-->
+        <!--                    android:id="@+id/seekbar_audio"-->
+        <!--                    android:layout_width="match_parent"-->
+        <!--                    android:layout_height="@dimen/_30sdp"-->
+        <!--                    android:layout_centerInParent="true"-->
+        <!--                    android:layout_toEndOf="@+id/frame_audio"-->
+        <!--                    android:backgroundTint="#676767"-->
+        <!--                    app:isb_thumb_color="#676767"-->
+        <!--                    app:isb_thumb_text_color="#676767"-->
+        <!--                    app:isb_track_progress_color="#676767" />-->
+
+
+        <!--                <TextView-->
+        <!--                    android:id="@+id/tv_audio_time"-->
+        <!--                    android:layout_width="@dimen/_50sdp"-->
+        <!--                    android:layout_height="wrap_content"-->
+        <!--                    android:layout_below="@+id/frame_audio"-->
+        <!--                    android:layout_alignParentEnd="true"-->
+        <!--                    android:layout_marginTop="@dimen/_15sdp"-->
+        <!--                    android:paddingBottom="6dp"-->
+        <!--                    android:text="10:39 PM"-->
+        <!--                    android:textColor="#676767"-->
+        <!--                    android:textSize="@dimen/_8ssp"-->
+        <!--                    android:textStyle="bold" />-->
+
+
+        <!--            </RelativeLayout>-->
+
+        <!--        </com.google.android.material.card.MaterialCardView>-->
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/ll_image_layout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_160sdp"
+            android:layout_alignParentStart="true"
+            android:layout_gravity="start"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_50sdp"
+            android:orientation="vertical"
+            android:visibility="gone"
+            app:cardBackgroundColor="#E1E1E1"
+            app:cardCornerRadius="@dimen/_10sdp"
+            app:cardUseCompatPadding="true">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/linear_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/iv_pic"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_gravity="end"
+                        android:layout_margin="@dimen/_4sdp"
+                        android:layout_weight="1"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/profile"
+                        android:visibility="visible"
+
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_image_time"
+                        android:layout_width="@dimen/_50sdp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom|end"
+                        android:gravity="center|center_vertical"
+                        android:paddingBottom="6dp"
+                        android:text="10:39 PM"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_8ssp" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:id="@+id/ll_video_layout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_160sdp"
+            android:layout_alignParentStart="true"
+            android:layout_gravity="start"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_50sdp"
+            android:orientation="vertical"
+            android:visibility="gone"
+            app:cardBackgroundColor="#E1E1E1"
+            app:cardCornerRadius="@dimen/_10sdp"
+            app:cardUseCompatPadding="true">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/linear_video"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/iv_video"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_gravity="end"
+                        android:layout_margin="@dimen/_4sdp"
+                        android:layout_weight="1"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/profile"
+                        android:visibility="gone"
+
+                        />
+                    <com.google.android.exoplayer2.ui.SimpleExoPlayerView
+                        android:id="@+id/idExoVideoVIew"
+                        android:layout_width="match_parent"
+                        android:visibility="visible"
+                        app:resize_mode="fill"
+                        android:layout_height="@dimen/_200sdp" />
+
+                    <TextView
+                        android:id="@+id/tv_video_time"
+                        android:layout_width="@dimen/_50sdp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom|end"
+                        android:gravity="center|center_vertical"
+                        android:paddingBottom="6dp"
+                        android:text="10:39 PM"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_8ssp" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/ll_feed_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_50sdp"
+            android:orientation="vertical"
+           android:visibility="gone"
+            app:cardBackgroundColor="#E1E1E1"
+            app:cardCornerRadius="@dimen/_10sdp"
+            app:cardUseCompatPadding="true">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/feedlyt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <RelativeLayout
+                    android:id="@+id/receiver_rlyt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="4dp"
+                    android:paddingTop="8dp"
+                    android:paddingEnd="4dp"
+                    android:paddingBottom="8dp">
+
+
+                    <TextView
+                        android:id="@+id/viewFeed"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_9sdp"
+                        android:fontFamily="@font/poppins_bold"
+                        android:paddingHorizontal="@dimen/_9sdp"
+                        android:paddingVertical="@dimen/_5sdp"
+                        android:text="View"
+                        android:textColor="@color/text_blue"
+                        android:textSize="@dimen/_14ssp" />
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/ivChatProfile"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="10dp"
+                        android:src="@drawable/dummy_profile_image" />
+
+
+                    <TextView
+                        android:id="@+id/userName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_toEndOf="@+id/ivChatProfile"
+                        android:fontFamily="@font/poppins_regular"
+                        android:text="Gulf"
+                        android:textColor="@color/text_blue"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/feedTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/ivChatProfile"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/poppins_medium"
+                        android:justificationMode="inter_word"
+                        android:text="Dummy Title"
+                        android:textColor="@color/black"
+
+                        android:textSize="18sp" />
+
+
+                    <TextView
+                        android:id="@+id/feedType"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/feedTitle"
+                        android:fontFamily="@font/poppins_regular"
+                        android:justificationMode="inter_word"
+                        android:text="Feed type: Post"
+                        android:textColor="@color/black"
+
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/feedDescription"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/feedType"
+                        android:fontFamily="@font/poppins_regular"
+                        android:justificationMode="inter_word"
+                        android:text="Lorem Ipsum is simply dummy text ever since the type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the)."
+                        android:textColor="@color/navigation_color" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/feedMedia"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp">
+
+                    <ImageView
+                        android:id="@+id/ivFeed"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_200sdp"
+                        android:background="@drawable/dummy_debate"
+                        android:scaleType="centerCrop" />
+
+                    <VideoView
+                        android:id="@+id/vvFeed"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_200sdp"
+                        android:visibility="gone" />
+
+                    <com.google.android.exoplayer2.ui.SimpleExoPlayerView
+                        android:id="@+id/idExoPlayerVIew"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_200sdp"
+                        android:visibility="gone" />
+
+                    <WebView
+                        android:id="@+id/wbFeed"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:visibility="gone" />
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/tv_feed_time"
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|end"
+                    android:gravity="center|center_vertical"
+                    android:paddingBottom="6dp"
+                    android:text="10:39 PM"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_8ssp" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </androidx.cardview.widget.CardView>
+
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/ll_receiver_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_40sdp"
+            android:layout_toStartOf="@+id/iv_receiver_profile"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/mag_bkd_white"
+
+                android:orientation="vertical"
+
+                >
+
+                <TextView
+                    android:id="@+id/tv_receiver_message"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxWidth="@dimen/_200sdp"
+                    android:paddingStart="@dimen/_16sdp"
+                    android:paddingTop="@dimen/_12sdp"
+                    android:paddingEnd="@dimen/_12sdp"
+                    android:paddingBottom="@dimen/_8sdp"
+
+                    android:text="Hii how  you ?\n "
+                    android:textSize="@dimen/_12ssp" />
+
+
+                <TextView
+                    android:id="@+id/tv_time_receiver"
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end|center"
+                    android:layout_marginTop="@dimen/_minus4sdp"
+                    android:gravity="center|center_vertical"
+                    android:paddingBottom="6dp"
+                    android:text="10:39 PM"
+                    android:textSize="@dimen/_8ssp" />
+
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+            <ImageView
+                android:layout_width="8dp"
+                android:layout_height="16dp"
+                android:layout_gravity="start"
+                android:layout_marginTop="-1.5dp"
+                android:background="@drawable/mag_bkd_white"
+                android:visibility="gone" />
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+</RelativeLayout>
