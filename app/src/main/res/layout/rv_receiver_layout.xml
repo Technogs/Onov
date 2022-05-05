@@ -10,7 +10,6 @@
         android:id="@+id/iv_receiver_profile"
         android:layout_width="@dimen/_50sdp"
         android:layout_height="@dimen/_50sdp"
-
         android:layout_alignParentEnd="true"
         android:layout_centerInParent="true"
         android:src="@drawable/profile"
@@ -19,7 +18,6 @@
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/ll_main"
         android:layout_width="match_parent"
-
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
@@ -171,6 +169,7 @@
                 </androidx.appcompat.widget.LinearLayoutCompat>
             </RelativeLayout>
         </androidx.cardview.widget.CardView>
+
         <androidx.cardview.widget.CardView
             android:id="@+id/ll_video_layout"
             android:layout_width="match_parent"
@@ -209,12 +208,13 @@
                         android:visibility="gone"
 
                         />
+
                     <com.google.android.exoplayer2.ui.SimpleExoPlayerView
                         android:id="@+id/idExoVideoVIew"
                         android:layout_width="match_parent"
+                        android:layout_height="@dimen/_200sdp"
                         android:visibility="visible"
-                        app:resize_mode="fill"
-                        android:layout_height="@dimen/_200sdp" />
+                        app:resize_mode="fill" />
 
                     <TextView
                         android:id="@+id/tv_video_time"
@@ -239,7 +239,7 @@
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginEnd="@dimen/_50sdp"
             android:orientation="vertical"
-           android:visibility="gone"
+            android:visibility="gone"
             app:cardBackgroundColor="#E1E1E1"
             app:cardCornerRadius="@dimen/_10sdp"
             app:cardUseCompatPadding="true">
@@ -274,6 +274,7 @@
                         android:text="View"
                         android:textColor="@color/text_blue"
                         android:textSize="@dimen/_14ssp" />
+
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/ivChatProfile"
                         android:layout_width="50dp"
@@ -410,8 +411,8 @@
                     android:paddingTop="@dimen/_12sdp"
                     android:paddingEnd="@dimen/_12sdp"
                     android:paddingBottom="@dimen/_8sdp"
-
                     android:text="Hii how  you ?\n "
+                    android:textColor="@color/black"
                     android:textSize="@dimen/_12ssp" />
 
 
@@ -423,6 +424,7 @@
                     android:layout_marginTop="@dimen/_minus4sdp"
                     android:gravity="center|center_vertical"
                     android:paddingBottom="6dp"
+                    android:textColor="@color/black"
                     android:text="10:39 PM"
                     android:textSize="@dimen/_8ssp" />
 

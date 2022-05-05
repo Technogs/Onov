@@ -1,6 +1,7 @@
 package com.application.onovapplication.activities.common
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -16,7 +17,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 
 
-class DebateDetailsActivity : BaseAppCompatActivity(),View.OnClickListener,DebateJoineeAdapter.onVoteClick {
+class DebateDetailsActivity : BaseAppCompatActivity(), View.OnClickListener,
+    DebateJoineeAdapter.onVoteClick {
     val debateViewModel by lazy { ViewModelProvider(this).get(DebatesViewModel::class.java) }
     lateinit var debate: DebateData
     lateinit var debateid: String
@@ -29,46 +31,69 @@ class DebateDetailsActivity : BaseAppCompatActivity(),View.OnClickListener,Debat
         binding = ActivityDebateDetailsBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
         debate = intent.getParcelableExtra<DebateData>("debates") as DebateData
-//        debateid = intent.getStringExtra("debates").toString()
-        debateViewModel.getDebateDetail(this,debate.dbatId)
+
+        debateViewModel.getDebateDetail(this, debate.dbatId)
         showDialog()
-init()
-observeViewModel()
+        init()
+        observeViewModel()
 
     }
 
-    fun init(){
-if (debate.requestStatus=="accepted"){
-    binding.btnAccept.visibility=View.VISIBLE
-    binding.btnReject.visibility=View.GONE
-    binding.btnAccept.text="Accepted"
-}else if (debate.requestStatus=="rejected"){
-    binding.btnAccept.visibility=View.GONE
-    binding.btnReject.visibility=View.VISIBLE
-    binding.btnAccept.text="Rejected"
-}
-        binding.debateDetailsTitleValue.text=debate.title
-        binding.debateDetailsDateValue.text=debate.date
-        binding.debateDetailsTimeValue.text=debate.time
-        binding.debateDetailsTimeCreatorValue.text=debate.userName
+    fun init() {
+        Log.d("users", debate.userRef + "  " + userPreferences.getuserDetails()?.userRef.toString())
+        if (debate.requestStatus == "accepted") {
+            binding.btnAccept.visibility = View.VISIBLE
+            binding.btnReject.visibility = View.GONE
+            binding.btnReshedule.visibility = View.GONE
+            binding.btnAccept.text = "Accepted"
+        } else if (debate.requestStatus == "rejected") {
+            binding.btnAccept.visibility = View.GONE
+            binding.btnReshedule.visibility = View.GONE
+            binding.btnReject.visibility = View.VISIBLE
+            binding.btnAccept.text = "Rejected"
+        } else if (debate.requestStatus == "reshedule") {
+            binding.btnAccept.visibility = View.VISIBLE
+            binding.btnReshedule.visibility = View.GONE
+            binding.btnReject.visibility = View.GONE
+            binding.btnAccept.text = "Requested for Reschedule"
+        }
+        binding.debateDetailsTitleValue.text = debate.title
+        binding.debateDetailsDateValue.text =
+            convertDateFormat(debate.date, "yyyy-MM-dd", "MMM dd,yyyy")//
+        binding.debateDetailsTimeValue.text = convertDateFormat(
+            debate.time,
+            "HH:mm",
+            "hh:mm a"
+        )
+
+        binding.debateDetailsTimeCreatorValue.text = debate.userName
         //debateDetailsTimeCreator
-        Glide.with(this).load(BaseUrl.photoUrl + debate.profilePic).apply(RequestOptions().placeholder(R.drawable.ic_baseline_account_circle_24)).into(binding.debateDetailsTimeCreator)
+        Glide.with(this).load(BaseUrl.photoUrl + debate.profilePic)
+            .apply(RequestOptions().placeholder(R.drawable.ic_baseline_account_circle_24))
+            .into(binding.debateDetailsTimeCreator)
 
     }
 
     override fun onClick(v: View?) {
-        when(v?.id){
-            R.id.btnAccept->{
-                if (binding.btnAccept.text=="Accept")
+        when (v?.id) {
+            R.id.btnAccept -> {
+                if (binding.btnAccept.text == "Accept")
                     showDialog()
-                debateViewModel.acceptRequest(this,debate.requestId,"1")
+                debateViewModel.acceptRequest(this, debate.requestId, "1")
 
             }
-            R.id.btnReject->{
-                if (binding.btnAccept.text=="Reject")
+            R.id.btnReject -> {
+                if (binding.btnAccept.text == "Reject")
                     showDialog()
-                debateViewModel.acceptRequest(this,debate.requestId,"0")
+                debateViewModel.acceptRequest(this, debate.requestId, "0")
+
+            }
+            R.id.btnReshedule -> {
+                if (binding.btnReshedule.text == "Reschedule")
+                    showDialog()
+                debateViewModel.acceptRequest(this, debate.requestId, "2")
 
             }
         }
@@ -82,8 +107,6 @@ if (debate.requestStatus=="accepted"){
             if (it != null) {
                 if (it) {
                     if (debateViewModel.status == "success") {
-                     //   setLayout(debateViewModel.eventResponse)
-                     //   setError(debateViewModel.message)
                         finish()
 
                     } else {
@@ -101,13 +124,19 @@ if (debate.requestStatus=="accepted"){
             if (it != null) {
                 if (it) {
                     if (debateViewModel.status == "success") {
-                     //   setLayout(debateViewModel.eventResponse)
-                     //   setError(debateViewModel.message)
-//                        finish()
-    debateDetailResponse=debateViewModel.debateDetailResponse
-                        debateJoineeAdapter = DebateJoineeAdapter(this, debateDetailResponse.debateDetail.debateJoinner, this, "dbdt")
+
+                        debateDetailResponse = debateViewModel.debateDetailResponse
+                        if (debateDetailResponse.debateDetail.userRef == userPreferences.getuserDetails()?.userRef.toString()) {
+                            binding.allBtn.visibility = View.GONE
+                        }
+                        debateJoineeAdapter = DebateJoineeAdapter(
+                            this,
+                            debateDetailResponse.debateDetail.debateJoinner,
+                            this,
+                            "dbdt"
+                        )
                         binding.rvDebateRequests.adapter = debateJoineeAdapter
-                    //}
+                        debateJoineeAdapter?.notifyDataSetChanged()
 
                     } else {
                         setError(debateViewModel.message)
@@ -119,7 +148,6 @@ if (debate.requestStatus=="accepted"){
             }
 
         })
-
 
 
     }

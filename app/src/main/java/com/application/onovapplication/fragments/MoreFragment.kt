@@ -5,19 +5,20 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.application.onovapplication.R
+import com.application.onovapplication.activities.DonationsActivity
 import com.application.onovapplication.activities.EventsActivity
+import com.application.onovapplication.activities.GovernmentScreenActivity
+import com.application.onovapplication.activities.PastPetitionActivity
 import com.application.onovapplication.activities.citizens.DebateRequestsActivity
 import com.application.onovapplication.activities.common.*
 import com.application.onovapplication.activities.lpa.CreateAnnouncementActivity
-import com.application.onovapplication.activities.DonationsActivity
-import com.application.onovapplication.activities.GovernmentScreenActivity
 import com.application.onovapplication.activities.politicians.CreateLawActivity
 import com.application.onovapplication.adapters.MoreScreenAdapter
-import com.application.onovapplication.databinding.FragmentFeedsBinding
 import com.application.onovapplication.databinding.FragmentMoreBinding
 import com.application.onovapplication.model.MoreScreenData
 import com.application.onovapplication.viewModels.LogoutViewModel
@@ -33,14 +34,15 @@ class MoreFragment : Fragment(), MoreScreenAdapter.MoreItemListener {
     val dataList: ArrayList<MoreScreenData> = ArrayList()
     private var moreScreenAdapter: MoreScreenAdapter? = null
 
-     override fun onCreateView(
+    override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-         binding = FragmentMoreBinding.inflate(inflater, container, false)
-         return binding.getRoot()    }
-    
+        binding = FragmentMoreBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -78,26 +80,26 @@ class MoreFragment : Fragment(), MoreScreenAdapter.MoreItemListener {
 
     private fun setPoliticiansList() {
 
-        dataList.add(
-            MoreScreenData(
-                "Stats",
-                R.drawable.stats
-            )
-        )
-        dataList.add(
-            MoreScreenData(
-                "Debate Search",
-                R.drawable.total_wining
-            )
-        )
-
-        dataList.add(
-            MoreScreenData(
-                "All Winners",
-                R.drawable.all_winners
-
-            )
-        )
+//        dataList.add(
+//            MoreScreenData(
+//                "Stats",
+//                R.drawable.stats
+//            )
+//        )
+//        dataList.add(
+//            MoreScreenData(
+//                "Debate Search",
+//                R.drawable.total_wining
+//            )
+//        )
+//
+//        dataList.add(
+//            MoreScreenData(
+//                "All Winners",
+//                R.drawable.all_winners
+//
+//            )
+//        )
 
         dataList.add(
             MoreScreenData(
@@ -129,7 +131,19 @@ class MoreFragment : Fragment(), MoreScreenAdapter.MoreItemListener {
             )
         )
 
+        dataList.add(
+            MoreScreenData(
+                "All Media",
+                R.drawable.petition
+            )
+        )
 
+        dataList.add(
+            MoreScreenData(
+                "Donation",
+                R.drawable.donations
+            )
+        )
         dataList.add(
             MoreScreenData(
                 "Debate Requests",
@@ -181,26 +195,26 @@ class MoreFragment : Fragment(), MoreScreenAdapter.MoreItemListener {
 
 
     private fun setCitizensList() {
-        dataList.add(
-            MoreScreenData(
-                "Stats",
-                R.drawable.stats
-            )
-        )
-        dataList.add(
-            MoreScreenData(
-                "Debate Search",
-                R.drawable.total_wining
-            )
-        )
-
-        dataList.add(
-            MoreScreenData(
-                "All Winners",
-                R.drawable.all_winners
-
-            )
-        )
+//        dataList.add(
+//            MoreScreenData(
+//                "Stats",
+//                R.drawable.stats
+//            )
+//        )
+//        dataList.add(
+//            MoreScreenData(
+//                "Debate Search",
+//                R.drawable.total_wining
+//            )
+//        )
+//
+//        dataList.add(
+//            MoreScreenData(
+//                "All Winners",
+//                R.drawable.all_winners
+//
+//            )
+//        )
 
         dataList.add(
             MoreScreenData(
@@ -226,7 +240,12 @@ class MoreFragment : Fragment(), MoreScreenAdapter.MoreItemListener {
                 R.drawable.petition
             )
         )
-
+        dataList.add(
+            MoreScreenData(
+                "All Media",
+                R.drawable.petition
+            )
+        )
         dataList.add(
             MoreScreenData(
                 "Donation",
@@ -278,13 +297,13 @@ class MoreFragment : Fragment(), MoreScreenAdapter.MoreItemListener {
     }
 
     private fun setNGOList() {
-        dataList.add(
-            MoreScreenData(
-                "Stats",
-                R.drawable.stats
-
-            )
-        )
+//        dataList.add(
+//            MoreScreenData(
+//                "Stats",
+//                R.drawable.stats
+//
+//            )
+//        )
         dataList.add(
             MoreScreenData(
                 "Laws",
@@ -306,7 +325,18 @@ class MoreFragment : Fragment(), MoreScreenAdapter.MoreItemListener {
                 R.drawable.profile
             )
         )
-
+        dataList.add(
+            MoreScreenData(
+                "Donation",
+                R.drawable.donations
+            )
+        )
+                dataList.add(
+            MoreScreenData(
+                "All Media",
+                R.drawable.donations
+            )
+        )
         dataList.add(
             MoreScreenData(
                 "About App",
@@ -345,13 +375,13 @@ class MoreFragment : Fragment(), MoreScreenAdapter.MoreItemListener {
 
 
     private fun setEntertainersList() {
-        dataList.add(
-            MoreScreenData(
-                "Stats",
-                R.drawable.stats
-
-            )
-        )
+//        dataList.add(
+//            MoreScreenData(
+//                "Stats",
+//                R.drawable.stats
+//
+//            )
+//        )
 
         dataList.add(
             MoreScreenData(
@@ -374,7 +404,18 @@ class MoreFragment : Fragment(), MoreScreenAdapter.MoreItemListener {
                 R.drawable.profile
             )
         )
-
+        dataList.add(
+            MoreScreenData(
+                "Donation",
+                R.drawable.donations
+            )
+        )
+                dataList.add(
+            MoreScreenData(
+                "All Media",
+                R.drawable.donations
+            )
+        )
         dataList.add(
             MoreScreenData(
                 "About App",
@@ -419,6 +460,7 @@ class MoreFragment : Fragment(), MoreScreenAdapter.MoreItemListener {
         )
 
     }
+
     private fun setLPAList() {
         dataList.add(
             MoreScreenData(
@@ -442,7 +484,18 @@ class MoreFragment : Fragment(), MoreScreenAdapter.MoreItemListener {
                 R.drawable.profile
             )
         )
-
+        dataList.add(
+            MoreScreenData(
+                "Donation",
+                R.drawable.donations
+            )
+        )
+        dataList.add(
+            MoreScreenData(
+                "All Media",
+                R.drawable.donations
+            )
+        )
         dataList.add(
             MoreScreenData(
                 "About App",
@@ -514,77 +567,86 @@ class MoreFragment : Fragment(), MoreScreenAdapter.MoreItemListener {
 
     private fun citizensClicks(position: Int) {
         when (position) {
+//            0 -> {
+////                val intent = Intent(requireContext(), StatsActivity::class.java)
+////                startActivity(intent)
+//            }
+//
+//            1 -> {
+////                val intent = Intent(requireContext(), SearchDebateActivity::class.java)
+////                startActivity(intent)
+//            }
+//
+//            2 -> {
+////                val intent = Intent(requireContext(), AllWinnersActivity::class.java)
+////                startActivity(intent)
+//            }
+
             0 -> {
-                val intent = Intent(requireContext(), StatsActivity::class.java)
-                startActivity(intent)
-            }
-
-            1 -> {
-                val intent = Intent(requireContext(), SearchDebateActivity::class.java)
-                startActivity(intent)
-            }
-
-            2 -> {
-                val intent = Intent(requireContext(), AllWinnersActivity::class.java)
-                startActivity(intent)
-            }
-
-            3 -> {
                 val intent = Intent(requireContext(), ProfileActivity2::class.java)
                 intent.putExtra("type", "user")
                 startActivity(intent)
             }
 
-            4 -> {
-                val intent = Intent(requireContext(), EventsActivity ::class.java)
+            1 -> {
+                val intent = Intent(requireContext(), EventsActivity::class.java)
                 startActivity(intent)
+            }
+
+            2 -> {
+                Toast.makeText(requireActivity(), "Coming Soon", Toast.LENGTH_SHORT).show()
+//                val intent = Intent(requireContext(), DebateRequestsActivity::class.java)
+//                startActivity(intent)
+            }
+
+            3 -> {
+//                val intent = Intent(requireContext(), AskToAddActivity::class.java)
+//                intent.putExtra("activity", "petition")
+//                startActivity(intent)
+                val intent = Intent(requireContext(), PastPetitionActivity::class.java)
+                startActivity(intent)
+            }
+
+            4 -> {
+//                val intent = Intent(requireContext(), PastPetitionActivity::class.java)
+//                startActivity(intent)
+                startActivity(Intent(requireActivity(),MediaActivity::class.java))
+
             }
 
             5 -> {
-                val intent = Intent(requireContext(), DebateRequestsActivity::class.java)
-                startActivity(intent)
-            }
-
-            6 -> {
-                val intent = Intent(requireContext(), AskToAddActivity::class.java)
-                intent.putExtra("activity","petition")
-                startActivity(intent)
-            }
-
-            7 -> {
                 val intent = Intent(requireContext(), DonationsActivity::class.java)
                 startActivity(intent)
             }
-
-            8 -> {
+            6 -> {
                 val intent = Intent(requireContext(), GovernmentScreenActivity::class.java)
                 startActivity(intent)
             }
 
-            9 -> {
+            7 -> {
                 val intent = Intent(requireContext(), AboutUsActivity::class.java)
                 intent.putExtra("type", "about")
                 startActivity(intent)
             }
 
-            10 -> {
+            8 -> {
                 val intent = Intent(requireContext(), SettingsActivity::class.java)
                 startActivity(intent)
             }
 
-            11 -> {
+            9 -> {
                 val intent = Intent(requireContext(), AboutUsActivity::class.java)
                 intent.putExtra("type", "privacy")
                 startActivity(intent)
             }
 
-            12 -> {
+            10 -> {
                 val intent = Intent(requireContext(), AboutUsActivity::class.java)
                 intent.putExtra("type", "conditions")
                 startActivity(intent)
             }
 
-            13 -> {
+            11 -> {
                 showPopUp()
 
             }
@@ -594,79 +656,88 @@ class MoreFragment : Fragment(), MoreScreenAdapter.MoreItemListener {
 
     private fun politiciansClick(position: Int) {
         when (position) {
+//            0 -> {
+////                val intent = Intent(requireContext(), StatsActivity::class.java)
+////                startActivity(intent)
+//            }
+//
+//            1 -> {
+////                val intent = Intent(requireContext(), SearchDebateActivity::class.java)
+////                startActivity(intent)
+//            }
+//
+//            2 -> {
+////                val intent = Intent(requireContext(), AllWinnersActivity::class.java)
+////                startActivity(intent)
+//            }
+
             0 -> {
-                val intent = Intent(requireContext(), StatsActivity::class.java)
-                startActivity(intent)
-            }
-
-            1 -> {
-                val intent = Intent(requireContext(), SearchDebateActivity::class.java)
-                startActivity(intent)
-            }
-
-            2 -> {
-                val intent = Intent(requireContext(), AllWinnersActivity::class.java)
-                startActivity(intent)
-            }
-
-            3 -> {
                 val intent = Intent(requireContext(), CreateLawActivity::class.java)
                 startActivity(intent)
             }
 
-            4 -> {
+            1 -> {
                 val intent = Intent(requireContext(), EventsActivity::class.java)
                 startActivity(intent)
 
 
             }
 
-            5 -> {
+            2 -> {
                 val intent = Intent(requireContext(), ProfileActivity2::class.java)
                 intent.putExtra("type", "user")
                 startActivity(intent)
             }
 
+            3 -> {
+                val intent = Intent(requireContext(), PastPetitionActivity::class.java)
+                startActivity(intent)
+            }
+
+            4 -> {
+
+                startActivity(Intent(requireActivity(),MediaActivity::class.java))
+
+            }
+
+            5 -> {
+                val intent = Intent(requireContext(), DonationsActivity::class.java)
+                startActivity(intent)
+            }
             6 -> {
-                val intent = Intent(requireContext(), AskToAddActivity::class.java)
-                        intent.putExtra("activity", "petition")
-                startActivity(intent)
+                Toast.makeText(requireActivity(), "Coming Soon", Toast.LENGTH_SHORT).show()
+//                val intent = Intent(requireContext(), DebateRequestsActivity::class.java)
+//                startActivity(intent)
             }
-
             7 -> {
-                val intent = Intent(requireContext(), DebateRequestsActivity::class.java)
-                startActivity(intent)
-            }
-
-            8 -> {
                 val intent = Intent(requireContext(), GovernmentScreenActivity::class.java)
                 startActivity(intent)
             }
 
-            9 -> {
+            8 -> {
                 val intent = Intent(requireContext(), AboutUsActivity::class.java)
                 intent.putExtra("type", "about")
                 startActivity(intent)
             }
 
-            10 -> {
+            9 -> {
                 val intent = Intent(requireContext(), SettingsActivity::class.java)
                 startActivity(intent)
             }
 
-            11 -> {
+            10 -> {
                 val intent = Intent(requireContext(), AboutUsActivity::class.java)
                 intent.putExtra("type", "privacy")
                 startActivity(intent)
             }
 
-            12 -> {
+            11 -> {
                 val intent = Intent(requireContext(), AboutUsActivity::class.java)
                 intent.putExtra("type", "conditions")
                 startActivity(intent)
             }
 
-            13 -> {
+            12 -> {
                 showPopUp()
 
             }
@@ -676,98 +747,49 @@ class MoreFragment : Fragment(), MoreScreenAdapter.MoreItemListener {
 
     private fun NGOClick(position: Int) {
         when (position) {
-            0 -> {
-                val intent = Intent(requireContext(), StatsActivity::class.java)
-                startActivity(intent)
-            }
+//            0 -> {
+////                val intent = Intent(requireContext(), StatsActivity::class.java)
+////                startActivity(intent)
+//            }
 
-            1 -> {
+            0 -> {
                 val intent = Intent(requireContext(), CreateLawActivity::class.java)
                 startActivity(intent)
             }
 
-            2 -> {
+            1 -> {
                 val intent = Intent(requireContext(), EventsActivity::class.java)
                 startActivity(intent)
             }
 
-            3 -> {
+            2 -> {
                 val intent = Intent(requireContext(), ProfileActivity2::class.java)
                 intent.putExtra("type", "user")
                 startActivity(intent)
             }
 
 
-            4 -> {
-                val intent = Intent(requireContext(), AboutUsActivity::class.java)
-                intent.putExtra("type", "about")
-                startActivity(intent)
-            }
-
-            5 -> {
-                val intent = Intent(requireContext(), SettingsActivity::class.java)
-                startActivity(intent)
-            }
-
-            6 -> {
-                val intent = Intent(requireContext(), AboutUsActivity::class.java)
-                intent.putExtra("type", "privacy")
-                startActivity(intent)
-            }
-
-            7 -> {
-                val intent = Intent(requireContext(), AboutUsActivity::class.java)
-                intent.putExtra("type", "conditions")
-                startActivity(intent)
-            }
-
-            8 -> {
-                showPopUp()
-
-            }
-
-        }
-    }
-
-    private fun entertainersClick(position: Int) {
-        when (position) {
-            0 -> {
-                val intent = Intent(requireContext(), StatsActivity::class.java)
-                startActivity(intent)
-            }
-
-            1 -> {
-                val intent = Intent(requireContext(), CreateLawActivity::class.java)
-                startActivity(intent)
-            }
-
-            2 -> {
-                val intent = Intent(requireContext(), EventsActivity::class.java)
-                startActivity(intent)
-            }
-
             3 -> {
-                val intent = Intent(requireContext(), ProfileActivity2::class.java)
-                intent.putExtra("type", "user")
+                val intent = Intent(requireContext(), DonationsActivity::class.java)
                 startActivity(intent)
             }
 
-
             4 -> {
+//                val intent = Intent(requireContext(), PastPetitionActivity::class.java)
+//                startActivity(intent)
+                startActivity(Intent(requireActivity(),MediaActivity::class.java))
+
+            }
+            5 -> {
                 val intent = Intent(requireContext(), AboutUsActivity::class.java)
                 intent.putExtra("type", "about")
                 startActivity(intent)
             }
 
-            5 -> {
+            6 -> {
                 val intent = Intent(requireContext(), SettingsActivity::class.java)
                 startActivity(intent)
             }
-
-            6 -> {
-                val intent = Intent(requireContext(), GovernmentScreenActivity::class.java)
-                startActivity(intent)
-                        }
 
             7 -> {
                 val intent = Intent(requireContext(), AboutUsActivity::class.java)
@@ -782,6 +804,77 @@ class MoreFragment : Fragment(), MoreScreenAdapter.MoreItemListener {
             }
 
             9 -> {
+                showPopUp()
+
+            }
+
+        }
+    }
+
+    private fun entertainersClick(position: Int) {
+        when (position) {
+//            0 -> {
+////                val intent = Intent(requireContext(), StatsActivity::class.java)
+////                startActivity(intent)
+//            }
+
+            0 -> {
+                val intent = Intent(requireContext(), CreateLawActivity::class.java)
+                startActivity(intent)
+            }
+
+            1 -> {
+                val intent = Intent(requireContext(), EventsActivity::class.java)
+                startActivity(intent)
+            }
+
+            2 -> {
+                val intent = Intent(requireContext(), ProfileActivity2::class.java)
+                intent.putExtra("type", "user")
+                startActivity(intent)
+            }
+
+
+            3 -> {
+                val intent = Intent(requireContext(), DonationsActivity::class.java)
+                startActivity(intent)
+            }
+
+            4 -> {
+//                val intent = Intent(requireContext(), PastPetitionActivity::class.java)
+//                startActivity(intent)
+                startActivity(Intent(requireActivity(),MediaActivity::class.java))
+
+            }
+            5 -> {
+                val intent = Intent(requireContext(), AboutUsActivity::class.java)
+                intent.putExtra("type", "about")
+                startActivity(intent)
+            }
+
+            6 -> {
+                val intent = Intent(requireContext(), SettingsActivity::class.java)
+                startActivity(intent)
+            }
+
+            7 -> {
+                val intent = Intent(requireContext(), GovernmentScreenActivity::class.java)
+                startActivity(intent)
+            }
+
+            8 -> {
+                val intent = Intent(requireContext(), AboutUsActivity::class.java)
+                intent.putExtra("type", "privacy")
+                startActivity(intent)
+            }
+
+            9 -> {
+                val intent = Intent(requireContext(), AboutUsActivity::class.java)
+                intent.putExtra("type", "conditions")
+                startActivity(intent)
+            }
+
+            10 -> {
                 showPopUp()
 
             }
@@ -808,34 +901,46 @@ class MoreFragment : Fragment(), MoreScreenAdapter.MoreItemListener {
 
 
             3 -> {
+                val intent = Intent(requireContext(), DonationsActivity::class.java)
+                startActivity(intent)
+            }
+
+            4 -> {
+                startActivity(Intent(requireActivity(),MediaActivity::class.java))
+
+//                val intent = Intent(requireContext(), PastPetitionActivity::class.java)
+//                startActivity(intent)
+            }
+
+            5 -> {
                 val intent = Intent(requireContext(), AboutUsActivity::class.java)
                 intent.putExtra("type", "about")
                 startActivity(intent)
             }
 
-            4 -> {
+            6 -> {
                 val intent = Intent(requireContext(), SettingsActivity::class.java)
                 startActivity(intent)
             }
 
-            5 -> {
+            7 -> {
                 val intent = Intent(requireContext(), GovernmentScreenActivity::class.java)
                 startActivity(intent)
-                        }
+            }
 
-            6 -> {
+            8 -> {
                 val intent = Intent(requireContext(), AboutUsActivity::class.java)
                 intent.putExtra("type", "privacy")
                 startActivity(intent)
             }
 
-            7 -> {
+            9 -> {
                 val intent = Intent(requireContext(), AboutUsActivity::class.java)
                 intent.putExtra("type", "conditions")
                 startActivity(intent)
             }
 
-            8 -> {
+            10 -> {
                 showPopUp()
 
             }

@@ -6,18 +6,18 @@ import android.content.ContentValues
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.database.Cursor
-import android.media.MediaPlayer
 import android.net.Uri
 import android.os.*
 import android.provider.MediaStore
+import android.text.TextUtils
 import android.util.Log
 import android.view.View
-import android.widget.Toast
+import android.widget.AdapterView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
-import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.abedelazizshe.lightcompressorlibrary.CompressionListener
 import com.abedelazizshe.lightcompressorlibrary.VideoCompressor
@@ -27,12 +27,13 @@ import com.application.onovapplication.R
 import com.application.onovapplication.UrlConnection.MultipartUtility
 import com.application.onovapplication.activities.DonorsActivity
 import com.application.onovapplication.databinding.ActionBarLayout2Binding
-import com.application.onovapplication.databinding.ActivityAboutInfoBinding
 import com.application.onovapplication.databinding.ActivityAskDonationsBinding
-import com.application.onovapplication.fragments.FeedFragment
-import com.application.onovapplication.model.DonationModel
 import com.application.onovapplication.model.EventModel
 import com.application.onovapplication.model.FeedsData
+import com.application.onovapplication.repository.BaseUrl
+import com.application.onovapplication.utils.CustomSpinnerAdapter
+import com.application.onovapplication.viewModels.DonationViewModel
+import com.application.onovapplication.viewModels.StatsViewModel
 import com.bumptech.glide.Glide
 import com.google.gson.Gson
 import id.zelory.compressor.Compressor
@@ -45,7 +46,6 @@ import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
-import kotlin.concurrent.thread
 
 class AskDonationsActivity : BaseAppCompatActivity(), View.OnClickListener {
     private var compressedImage: File? = null
@@ -53,8 +53,12 @@ class AskDonationsActivity : BaseAppCompatActivity(), View.OnClickListener {
     var mVideoFile: File? = null
     val LAUNCH_SECOND_ACTIVITY = 11
     var result = arrayListOf<String>()
+    var radius = ""
+    val donationViewModel by lazy { ViewModelProvider(this).get(DonationViewModel::class.java) }
+    private val statsViewModel by lazy { ViewModelProvider(this).get(StatsViewModel::class.java) }
 
-
+    private val spinnerList =
+        arrayOf("Select Radius", "Local", "State", "National")
     private var videoFile: File? = null
     private var path: String=""
     var feeds: FeedsData? = null
@@ -76,17 +80,23 @@ class AskDonationsActivity : BaseAppCompatActivity(), View.OnClickListener {
         setContentView(view)
         val incBinding:ActionBarLayout2Binding=binding.inc
         incBinding.tvScreenTitle.text = getString(R.string.ask_for_donations)
+        setSpinner()
+        observeViewModel()
         mtype=intent.getStringExtra("type").toString()
         if (intent.getParcelableExtra<FeedsData>("feed")!=null) {
             feeds = intent.getParcelableExtra("feed")
             if (feeds!=null)binding.addDonation.setText("Edit")
             binding.etDonationTitle.setText(feeds?.title)
             binding.dontnDesc.setText(feeds?.description)
+            binding.dntnGoal.setText(feeds?.donationGoal)
             if (feeds?.fileType=="photo") {
-                Glide.with(this).load(feeds?.filePath).into(binding.uploadPhoto)
-                //  photopath=feeds?.filePath.toString()
-            }//else  if (feeds?.fileType=="video") path=feeds?.filePath.toString()
-            //  dntnGoal.setText(feeds?.)
+                Glide.with(this).load(BaseUrl.photoUrl+feeds?.filePath).into(binding.uploadPhoto)
+            }
+            for (i in spinnerList.indices) {
+                if (spinnerList[i] == feeds?.areaLimit) {
+                    binding.spPetition.setSelection(i)
+                }
+            }
 
         }
 
@@ -95,8 +105,12 @@ class AskDonationsActivity : BaseAppCompatActivity(), View.OnClickListener {
             binding.picLyt.visibility=View.VISIBLE
             binding.videoLyt.visibility=View.GONE
         }else  if (mtype=="video"){
+
             binding.videoLyt.visibility=View.VISIBLE
+            binding.viewVideo.visibility=View.VISIBLE
             binding.picLyt.visibility=View.GONE
+            binding.uploadVideo.visibility=View.GONE
+            binding.viewVideo.setVideoURI(Uri.parse(BaseUrl.photoUrl+feeds?.filePath))
         }
 
     }
@@ -108,17 +122,90 @@ class AskDonationsActivity : BaseAppCompatActivity(), View.OnClickListener {
                 openFile()
             }R.id.tagDonor -> {
             val i =  Intent(this, DonorsActivity::class.java)
-            // i.putExtra("debate","debate")
             startActivityForResult(i, LAUNCH_SECOND_ACTIVITY)
             }
             R.id.addDonation -> {
-                if (binding.addDonation.text=="Post") {
-                    if (path == "") askdonation("photo", compressedImage.toString())
-                    else if (path != "") askdonation("video", path)
-                }else  if (binding.addDonation.text=="Edit") {
-                    if (path == "") editdonation(feeds!!, photopath)
-                    else if (path != "") editdonation(feeds!!, path)
-                }
+                if ( binding.etDonationTitle.text.toString()=="")setError("Add a title")
+                else      if (  binding.dontnDesc.text.toString()=="")setError("Add Description")
+                else      if (  binding.dntnGoal.text.toString()=="")setError("Add donation goal")
+                else    if ( radius=="Select Radius" )
+                    setError("Please select a radius")
+//                else if (mtype == "photo" && compressedImage==null) {
+//                    setError(getString(R.string.photo_error))
+//
+//                } else if (mtype == "video" && path == "") {
+//                    setError(getString(R.string.video_error))
+//
+//                }
+
+          else {
+
+                        if (binding.addDonation.text == "Post") {
+                            val opt: String = TextUtils.join(",", result)
+                            if (mtype=="photo") {
+                                if (compressedImage==null)
+                                    setError(getString(R.string.photo_error))
+
+                                else {
+                                    showDialog()
+                                    donationViewModel.requestDonation(
+                                        this,
+                                        userPreferences.getuserDetails()?.userRef.toString(),
+                                        binding.etDonationTitle.text.toString(),
+                                        binding.dontnDesc.text.toString(),
+                                        binding.dntnGoal.text.toString(),
+                                        "photo",
+                                        opt,
+                                        radius,
+                                        compressedImage
+                                    )
+                                }
+                            }
+                            else if (mtype=="video") {
+                                if (mtype == "video" && path == "")
+                                    setError(getString(R.string.video_error))
+                               else {
+                                    showDialog()
+                                    donationViewModel.requestDonation(
+                                        this,
+                                        userPreferences.getuserDetails()?.userRef.toString(),
+                                        binding.etDonationTitle.text.toString(),
+                                        binding.dontnDesc.text.toString(),
+                                        binding.dntnGoal.text.toString(),
+                                        "video",
+                                        opt,
+                                        radius,
+                                        videoFile
+                                    )
+                                }
+                            }
+                        } else if (binding.addDonation.text == "Edit") {
+                            val opt: String = TextUtils.join(",", result)
+
+                            if (feeds?.fileType == "photo") statsViewModel.editLaws(
+                                this,
+                                feeds?.id.toString(),
+                                feeds?.recordType.toString(),
+                                binding.etDonationTitle.text.toString(),
+                                binding.dontnDesc.text.toString(),
+                                feeds?.fileType.toString(),
+                                binding.dntnGoal.text.toString(),
+                                radius,
+                                compressedImage
+                            )
+                            else if (feeds?.fileType == "video") statsViewModel.editLaws(
+                                this,
+                                feeds?.id.toString(),
+                                feeds?.recordType.toString(),
+                                binding.etDonationTitle.text.toString(),
+                                binding.dontnDesc.text.toString(),
+                                feeds?.fileType.toString(),
+                                binding.dntnGoal.text.toString(),
+                                radius,
+                                videoFile
+                            )
+                        }
+                    }
             } R.id.pic_lyt -> {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -288,23 +375,29 @@ class AskDonationsActivity : BaseAppCompatActivity(), View.OnClickListener {
             when (requestCode) {
                 GALLERYVIDEO -> {
                     if (data != null) {
+
+                        binding.uploadVideo.visibility=View.GONE
+                        binding.viewVideo.visibility=View.VISIBLE
                         val contentURI: Uri = data.data!!
+
+                        binding.viewVideo.setVideoURI(contentURI)
+                        binding.viewVideo.start()
                         path = getMediaPath(contentURI)
 
 
-                        val mp: MediaPlayer = MediaPlayer.create(this, Uri.fromFile(File(path)))
-                        val duration: Int = mp.duration
-                        mp.release()
-                        if (duration / 10000 > 10) {
-
-                            showPopUp()
-                        } else {
+//                        val mp: MediaPlayer = MediaPlayer.create(this, Uri.fromFile(File(path)))
+//                        val duration: Int = mp.duration
+//                        mp.release()
+//                        if (duration / 10000 > 10) {
+//
+//                            showPopUp()
+//                        } else {
                             videoFile = saveVideoFile(path)
                             compressVideo(path, videoFile)
 
 
-                            videoFile = File(getRealPathFromUri(contentURI)!!)
-                        }
+//                            videoFile = File(getRealPathFromUri(contentURI)!!)
+//                        }
 
                     }
                 }
@@ -313,7 +406,11 @@ class AskDonationsActivity : BaseAppCompatActivity(), View.OnClickListener {
                     if (data != null) {
                         val contentURI: Uri = data.data!!
                         path = getMediaPath(contentURI)
+                        binding.uploadVideo.visibility=View.GONE
+                        binding.viewVideo.visibility=View.VISIBLE
 
+                        binding.viewVideo.setVideoURI(contentURI)
+                        binding.viewVideo.start()
                         videoFile = saveVideoFile(path)
                         compressVideo(path, videoFile)
                     }
@@ -360,9 +457,8 @@ class AskDonationsActivity : BaseAppCompatActivity(), View.OnClickListener {
                 LAUNCH_SECOND_ACTIVITY->{
                     if (resultCode == AppCompatActivity.RESULT_OK) {
                           result=
-                              data?.getStringArrayListExtra("result") as ArrayList<String>//("result")!!
-                        Toast.makeText(this, ""+result, Toast.LENGTH_SHORT).show()
-                        //  dntnViewModel.addDonations(this,userPreferences.getUserREf(),result,damount)
+                              data?.getStringArrayListExtra("result") as ArrayList<String>
+//                        Toast.makeText(this, ""+result, Toast.LENGTH_SHORT).show()
 
                     }
                     if (resultCode == AppCompatActivity.RESULT_CANCELED) {
@@ -394,9 +490,6 @@ class AskDonationsActivity : BaseAppCompatActivity(), View.OnClickListener {
 
 //            Glide.with(this).load(mPhotoFile).into(binding.uploadPhoto)
         }
-
-
-//        if (requestCode == LAUNCH_SECOND_ACTIVITY) { }
     }
 
     private fun showPopUp() {
@@ -435,6 +528,34 @@ class AskDonationsActivity : BaseAppCompatActivity(), View.OnClickListener {
         }
 
     }
+    private fun setSpinner() {
+        val spinnerAdapter = CustomSpinnerAdapter(
+            this,  // Use our custom adapter
+            R.layout.spinner_text, spinnerList
+        )
+
+
+        spinnerAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown)
+        binding.spPetition.adapter = spinnerAdapter
+
+
+        binding.spPetition.onItemSelectedListener = object :
+            AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+            }
+
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                radius = spinnerList[position]
+            }
+        }
+    }
+
     private fun compressVideo(path: String, mediaoFile: File?) {
         videoFile?.let {
             VideoCompressor.start(path, mediaoFile!!.path,
@@ -443,12 +564,14 @@ class AskDonationsActivity : BaseAppCompatActivity(), View.OnClickListener {
                         //Update UI
                         if (percent <= 100 && percent.toInt() % 5 == 0)
                             this@AskDonationsActivity.runOnUiThread {
+                                binding.progressBar.progress = percent.toInt()
 
                             }
                     }
 
                     override fun onStart() {
-
+                        binding.progressBar.visibility = View.VISIBLE
+                        binding.progressBar.progress = 0
                     }
 
                     override fun onSuccess() {
@@ -458,6 +581,7 @@ class AskDonationsActivity : BaseAppCompatActivity(), View.OnClickListener {
 
                             Looper.myLooper()?.let {
                                 Handler(it).postDelayed({
+                                    binding.progressBar.visibility = View.GONE
                                 }, 50)
                             }
                         }
@@ -544,7 +668,44 @@ class AskDonationsActivity : BaseAppCompatActivity(), View.OnClickListener {
         }
         return null
     }
+    private fun observeViewModel() {
+        donationViewModel.successfulRequestDonation.observe(this, androidx.lifecycle.Observer {
+            dismissDialog()
+            if (it != null) {
+                if (it) {
+                    if (donationViewModel.status == "success") {
+                        setError(donationViewModel.message)
+                        startActivity(Intent(this,HomeTabActivity::class.java))
+                        finish()
 
+                    } else {
+                        setError(donationViewModel.message)
+                        finish()
+                    }
+                }
+            } else {
+                setError(donationViewModel.message)
+            }
+        })
+
+        statsViewModel.successfulEditLaw.observe(this, androidx.lifecycle.Observer {
+            dismissDialog()
+            if (it != null) {
+                if (it) {
+                    if (statsViewModel.status == "success") {
+                        setError(statsViewModel.message)
+                      startActivity(Intent(this,HomeTabActivity::class.java))
+                    } else {
+                        setError(statsViewModel.message)
+                        finish()
+                    }
+                }
+            } else {
+                setError(statsViewModel.message)
+            }
+        })
+
+    }
     private fun getMediaPath(uri: Uri): String {
 
         val resolver = this.contentResolver
@@ -577,232 +738,9 @@ class AskDonationsActivity : BaseAppCompatActivity(), View.OnClickListener {
         } finally { cursor?.close() }
     }
 
-//    fun askdonation(type:String,mediaFile: String){
-//        showDialog()
-//        val charset = "UTF-8"
-//        val uploadFile1 = File(mediaFile)
-//        //  val uploadFile2 = File("e:/Test/PIC2.JPG")
-//        val requestURL = "https://bdztl.com/onov/api/v1/requestDonation"
-//
-//        try {
-//
-//            Thread {
-//                // Run whatever background code you want here.
-//
-//
-//
-//                /*  Handler(Looper.getMainLooper()).postDelayed({*/
-//                val multipart = MultipartUtility(requestURL, charset)
-//                multipart.addFormField("userRef", userPreferences.getUserREf())
-//                multipart.addFormField("title", binding.etDonationTitle.text.toString())
-//                multipart.addFormField("donationGoal", binding.dntnGoal.text.toString())
-//                multipart.addFormField("description", binding.dontnDesc.text.toString())
-//                multipart.addFormField("tagPeopleArr", result)
-//                multipart.addFormField("fileType", type)
-//                multipart.addFilePart("imageFile", uploadFile1)
-//                // val response: List<String> = multipart.finish() as List<String>
-//                val response: String = multipart.finish()
-//                println("SERVER REPLIED:")
-//                //   dismissDialog()
-////            for (line in response) {
-////                println(line)
-////                val mdonations=response as DonationModel
-////                if (mdonations.status!="success"){
-////                    setError(mdonations.msg)
-////                }
-////            }
-//
-//                val gson = Gson() // Or use new GsonBuilder().create();
-//
-//                data = gson.fromJson(response, EventModel::class.java)
-//                if (data != null) {
-//                    dismissDialog()
-//                    if (data.status == "success") {
-//                        setError(data.status)
-//                        runOnUiThread {
-//                            startActivity(Intent(this, HomeTabActivity::class.java))
-//                            dismissDialog()
-//
-//                        }
-//
-//                    } else {
-//                        setError(data.msg)
-//                    }
-//
-////                    Handler(Looper.getMainLooper()).postDelayed({
-////
-////                    }, 2000)
-//                }
-//
-//
-//
-//
-//
-//
-//            }.start()
-//
-//            /*    Handler(Looper.getMainLooper()).postDelayed({
-//                val multipart = MultipartUtility(requestURL, charset)
-//                multipart.addFormField("userRef", userPreferences.getUserREf())
-//                multipart.addFormField("title", binding.etDonationTitle.text.toString())
-//                multipart.addFormField("donationGoal", binding.dntnGoal.text.toString())
-//                multipart.addFormField("description", binding.dontnDesc.text.toString())
-//                multipart.addFormField("fileType", type)
-//                multipart.addFilePart("imageFile", uploadFile1)
-//               // val response: List<String> = multipart.finish() as List<String>
-//                val response: String = multipart.finish()
-//                println("SERVER REPLIED:")
-//             //   dismissDialog()
-//    //            for (line in response) {
-//    //                println(line)
-//    //                val mdonations=response as DonationModel
-//    //                if (mdonations.status!="success"){
-//    //                    setError(mdonations.msg)
-//    //                }
-//    //            }
-//
-//                    val gson = Gson() // Or use new GsonBuilder().create();
-//
-//                    data = gson.fromJson(response, EventModel::class.java)
-//                    if (data!=null) {
-//                        dismissDialog()
-//                        if (data.status=="success"){
-//                            setError(data.status)
-//                            startActivity(Intent(this,HomeTabActivity::class.java))
-//                        }else {
-//                            setError(data.msg)
-//                        }
-//
-//    //                    Handler(Looper.getMainLooper()).postDelayed({
-//    //
-//    //                    }, 2000)
-//                    }
-//                }, 2000)*/
-//        } catch (ex: IOException) {
-//            System.err.println(ex)
-//        }
-//
-//
-//    }
-
-    fun askdonation(type:String,mediaFile: String){
-
-        val charset = "UTF-8"
-        //  val uploadFile1 = File(mediaFile)
-        val uploadFile2 = File(mediaFile)
-        val requestURL = "https://bdztl.com/onov/api/v1/requestDonation"
-        showDialog()
-        try {
-
-            Thread {
-
-                val multipart = MultipartUtility(requestURL, charset)
-
-                multipart.addFormField("userRef", userPreferences.getUserREf())
-                multipart.addFormField("title", binding.etDonationTitle.text.toString())
-                multipart.addFormField("donationGoal", binding.dntnGoal.text.toString())
-                multipart.addFormField("description", binding.dontnDesc.text.toString())
-                multipart.addFormField("tagPeopleArr", result.toString())
-                multipart.addFormField("fileType", type)
-
-
-//                multipart.addFormField("recordId",data.id)
-//                multipart.addFormField("recordType", data.recordType)
-//                multipart.addFormField("title", binding.etDonationTitle.text.toString())
-//                multipart.addFormField("description", binding.dontnDesc.text.toString())
-//                multipart.addFormField("fileType", data.fileType)
-//                multipart.addFormField("donationGoal", binding.dntnGoal.text.toString())
-//                multipart.addFormField("tagPeopleArr", result)
-                multipart.addFilePart("imageFile", uploadFile2)
-                Log.e("mediaFilepath...=  ",mediaFile.toString())
-                //   cretePostViewModel.addFilePart("fileUpload", uploadFile2)
-                //  val response: List<String> = multipart.finish() as List<String>
-                val response: String = multipart.finish()
-                println("SERVER REPLIED:")
-                // dismissDialog()
-                val gson = Gson() // Or use new GsonBuilder().create();
-
-                data = gson.fromJson(response, EventModel::class.java)
-                if (data!=null) {
-                    setError(data.msg)
-                    dismissDialog()
-
-                }
-                runOnUiThread {
-
-                    if (data.status=="success"){
-
-                        startActivity(Intent(this,HomeTabActivity::class.java))
-                    }
-                    Handler(Looper.getMainLooper()).postDelayed({
-
-                    }, 2000)
-                }
-
-            }.start()
-
-
-/*
-            Handler(Looper.getMainLooper()).postDelayed({
-
-            }, 2000)*/
-
-        } catch (ex: IOException) {
-            System.err.println(ex)
-        }
-
-
-    }
-    fun editdonation(data:FeedsData,mediaFile: String){
-
-        val charset = "UTF-8"
-        //  val uploadFile1 = File(mediaFile)
-        val uploadFile2 = File(mediaFile)
-        val requestURL = "https://bdztl.com/onov/api/v1/editFeed"
-        showDialog()
-        try {
-            Handler(Looper.getMainLooper()).postDelayed({
-                val multipart = MultipartUtility(requestURL, charset)
-
-                multipart.addFormField("recordId",data.id)
-                multipart.addFormField("recordType", data.recordType)
-                multipart.addFormField("title", binding.etDonationTitle.text.toString())
-                multipart.addFormField("description", binding.dontnDesc.text.toString())
-                multipart.addFormField("fileType", data.fileType)
-                multipart.addFormField("donationGoal", binding.dntnGoal.text.toString())
-                multipart.addFilePart("mediaFile", uploadFile2)
-                Log.e("mediaFilepath...=  ",mediaFile.toString())
-                //   cretePostViewModel.addFilePart("fileUpload", uploadFile2)
-                //  val response: List<String> = multipart.finish() as List<String>
-                val response: String = multipart.finish()
-                println("SERVER REPLIED:")
-                // dismissDialog()
-                val gson = Gson() // Or use new GsonBuilder().create();
-
-                data1 = gson.fromJson(response, EventModel::class.java)
-                if (data!=null) {
-                    setError(data1.msg)
-                    dismissDialog()
-                    if (data1.status=="success"){
-//                      finishAffinity()
-//                        finish()
-                        startActivity(Intent(this,HomeTabActivity::class.java))
-                    }
-                    Handler(Looper.getMainLooper()).postDelayed({
-                        /// finish()
-                    }, 2000)
-                }
-            }, 2000)
-
-        } catch (ex: IOException) {
-            System.err.println(ex)
-        }
-
-
-    }
 
     override fun onBackPressed() {
         super.onBackPressed()
-        startActivity(Intent(this,HomeTabActivity::class.java))
+//        startActivity(Intent(this,HomeTabActivity::class.java))
     }
 }

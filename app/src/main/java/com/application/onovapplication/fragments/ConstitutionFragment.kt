@@ -31,53 +31,12 @@ class ConstitutionFragment: BaseFragment(),ParserResponseInterface {
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = ConstitutionLayoutBinding.inflate(inflater, container, false)
-//        WebScratch().execute()
-//        HtmlParser(this).execute("https://constitutionus.com/");
-//        binding.btnView.setOnClickListener {}
-//        binding.textView.setText(getString(R.string.nice_html))
-        binding.textView.setText(Html.fromHtml(getString(R.string.nice_html), FROM_HTML_MODE_LEGACY));
+
+        binding.textView.setText(Html.fromHtml(getString(R.string.nice_html), FROM_HTML_MODE_LEGACY))
 
         return binding.getRoot()
     }
-    class HtmlParser(parserResponseInterface: ParserResponseInterface) :
-        AsyncTask<String?, Void?, ArticleModel?>() {
-        private val parserResponseInterface: ParserResponseInterface
-         override fun doInBackground(vararg params: String?): ArticleModel? {
-            val url = params[0]
-            var articleModel: ArticleModel? = null
-            val headline: String
-            var article = ""
-            val pageDocument: Document
-            val elements: Elements
-            val articleElements: Elements
-            try {
-                pageDocument = Jsoup.connect(url).get()
-                elements = pageDocument.select("#body-content")
-                articleElements = pageDocument.select(".wrap .cols .col-1of2 p")
-                headline = elements.select("h1").text()
-                for (element in articleElements) {
-                    article = """
-                    $article${element.text()}
-                    
-                    
-                    """.trimIndent()
-                }
-                articleModel = ArticleModel(headline, article)
-            } catch (e: IOException) {
-                e.printStackTrace()
-            }
-            return articleModel
-        }
 
-        override fun onPostExecute(articleModel: ArticleModel?) {
-            super.onPostExecute(articleModel)
-            parserResponseInterface.onParsingDone(articleModel)
-        }
-
-        init {
-            this.parserResponseInterface = parserResponseInterface
-        }
-    }
 
     override fun onParsingDone(articleModel: ArticleModel?) {
         binding.progressBar.setVisibility(View.GONE)
@@ -101,7 +60,7 @@ class ConstitutionFragment: BaseFragment(),ParserResponseInterface {
         override fun onPostExecute(aVoid: Void?) {
             super.onPostExecute(aVoid)
             binding.textView.text = Html.fromHtml(words, FROM_HTML_MODE_LEGACY)
-//            binding.textView.text = words
+
         }
     }
 }

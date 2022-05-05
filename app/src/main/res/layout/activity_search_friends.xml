@@ -1,11 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:orientation="vertical"
+    android:background="@color/white"
     android:layout_height="match_parent"
     tools:context=".activities.common.SearchFriendsActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text_blue"
+        android:fontFamily="@font/poppins_medium"
+        android:textSize="18sp"
+        android:visibility="gone"
+        android:id="@+id/noDebateData"
+        android:layout_centerInParent="true"
+        android:text="@string/no_data_yet"
+        />
+    <androidx.appcompat.widget.LinearLayoutCompat
+
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
 
 
     <include layout="@layout/action_bar_layout"/>
@@ -17,22 +35,23 @@
 
 
     <EditText
-        android:layout_width="match_parent"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
-        android:paddingStart="15dp"
-        android:paddingEnd="15dp"
         android:id="@+id/searchKey"
-        android:textColor="@color/black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:textColorHint="@color/black"
+        android:layout_marginEnd="15dp"
+        android:layout_toStartOf="@+id/btnSearch"
+        android:background="@drawable/drawable_chat_background"
+        android:drawableStart="@drawable/ic_search"
+        android:drawablePadding="15dp"
         android:fontFamily="@font/poppins_regular"
         android:hint="Search here"
-        android:layout_toStartOf="@+id/btnSearch"
-        android:drawablePadding="15dp"
-        android:drawableStart="@drawable/ic_search"
-        android:background="@drawable/drawable_chat_background"
-        android:layout_height="wrap_content"/>
+        android:paddingStart="15dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="15dp"
+        android:paddingBottom="8dp"
+        android:textColor="@color/black" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:layout_width="wrap_content"
@@ -58,5 +77,5 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/rv_search_friends"
         android:layout_height="wrap_content"/>
-
-</androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</RelativeLayout>

@@ -11,9 +11,3 @@ data class ChatModel(
     val status: String
 )
 
-
-data class Chat(
-    val fullName: String,
-    val profilePic: String,
-    val userRef: String
-)

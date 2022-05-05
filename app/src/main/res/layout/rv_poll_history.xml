@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="@dimen/_4sdp"
+    android:elevation="@dimen/_22sdp"
+    android:background="@color/white"
+    android:layout_height="wrap_content">
+    <androidx.appcompat.widget.LinearLayoutCompat
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+        android:background="@color/white"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/ivChatProfile"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/dummy_profile_image" />
+
+
+        <TextView
+            android:id="@+id/userName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginEnd="5dp"
+            android:layout_toEndOf="@+id/ivChatProfile"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Gulf"
+            android:textColor="@color/text_blue"
+            android:textSize="@dimen/_9ssp" />
+
+        <TextView
+            android:id="@+id/pollQue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/userName"
+            android:layout_marginEnd="5dp"
+            android:layout_toEndOf="@+id/ivChatProfile"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Ask a Question"
+            android:textColor="@color/text_blue"
+            android:textSize="@dimen/_13ssp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:layout_alignParentEnd="true"
+            android:fontFamily="@font/poppins_regular"
+            android:text="View Result"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:id="@+id/viewResult"
+            android:background="@color/app_color"
+            android:layout_gravity="end"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:paddingVertical="@dimen/_3sdp"
+            android:paddingHorizontal="@dimen/_9sdp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_10ssp" />
+    </RelativeLayout>
+        <ImageView
+            android:id="@+id/ivFeed"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_120sdp"
+            android:layout_marginHorizontal="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:scaleType="centerCrop" />
+        <RelativeLayout
+        android:layout_width="match_parent"
+            android:paddingStart="@dimen/_40sdp"
+            android:background="@color/virtual_image_top"
+            android:paddingEnd="@dimen/_10sdp"
+            android:visibility="gone"
+            android:layout_marginVertical="@dimen/_10sdp"
+        android:layout_height="wrap_content">
+
+            <TextView
+            android:id="@+id/pollVote"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginEnd="5dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Gulf"
+            android:textColor="@color/navigation_color"
+            android:textSize="@dimen/_8ssp" />
+
+            <TextView
+                android:id="@+id/winOpt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/pollVote"
+                android:layout_marginEnd="5dp"
+                android:fontFamily="@font/poppins_regular"
+                android:text="your Question"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_11ssp" />
+    </RelativeLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/pollVote"
+            android:layout_marginEnd="5dp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Total Votes:"
+            android:id="@+id/totalVote"
+            android:paddingStart="@dimen/_40sdp"
+            android:textColor="@color/navigation_color"
+            android:textSize="@dimen/_10ssp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/pollVote"
+            android:layout_marginEnd="5dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Public Poll(your vote is visible to others)"
+            android:paddingStart="@dimen/_40sdp"
+            android:visibility="gone"
+            android:id="@+id/publicPoll"
+            android:textColor="@color/navigation_color"
+            android:textSize="@dimen/_10ssp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/pollVote"
+            android:layout_marginEnd="5dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Poll Ended"
+            android:paddingStart="@dimen/_40sdp"
+            android:id="@+id/pollEnded"
+            android:textColor="@color/navigation_color"
+            android:textSize="@dimen/_10ssp" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</androidx.cardview.widget.CardView>

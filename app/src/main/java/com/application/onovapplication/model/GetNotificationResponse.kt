@@ -1,9 +1,7 @@
 package com.application.onovapplication.model
 
 import com.google.gson.annotations.Expose
-
 import com.google.gson.annotations.SerializedName
-
 
 class GetNotificationResponse {
     @SerializedName("status")
@@ -20,9 +18,17 @@ class GetNotificationResponse {
 }
 
 class NotificationList {
-    @SerializedName("id")
+    @SerializedName("sender_id")
     @Expose
-    var id: String? = null
+    var sender_id: String? = null
+
+    @SerializedName("sender_fullName")
+    @Expose
+    var sennder_fullName: String? = null
+
+    @SerializedName("sender_profilePic")
+    @Expose
+    var sender_profilePic: String? = null
 
     @SerializedName("notifyTo")
     @Expose
@@ -36,11 +42,17 @@ class NotificationList {
     @Expose
     var notificationText: String? = null
 
+    @SerializedName("seen")
+    @Expose
+    var seen: String? = null
+
     @SerializedName("create_at")
     @Expose
-    var createAt: String? = null
+    var create_at: String? = null
 
     @SerializedName("update_at")
     @Expose
-    var updateAt: String? = null
+    var update_at: String? = null
+
+
 }

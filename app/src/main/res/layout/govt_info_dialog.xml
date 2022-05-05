@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/white"
+    android:layout_height="wrap_content">
+<ImageView
+    android:layout_width="@dimen/_20sdp"
+    android:src="@drawable/icon_video_close_gray"
+    android:layout_alignParentEnd="true"
+    android:id="@+id/close"
+    android:layout_height="@dimen/_20sdp"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:padding="@dimen/_12sdp"
+        android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/title_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:text="title: "
+        android:textSize="@dimen/_13ssp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/title_vl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title_txt"
+        android:layout_marginStart="@dimen/_15sdp"
+        android:layout_marginTop="@dimen/_2sdp"
+
+        android:text="party" />
+
+    <TextView
+        android:id="@+id/phone_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title_vl"
+        android:layout_marginStart="@dimen/_15sdp"
+        android:layout_marginTop="@dimen/_2sdp"
+        android:text="contact Info " />
+
+        <TextView
+            android:id="@+id/officeLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/phone_txt"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_2sdp"
+
+            android:text="office location " />
+</RelativeLayout></RelativeLayout>

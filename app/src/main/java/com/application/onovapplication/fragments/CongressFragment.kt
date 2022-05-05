@@ -1,12 +1,12 @@
 package com.application.onovapplication.fragments
 
+import android.app.Dialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.AdapterView
-import android.widget.Toast
+import android.widget.LinearLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -15,20 +15,17 @@ import com.application.onovapplication.R
 import com.application.onovapplication.activities.common.BaseFragment
 import com.application.onovapplication.adapters.ImagesGovernmentAdapter
 import com.application.onovapplication.adapters.StatesAdapter
-import com.application.onovapplication.api.ApiClient
 import com.application.onovapplication.api.ApiInterface
 import com.application.onovapplication.databinding.FragmentCongressBinding
+import com.application.onovapplication.databinding.GovtInfoDialogBinding
 import com.application.onovapplication.model.GovtData
-import com.application.onovapplication.model.SenateResponse
 import com.application.onovapplication.model.statesData
 
 import com.application.onovapplication.viewModels.GovernmentViewModel
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import java.io.IOException
 
-class CongressFragment(var title: String) : BaseFragment(), View.OnClickListener {
+
+class CongressFragment(var title: String) : BaseFragment(), View.OnClickListener,
+    ImagesGovernmentAdapter.OnAdapterClick {
     lateinit var rvImages: RecyclerView
 
 
@@ -36,8 +33,8 @@ class CongressFragment(var title: String) : BaseFragment(), View.OnClickListener
     var stateslist = arrayListOf<statesData>()
     private var apiInterface: ApiInterface? = null
     lateinit var binding: FragmentCongressBinding
-//    lateinit var adapter : ImagesGovernmentAdapter
-     var govtData:List<GovtData> =ArrayList()
+
+    var govtData: List<GovtData> = ArrayList()
     val governmentViewModel by lazy { ViewModelProvider(this).get(GovernmentViewModel::class.java) }
 
     override fun onCreateView(
@@ -48,9 +45,8 @@ class CongressFragment(var title: String) : BaseFragment(), View.OnClickListener
         binding = FragmentCongressBinding.inflate(inflater, container, false)
         initViews(binding.root)
 
-
         return binding.root
-        //return view
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -80,7 +76,7 @@ class CongressFragment(var title: String) : BaseFragment(), View.OnClickListener
                     i: Int,
                     l: Long
                 ) {
-                    Log.e("datahghg", stateslist[i].state!!)
+
                     binding.allState.setBackgroundResource(R.color.white)
 
                     if (stateslist.isNotEmpty()) {
@@ -102,7 +98,7 @@ class CongressFragment(var title: String) : BaseFragment(), View.OnClickListener
     override fun onClick(v: View?) {
         when (v!!.id) {
 
-            R.id.allState->{
+            R.id.allState -> {
                 showDialog()
                 binding.allState.setBackgroundResource(R.color.red)
                 governmentViewModel.getgovtdata(requireActivity(), title, "")
@@ -114,28 +110,25 @@ class CongressFragment(var title: String) : BaseFragment(), View.OnClickListener
     private fun observeViewModel() {
 
         governmentViewModel.successfulGovtData.observe(requireActivity(), Observer {
-dismissDialog()
+            dismissDialog()
             if (it != null) {
                 if (it) {
                     if (governmentViewModel.status == "success") {
-                     //  if (governmentViewModel.govtDataResponse.govtData.isNotEmpty()) {
-
-                            govtData=governmentViewModel.govtDataResponse.govtData
+                        if (isAdded && activity != null) {
+                            govtData = governmentViewModel.govtDataResponse.govtData
                             rvImages.layoutManager = GridLayoutManager(requireActivity(), 2)
-                          val adapter =ImagesGovernmentAdapter(requireActivity(),govtData)
+                            val adapter = ImagesGovernmentAdapter(
+                                requireActivity(), govtData, this
+                            )
                             rvImages.adapter = adapter
                             adapter.notifyDataSetChanged()
-//                        } else{
-//                           binding.rvImages.visibility=View.GONE
-//                           binding.noDataText.visibility=View.VISIBLE
-//
-//                       }
+                        }
                     }
                 }
             }
         })
         governmentViewModel.successfulState.observe(requireActivity(), Observer {
-dismissDialog()
+            dismissDialog()
             if (it != null) {
                 if (it) {
                     if (governmentViewModel.status == "success") {
@@ -147,10 +140,9 @@ dismissDialog()
                             stateslist.addAll(governmentViewModel.stateResponse.statesData!!)
                             states.add("Alabama")
 
-                            for (i in 0..stateslist.size-1)
-                             {
-                                 states.add(governmentViewModel.stateResponse.statesData!!.get(i).state.toString())
-                            Log.e("datahghg", "dd "+states[i])
+                            for (i in 0..stateslist.size - 1) {
+                                states.add(governmentViewModel.stateResponse.statesData!!.get(i).state.toString())
+                                Log.e("datahghg", "dd " + states[i])
                             }
                             val spinnerAdapter = StatesAdapter(
                                 requireActivity(),  // Use our custom adapter
@@ -159,11 +151,6 @@ dismissDialog()
                             )
                             spinnerAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown)
                             binding.spState.adapter = spinnerAdapter
-
-
-                            // states.addAll(governmentViewModel.stateResponse.statesData)
-
-
 
 
                         }
@@ -175,44 +162,39 @@ dismissDialog()
     }
 
 
-    private fun getSenate() {
-        showDialog()
-        apiInterface = ApiClient.getRetrofit("https://api.propublica.org/congress/v1/116/senate/")
-            ?.create(ApiInterface::class.java)
-        val call = apiInterface?.classlist()
-        call?.enqueue(object : Callback<SenateResponse?> {
-            override fun onResponse(
-                call: Call<SenateResponse?>,
-                response: Response<SenateResponse?>
-            ) {
-                dismissDialog()
-                val response1 = response.body()
-                if (response1!!.status.equals("OK")) {
-//
-                    rvImages.layoutManager = GridLayoutManager(activity, 2)
-                    val adapter = ImagesGovernmentAdapter(
-                        requireActivity(),
-                        governmentViewModel.govtDataResponse.govtData
-                    )
-                    rvImages.adapter = adapter
-//                    if (r1 != null) {
-//                        for (i in 1..r1.size) {
-//                            arrayList.addAll(listOf(r1.get(i - 1).className))
-//                        }
-//                    }
-                }
-            }
-
-            override fun onFailure(call: Call<SenateResponse?>, t: Throwable) {
-                dismissDialog()
-                if (t is IOException) {
-                    Toast.makeText(requireActivity(), t.message, Toast.LENGTH_SHORT).show()
-                    //  Toast.makeText(requireActivity(), "Something went wrong, Please try again", Toast.LENGTH_SHORT).show()
-                } else {
-                    Toast.makeText(requireActivity(), "Something went wrong", Toast.LENGTH_SHORT)
-                        .show()
-                }
-            }
-        })
+    override fun doClick(dataItem: GovtData?) {
+        openDonationsDialog(dataItem)
     }
+
+    private fun openDonationsDialog(dataItem: GovtData?) {
+        val dialog = Dialog(requireActivity())
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(true)
+        val binding = GovtInfoDialogBinding.inflate(dialog.layoutInflater)
+        val view = binding.root
+        dialog.setContentView(view)
+        dialog.window?.setLayout(
+            LinearLayout.LayoutParams.MATCH_PARENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT
+        )
+
+        binding.titleTxt.text = dataItem?.name
+        binding.officeLocation.text = "Office Location: " + dataItem?.officeLocation
+        binding.titleVl.text = "Party: " + dataItem?.party
+        binding.phoneTxt.text = "Contact Info: " + dataItem?.contactInfo
+        dialog.setOnKeyListener(DialogInterface.OnKeyListener { dialog, keyCode, event ->
+            if (keyCode == KeyEvent.KEYCODE_BACK) {
+                dialog?.cancel()
+                return@OnKeyListener true
+
+            }
+            false
+        })
+
+        binding.close.setOnClickListener { dialog.dismiss() }
+        dialog.show()
+
+    }
+
+
 }

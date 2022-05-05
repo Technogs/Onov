@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:background="@color/white"
     android:layout_height="wrap_content">
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,10 +18,10 @@
             android:hint="@string/time"
             android:layout_marginVertical="@dimen/_5sdp"
             android:inputType="number"
-            android:paddingVertical="15dp"
+            android:paddingVertical="@dimen/_5sdp"
             android:paddingHorizontal="@dimen/_18sdp"
             android:text="hello"
-            android:textColor="@color/navigation_color"
+            android:textColor="@color/black"
             android:textColorHint="@color/navigation_color" />
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
@@ -33,9 +34,10 @@
             android:hint="@string/time"
             android:layout_marginVertical="@dimen/_4sdp"
             android:inputType="number"
-            android:padding="15dp"
+            android:paddingHorizontal="15dp"
+            android:paddingVertical="@dimen/_5sdp"
             android:text="2"
-            android:textColor="@color/navigation_color"
+            android:textColor="@color/black"
             android:textColorHint="@color/navigation_color" />
 
     </LinearLayout>

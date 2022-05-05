@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".activities.GovtDetailActivity">
 
     <LinearLayout
@@ -125,13 +126,14 @@
                 android:layout_marginTop="@dimen/_5sdp"
                 android:layout_toRightOf="@+id/office_txt"
                 android:text="name" />
+
             <TextView
-                android:layout_width="@dimen/_80sdp"
-                android:layout_below="@+id/office_txt"
                 android:id="@+id/title_txt"
+                android:layout_width="@dimen/_80sdp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/office_txt"
                 android:layout_marginStart="@dimen/_5sdp"
-                android:text="title: "
-                android:layout_height="wrap_content"/>
+                android:text="title: " />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_below="@+id/office_txt"

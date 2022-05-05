@@ -206,6 +206,22 @@
         android:paddingBottom="8dp"
         android:textColor="@color/navigation_color"
         android:textColorHint="@color/navigation_color" />
+            <EditText
+        android:id="@+id/pLocation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_15sdp"
+        android:background="@drawable/drawable_chat_background"
+        android:gravity="center"
+        android:layout_marginTop="15dp"
+        android:hint="Confirm Location"
+        android:onClick="onClick"
+        android:paddingStart="15dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="15dp"
+        android:paddingBottom="8dp"
+        android:textColor="@color/navigation_color"
+        android:textColorHint="@color/navigation_color" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -258,8 +274,7 @@ android:layout_marginBottom="20dp"
             android:id="@+id/petition_pic"
             android:onClick="onClick"
             android:visibility="gone"
-            android:layout_marginTop="@dimen/_10sdp"
-          >
+            android:layout_marginTop="@dimen/_10sdp">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="wrap_content"
@@ -300,6 +315,12 @@ android:layout_marginBottom="20dp"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="@dimen/_10sdp"
             android:onClick="onClick">
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_centerInParent="true"
+                android:id="@+id/progressBar"
+                android:visibility="gone"
+                android:layout_height="wrap_content"/>
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/upload_video"
@@ -307,7 +328,13 @@ android:layout_marginBottom="20dp"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:src="@drawable/video_transparent" />
-
+            <VideoView
+                android:id="@+id/view_video"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/video_transparent"
+                android:visibility="gone" />
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

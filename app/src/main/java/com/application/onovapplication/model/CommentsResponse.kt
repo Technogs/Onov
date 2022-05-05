@@ -31,7 +31,7 @@ data class CommentData(
     @SerializedName("likeCount")
     var likeCount: String,
     @SerializedName("replyCount")
-    val replyCount: String,
+    var replyCount: String,
     @SerializedName("created_at")
     val created_at: String,
     @SerializedName("fullName")

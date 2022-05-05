@@ -7,8 +7,6 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.database.Cursor
 import android.net.Uri
-import android.os.Bundle
-import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
@@ -25,28 +23,40 @@ import com.application.onovapplication.viewModels.StatsViewModel
 import java.util.*
 import android.provider.DocumentsContract
 import android.content.ContentUris
-import android.os.Build
 import android.annotation.TargetApi
+import android.os.*
+import android.widget.AdapterView
+import com.application.onovapplication.UrlConnection.MultipartUtility
+import com.application.onovapplication.activities.common.ForgotPasswordOtpActivity
+import com.application.onovapplication.activities.common.HomeTabActivity
 import com.application.onovapplication.databinding.ActionBarLayout2Binding
 import com.application.onovapplication.databinding.ActivityCreateAnnouncementBinding
 import com.application.onovapplication.databinding.ActivityCreateLawBinding
 import com.application.onovapplication.model.FeedsData
+import com.application.onovapplication.model.RegisterResponse
 import com.application.onovapplication.repository.BaseUrl
+import com.application.onovapplication.utils.CustomSpinnerAdapter
 import com.application.onovapplication.utils.FileUtils
 import java.io.*
 import com.application.onovapplication.utils.GetFilePath.isMediaDocument
 import com.application.onovapplication.utils.GetFilePath.isDownloadsDocument
 import com.application.onovapplication.utils.GetFilePath.isExternalStorageDocument
+import com.google.gson.Gson
+import kotlin.concurrent.thread
 
 class CreateLawActivity : BaseAppCompatActivity(), View.OnClickListener {
     private val BUFFER_SIZE = 1024 * 2
     private val IMAGE_DIRECTORY = "/demonuts_upload_gallery"
     private val PICK_PDF_REQUEST = 1
     var feeds: FeedsData? = null
+    var radius = ""
     private val STORAGE_PERMISSION_CODE = 123
     private val statsViewModel by lazy { ViewModelProvider(this).get(StatsViewModel::class.java) }
     private var myUri: Uri? = null
     private var file: File? = null
+    var data: RegisterResponse? = null
+    private val spinnerList =
+        arrayOf("Select Radius", "Local", "State", "National")
     private var myFile: String? = null
     private lateinit var binding: ActivityCreateLawBinding
 
@@ -65,9 +75,37 @@ class CreateLawActivity : BaseAppCompatActivity(), View.OnClickListener {
             binding.lawDesc.setText(feeds?.description)
          //   file=File(BaseUrl.photoUrl+feeds?.filePath)
         }
+        setSpinner()
         observeViewModel()
     }
+    private fun setSpinner() {
+        val spinnerAdapter = CustomSpinnerAdapter(
+            this,  // Use our custom adapter
+            R.layout.spinner_text, spinnerList
+        )
 
+
+        spinnerAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown)
+        binding.spPetition.adapter = spinnerAdapter
+
+
+        binding.spPetition.onItemSelectedListener = object :
+            AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+            }
+
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                // selectedRole = parent?.getItemAtPosition(position).toString()
+                radius = spinnerList[position]
+            }
+        }
+    }
     override fun onClick(p0: View?) {
         when (p0?.id) {
             R.id.btnUploadPdf -> {
@@ -105,11 +143,13 @@ class CreateLawActivity : BaseAppCompatActivity(), View.OnClickListener {
                 else {
                     showDialog()
                     if (binding.postLaw.text=="Post") {
+//                        addLaw()
+
                         statsViewModel.addLaws(
                             this,
                             binding.etLawTitle.text.toString(),
                             userPreferences.getuserDetails()?.userRef.toString(),
-                            binding.lawDesc.text.toString(),
+                            binding.lawDesc.text.toString(),radius,
                             "document", file
                         )
                     }else  if (binding.postLaw.text=="Edit") {
@@ -117,7 +157,7 @@ class CreateLawActivity : BaseAppCompatActivity(), View.OnClickListener {
                             this,feeds?.id.toString(),feeds?.recordType.toString(),
                             binding.etLawTitle.text.toString(),
                             binding.lawDesc.text.toString(),
-                            "document","", file
+                            "document","",radius, file
                         )}
                 }
             }
@@ -404,7 +444,7 @@ class CreateLawActivity : BaseAppCompatActivity(), View.OnClickListener {
                 if (it) {
                     if (statsViewModel.status == "success") {
                         setError(statsViewModel.message)
-                        finish()
+                       startActivity(Intent(this,HomeTabActivity::class.java))
                     } else {
                         setError(statsViewModel.message)
                         finish()
@@ -430,5 +470,54 @@ class CreateLawActivity : BaseAppCompatActivity(), View.OnClickListener {
                 setError(statsViewModel.message)
             }
         })
+    }
+
+
+    fun addLaw(){
+
+        val charset = "UTF-8"
+//        showDialog()
+        try {
+            var uploadFile1=File(myFile.toString())
+            var uploadFile2=File("")
+            thread {
+                val requestURL = "https://bdztl.com/onov/api/v1/addLaws"
+                /*     runOnUiThread {  }*/
+
+                val multipart = MultipartUtility(requestURL, charset)
+                multipart.addFormField("userRef", userPreferences.getuserDetails()?.userRef.toString())
+                multipart.addFormField("lawTitle",  binding.etLawTitle.text.toString())
+                multipart.addFormField("description",   binding.lawDesc.text.toString())
+                multipart.addFormField("fileType",  "document")
+                multipart.addFormField("areaLimit", radius)
+
+                multipart.addFilePart("documentFile", uploadFile1)
+//                multipart.addFilePart("coverPhoto", compressedImage)
+                val response: String = multipart.finish()
+
+                println("SERVER REPLIED:")
+
+                val gson = Gson() // Or use new GsonBuilder().create();
+
+                data = gson.fromJson(response, RegisterResponse::class.java)
+
+                if (data!=null) {
+                    setError(data?.msg.toString())
+                    dismissDialog()
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        //finish()
+                        val intent = Intent(this, HomeTabActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                        //finishAffinity()
+                    }, 2000)
+                }
+
+            }
+
+
+        } catch (ex: IOException) {
+            System.err.println(ex)
+        }
     }
 }

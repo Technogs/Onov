@@ -4,23 +4,46 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.res.Configuration
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
+import android.view.KeyEvent
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
+import android.webkit.WebView
 import android.widget.EditText
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.VideoView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.application.onovapplication.R
 import com.application.onovapplication.prefs.PreferenceManager
-
+import com.application.onovapplication.repository.BaseUrl
+import com.bumptech.glide.Glide
+import com.google.android.exoplayer2.ExoPlayerFactory
+import com.google.android.exoplayer2.SimpleExoPlayer
+import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory
+import com.google.android.exoplayer2.extractor.ExtractorsFactory
+import com.google.android.exoplayer2.source.ExtractorMediaSource
+import com.google.android.exoplayer2.source.MediaSource
+import com.google.android.exoplayer2.trackselection.AdaptiveTrackSelection
+import com.google.android.exoplayer2.trackselection.DefaultTrackSelector
+import com.google.android.exoplayer2.trackselection.TrackSelector
+import com.google.android.exoplayer2.ui.AspectRatioFrameLayout
+import com.google.android.exoplayer2.ui.SimpleExoPlayerView
+import com.google.android.exoplayer2.upstream.BandwidthMeter
+import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter
+import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory
 import com.google.android.material.snackbar.Snackbar
 import java.text.ParseException
 import java.text.SimpleDateFormat
@@ -29,6 +52,7 @@ import android.view.MotionEvent as MotionEvent1
 
 
 abstract class BaseAppCompatActivity : AppCompatActivity() {
+    var exoPlayer: SimpleExoPlayer? = null
 
     val userPreferences: PreferenceManager by lazy {
         PreferenceManager(this)
@@ -75,7 +99,6 @@ abstract class BaseAppCompatActivity : AppCompatActivity() {
     fun showDialog() {
         if (!mDialog.isShowing) {
             mDialog.show()
-            mDialog.setCancelable(false)
         }
     }
 
@@ -189,4 +212,126 @@ abstract class BaseAppCompatActivity : AppCompatActivity() {
         val seconds = millis / 1000
         return seconds
     }
+
+     fun showDialogMedia(data: String,type: String) {
+
+        var dialog = Dialog(this)
+
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(false)
+        dialog.setContentView(R.layout.custom_layout)
+        dialog.getWindow()?.setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+
+        val ivFeed = dialog.findViewById(R.id.ivFeed) as ImageView
+        val cross = dialog.findViewById(R.id.close) as ImageView
+        val vvFeed = dialog.findViewById(R.id.vvFeed) as VideoView
+
+        val idExoPlayerVIew = dialog.findViewById(R.id.idExoPlayerVIew) as SimpleExoPlayerView
+        val wbFeed = dialog.findViewById(R.id.wbFeed) as WebView
+        idExoPlayerVIew.setResizeMode(AspectRatioFrameLayout.RESIZE_MODE_FILL)
+
+        cross.setOnClickListener { dialog.dismiss() }
+
+            when (type) {
+                "document" -> {
+                    wbFeed.visibility = View.VISIBLE
+                    vvFeed.visibility = View.GONE
+                    idExoPlayerVIew.visibility = View.GONE
+
+                    ivFeed.visibility = View.GONE
+                    wbFeed.settings.javaScriptEnabled = true
+
+                    wbFeed.settings.javaScriptCanOpenWindowsAutomatically = true
+                    wbFeed.scrollBarStyle = View.SCROLLBARS_INSIDE_OVERLAY
+                    wbFeed.loadUrl(
+                        "https://docs.google.com/gview?embedded=true&url=".plus(
+                            BaseUrl.photoUrl + data
+                        )
+                    )
+
+                }
+
+                "video" -> {
+
+                    wbFeed.visibility = View.GONE
+                    vvFeed.visibility = View.GONE
+                    idExoPlayerVIew.visibility = View.VISIBLE
+                    ivFeed.visibility = View.GONE
+                        exoplayer(BaseUrl.photoUrl + data,idExoPlayerVIew)
+                }
+
+                "photo" -> {
+                    wbFeed.visibility = View.GONE
+                    vvFeed.visibility = View.GONE
+                    idExoPlayerVIew.visibility = View.GONE
+                    ivFeed.visibility = View.VISIBLE
+                        Glide.with(this).load(BaseUrl.photoUrl + data)
+                            .into(ivFeed)
+
+                }
+            }
+        dialog.setOnKeyListener(DialogInterface.OnKeyListener { dialog, keyCode, event ->
+            if (keyCode == KeyEvent.KEYCODE_BACK) {
+                dialog?.cancel()
+                return@OnKeyListener true
+
+            }
+            false
+        })
+        dialog.show()
+
+    }
+
+    fun exoplayer(videoURL: String,explayer:SimpleExoPlayerView)
+    {
+        try {
+            // bandwisthmeter is used for
+            // getting default bandwidth
+            val bandwidthMeter: BandwidthMeter = DefaultBandwidthMeter()
+
+            // track selector is used to navigate between
+            // video using a default seekbar.
+            val trackSelector: TrackSelector =
+                DefaultTrackSelector(AdaptiveTrackSelection.Factory(bandwidthMeter))
+
+            // we are adding our track selector to exoplayer.
+            exoPlayer = ExoPlayerFactory.newSimpleInstance(this, trackSelector)
+
+            // we are parsing a video url
+            // and parsing its video uri.
+            val videouri: Uri = Uri.parse(videoURL)
+
+            // we are creating a variable for datasource factory
+            // and setting its user agent as 'exoplayer_view'
+            val dataSourceFactory = DefaultHttpDataSourceFactory("exoplayer_video")
+
+            // we are creating a variable for extractor factory
+            // and setting it to default extractor factory.
+            val extractorsFactory: ExtractorsFactory = DefaultExtractorsFactory()
+
+            // we are creating a media source with above variables
+            // and passing our event handler as null,
+            val mediaSource: MediaSource =
+                ExtractorMediaSource(videouri, dataSourceFactory, extractorsFactory, null, null)
+
+            // inside our exoplayer view
+            // we are setting our player
+            explayer.player = exoPlayer
+            // exoPlayerView.setPlayer(exoPlayer)
+
+            // we are preparing our exoplayer
+            // with media source.
+            exoPlayer?.prepare(mediaSource)
+
+            // we are setting our exoplayer
+            // when it is ready.
+            //   exoPlayer?.playWhenReady = true
+            exoPlayer?.playWhenReady = false
+        } catch (e: Exception) {
+            // below line is used for
+            // handling our errors.
+            Log.e("TAG", "Error : $e")
+        }
+    }
+
 }

@@ -2,23 +2,17 @@ package com.application.onovapplication.activities
 
 import android.content.Intent
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.StrictMode
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.application.onovapplication.R
-import com.application.onovapplication.activities.common.AskDonationsActivity
 import com.application.onovapplication.activities.common.AskToAddActivity
 import com.application.onovapplication.activities.common.BaseAppCompatActivity
 import com.application.onovapplication.adapters.DonationsAdapter
-import com.application.onovapplication.databinding.ActivityCommentBinding
-import com.application.onovapplication.databinding.ActivityDonationsBinding
 import com.application.onovapplication.databinding.ActivityDonationsNgoBinding
 import com.application.onovapplication.model.DonationData
 import com.application.onovapplication.viewModels.DonationViewModel
-import com.application.onovapplication.viewModels.EventDetailViewModel
 
 class DonationsActivity : BaseAppCompatActivity() {
     private lateinit var binding: ActivityDonationsNgoBinding
@@ -31,7 +25,6 @@ class DonationsActivity : BaseAppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //setContentView(R.layout.activity_donations_ngo)
         binding = ActivityDonationsNgoBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)

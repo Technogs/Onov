@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/white"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:id="@+id/shrDltLyt"
+    android:visibility="gone"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/shareBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="@dimen/_15sdp"
+        android:layout_toLeftOf="@+id/deleteBtn"
+        android:fontFamily="@font/poppins_medium"
+        android:justificationMode="inter_word"
+        android:paddingHorizontal="@dimen/_5sdp"
+        android:text="Share"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_14ssp" />
+
+    <TextView
+        android:id="@+id/deleteBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="@dimen/_15sdp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="Delete"
+        android:paddingHorizontal="@dimen/_5sdp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_14ssp" />
+</RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/feedMedia"
+        android:layout_margin="@dimen/_1sdp"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/ivFeed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:background="@color/white" />
+<!--        </androidx.cardview.widget.CardView>-->
+
+
+        <VideoView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/vvFeed"
+            android:visibility="gone" />
+        <com.google.android.exoplayer2.ui.SimpleExoPlayerView
+            android:id="@+id/idExoPlayerVIew"
+            android:layout_width="match_parent"
+            android:visibility="gone"
+            app:resize_mode="fill"
+            android:layout_height="@dimen/_300sdp" />
+
+        <WebView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/wbFeed"
+            android:visibility="gone"
+            tools:ignore="WebViewLayout" />
+
+        <ImageView
+            android:id="@+id/close"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_alignParentEnd="true"
+            android:paddingStart="@dimen/_8sdp"
+            android:paddingBottom="@dimen/_8sdp"
+            android:paddingEnd="@dimen/_2sdp"
+            android:paddingTop="@dimen/_2sdp"
+            android:src="@drawable/icon_video_close_gray" />
+    </RelativeLayout>
+    <ImageView
+        android:layout_width="@dimen/_30sdp"
+        android:src="@drawable/black_cross"
+        android:padding="@dimen/_9sdp"
+        android:id="@+id/cross"
+        android:visibility="gone"
+        android:layout_marginEnd="@dimen/_5sdp"
+        android:layout_height="@dimen/_30sdp"/>
+</LinearLayout>

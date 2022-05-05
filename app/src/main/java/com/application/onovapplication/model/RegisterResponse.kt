@@ -18,7 +18,7 @@ class RegisterResponse {
 
     @SerializedName("data")
     @Expose
-    var registrationData: RegistrationData? = null
+    var registrationData: UserInfo? = null
 }
 
 class  RegistrationData {

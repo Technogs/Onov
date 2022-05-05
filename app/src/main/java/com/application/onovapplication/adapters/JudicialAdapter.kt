@@ -28,15 +28,11 @@ holder.bind(judicialList[position])
     class JudicialViewHolder(val binding: ItemViewJudicialBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(judicialData: JudicialData) {
 
-//            Glide.with(context).load( BaseUrl.photoUrl+judicialData.memberPic).into(
-//                binding.judicialPic)
 
             binding.judiciaryAge.text = judicialData.age
             binding.judiciaryJoining.text = judicialData.appointmentDate
             binding.judiciaryName.text = judicialData.name
-//            binding.judiciaryPlace.text = judicialData.
             binding.judiciaryScv.text = judicialData.scv
-//            binding.judiciaryAge.text = judicialData.age
             binding.judiciaryAppointedBy.text = judicialData.appointmentBy
 
 

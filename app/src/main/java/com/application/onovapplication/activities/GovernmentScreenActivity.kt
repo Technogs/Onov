@@ -1,28 +1,20 @@
 package com.application.onovapplication.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.AdapterView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.application.onovapplication.R
 import com.application.onovapplication.activities.common.BaseAppCompatActivity
-import com.application.onovapplication.api.ApiClient
-import com.application.onovapplication.api.ApiInterface
+import com.application.onovapplication.databinding.ActionBarLayoutBinding
+import com.application.onovapplication.databinding.ActivityGovernmentScreenBinding
 import com.application.onovapplication.fragments.CongressFragment
 import com.application.onovapplication.fragments.ConstitutionFragment
 import com.application.onovapplication.fragments.ExecutiveFragment
 import com.application.onovapplication.fragments.JudicialFragment
-import com.application.onovapplication.model.SenateResponse
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import java.io.IOException
 
 
 class GovernmentScreenActivity : BaseAppCompatActivity(), View.OnClickListener {
@@ -31,13 +23,19 @@ class GovernmentScreenActivity : BaseAppCompatActivity(), View.OnClickListener {
     lateinit var tvLegislation: TextView
     lateinit var tvCongress: TextView
     lateinit var tvJudicial: TextView
+    private lateinit var binding: ActivityGovernmentScreenBinding
+    lateinit var includedView: ActionBarLayoutBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_government_screen)
+        binding = ActivityGovernmentScreenBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
+        includedView= binding.ab
 
         initViews()
         replaceFragment(CongressFragment("Congress"))
+        includedView.usrName.text=binding.tvCongress.text
         tvCongress.setBackgroundResource(R.drawable.background_gradient_square)
         tvCongress.setTextColor(ContextCompat.getColor(this, R.color.white))
 
@@ -68,6 +66,7 @@ class GovernmentScreenActivity : BaseAppCompatActivity(), View.OnClickListener {
     override fun onClick(p0: View?) {
         when (p0!!.id) {
             R.id.tvExecutive -> {
+                includedView.usrName.text=binding.tvExecutive.text
                 tvExecutive.setBackgroundResource(R.drawable.background_gradient_square)
                 tvExecutive.setTextColor(ContextCompat.getColor(this, R.color.white))
                 tvSenate.setBackgroundResource(R.color.white)
@@ -79,8 +78,10 @@ class GovernmentScreenActivity : BaseAppCompatActivity(), View.OnClickListener {
                 tvJudicial.setBackgroundResource(R.color.white)
                 tvJudicial.setTextColor(ContextCompat.getColor(this, R.color.grey))
                 replaceFragment(ExecutiveFragment())
+
             }
             R.id.tvSenate -> {
+                includedView.usrName.text=binding.tvSenate.text
                 tvExecutive.setBackgroundResource(R.color.white)
                 tvExecutive.setTextColor(ContextCompat.getColor(this, R.color.grey))
                 tvSenate.setBackgroundResource(R.drawable.background_gradient_square)
@@ -94,6 +95,7 @@ class GovernmentScreenActivity : BaseAppCompatActivity(), View.OnClickListener {
                 replaceFragment(CongressFragment("Senate"))
             }
             R.id.tvLegislation -> {
+                includedView.usrName.text=binding.tvLegislation.text
                 tvExecutive.setBackgroundResource(R.color.white)
                 tvExecutive.setTextColor(ContextCompat.getColor(this, R.color.grey))
                 tvSenate.setBackgroundResource(R.color.white)
@@ -109,6 +111,7 @@ class GovernmentScreenActivity : BaseAppCompatActivity(), View.OnClickListener {
 //                replaceFragment(CongressFragment("legislation"))
             }
             R.id.tvCongress -> {
+                includedView.usrName.text=binding.tvCongress.text
                 tvExecutive.setBackgroundResource(R.color.white)
                 tvExecutive.setTextColor(ContextCompat.getColor(this, R.color.grey))
                 tvSenate.setBackgroundResource(R.color.white)
@@ -122,6 +125,7 @@ class GovernmentScreenActivity : BaseAppCompatActivity(), View.OnClickListener {
                 replaceFragment(CongressFragment("Congress"))
             }
             R.id.tvJudicial -> {
+                includedView.usrName.text=binding.tvJudicial.text
                 tvExecutive.setBackgroundResource(R.color.white)
                 tvExecutive.setTextColor(ContextCompat.getColor(this, R.color.grey))
                 tvSenate.setBackgroundResource(R.color.white)

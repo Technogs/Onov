@@ -26,8 +26,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.application.onovapplication.R;
 import com.application.onovapplication.adapters.DebateJoineeAdapter;
-import com.application.onovapplication.api.ApiClient;
-import com.application.onovapplication.api.ApiInterface;
 import com.application.onovapplication.debate.vlive.agora.rtm.model.SeatStateMessage;
 import com.application.onovapplication.debate.vlive.protocol.manager.SeatServiceManager;
 import com.application.onovapplication.debate.vlive.protocol.model.model.SeatInfo;
@@ -119,7 +117,7 @@ share.setOnClickListener(new View.OnClickListener() {
         //alertDialog.show();
 
 
-        Call<DebateJoinerResponse> call=apiInterface.debaterVote(userPreferences.getuserDetails().getId(),voteTo,userPreferences.getDebateDetails().getId());
+        Call<DebateJoinerResponse> call=apiInterface.debaterVote(userPreferences.getuserDetails().getUserRef().toString(),voteTo,userPreferences.getDebateDetails().getId());
 
         call.enqueue(new Callback<DebateJoinerResponse>() {
 

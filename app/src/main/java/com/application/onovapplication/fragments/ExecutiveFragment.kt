@@ -5,17 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
-import com.application.onovapplication.R
+
 import com.application.onovapplication.activities.common.BaseFragment
-import com.application.onovapplication.adapters.ImagesGovernmentAdapter
 import com.application.onovapplication.api.ApiClient
 import com.application.onovapplication.api.ApiInterface
-import com.application.onovapplication.databinding.FragmentDonationsBinding
 import com.application.onovapplication.databinding.FragmentExecutiveBinding
 import com.application.onovapplication.model.PresidentResponse
-import com.application.onovapplication.model.SenateResponse
 import com.bumptech.glide.Glide
 import retrofit2.Call
 import retrofit2.Callback
@@ -31,7 +26,6 @@ class ExecutiveFragment : BaseFragment() , View.OnClickListener{
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        //var view = inflater.inflate(R.layout.fragment_executive, container, false)
 
         binding = FragmentExecutiveBinding.inflate(inflater, container, false)
         initViews(binding.root)
@@ -74,18 +68,12 @@ class ExecutiveFragment : BaseFragment() , View.OnClickListener{
                         }
                     }
 
-//                    if (r1 != null) {
-//                        for (i in 1..r1.size) {
-//                            arrayList.addAll(listOf(r1.get(i - 1).className))
-//                        }
-//                    }
                 }
             }
             override fun onFailure(call: Call<PresidentResponse?>, t: Throwable) {
                 dismissDialog()
                 if (t is IOException) {
                     Toast.makeText(requireActivity(), t.message, Toast.LENGTH_SHORT).show()
-                    //  Toast.makeText(requireActivity(), "Something went wrong, Please try again", Toast.LENGTH_SHORT).show()
                 } else {
                     Toast.makeText(requireActivity(), "Something went wrong", Toast.LENGTH_SHORT).show()
                 }

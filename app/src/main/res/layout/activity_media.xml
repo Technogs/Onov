@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    tools:context=".activities.common.MediaActivity">
+    <include layout="@layout/action_bar_layout"/>
+
+    <RelativeLayout
+        android:id="@+id/noEventsLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/poppins_medium"
+            android:text="@string/no_events_yet"
+            android:textColor="@color/app_color"
+            android:textSize="18sp" />
+
+    </RelativeLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_media"
+        android:layout_marginTop="5dp"
+        tools:listitem="@layout/rv_media"
+        android:layout_marginBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_margin="@dimen/_2sdp"
+        android:layout_height="wrap_content"
+        app:spanCount="3"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"/>
+</androidx.appcompat.widget.LinearLayoutCompat>

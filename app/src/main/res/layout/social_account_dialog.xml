@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:paddingHorizontal="@dimen/_10sdp"
+android:paddingVertical="@dimen/_10sdp"
+    android:layout_height="wrap_content">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/userName"
+        android:layout_marginEnd="5dp"
+        android:layout_gravity="center"
+        android:fontFamily="@font/poppins_regular"
+        android:text="Winner"
+        android:textStyle="bold"
+        android:textColor="@color/text_blue"
+        android:textSize="@dimen/_13ssp" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/ivChatProfile"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/dummy_profile_image" />
+
+
+        <TextView
+            android:id="@+id/userName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_9sdp"
+            android:layout_marginEnd="5dp"
+            android:layout_toEndOf="@+id/ivChatProfile"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Gulf"
+            android:textColor="@color/text_blue"
+            android:textSize="@dimen/_11ssp" />
+
+        <TextView
+            android:id="@+id/pollQue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/userName"
+            android:layout_marginEnd="5dp"
+            android:visibility="gone"
+            android:layout_toEndOf="@+id/ivChatProfile"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Ask a Question"
+            android:textColor="@color/text_blue"
+            android:textSize="@dimen/_13ssp" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/instaName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Instagram Account:"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_11ssp" />
+
+        <TextView
+            android:id="@+id/instaValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_toRightOf="@+id/instaName"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Jolene"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_11ssp" />
+
+        <TextView
+            android:id="@+id/twitterName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/instaName"
+            android:layout_marginVertical="@dimen/_5sdp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Twitter Account:"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_11ssp" />
+        <TextView
+            android:id="@+id/twitterValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/_5sdp"
+            android:layout_below="@+id/instaName"
+            android:layout_toRightOf="@+id/twitterName"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Jolene"
+            android:textStyle="bold"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_11ssp" />
+        <TextView
+            android:id="@+id/fbName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/twitterName"
+            android:fontFamily="@font/poppins_regular"
+            android:text="FaceBook Account"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_11ssp" />
+
+        <TextView
+            android:id="@+id/fbValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/twitterName"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_toRightOf="@+id/fbName"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Jolene"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="@dimen/_11ssp" />
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/twitterName"
+        android:fontFamily="@font/poppins_regular"
+        android:text="Cancel"
+        android:layout_gravity="end"
+        android:textColor="@color/app_color"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginHorizontal="@dimen/_15sdp"
+        android:textSize="@dimen/_11ssp" />
+</androidx.appcompat.widget.LinearLayoutCompat>

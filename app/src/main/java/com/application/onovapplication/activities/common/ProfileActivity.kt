@@ -21,9 +21,7 @@ import androidx.core.content.FileProvider
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.multidex.BuildConfig
-//import com.application.onovapplication.BuildConfig
 import com.application.onovapplication.R
-import com.application.onovapplication.databinding.ActivityNotificationsBinding
 import com.application.onovapplication.databinding.ActivityProfileBinding
 import com.application.onovapplication.databinding.DonateDialogBinding
 import com.application.onovapplication.model.UserInfo
@@ -72,7 +70,7 @@ class ProfileActivity : BaseAppCompatActivity(), View.OnClickListener {
             binding.phoneEdit.visibility = View.INVISIBLE
         }
 
-        profileViewModel.getProfile(this, userPreferences.getUserREf())
+        profileViewModel.getProfile(this, userPreferences.getUserREf(),"")
         showDialog()
         observeViewModel()
 
@@ -106,7 +104,6 @@ class ProfileActivity : BaseAppCompatActivity(), View.OnClickListener {
             if (it) {
                 if (profileViewModel.status == "success") {
                     setError(profileViewModel.message)
-                    // userPreferences.savePhoto(profileViewModel.photoPath)
                 } else {
                     setError(profileViewModel.message)
                     finish()
@@ -348,7 +345,6 @@ class ProfileActivity : BaseAppCompatActivity(), View.OnClickListener {
         dialogb = DonateDialogBinding.inflate(layoutInflater)
         val view = binding.root
         dialog.setContentView(view)
-        ///dialog.setContentView(R.layout.donate_dialog)
         dialog.window!!.setBackgroundDrawableResource(android.R.color.transparent);
         dialog.show()
 

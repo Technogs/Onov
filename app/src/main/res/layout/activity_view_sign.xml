@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:layout_height="match_parent"
+    tools:context=".activities.ViewSignActivity">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/no_data_yet"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        android:id="@+id/signCount"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/ab"
+        android:textStyle="bold"
+        android:fontFamily="@font/poppins_medium"
+        android:textSize="@dimen/_11ssp"
+        android:textColor="@color/black"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/no_data_yet"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="10dp"
+        android:layout_centerInParent="true"
+        android:id="@+id/noData"
+        android:visibility="gone"
+        android:textStyle="bold"
+        android:fontFamily="@font/poppins_medium"
+        android:textSize="@dimen/_16ssp"
+        android:textColor="@color/black"
+        />
+    <include layout="@layout/action_bar_layout"
+        android:id="@+id/ab"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_sign"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/signCount"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/rv_sign" />
+</RelativeLayout>

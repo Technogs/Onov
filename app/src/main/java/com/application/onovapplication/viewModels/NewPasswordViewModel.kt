@@ -29,6 +29,7 @@ class NewPasswordViewModel : ViewModel() {
     fun createNewPassword(
         context: Context,
         email: String,
+        otp: String,
         password: String
     ) {
 
@@ -37,9 +38,11 @@ class NewPasswordViewModel : ViewModel() {
             RequestBody.create("multipart/form-data".toMediaTypeOrNull(), email)
         val userPassword: RequestBody =
             RequestBody.create("multipart/form-data".toMediaTypeOrNull(), password)
+        val otp: RequestBody =
+            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), otp)
 
 
-        dataManager.createNewPassword(userEmail, userPassword)
+        dataManager.createNewPassword(userEmail, otp, userPassword)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeWith(

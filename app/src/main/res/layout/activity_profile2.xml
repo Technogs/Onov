@@ -7,19 +7,26 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     tools:context=".activities.common.ProfileActivity2">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
     <RelativeLayout
         android:id="@+id/rl"
         android:layout_width="match_parent"
-        android:layout_height="260dp"
+        android:layout_height="@dimen/_210sdp"
         android:background="@drawable/profile_background">
 
         <ImageView
-            android:layout_width="match_parent"
             android:id="@+id/ivCoverPhoto"
-            android:scaleType="centerCrop"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/transparent_black" />
+            android:background="@color/transparent_black"
+            android:scaleType="centerCrop" />
 
         <ImageView
             android:id="@+id/backBtn"
@@ -32,27 +39,43 @@
 
 
         <ImageView
+            android:id="@+id/logo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/_2sdp"
             android:src="@drawable/onov_logo_2"
             app:tint="@color/white" />
+
         <TextView
+            android:id="@+id/role"
             android:layout_width="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:text="Edit"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/logo"
+            android:layout_centerInParent="true"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/poppins_bold"
+            android:onClick="onClick"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="@dimen/_1sdp"
+            android:text=""
+            android:textColor="@color/white" />
+        <TextView
             android:id="@+id/button_edit"
-            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="15dp"
             android:layout_marginEnd="20dp"
             android:background="@drawable/drawable_light_grey_curve"
-            android:paddingHorizontal="10dp"
-            android:onClick="onClick"
-            android:paddingVertical="3dp"
-            android:layout_marginTop="15dp"
             android:fontFamily="@font/poppins_bold"
-            android:layout_height="wrap_content"/>
+            android:onClick="onClick"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="3dp"
+            android:text="Edit"
+            android:visibility="gone"
+            android:textColor="@color/black" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_alignParentEnd="true"
@@ -120,30 +143,72 @@
             android:layout_marginTop="10dp"
             android:onClick="onClick"
             android:src="@drawable/dummy_profile_image" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_toEndOf="@+id/profileImage"
+            android:orientation="vertical"
+            android:onClick="onClick"
+            android:layout_marginTop="50dp"
+            android:id="@+id/sll"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/supportClick"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:src="@drawable/ic_sopports"
+                app:tint="@color/app_color" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/profileName"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/poppins_bold"
+                android:text="Support"
+                android:id="@+id/sprtText"
+                android:layout_gravity="center"
+                android:textColor="@color/app_color"
+                android:textSize="@dimen/_7ssp" />
+        </LinearLayout>
+
 
         <ImageView
             android:id="@+id/profileClick"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginTop="50dp"
             android:layout_marginStart="-20dp"
+            android:layout_marginTop="50dp"
             android:layout_toEndOf="@+id/profileImage"
             android:elevation="3dp"
-
+            android:visibility="gone"
             android:src="@drawable/profile_camera" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_marginStart="10dp"
-            android:textSize="15sp"
-            android:fontFamily="@font/poppins_bold"
-            android:textColor="@color/red"
-            android:text="(R)"
             android:id="@+id/partyFollower"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="4dp"
             android:layout_below="@+id/profileImage"
-            android:layout_toEndOf="@+id/profileName"
-            android:layout_height="wrap_content"/>
+            android:layout_toRightOf="@+id/profileName"
+            android:fontFamily="@font/poppins_bold"
+            android:text="(R)"
+            android:textColor="@color/red"
+            android:textSize="@dimen/_13ssp" />
+
+        <TextView
+            android:id="@+id/adress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/profileName"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="4dp"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/poppins_regular"
+            android:text="UN"
+            android:gravity="center"
+            android:textColor="@color/app_color"
+            android:textSize="@dimen/_9ssp" />
 
 
         <EditText
@@ -151,7 +216,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/profileImage"
-            android:layout_centerInParent="true"
+            android:layout_centerHorizontal="true"
             android:layout_marginTop="5dp"
             android:background="@color/white"
             android:focusable="false"
@@ -165,24 +230,79 @@
             android:id="@+id/editName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd= "15dp"
-            android:layout_marginTop="10dp"
             android:layout_alignParentEnd="true"
+            android:layout_marginTop="10dp"
+            android:visibility="gone"
+            android:layout_marginEnd="15dp"
             android:onClick="onClick"
             android:src="@drawable/edit" />
 
         <TextView
             android:id="@+id/aboutInfo"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_below="@+id/profileName"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_below="@+id/adress"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
+            android:layout_marginStart="@dimen/_11sdp"
+            android:drawableRight="@drawable/edit"
+            android:drawablePadding="@dimen/_7sdp"
             android:fontFamily="@font/poppins_regular"
             android:onClick="onClick"
+            android:paddingHorizontal="@dimen/_11ssp"
+            android:paddingVertical="@dimen/_5sdp"
             android:text="@string/about_info_details"
             android:textColor="@color/black"
             android:textSize="14sp" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:orientation="horizontal"
+            android:onClick="onClick"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/aboutInfo"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:src="@drawable/ic_sopports"
+                android:visibility="gone"
+                app:tint="@color/app_color" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/profileName"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/poppins_bold"
+                android:text="N:"
+                android:id="@+id/nationalRank"
+                android:layout_gravity="center"
+                android:textColor="@color/app_color"
+                android:textSize="@dimen/_9ssp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/profileName"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/poppins_bold"
+                android:id="@+id/stateRank"
+                android:text="S:"
+                android:layout_marginHorizontal="@dimen/_5sdp"
+                android:layout_gravity="center"
+                android:textColor="@color/app_color"
+                android:textSize="@dimen/_9ssp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/profileName"
+                android:layout_centerInParent="true"
+                android:id="@+id/localRank"
+                android:fontFamily="@font/poppins_bold"
+                android:text="L:"
+                android:layout_gravity="center"
+                android:textColor="@color/app_color"
+                android:textSize="@dimen/_9ssp" />
+        </LinearLayout>
 
 
 
@@ -203,11 +323,10 @@
     </RelativeLayout>
 
 
-
     <LinearLayout
         android:id="@+id/ll"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/_50sdp"
         android:layout_below="@+id/photoLayout"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
@@ -216,46 +335,68 @@
 
         <TextView
             android:id="@+id/tv_followers"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="40dp"
-            android:layout_marginStart="25dp"
-            android:layout_marginEnd="25dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_weight="1"
             android:background="@drawable/drawable_chat_background"
-            android:onClick="onClick"
             android:gravity="center"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
-            android:text="20 Citizens"
+            android:onClick="onClick"
+            android:paddingStart="@dimen/_5sdp"
+            android:paddingEnd="@dimen/_5sdp"
+            android:text="0 Citizens"
             android:textAllCaps="false"
             android:textColor="@color/black" />
 
 
         <TextView
             android:id="@+id/tv_following"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
             android:background="@drawable/drawable_chat_background"
-            android:onClick="onClick"
             android:gravity="center"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
-            android:text="10 Support"
+            android:onClick="onClick"
+            android:paddingStart="@dimen/_5sdp"
+            android:paddingEnd="@dimen/_5sdp"
+            android:text="0 Support"
             android:textAllCaps="false"
             android:textColor="@color/black" />
 
 
         <TextView
             android:id="@+id/tv_donors"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="40dp"
-            android:gravity="center"
-            android:layout_marginStart="25dp"
-            android:layout_marginEnd="25dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_weight="1"
             android:background="@drawable/drawable_chat_background"
+            android:gravity="center"
             android:onClick="onClick"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
+            android:paddingStart="@dimen/_5sdp"
+            android:paddingEnd="@dimen/_5sdp"
             android:text="@string/_02_donors"
+            android:textAllCaps="false"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/tvDonatedTo"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginEnd="15dp"
+            android:layout_weight="1"
+            android:background="@drawable/drawable_chat_background"
+            android:gravity="center"
+            android:onClick="onClick"
+            android:paddingStart="@dimen/_5sdp"
+            android:paddingEnd="@dimen/_5sdp"
+            android:text="0 Donated"
             android:textAllCaps="false"
             android:textColor="@color/black" />
 
@@ -288,5 +429,7 @@
 
     </RelativeLayout>
 
+    </RelativeLayout>
 
+    </ScrollView>
 </RelativeLayout>

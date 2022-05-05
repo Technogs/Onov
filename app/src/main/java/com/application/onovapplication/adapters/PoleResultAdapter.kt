@@ -19,7 +19,6 @@ class PoleResultAdapter (val context: Context,val pollResult: List<PollResult>) 
     override fun getItemCount(): Int { return pollResult.size }
 
     override fun onBindViewHolder(holder: RVHolder, position: Int) {
-      //  holder.bind(pollResult[position])
         holder.binding.voteCount.setText( pollResult[position].valCount.toString())
         holder.binding.pollOption.setText(pollResult[position].name)
     }
@@ -29,9 +28,5 @@ class PoleResultAdapter (val context: Context,val pollResult: List<PollResult>) 
         }
 
 
-    interface onclickCross {
-        fun onclick()
-        fun onClickOption(option: String)
-    }
 
 }

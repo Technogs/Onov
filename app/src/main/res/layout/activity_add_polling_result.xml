@@ -5,8 +5,51 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".activities.AddPollingResultActivity">
     <include layout="@layout/action_bar_layout"/>
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/submitPoll"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_gravity="end"
+        android:layout_marginHorizontal="@dimen/_15sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:background="@drawable/drawable_gradient_button_background"
+        android:fontFamily="@font/poppins_medium"
+        android:paddingHorizontal="@dimen/_10sdp"
+        android:text="@string/submit"
+        android:onClick="onClick"
+        android:textAllCaps="false"
+        android:textColor="@color/white" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@null"
+        android:clickable="true"
+        android:visibility="gone"
+        android:id="@+id/pollEnd"
+        android:onClick="onClick"
+        android:textStyle="bold"
+        android:fontFamily="@font/poppins_regular"
+        android:hint="@string/time"
+        android:layout_marginVertical="@dimen/_4sdp"
+        android:inputType="number"
+        android:gravity="center"
+        android:text="End Poll"
+        android:textSize="@dimen/_10ssp"
+        android:textColor="@color/blue_original"
+        android:textColorHint="@color/navigation_color" />
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/etPollingTitle"
         android:layout_width="match_parent"
@@ -16,29 +59,80 @@
         android:clickable="true"
         android:fontFamily="@font/poppins_regular"
         android:hint="@string/time"
-        android:layout_marginVertical="@dimen/_10sdp"
-        android:inputType="number"
-        android:padding="15dp"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:padding="@dimen/_10sdp"
+        android:layout_marginHorizontal="@dimen/_10sdp"
         android:textColor="@color/navigation_color"
         android:textColorHint="@color/navigation_color" />
+            <ImageView
+                android:id="@+id/ivFeed"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_120sdp"
+                android:layout_marginHorizontal="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:scaleType="centerCrop" />
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_addpolling"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_200sdp"
+        android:layout_marginVertical="@dimen/_10sdp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:itemCount="2"
         tools:listitem="@layout/polling_submit" />
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/submitPoll"
+    <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/_32sdp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:background="@drawable/drawable_gradient_button_background"
-        android:fontFamily="@font/poppins_medium"
-        android:paddingHorizontal="@dimen/_10sdp"
-        android:text="@string/submit"
-        android:textAllCaps="false"
-        android:textColor="@color/white" />
+        android:background="@null"
+        android:clickable="true"
+        android:id="@+id/changeVote"
+        android:textStyle="bold"
+        android:fontFamily="@font/poppins_regular"
+        android:hint="@string/time"
+        android:layout_marginVertical="@dimen/_4sdp"
+        android:inputType="number"
+        android:gravity="center"
+        android:onClick="onClick"
+        android:text="Change Vote"
+        android:textSize="@dimen/_10ssp"
+        android:textColor="@color/blue_original"
+        android:textColorHint="@color/navigation_color" />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:background="@null"
+        android:clickable="true"
+        android:id="@+id/voteTotal"
+        android:textStyle="bold"
+        android:fontFamily="@font/poppins_regular"
+        android:hint="@string/time"
+        android:layout_marginVertical="@dimen/_4sdp"
+        android:inputType="number"
+        android:text="Total Votes:"
+        android:layout_marginStart="@dimen/_15sdp"
+        android:textSize="@dimen/_10ssp"
+        android:textColor="@color/navigation_color"
+        android:textColorHint="@color/navigation_color" />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:background="@null"
+        android:clickable="true"
+        android:id="@+id/pollEndTime"
+        android:textStyle="bold"
+        android:fontFamily="@font/poppins_regular"
+        android:hint="@string/time"
+        android:layout_marginVertical="@dimen/_4sdp"
+        android:inputType="number"
+        android:text="Poll closes:"
+        android:layout_marginStart="@dimen/_15sdp"
+        android:textSize="@dimen/_10ssp"
+        android:textColor="@color/navigation_color"
+        android:textColorHint="@color/navigation_color" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </ScrollView>
 </LinearLayout>

@@ -2,8 +2,6 @@ package com.application.onovapplication.adapters
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -34,13 +32,10 @@ class PollingAdapter(
         }
 
         holder.binding.etPollOption.setOnFocusChangeListener { _, hasFocus ->
-            if (hasFocus)
-            else                 onClickCross.onClickOption(holder.binding.etPollOption.text.toString())
-
+            if (hasFocus) else onClickCross.onClickOption(holder.binding.etPollOption.text.toString())
         }
 
     }
-    // }
 
 
     inner class RVHolder(val binding: RvPollingBinding) :

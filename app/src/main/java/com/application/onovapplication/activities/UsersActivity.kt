@@ -1,6 +1,5 @@
 package com.application.onovapplication.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -23,6 +22,7 @@ import android.view.KeyEvent
 import android.view.Window
 import android.widget.ImageView
 import android.widget.TextView
+import com.application.onovapplication.activities.common.HomeTabActivity
 import com.application.onovapplication.databinding.ActivitySignPetitionBinding
 import com.application.onovapplication.databinding.ActivityUsersBinding
 import com.application.onovapplication.model.ChatModel
@@ -48,19 +48,24 @@ class UsersActivity : BaseAppCompatActivity(), ViewChatsAdapter.OnMessageClickLi
         setContentView(view)
         feeds = intent.getParcelableExtra("feeds")
         events = intent.getParcelableExtra("event")
-    //    debate = intent.getStringExtra("debate").toString()
-        chatViewModel.getChatList(this, userPreferences.getUserREf())
-
+        chatViewModel.getChatList(this, userPreferences.getUserREf(),"")
+      if ( feeds==null)  { binding.shareFeed.visibility=View.GONE}
 
         showDialog()
         binding.shareFeed.setOnClickListener {
             showDialog()
             when {
 
-                events==null ->  chatViewModel.shareFeed(this,userPreferences.getuserDetails()?.userRef.toString(),feeds?.recordId.toString())
+                events==null ->  chatViewModel.shareFeed(this,userPreferences.getuserDetails()?.userRef.toString(),feeds?.id.toString())
 
-                feeds==null ->  chatViewModel.shareFeed(this,userPreferences.getuserDetails()?.userRef.toString(),events?.id.toString())
-            }
+                feeds==null -> {
+                    binding.shareFeed.visibility=View.GONE
+//                    chatViewModel.shareFeed(
+//                        this,
+//                        userPreferences.getuserDetails()?.userRef.toString(),
+//                        events?.id.toString()
+//                    )
+                }            }
         }
         observeViewModel()
 
@@ -74,14 +79,18 @@ class UsersActivity : BaseAppCompatActivity(), ViewChatsAdapter.OnMessageClickLi
             if (it != null) {
                 if (it) {
                     if (chatViewModel.status == "success") {
-                        if (chatViewModel.chatdata.chatList.isNullOrEmpty()) {
+                        if (chatViewModel.chatdata.chatList==null) {
+                            binding.rvChatList.visibility = View.GONE
                             binding.noChatData.visibility = View.VISIBLE
-                        }
-                        chatdata=chatViewModel.chatdata
-                        chatsAdapter =
-                            ViewChatsAdapter(this, chatdata.chatList, this, this, 1)
-                        binding.rvChatList.adapter = chatsAdapter
-                        //   chatsAdapter!!.notifyDataSetChanged()
+
+                        }else{
+                            binding.noChatData.visibility = View.GONE
+                            binding.rvChatList.visibility = View.VISIBLE}
+                            chatdata = chatViewModel.chatdata
+                            chatsAdapter =
+                                ViewChatsAdapter(this, chatdata.chatList, this, this, 1)
+                            binding.rvChatList.adapter = chatsAdapter
+                               chatsAdapter!!.notifyDataSetChanged()
 
                     } else {
                         setError(chatViewModel.message)
@@ -99,9 +108,9 @@ class UsersActivity : BaseAppCompatActivity(), ViewChatsAdapter.OnMessageClickLi
             if (it != null) {
                 if (it) {
                     if (chatViewModel.status == "success") {
-
                         chatdata=chatViewModel.chatdata
-                     finish()
+                        startActivity(Intent(this,HomeTabActivity::class.java))
+
 
                     } else {
                         setError(chatViewModel.message)
@@ -117,30 +126,32 @@ class UsersActivity : BaseAppCompatActivity(), ViewChatsAdapter.OnMessageClickLi
 
     override fun onMessageClickListener(data: Follow) {
 
-//        Log.e(TAG,"feeds ${feeds?.Name}")
         when {
             events==null -> startActivity(
                 ChatActivity.getStartIntent(
-                    this, data.id.trim(),
+                    this, data.user_id?.trim().toString(),
                     data.fullName,
                     BaseUrl.photoUrl + "" + data.profilePic.trim(), "feed", feeds,null,
-                    data.userRef.trim()
+                    data.userRef?.trim().toString()
                 )
             )
-            feeds==null -> startActivity(
-                ChatActivity.getStartIntent(
-                    this, data.id.trim(),
-                    data.fullName,
-                    BaseUrl.photoUrl + "" + data.profilePic.trim(), "feed", null,events,
-                    data.userRef.trim()
+            feeds==null -> {
+
+                startActivity(
+                    ChatActivity.getStartIntent(
+                        this, data.user_id?.trim().toString(),
+                        data.fullName,
+                        BaseUrl.photoUrl + "" + data.profilePic.trim(), "feed", null, events,
+                        data.userRef?.trim().toString()
+                    )
                 )
-            )
+            }
             else -> startActivity(
                 ChatActivity.getStartIntent(
-                    this, data.id.trim(),
+                    this, data.user_id?.trim().toString(),
                     data.fullName,
                     BaseUrl.photoUrl + "" + data.profilePic.trim(), "feed", null,null,
-                    data.userRef.trim()
+                    data.userRef?.trim().toString()
                 )
             )
         }

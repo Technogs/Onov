@@ -9,8 +9,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.application.onovapplication.R
 import com.application.onovapplication.databinding.ActionBarLayout2Binding
-import com.application.onovapplication.databinding.ActionBarLayoutBinding
-import com.application.onovapplication.databinding.ActivityRegisterBinding
 import com.application.onovapplication.databinding.ActivityResetPasswordBinding
 import com.application.onovapplication.viewModels.NewPasswordViewModel
 
@@ -26,8 +24,8 @@ class ResetPasswordActivity : BaseAppCompatActivity(), View.OnClickListener {
         binding = ActivityResetPasswordBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        val incBinding: ActionBarLayout2Binding =binding.ab
-        incBinding.tvScreenTitle.text = getString(R.string.reset_password)
+        val incBinding: ActionBarLayout2Binding = binding.ab
+        incBinding.tvScreenTitle.text = getString(R.string.create_new_password)
         observeViewModel()
     }
 
@@ -49,6 +47,8 @@ class ResetPasswordActivity : BaseAppCompatActivity(), View.OnClickListener {
                         finishAffinity()
 
                     }, 1500)
+                }else {
+                    setError(newPasswordViewModel.message)
                 }
             } else {
                 setError(newPasswordViewModel.message)
@@ -63,27 +63,32 @@ class ResetPasswordActivity : BaseAppCompatActivity(), View.OnClickListener {
             R.id.btnResetPassword -> {
                 when {
 
-                    checkEmpty(binding.edNewPassword) -> {
+                    checkEmpty(binding.edOtp) -> {
+                        setError("Enter Valid Otp")
+                    }checkEmpty(binding.edNewPassword) -> {
                         setError(getString(R.string.new_password_error))
                     }
-
+                    binding.edNewPassword.text.toString().length < 6 -> {
+                        setError(getString(R.string.password_length_error))
+                    }
                     checkEmpty(binding.edConfirmPassword) -> {
                         setError(getString(R.string.confirm_password_error))
                     }
 
-                    binding.edNewPassword.text.toString().length < 8 -> {
-                        setError(getString(R.string.password_length_error))
-                    }
 
                     binding.edNewPassword.text.toString() != binding.edConfirmPassword.text.toString() -> {
                         setError(getString(R.string.unmatch_password_error))
 
                     }
                     else -> {
-
-                        newPasswordViewModel.createNewPassword(
-                            this,
-                            intent.getStringExtra("mobile")!!,
+                        if (intent.getStringExtra("email") != null)
+                            newPasswordViewModel.createNewPassword(
+                                this,
+                                intent.getStringExtra("email").toString(),binding.edOtp.text.toString(),
+                                binding.edNewPassword.text.toString()
+                            )
+                        else newPasswordViewModel.createNewPassword(
+                            this, userPreferences.getuserDetails()?.email.toString(),binding.edOtp.text.toString(),
                             binding.edNewPassword.text.toString()
                         )
 

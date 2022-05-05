@@ -2,112 +2,133 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/no_data"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_centerInParent="true"
+        android:layout_gravity="end"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:visibility="gone"
+        android:textStyle="bold"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:fontFamily="@font/poppins_regular"
+        android:paddingHorizontal="@dimen/_9sdp"
+        android:paddingVertical="@dimen/_3sdp"
+        android:text="@string/no_data_yet"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_15ssp" />
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <include
+        android:id="@+id/ab"
+        android:visibility="gone"
+        layout="@layout/action_bar_layout" />
+
+
+    <LinearLayout
+        android:id="@+id/ll"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_35sdp"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/drawable_chat_background"
+        android:orientation="horizontal" >
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/createPoll"
+            android:id="@+id/active"
+            android:text="@string/active"
             android:layout_width="wrap_content"
-            android:layout_height="36dp"
-            android:layout_gravity="end"
-            android:layout_marginTop="10sp"
-            android:layout_marginEnd="10sp"
-            android:background="@drawable/drawable_gradient_button_background"
-            android:fontFamily="@font/poppins_medium"
-            android:onClick="onClick"
-            android:paddingHorizontal="@dimen/_10sdp"
-            android:text="@string/create"
+            android:layout_height="match_parent"
             android:textAllCaps="false"
-            android:textColor="@color/white" />
-
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/etPollTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:background="@null"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:textSize="@dimen/_13ssp"
             android:fontFamily="@font/poppins_regular"
-            android:hint="@string/event_title"
-            android:padding="15dp"
-            android:textColor="@color/navigation_color"
-            android:textColorHint="@color/navigation_color" />
-
-        <View
-            android:id="@+id/vShadowTwo"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:alpha="0.4"
-            android:background="@color/edit_text_background" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/etPollingDate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:background="@null"
-            android:clickable="true"
+            android:background="@color/app_color"
+            android:layout_weight="1"
+            />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/expired"
+            android:text="@string/expired"
+            android:textAllCaps="false"
             android:fontFamily="@font/poppins_regular"
-            android:hint="@string/date"
-            android:inputType="number"
-            android:onClick="onClick"
-            android:padding="15dp"
-            android:textColor="@color/navigation_color"
-            android:textColorHint="@color/navigation_color" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/etPollingTime"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:background="@null"
-            android:clickable="true"
-            android:fontFamily="@font/poppins_regular"
-            android:hint="@string/time"
-            android:inputType="number"
-            android:onClick="onClick"
-            android:padding="15dp"
-            android:textColor="@color/navigation_color"
-            android:textColorHint="@color/navigation_color" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:alpha="0.4"
-            android:background="@color/edit_text_background" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_voting"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:itemCount="2"
-            tools:listitem="@layout/rv_polling" />
-
-        <androidx.cardview.widget.CardView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/_10sdp"
-            android:layout_marginVertical="@dimen/_5sdp"
-            android:elevation="@dimen/_11sdp">
+            android:gravity="center"
+            android:textSize="@dimen/_13ssp"
+            android:textColor="@color/black"
+            android:background="@drawable/drawable_chat_background"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/etAddOption"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:background="@null"
-                android:fontFamily="@font/poppins_regular"
-                android:hint="Add Options"
-                android:padding="@dimen/_8sdp"
-                android:textColor="@color/navigation_color"
-                android:textColorHint="@color/navigation_color" />
-        </androidx.cardview.widget.CardView>
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
+    </LinearLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_winnings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ll"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="0dp"
+        android:background="@color/white"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/rv_poll_history" />
+
+    <TextView
+        android:id="@+id/noWinningsData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:fontFamily="@font/poppins_medium"
+        android:text="@string/no_debates_yet"
+        android:visibility="gone"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
 </RelativeLayout>
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_height="wrap_content">
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/floatBtn"
+            android:layout_gravity="end|bottom"
+            android:layout_width="wrap_content">
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:layout_width="@dimen/_50sdp"
+                android:layout_margin="@dimen/_20sdp"
+                app:backgroundTint="@color/app_color"
+                android:tint="@color/white"
+                android:scaleType="fitXY"
+                android:elevation="@dimen/_20sdp"
+                android:foregroundGravity="center"
+                app:rippleColor="@color/events_color"
+                android:layout_height="@dimen/_50sdp"/>
+
+            <TextView android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="+"
+                android:elevation="6dp"
+                android:layout_gravity="center"
+                android:textSize="@dimen/_18sdp"
+                android:textColor="@color/white"
+                app:layout_anchorGravity="center"/>
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    </FrameLayout>
+   </RelativeLayout>

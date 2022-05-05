@@ -1,8 +1,12 @@
 package com.application.onovapplication.chat
 
+import androidx.annotation.Keep
 import com.application.onovapplication.model.EventData
 import com.application.onovapplication.model.FeedsData
+import com.google.firebase.database.IgnoreExtraProperties
 
+@Keep
+@IgnoreExtraProperties
 data class Messages(
     var fileUrl: String = "",
     var feed: FeedsData? = null,

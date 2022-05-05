@@ -3,10 +3,8 @@ package com.application.onovapplication.activities.politicians
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.application.onovapplication.R
-import com.application.onovapplication.adapters.DebateRequestsAdapter
 import com.application.onovapplication.adapters.DebateRequestsPoliticianAdapter
 import com.application.onovapplication.databinding.ActionBarLayout2Binding
-import com.application.onovapplication.databinding.ActivityCreateLawBinding
 import com.application.onovapplication.databinding.ActivityPoliticianDebateRequestBinding
 
 

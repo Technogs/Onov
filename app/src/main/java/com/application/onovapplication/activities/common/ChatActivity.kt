@@ -44,7 +44,6 @@ import com.application.onovapplication.viewModels.ChatViewModel
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.database.*
 import com.application.onovapplication.repository.ApiManager
-import com.bumptech.glide.Glide
 import com.google.gson.Gson
 import id.zelory.compressor.Compressor
 import kotlinx.coroutines.launch
@@ -74,18 +73,18 @@ class ChatActivity : BaseAppCompatActivity(), View.OnClickListener,
     var receiverPhoto = ""
     var connectionid = ""
     var msgType = ""
-    var feeds:FeedsData? = null
-    var events:EventData? = null
-    var data:ChatImageResponse? = null
+    var feeds: FeedsData? = null
+    var events: EventData? = null
+    var data: ChatImageResponse? = null
 
     var serverImageUrl = ""
     var serverAudioUrl = ""
     private lateinit var apiService: API
     private var messagesArrayList = ArrayList<Messages>()
 
-    //   private lateinit var viewModel: NavigationViewModel
-    //private lateinit var apiService: ApiService
     var audioStatus = 0
+
+
 
     companion object {
         var mPhotoFile: File? = null
@@ -97,14 +96,14 @@ class ChatActivity : BaseAppCompatActivity(), View.OnClickListener,
         private var mPlayer: MediaPlayer? = null
         var mAudioFile: File? = null
 
-
         fun getStartIntent(context: Context): Intent {
             return Intent(context, ChatActivity::class.java)
         }
 
         fun getStartIntent(
             context: Context, receiverId: String, userName: String, photoUrl: String,
-            msgType: String, feedsData: FeedsData?,eventData: EventData?, receiverUserRef: String): Intent {
+            msgType: String, feedsData: FeedsData?, eventData: EventData?, receiverUserRef: String
+        ): Intent {
             val startIntent = Intent(context, ChatActivity::class.java)
             startIntent.putExtra(Constants.USER_ID, receiverId)
             startIntent.putExtra(Constants.USER_NAME, userName)
@@ -118,7 +117,6 @@ class ChatActivity : BaseAppCompatActivity(), View.OnClickListener,
         }
     }
 
-    // var databaseReference: DatabaseReference? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityChatBinding.inflate(layoutInflater)
@@ -126,15 +124,14 @@ class ChatActivity : BaseAppCompatActivity(), View.OnClickListener,
         setContentView(view)
         apiService = ApiManager.retrofitBuilderForChat().create(API::class.java)
         observeViewModel()
- if (Build.VERSION.SDK_INT > 9) {
+        if (Build.VERSION.SDK_INT > 9) {
             val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
-            StrictMode.setThreadPolicy(policy) }
+            StrictMode.setThreadPolicy(policy)
+        }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-
             window.statusBarColor = ContextCompat.getColor(this, R.color.grey)
             window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-
         }
 
         /*RetrofitBuilder.BASE_URL + "" +*/
@@ -142,21 +139,24 @@ class ChatActivity : BaseAppCompatActivity(), View.OnClickListener,
         senderId = userPreferences.getuserDetails()?.id?.trim()?.toInt()!!
         senderName = userPreferences.getUserREf().trim()
         receiverId = intent.getStringExtra(Constants.USER_ID).toString().trim().toInt()
-
         receiverUserName = intent.getStringExtra(Constants.USER_NAME).toString().trim()
+
         receiverPhoto = "${intent.getStringExtra(Constants.PHOTO).toString().trim()}"
         receiverUserRef = intent.getStringExtra(Constants.USER_REF).toString().trim()
         msgType = intent.getStringExtra(Constants.FEEDTYPE).toString().trim()
         feeds = intent.getParcelableExtra(Constants.FEED) as FeedsData?
         events = intent.getParcelableExtra(Constants.EVENT) as EventData?
-        Log.e(TAG,"feedds ${feeds?.Name}")
+        Log.e(TAG, "feffffffffedds ${receiverUserName}")
         binding.userName.text = receiverUserName
         binding.userPhoto.loadImage(receiverPhoto)
 
-       if (senderId < receiverId)
-        connectionid = "$senderId-$receiverId"
-       else
-           connectionid = "$receiverId-$senderId"
+        if (senderId < receiverId)
+            connectionid = "$senderId-$receiverId"
+        else
+            connectionid = "$receiverId-$senderId"
+
+
+        Log.e("sfdfffsd",connectionid)
 
 
         val chatMessageAdapter: ChatMessageAdapter by lazy {
@@ -164,11 +164,20 @@ class ChatActivity : BaseAppCompatActivity(), View.OnClickListener,
         }
 
 
+
+        chatViewModel.getMesageSeen(
+            this,
+            userPreferences.getuserDetails()?.userRef.toString(),
+            receiverUserRef,)
+
         binding.rvChat.adapter = chatMessageAdapter
         firebaseDataBase = FirebaseDatabase.getInstance()
 
-        if (feeds!=null){ uploadFeedOnFirebase(feeds,null)}
-        else    if (events!=null){ uploadFeedOnFirebase(null,events)}
+        if (feeds != null) {
+            uploadFeedOnFirebase(feeds, null)
+        } else if (events != null) {
+            uploadFeedOnFirebase(null, events)
+        }
         val chatReference: DatabaseReference =
             firebaseDataBase.reference.child("Chats").child(connectionid)
 
@@ -198,13 +207,18 @@ class ChatActivity : BaseAppCompatActivity(), View.OnClickListener,
             R.id.send_msg -> {
                 val message: String = binding.etMessageBox.text.toString()
                 if (message.isEmpty()) {
-                        Toast.makeText(this@ChatActivity, "Please enter Valid Message", Toast.LENGTH_SHORT).show()
-                    }else msgSend()
+                    Toast.makeText(
+                        this@ChatActivity,
+                        "Please enter Valid Message",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                } else msgSend()
             }
             R.id.attachment -> {
                 checkExternalPermission()
-            }  R.id.userPhoto -> {
-            previewChatImage(receiverPhoto, receiverUserName)
+            }
+            R.id.userPhoto -> {
+                previewChatImage(receiverPhoto, receiverUserName)
             }
         }
     }
@@ -216,22 +230,21 @@ class ChatActivity : BaseAppCompatActivity(), View.OnClickListener,
         Log.e(TAG, "msgSend")
         binding.etMessageBox.setText("")
         val date = Date()
-       // const val DEFAULTTIME = "EEE MMM dd hh:mm:ss z yyyy"
+        // const val DEFAULTTIME = "EEE MMM dd hh:mm:ss z yyyy"
 
         val chatDate = convertDateFormat(
             date.toString().trim(),
             Constants.DEFAULTTIME,
             "yyyy-MM-dd HH:mm:ss"
         ).trim()
-        Log.e( "msgSendtime",chatDate)
+        Log.e("msgSendtime", chatDate)
         val messages = Messages(
-            "",null,null ,message, chatDate, "text",
+            "", null, null, message, chatDate, "text",
             receiverId.toString(), receiverUserName,
             senderId.toString(), senderName, getEpochTime().toString()
         )
 
-     //   var data= Data(      "Message Received",)
-
+        //   var data= Data(      "Message Received",)
 
 
         firebaseDataBase.reference.child("Chats")
@@ -240,17 +253,12 @@ class ChatActivity : BaseAppCompatActivity(), View.OnClickListener,
             })
 
 
-        //     sendChatNotificationFromServer(message)
-
-
+        sendChatNotificationFromServer(message)
 
 
 /*   val data: Data,
     val notification: Notification,
     var to: String*/
-
-
-
 
 
 /*
@@ -281,16 +289,16 @@ class ChatActivity : BaseAppCompatActivity(), View.OnClickListener,
     }
 
 
-    private fun generateNotification()
-    {
+    private fun generateNotification() {
 
     }
 
 
-
     private fun previewChatImage(url: String, userName: String) {
-        val ImagePreviewDialog = Dialog(this,
-            android.R.style.ThemeOverlay_Material_Dialog)
+        val ImagePreviewDialog = Dialog(
+            this,
+            android.R.style.ThemeOverlay_Material_Dialog
+        )
         ImagePreviewDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         ImagePreviewDialog.setCancelable(false)
         ImagePreviewDialog.setContentView(R.layout.big_image_preview)
@@ -322,11 +330,10 @@ class ChatActivity : BaseAppCompatActivity(), View.OnClickListener,
         var chatDate = convertDateFormat(
             date.toString().trim(),
             Constants.DEFAULTTIME,
-            "yyyy-MM-dd HH:mm:ss"
-        ).trim()
+            "yyyy-MM-dd HH:mm:ss").trim()
         val messages = Messages(
             serverImageUrl,
-            null,null,"",
+            null, null, "",
             chatDate,
             "image",
             receiverId.toString(),
@@ -342,9 +349,10 @@ class ChatActivity : BaseAppCompatActivity(), View.OnClickListener,
             .push().setValue(messages).addOnCompleteListener(OnCompleteListener<Void?> {
             })
 
-        //   sendChatNotificationFromServer("Image")
+        sendChatNotificationFromServer("Image")
     }
-    private fun uploadFeedOnFirebase(feeddata: FeedsData?,eventdata: EventData?) {
+
+    private fun uploadFeedOnFirebase(feeddata: FeedsData?, eventdata: EventData?) {
 
         val date = Date()
         var chatDate = convertDateFormat(
@@ -352,42 +360,48 @@ class ChatActivity : BaseAppCompatActivity(), View.OnClickListener,
             Constants.DEFAULTTIME,
             "yyyy-MM-dd HH:mm:ss"
         ).trim()
-        var  messages = Messages()
-        if (feeddata==null){
+        var messages = Messages()
+        if (feeddata == null) {
             messages = Messages(
                 serverImageUrl,
-                feeddata,eventdata,"",
+                feeddata, eventdata, "",
                 chatDate,
                 "event",
                 receiverId.toString(),
                 receiverUserName,
                 senderId.toString(),
                 senderName,
-                getEpochTime().toString() )
-        }else  if (eventdata==null){
+                getEpochTime().toString()
+            )
+        } else if (eventdata == null) {
             messages = Messages(
                 serverImageUrl,
-                feeddata,eventdata,"",
+                feeddata, eventdata, "",
                 chatDate,
                 "feed",
                 receiverId.toString(),
                 receiverUserName,
                 senderId.toString(),
                 senderName,
-                getEpochTime().toString() )
+                getEpochTime().toString()
+            )
         }
-
-
-
 
         firebaseDataBase.reference.child("Chats")
             .child(connectionid)
             .push().setValue(messages).addOnCompleteListener(OnCompleteListener<Void?> {
             })
-
-        //   sendChatNotificationFromServer("Image")
+        sendChatNotificationFromServer("feed")
     }
 
+    private fun sendChatNotificationFromServer(message: String) {
+        chatViewModel.chatNotification(
+            this,
+            userPreferences.getuserDetails()?.userRef.toString(),
+            receiverUserRef,
+            message
+        )
+    }
 
     private fun checkExternalPermission() {
         if (ContextCompat.checkSelfPermission(
@@ -419,14 +433,14 @@ class ChatActivity : BaseAppCompatActivity(), View.OnClickListener,
         val title = pictureDialog.setTitle(getString(R.string.select_action))
         val pictureDialogItems = arrayOf(
             getString(R.string.select_image_from_gallery),
-//            getString(R.string.select_image_from_camera)
+            getString(R.string.select_image_from_camera)
         )
         pictureDialog.setItems(
             pictureDialogItems
         ) { _, which ->
             when (which) {
                 0 -> dispatchGalleryIntent()
-//                1 -> dispatchTakePictureIntent()
+                1 -> dispatchTakePictureIntent()
             }
         }
         pictureDialog.show()
@@ -444,9 +458,41 @@ class ChatActivity : BaseAppCompatActivity(), View.OnClickListener,
         )
     }
 
+    //    private fun dispatchTakePictureIntent() {
+//
+//
+//        val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+//        if (takePictureIntent.resolveActivity(packageManager) != null) {
+//            // Create the File where the photo should go
+//            var photoFile: File? = null
+//            try {
+//                photoFile = createImageFile()
+//            } catch (ex: IOException) {
+//                ex.printStackTrace()
+//                // Error occurred while creating the File
+//            }
+//            if (photoFile != null) {
+//
+////          FileProvider.getUriForFile(Objects.requireNonNull(getApplicationContext()),
+////                    BuildConfig.APPLICATION_ID + ".provider", file);
+//
+//
+//                val photoURI = FileProvider.getUriForFile(
+//                    Objects.requireNonNull(applicationContext),
+//                    "com.application.onovapplication.provider",
+////                    "${BuildConfig.APPLICATION_ID}.provider",
+//                    photoFile
+//                )
+//                mPhotoFile = photoFile
+////                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
+//                startActivityForResult(
+//                    takePictureIntent,
+//                    REQUEST_TAKE_PHOTO
+//                )
+//            }
+//        }
+//    }
     private fun dispatchTakePictureIntent() {
-
-
         val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         if (takePictureIntent.resolveActivity(packageManager) != null) {
             // Create the File where the photo should go
@@ -458,22 +504,18 @@ class ChatActivity : BaseAppCompatActivity(), View.OnClickListener,
                 // Error occurred while creating the File
             }
             if (photoFile != null) {
-
-//          FileProvider.getUriForFile(Objects.requireNonNull(getApplicationContext()),
-//                    BuildConfig.APPLICATION_ID + ".provider", file);
-
-
                 val photoURI = FileProvider.getUriForFile(
-                    Objects.requireNonNull(applicationContext),
-                    "com.application.onovapplication.provider",
-//                    "${BuildConfig.APPLICATION_ID}.provider",
+                    this, "${com.application.onovapplication.BuildConfig.APPLICATION_ID}.provider",
                     photoFile
                 )
                 mPhotoFile = photoFile
-//                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
+                Log.d(
+                    "checkcamerapic",
+                    "" + "photoFile is:" + photoFile + " photoURI" + photoURI + " mPhotoFile" + mPhotoFile
+                )
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
                 startActivityForResult(
-                    takePictureIntent,
-                    REQUEST_TAKE_PHOTO
+                    takePictureIntent, REQUEST_TAKE_PHOTO
                 )
             }
         }
@@ -482,25 +524,42 @@ class ChatActivity : BaseAppCompatActivity(), View.OnClickListener,
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == REQUEST_TAKE_PHOTO && resultCode== RESULT_OK) {
-            Log.e("dataimage",""+data?.data)
-            val selectedImage = data?.data
+        if (requestCode == REQUEST_TAKE_PHOTO && resultCode == RESULT_OK) {
+            // Log.e("dataimage",""+data?.data)
+            //  val selectedImage = data?.data
+
             try {
-                mPhotoFile = File(getRealPathFromUri(Uri.parse(mPhotoFile.toString()))!!)
-                chatViewModel.uploadChatImage(this, mPhotoFile)
-                //    uploadPhotoOnServer()
+
+//                mPhotoFile = File(getRealPathFromUri(Uri.parse(mPhotoFile.toString()))!!)
+                compressImage(mPhotoFile!!)
+                mPhotoFile.let { imageFile ->
+                    this.lifecycleScope.launch {
+                        // Default compression
+                        compressedImage = Compressor.compress(this@ChatActivity, imageFile!!)
+                        Log.e("komal", "new file ${compressedImage!!.length()}")
+                        chatViewModel.uploadChatImage(this@ChatActivity, compressedImage)
+                    }
+                }
+
 
             } catch (e: IOException) {
                 e.printStackTrace()
             }
-            // uploadPhotoOnServer()
-        }
-        else if (requestCode == REQUEST_GALLERY_PHOTO) {
+
+        } else if (requestCode == REQUEST_GALLERY_PHOTO) {
             val selectedImage = data!!.data
             try {
                 mPhotoFile = File(getRealPathFromUri(selectedImage)!!)
-                chatViewModel.uploadChatImage(this, mPhotoFile)
-            //    uploadPhotoOnServer()
+                mPhotoFile.let { imageFile ->
+                    this.lifecycleScope.launch {
+                        // Default compression
+                        compressedImage = Compressor.compress(this@ChatActivity, imageFile!!)
+                        Log.e("komal", "new file ${compressedImage!!.length()}")
+                        chatViewModel.uploadChatImage(this@ChatActivity, compressedImage)
+                    }
+                }
+
+                //    uploadPhotoOnServer()
 
             } catch (e: IOException) {
                 e.printStackTrace()
@@ -543,7 +602,26 @@ class ChatActivity : BaseAppCompatActivity(), View.OnClickListener,
             if (it != null) {
                 if (it) {
                     if (chatViewModel.status == "success") {
-                      uploadImageOnFirebase(chatViewModel.chatImgdata.chatImgUrl)
+
+                        uploadImageOnFirebase(chatViewModel.chatImgdata.chatImgUrl)
+
+                    } else {
+                        setError(chatViewModel.message)
+                        finish()
+                    }
+                }
+            } else {
+                setError(chatViewModel.message)
+            }
+
+        })
+        chatViewModel.successfulChatNotification.observe(this, androidx.lifecycle.Observer {
+            dismissDialog()
+            if (it != null) {
+                if (it) {
+                    if (chatViewModel.status == "success") {
+
+//                        setError(chatViewModel.message)
 
                     } else {
                         setError(chatViewModel.message)
@@ -558,6 +636,7 @@ class ChatActivity : BaseAppCompatActivity(), View.OnClickListener,
 
 
     }
+
     override fun onImageViewClick(position: Int, status: Int) {
 //        var username = messagesArrayList.get(position).receiver_name.trim()
 //        if (status == 0)
@@ -565,6 +644,7 @@ class ChatActivity : BaseAppCompatActivity(), View.OnClickListener,
 //        //preview image open
 
     }
+
     private fun compressImage(photoFile: File) {
 
         Log.e("komal", "old file ${photoFile.length()}")
@@ -573,21 +653,18 @@ class ChatActivity : BaseAppCompatActivity(), View.OnClickListener,
             this.lifecycleScope.launch {
                 // Default compression
                 compressedImage = Compressor.compress(this@ChatActivity, imageFile)
-
-//                alertDialog?.show()
-                // showDialog()
-//                Glide.with(this@ChatActivity).load(compressedImage).into(binding.uploadPhoto)
-//                alertDialog?.dismiss()
-                //dismissDialog()
                 Log.e("komal", "new file ${compressedImage!!.length()}")
 
             }
+
         }
 
     }
+
     private fun compressVideo(path: String, videoFile: File?) {
         videoFile?.let {
-            VideoCompressor.start(path, videoFile.path,
+            VideoCompressor.start(
+                path, videoFile.path,
                 object : CompressionListener {
                     override fun onProgress(percent: Float) {
                         //Update UI
@@ -638,6 +715,7 @@ class ChatActivity : BaseAppCompatActivity(), View.OnClickListener,
             )
         }
     }
+
     private fun saveVideoFile(filePath: String?): File? {
         filePath?.let {
             val videoFile = File(filePath)
@@ -728,65 +806,19 @@ class ChatActivity : BaseAppCompatActivity(), View.OnClickListener,
                     FileOutputStream(file).use { outputStream ->
                         val buf = ByteArray(4096)
                         var len: Int
-                        while (inputStream.read(buf).also { len = it } > 0) outputStream.write(buf, 0, len)
+                        while (inputStream.read(buf).also { len = it } > 0) outputStream.write(
+                            buf,
+                            0,
+                            len
+                        )
                     }
                 }
                 return file.absolutePath
             }
-        } finally { cursor?.close() }
-    }
-
-    fun addEvent(path:String){
-
-        val charset = "UTF-8"
-        showDialog()
-        try {
-            var uploadFile1=File("")
-            var uploadFile2=File("")
-            thread {
-//                if (photopath.isNotEmpty()) {
-//                    uploadFile1 = File(photopath)
-//                }else if (path.isNotEmpty()) {
-                    uploadFile1 = File(path)
-//                }
-                //  val uploadFile2 = File(path)
-                val requestURL = "https://bdztl.com/onov/api/v1/uploadChatImage"
-                /*     runOnUiThread {  }*/
-
-                val multipart = MultipartUtility(requestURL, charset)
-//                multipart.addFormField("userRef", userPreferences.getUserREf())
-//                multipart.addFormField("title", title)
-//                multipart.addFormField("price", binding.etEventPrice.text.toString())
-//                multipart.addFormField("start_date", binding.edEventStartDate.text.toString())
-//                multipart.addFormField("start_time", binding.edEventStartTime.text.toString())
-//                multipart.addFormField("end_date", binding.edEventEndDate.text.toString())
-//                multipart.addFormField("end_time", binding.edEventEndTime.text.toString())
-//                multipart.addFormField("description", desc)
-                multipart.addFilePart("chatImg", uploadFile1)
-//                multipart.addFilePart("ent_video", uploadFile1)
-                val response: String = multipart.finish()
-
-                println("SERVER REPLIED:")
-
-                val gson = Gson() // Or use new GsonBuilder().create();
-
-                data = gson.fromJson(response, ChatImageResponse::class.java)
-
-                if (data!=null) {
-                    setError(data?.msg.toString())
-                    dismissDialog()
-                    Handler(Looper.getMainLooper()).postDelayed({
-                        //finish()
-//                        startActivity(Intent(this, EventsActivity::class.java))
-                    }, 2000)
-                }
-
-            }
-
-
-        } catch (ex: IOException) {
-            System.err.println(ex)
+        } finally {
+            cursor?.close()
         }
     }
+
 
 }

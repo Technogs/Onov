@@ -28,12 +28,14 @@ interface API {
 
         @Part("createBy") createBy: RequestBody?,
         @Part("pollTitle") pollTitle: RequestBody?,
-      //  @Part("options") options:  ArrayList<String>?,
-        //  RequestBody id = RequestBody.create(MediaType.parse("text/plain"), sharedPreferences.getuserDetails().getId());
-        @Part("options[]") options: ArrayList<RequestBody>,
+        @Part("options") options: RequestBody?,
         @Part("tillDate") tillDate: RequestBody?,
-        @Part("tillTime") tillTime: RequestBody?
-    ): Observable<LoginResponse>
+        @Part("tillTime") tillTime: RequestBody?,
+        @Part("areaLimit") areaLimit: RequestBody?,
+        @Part("isPublic") isPublic: RequestBody?,
+        @Part("isMultiple") isMultiple: RequestBody?,
+        @Part pollImage: MultipartBody.Part
+        ): Observable<LoginResponse>
 
     @Multipart
     @POST("userRegister")
@@ -44,6 +46,9 @@ interface API {
         @Part("password") password: RequestBody,
         @Part("role") role: RequestBody,
         @Part("deviceToken") device_token: RequestBody,
+        @Part("countryName") countryName: RequestBody,
+        @Part("stateName") stateName: RequestBody,
+        @Part("cityName") cityName: RequestBody,
         @Part("countryCode") countryCode: RequestBody,
         @Part("deviceType") mobileType: RequestBody,
         @Part profile_image: MultipartBody.Part,
@@ -58,7 +63,8 @@ interface API {
     @POST("GetUserInfo")
     fun getUserInfo(
         @Part("Key") key: RequestBody,
-        @Part("Value") value: RequestBody
+        @Part("Value") value: RequestBody,
+        @Part("selfUserRef") selfUserRef: RequestBody
     ): Observable<ProfileModel>
 
     @Multipart
@@ -66,17 +72,94 @@ interface API {
     fun editProfile(
         @Part("fullName") name: RequestBody,
         @Part("about") about: RequestBody?,
+        @Part("politicalParty") politicalParty: RequestBody?,
         @Part("webUrl") webUrl: RequestBody?,
+        @Part("countryName") countryName: RequestBody?,
+        @Part("stateName") stateName: RequestBody?,
+        @Part("cityName") cityName: RequestBody?,
         @Part("userRef") userRef: RequestBody,
         @Part coverPhoto: MultipartBody.Part  ,
         @Part profilePic: MultipartBody.Part
+    ): Observable<LoginResponse>
+
+    @Multipart
+    @POST("editPetition")
+    fun editPetition(
+        @Part("feedId") feedId: RequestBody,
+        @Part("title") title: RequestBody?,
+        @Part("discription") discription: RequestBody?,
+        @Part("websitelink") websitelink: RequestBody?,
+        @Part("duration") duration: RequestBody?,
+        @Part("signtureCount") signtureCount: RequestBody?,
+        @Part("areaLimit") areaLimit: RequestBody?,
+        @Part("location") location: RequestBody?,
+        @Part("mediaType") mediaType: RequestBody,
+//        @Part coverPhoto: MultipartBody.Part  ,
+        @Part petitionMedia: MultipartBody.Part
+    ): Observable<LoginResponse>
+
+    @Multipart
+    @POST("createPost")
+    fun createPost(
+        @Part("userRef") userRef: RequestBody,
+        @Part("title") title: RequestBody?,
+        @Part("description") description: RequestBody?,
+        @Part("fileType") fileType: RequestBody?,
+        @Part("areaLimit") areaLimit: RequestBody?,
+        @Part mediaFile: MultipartBody.Part
+    ): Observable<LoginResponse>
+
+    @Multipart
+    @POST("createEvent")
+    fun createEvent(
+        @Part("userRef") name: RequestBody,
+        @Part("title") title: RequestBody?,
+        @Part("description") description: RequestBody?,
+        @Part("price") price: RequestBody?,
+        @Part("start_date") start_date: RequestBody?,
+        @Part("start_time") start_time: RequestBody?,
+        @Part("end_date") end_date: RequestBody?,
+        @Part("end_time") end_time: RequestBody?,
+        @Part("areaLimit") stateName: RequestBody?,
+        @Part cover_image: MultipartBody.Part,
+        @Part ent_video: MultipartBody.Part
+    ): Observable<LoginResponse>
+
+    @Multipart
+    @POST("addPetition")
+    fun addPetition(
+        @Part("userRef") name: RequestBody,
+        @Part("title") title: RequestBody?,
+        @Part("discription") discription: RequestBody?,
+        @Part("petitionDate") petitionDate: RequestBody?,
+        @Part("websitelink") websitelink: RequestBody?,
+        @Part("duration") duration: RequestBody?,
+        @Part("signtureCount") signtureCount: RequestBody?,
+        @Part("mediaType") mediaType: RequestBody?,
+        @Part("areaLimit") stateName: RequestBody?,
+        @Part("location") location: RequestBody?,
+        @Part petitionMedia: MultipartBody.Part
+    ): Observable<LoginResponse>
+
+
+    @Multipart
+    @POST("requestDonation")
+    fun requestDonation(
+        @Part("userRef") name: RequestBody,
+        @Part("title") title: RequestBody?,
+        @Part("description") description: RequestBody?,
+        @Part("donationGoal") donationGoal: RequestBody?,
+        @Part("fileType") fileType: RequestBody?,
+        @Part("tagPeopleArr") tagPeopleArr: RequestBody?,
+        @Part("areaLimit") areaLimit: RequestBody?,
+        @Part imageFile: MultipartBody.Part
     ): Observable<LoginResponse>
 
 
     @Multipart
     @POST("CreateNewPassword")
     fun createNewPassword(
-        @Part("email") email: RequestBody, @Part("password") password: RequestBody
+        @Part("email") email: RequestBody, @Part("otp") otp: RequestBody, @Part("password") password: RequestBody
     ): Observable<RegisterResponse>
 
     @Multipart
@@ -97,7 +180,13 @@ interface API {
 
     @Multipart
     @POST("getChatList")
-    fun getChatList(@Part("userRef") userRef: RequestBody): Observable<ChatModel>
+    fun getChatList(@Part("userRef") userRef: RequestBody
+                    ,@Part("keyword") keyword: RequestBody): Observable<ChatModel>
+
+    @Multipart
+    @POST("messageSeen")
+    fun getChatseen(@Part("fromRef") userRef: RequestBody
+                    ,@Part("toRef") keyword: RequestBody): Observable<ChatModel>
 
     @Multipart
     @POST("peopleList")
@@ -109,7 +198,7 @@ interface API {
 
     @Multipart
     @POST("getmydonner")
-    fun getmydonner(@Part("userRef") userRef: RequestBody): Observable<DonorsResponse>
+    fun getmydonner(@Part("userRef") userRef: RequestBody,@Part("keyword") keyword: RequestBody): Observable<DonorsResponse>
 
     @Multipart
     @POST("getAttendees")
@@ -124,6 +213,14 @@ interface API {
     ): Observable<RegisterResponse>
 
     @Multipart
+    @POST("chatNotification")
+    fun chatNotification(
+        @Part("fromRef") fromRef: RequestBody,
+        @Part("toRef") toRef: RequestBody,
+        @Part("message") message: RequestBody
+    ): Observable<SimpleResponse>
+
+    @Multipart
     @POST("payment")
     fun payment(
         @Part("cardToken") cardToken: RequestBody,
@@ -134,18 +231,28 @@ interface API {
     @Multipart
     @POST("polling")
     fun polling(
-        @Part("pollingId") userRef: RequestBody,
-        @Part("pollByRef") newPassword: RequestBody,
-        @Part("pollOption") pldPassword: RequestBody
+        @Part("pollingId") pollingId: RequestBody,
+        @Part("pollByRef") pollByRef: RequestBody,
+        @Part("pollOption") pollOption: RequestBody
     ): Observable<RegisterResponse>
 
-//    @Multipart
-//    @POST("getComment")
-//    fun getComment(
-//        @Part("commentTo") commentTo: RequestBody,
-//        @Part("conmmentOn") conmmentOn: RequestBody,
-//        @Part("parentCommentId") parentCommentId: RequestBody
-//    ): Observable<RegisterResponse>
+    @Multipart
+    @POST("viewPetition")
+    fun viewPetition(
+        @Part("past") past: RequestBody
+    ): Observable<ViewPetitionResponse>
+
+    @Multipart
+    @POST("getSignPetition")
+    fun getSignPetition(
+        @Part("petitionId") petitionId: RequestBody
+    ): Observable<PetitionSignResponse>
+
+    @Multipart
+    @POST("getAllDonationRequest")
+    fun getAllDonationRequest(
+        @Part("userRef") userRef: RequestBody
+    ): Observable<DonationRequestsResponse>
 
     @Multipart
     @POST("addSignPetition")
@@ -180,9 +287,17 @@ interface API {
     ): Observable<SearchModel>
 
     @Multipart
+    @POST("endpoll")
+    fun endpoll(
+        @Part("userRef") userRef: RequestBody,
+        @Part("pollId") pollId: RequestBody
+    ): Observable<SearchModel>
+
+    @Multipart
     @POST("getpollresult")
     fun getpollresult(
         @Part("pollId") pollId: RequestBody,
+        @Part("userRef") userRef: RequestBody
     ): Observable<PollResultResponse>
 
     @Multipart
@@ -211,7 +326,8 @@ interface API {
     @Multipart
     @POST("getEvent")
     fun getEvent(
-        @Part("userRef") userId: RequestBody
+        @Part("userRef") userRef: RequestBody,
+        @Part("searchkeyword") searchkeyword: RequestBody
     ): Observable<EventModel>
 
 
@@ -263,6 +379,7 @@ interface API {
     @Multipart
     @POST("searchDebate")
     fun searchDebate(
+        @Part("userRef") userRef: RequestBody,
         @Part("keyword") keyword: RequestBody
     ): Observable<LiveDebateModel>
 
@@ -275,6 +392,7 @@ interface API {
         @Part("description") description: RequestBody,
         @Part("fileType") fileType: RequestBody,
         @Part("donationGoal") donationGoal: RequestBody,
+        @Part("areaLimit") areaLimit: RequestBody,
         @Part mediaFile: MultipartBody.Part
     ): Observable<FeedModel>
 
@@ -329,6 +447,7 @@ interface API {
         @Part("userRef") userRef: RequestBody,
         @Part("lawTitle") lawTitle: RequestBody,
         @Part("description") description: RequestBody,
+        @Part("areaLimit") areaLimit: RequestBody,
         @Part("fileType") fileType: RequestBody,
         @Part documentFile: MultipartBody.Part
      //   @Part("documentFile") documentFile: RequestBody
@@ -343,7 +462,10 @@ interface API {
         @Part("title") title: RequestBody,
         @Part("message") message: RequestBody,
         @Part("date") date: RequestBody,
-        @Part("time") time: RequestBody
+        @Part("time") time: RequestBody,
+        @Part("isPublic") isPublic: RequestBody,
+        @Part("debateDuration") debateDuration: RequestBody,
+        @Part("areaLimit") areaLimit: RequestBody
     ): Observable<DebateResponse>
 
     @Multipart
@@ -355,10 +477,44 @@ interface API {
     ): Observable<DebateResponse>
 
     @Multipart
+    @POST("addsocialmedia")
+    fun addsocialmedia(
+        @Part("userRef") userRef: RequestBody,
+        @Part("instagram") instagram: RequestBody,
+        @Part("twitter") twitter: RequestBody,
+        @Part("facebook") facebook: RequestBody
+    ): Observable<DebateResponse>
+
+    @Multipart
+    @POST("getsocialaccount")
+    fun getsocialaccount(
+        @Part("userRef") userRef: RequestBody
+    ): Observable<SocialMediaResponse>
+
+    @Multipart
+    @POST("donationdetail")
+    fun donationdetail(
+        @Part("donationId") donationId: RequestBody
+    ): Observable<DonationDetailResponse>
+
+    @Multipart
     @POST("getSetting")
     fun getSettings(
         @Part("userRef") userRef: RequestBody
     ): Observable<GetSettingsResponse>
+
+    @Multipart
+    @POST("getAllMedia")
+    fun getAllMedia(
+        @Part("userRef") userRef: RequestBody
+    ): Observable<MediaResponse>
+
+
+    @Multipart
+    @POST("getallpoll")
+    fun getallpoll(
+        @Part("userRef") userRef: RequestBody
+    ): Observable<PollListsResponse>
 
 
     @Multipart
@@ -367,6 +523,19 @@ interface API {
         @Part("debateId") debateId: RequestBody
     ): Observable<DebateJoinerResponse>
 
+    @Multipart
+    @POST("getAllWinner")
+    fun getWinners(
+        @Part("userRef") userRef: RequestBody,
+        @Part("keyword") keyword: RequestBody,
+    ): Observable<GetAllWinnersResponse>
+
+    @Multipart
+    @POST("deleteMedia")
+    fun deleteMedia(
+        @Part("id") id: RequestBody,
+        @Part("recordType") recordType: RequestBody,
+    ): Observable<MediaResponse>
 
     @GET("getStats/{id}")
     fun getStats(
@@ -379,16 +548,13 @@ interface API {
     ): Observable<DebateDetailResponse>
 
     @GET("getlivedebate")
-    fun getlivedebate(
-    ): Observable<LiveDebateModel>
+    fun getlivedebate(): Observable<LiveDebateModel>
 
     @GET("getgovtstates")
-    fun getgovtstates(
-    ): Observable<StateResponse>
+    fun getgovtstates(): Observable<StateResponse>
 
     @GET("getjudicial")
-    fun getjudicial(
-    ): Observable<JudicialModel>
+    fun getjudicial(): Observable<JudicialModel>
 
     @GET("getDebateRequest/{id}")
     fun getDebateRequest(
@@ -409,9 +575,7 @@ interface API {
         @Path("id") userRef: String
     ): Observable<GetStatsResponse>
 
-    @GET("getAllWinner")
-    fun getWinners(
-    ): Observable<GetAllWinnersResponse>
+
 
     @GET("getDebates")
     fun getDebates(
@@ -429,6 +593,7 @@ interface API {
         @Body
         body: ChatSender?
     ): Call<ChatDataResponse>
+
 
 
 }

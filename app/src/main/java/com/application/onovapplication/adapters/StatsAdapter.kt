@@ -2,11 +2,8 @@ package com.application.onovapplication.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.application.onovapplication.R
-import com.application.onovapplication.databinding.RvSearchFriendsBinding
 import com.application.onovapplication.databinding.RvStatsBinding
 import com.application.onovapplication.model.StatsDataList
 
@@ -36,7 +33,14 @@ class StatsAdapter(val context: Context, private val statsList: List<StatsDataLi
 
             binding.tvStatsTitle.text = statsDataList.title
             binding.tvStatsVotes.text = statsDataList.voteCount
-           // itemView.tvStatsViews.text = statsDataList.
+            if (statsDataList.myResult=="")
+            binding.tvStatsViews.text = "NP"
+            else   if (statsDataList.myResult=="0")
+                binding.tvStatsViews.text = "L"
+            else   if (statsDataList.myResult=="winner")
+                binding.tvStatsViews.text = "W"
+            else   if (statsDataList.myResult=="tie")
+                binding.tvStatsViews.text = "T"
         }
 
     }

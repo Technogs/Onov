@@ -2,22 +2,20 @@ package com.application.onovapplication.activities.common
 
 import android.os.Bundle
 import android.util.Log
-import android.widget.TextView
+import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.application.onovapplication.R
 import com.application.onovapplication.adapters.SearchFriendsAdapter
-import com.application.onovapplication.databinding.ActivitySearchDebateBinding
 import com.application.onovapplication.databinding.ActivitySearchFriendsBinding
-import com.application.onovapplication.model.SearchData
+import com.application.onovapplication.model.Follow
 import com.application.onovapplication.model.SearchModel
 import com.application.onovapplication.viewModels.SearchViewModel
 
 
 class SearchFriendsActivity : BaseAppCompatActivity(), SearchFriendsAdapter.OnViewClick {
     var type = 0
-    var dataItem: SearchData? = null
+    var dataItem: Follow? = null
     var searchFriendsAdapter: SearchFriendsAdapter? = null
     val searchViewModel by lazy { ViewModelProvider(this).get(SearchViewModel::class.java) }
     private lateinit var binding: ActivitySearchFriendsBinding
@@ -28,11 +26,14 @@ class SearchFriendsActivity : BaseAppCompatActivity(), SearchFriendsAdapter.OnVi
         val view = binding.root
         setContentView(view)
 
-
+        searchViewModel.searchUser(
+            this, userPreferences.getUserREf(),
+            ""
+        )
 
         binding.btnSearch.setOnClickListener {
             if (binding.searchKey.text.toString() == "") Toast.makeText(
-                this, "please enter a key",
+                this, "please enter a keyword",
                 Toast.LENGTH_SHORT
             ).show()
             else searchViewModel.searchUser(
@@ -53,11 +54,15 @@ class SearchFriendsActivity : BaseAppCompatActivity(), SearchFriendsAdapter.OnVi
             if (it != null) {
                 if (it) {
                     if (searchViewModel.status == "success") {
+                        binding.rvSearchFriends.visibility=View.VISIBLE
                         setLayout(searchViewModel.searchList)
+                        binding.noDebateData.visibility=View.GONE
 
-                    } else {
+                    } else    {
                         setError(searchViewModel.message)
-                        finish()
+                        binding.noDebateData.visibility=View.VISIBLE
+                        binding.rvSearchFriends.visibility=View.GONE
+
                     }
                 }
             } else {
@@ -71,7 +76,7 @@ class SearchFriendsActivity : BaseAppCompatActivity(), SearchFriendsAdapter.OnVi
             if (it != null) {
                 if (it) {
                     if (searchViewModel.status == "success") {
-                        Log.d("followuser", dataItem!!.follow)
+                        Log.d("followuser", dataItem!!.follow!!)
 
                         if (dataItem!!.follow == "0") {
                             dataItem!!.follow = "4"
@@ -104,17 +109,19 @@ class SearchFriendsActivity : BaseAppCompatActivity(), SearchFriendsAdapter.OnVi
     }
 
 
-    override fun onClick(dataItem: SearchData) {
+    override fun onClick(dataItem: Follow) {
         this.dataItem = dataItem
         if (dataItem.follow == "0") {
-            searchViewModel.followUser(this, userPreferences.getUserREf(), "1", dataItem.userRef)
+            searchViewModel.followUser(this, userPreferences.getUserREf(),
+                "1", dataItem.userRef2)
 
         } else {
-            searchViewModel.followUser(this, userPreferences.getUserREf(), "0", dataItem.userRef)
+            searchViewModel.followUser(this, userPreferences.getUserREf(),
+                "0", dataItem.userRef2)
 
         }
 
     }
 
-    //  }
+
 }

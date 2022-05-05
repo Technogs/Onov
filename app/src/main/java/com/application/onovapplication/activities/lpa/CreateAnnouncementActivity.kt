@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.application.onovapplication.R
 import com.application.onovapplication.databinding.ActionBarLayout2Binding
-import com.application.onovapplication.databinding.ActivityAnnouncementsBinding
 import com.application.onovapplication.databinding.ActivityCreateAnnouncementBinding
 
 class CreateAnnouncementActivity : AppCompatActivity() {

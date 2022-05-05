@@ -10,14 +10,13 @@ import android.content.ContentValues
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.database.Cursor
-import android.media.MediaPlayer
 import android.net.Uri
 import android.os.*
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
+import android.widget.AdapterView
 import android.widget.EditText
-import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
@@ -31,17 +30,16 @@ import com.application.onovapplication.R
 import com.application.onovapplication.UrlConnection.MultipartUtility
 import com.application.onovapplication.activities.EventsActivity
 import com.application.onovapplication.databinding.ActionBarLayout2Binding
-import com.application.onovapplication.databinding.ActivityChangePasswordBinding
 import com.application.onovapplication.databinding.ActivityCreateEventBinding
 import com.application.onovapplication.model.EventModel
-import com.application.onovapplication.viewModels.CreateEventViewModel
+import com.application.onovapplication.utils.CustomSpinnerAdapter
+import com.application.onovapplication.viewModels.EventViewModel
 import com.bumptech.glide.Glide
 import com.google.gson.Gson
 import id.zelory.compressor.Compressor
 
 import kotlinx.coroutines.launch
 import java.io.*
-import java.net.HttpURLConnection
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.concurrent.thread
@@ -49,8 +47,8 @@ import kotlin.concurrent.thread
 
 class CreateEventActivity : BaseAppCompatActivity(), View.OnClickListener {
     private lateinit var binding: ActivityCreateEventBinding
-
-    //   val creteEventViewModel by lazy { ViewModelProvider(this).get(CreateEventViewModel::class.java) }
+    private val spinnerList = arrayOf("Select Radius", "Local", "State", "National")
+       val eventViewModel by lazy { ViewModelProvider(this).get(EventViewModel::class.java) }
     private var videoFile: File? = null
     private var path: String=""
     private var photopath: String=""
@@ -61,7 +59,7 @@ class CreateEventActivity : BaseAppCompatActivity(), View.OnClickListener {
     var mVideoFile: File? = null
     val LAUNCH_INFO_ACTIVITY = 11
     var type = ""
-
+    var radius = ""
     private val GALLERYVIDEO = 1
     private var CAMERAVIDEO: Int = 2
     private val REQUEST_TAKE_PHOTO = 101
@@ -73,9 +71,9 @@ class CreateEventActivity : BaseAppCompatActivity(), View.OnClickListener {
         setContentView(view)
         val incBinding: ActionBarLayout2Binding =binding.ab
 
-        if (Build.VERSION.SDK_INT > 9) {
-            val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
-            StrictMode.setThreadPolicy(policy) }
+//        if (Build.VERSION.SDK_INT > 9) {
+//            val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
+//            StrictMode.setThreadPolicy(policy) }
 
         type = intent.getStringExtra("type").toString()
 
@@ -87,7 +85,8 @@ class CreateEventActivity : BaseAppCompatActivity(), View.OnClickListener {
             binding.picLayout.visibility = View.GONE
             binding.videoLyt.visibility = View.VISIBLE
         }
-        //tvScreenTitleRight.text = getString(R.string.post)
+        setSpinner()
+        observeViewModel()
     }
 
     override fun onClick(v: View?) {
@@ -129,17 +128,30 @@ class CreateEventActivity : BaseAppCompatActivity(), View.OnClickListener {
                 } else if (binding.etPostDescription.text.toString() == "") {
                     setError(getString(R.string.description_error))
 
-//                } else if ( photopath == "") {
-//                    setError(getString(R.string.photo_error))
-//
-//                } else if (path == "") {
-//                    setError(getString(R.string.video_error))
-                } else {
 
-                    addEvent(
-                        binding.etEventTitle.text.toString(),
-                        binding.etPostDescription.text.toString()
-                    )}
+                } else {
+                    showDialog()
+
+                    eventViewModel.createEvent(this,userPreferences.getuserDetails()?.userRef.toString(), binding.etEventTitle.text.toString(), binding.etPostDescription.text.toString(), binding.etEventPrice.text.toString(),
+                        convertDateFormat(
+                            binding.edEventStartDate.text.toString(),
+                            "MMM dd,yyyy",
+                            "yyyy-MM-dd"
+                        ).toString()     , convertDateFormat(
+                            binding.edEventStartTime.text.toString(),
+                            "hh:mm a",
+                            "HH:mm"
+                        ),convertDateFormat(
+                            binding.edEventEndDate.text.toString(),
+                            "MMM dd,yyyy",
+                            "yyyy-MM-dd"
+                        ).toString()  ,
+                        convertDateFormat(
+                            binding.edEventEndTime.text.toString(),
+                            "hh:mm a",
+                            "HH:mm"
+                        )  ,radius,compressedImage,videoFile)
+                }
             }
             R.id.pic_layout -> {
                 if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
@@ -183,6 +195,33 @@ class CreateEventActivity : BaseAppCompatActivity(), View.OnClickListener {
         }
 
     }
+    private fun setSpinner() {
+        val spinnerAdapter = CustomSpinnerAdapter(
+            this,  // Use our custom adapter
+            R.layout.spinner_text, spinnerList
+        )
+
+
+        spinnerAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown)
+        binding.spPetition.adapter = spinnerAdapter
+
+
+        binding.spPetition.onItemSelectedListener = object :
+            AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+            }
+
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                radius = spinnerList[position]
+            }
+        }
+    }
     private fun showVideoDialog() {
         val pictureDialog: AlertDialog.Builder = AlertDialog.Builder(this)
         pictureDialog.setTitle("Select Action")
@@ -209,7 +248,26 @@ class CreateEventActivity : BaseAppCompatActivity(), View.OnClickListener {
             startActivityForResult(galleryIntent, GALLERYVIDEO)
         }
     }
+    private fun observeViewModel() {
+eventViewModel.successfulAddEvent.observe(this, androidx.lifecycle.Observer {
+    dismissDialog()
+    if (it != null) {
+        if (it) {
+            if (eventViewModel.status == "success") {
+            setError(eventViewModel.loginResponse.msg.toString())
+                startActivity(Intent(this,EventsActivity::class.java))
+                finish()
 
+            } else {
+                setError(eventViewModel.message)
+                finish()
+            }
+        }
+    } else {
+        setError(eventViewModel.message)
+    }
+})
+    }
     private fun takeVideoFromCamera() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(
@@ -312,60 +370,28 @@ class CreateEventActivity : BaseAppCompatActivity(), View.OnClickListener {
             when (requestCode) {
                 GALLERYVIDEO -> {
                     if (data != null) {
+                        binding.uploadVideo.visibility=View.GONE
+                        binding.viewVideo.visibility=View.VISIBLE
                         val contentURI: Uri = data.data!!
+
+                        binding.viewVideo.setVideoURI(contentURI)
+                        binding.viewVideo.start()
                         path = getMediaPath(contentURI)
 
-
-                        val mp: MediaPlayer = MediaPlayer.create(this, Uri.fromFile(File(path)))
-                        val duration: Int = mp.duration
-                        mp.release()
-                        if (duration / 10000 > 10) {
-
-                            showPopUp()
-                        } else {
+//
+//                        val mp: MediaPlayer = MediaPlayer.create(this, Uri.fromFile(File(path)))
+//                        val duration: Int = mp.duration
+//                        mp.release()
+//                        if (duration / 10000 > 10) {
+//
+//                            showPopUp()
+//                        } else {
                             videoFile = saveVideoFile(path)
                             compressVideo(path, videoFile)
 
+                    //                            videoFile = File(getRealPathFromUri(contentURI)!!)
 
-                            ////////////////
-                            videoFile = File(getRealPathFromUri(contentURI)!!)
-//                        // Get the Video from data
-
-//                        // Get the Video from data
-//                        val selectedVideo: Uri = data.data!!
-//                        val filePathColumn = arrayOf(MediaStore.Video.Media.DATA)
-//
-//                        val cursor: Cursor =
-//                            activity?.getContentResolver()?.query(
-//                                selectedVideo,
-//                                filePathColumn,
-//                                null,
-//                                null,
-//                                null
-//                            )!!
-//                        cursor.moveToFirst()
-//
-//                        val columnIndex = cursor.getColumnIndex(filePathColumn[0])
-//
-//                      val  mediaPath1 = cursor.getString(columnIndex)
-//                        videoFile= File(mediaPath1)
-//                        str2.setText(mediaPath1)
-//                        // Set the Video Thumb in ImageView Previewing the Media
-//                        // Set the Video Thumb in ImageView Previewing the Media
-//                        imgView.setImageBitmap(
-//                            getThumbnailPathForLocalFile(
-//                                this@MainActivity,
-//                                selectedVideo
-//                            )
-//                        )
-//                        cursor.close() /////////////////////////////////////
-
-//                        saveVideoToInternalStorage(selectedVideoPath)
-//                        addVideo.visibility = View.VISIBLE
-//                        addVideoImage.visibility = View.GONE
-//                        addVideo.setVideoPath(selectedVideoPath);
-//                        addVideo.start();
-                        }
+//                        }
 
                     }
                 }
@@ -374,11 +400,11 @@ class CreateEventActivity : BaseAppCompatActivity(), View.OnClickListener {
                     if (data != null) {
                         val contentURI: Uri = data.data!!
                         path = getMediaPath(contentURI)
-//                    addVideo.visibility = View.VISIBLE
-//                    addVideoImage.visibility = View.GONE
-//                    addVideo.setVideoPath(path);
-//                    addVideo.start();
-//
+                        binding.uploadVideo.visibility=View.GONE
+                        binding.viewVideo.visibility=View.VISIBLE
+
+                        binding.viewVideo.setVideoURI(contentURI)
+                        binding.viewVideo.start()
                         videoFile = saveVideoFile(path)
                         compressVideo(path, videoFile)
                     }
@@ -397,29 +423,23 @@ class CreateEventActivity : BaseAppCompatActivity(), View.OnClickListener {
                         e.printStackTrace()
                     }
                 }
-
-                REQUEST_TAKE_PHOTO -> {
-                    val selectedImage = data!!.data
-                    try {
-
-                        mPhotoFile = File(getRealPathFromUri(selectedImage)!!)
-
-                        photopath=mPhotoFile.toString()
-                        compressImage(mPhotoFile!!)
-                        //Glide.with(this).load(mPhotoFile).into(addCoverPhoto)
-
-                    } catch (e: IOException) {
-                        e.printStackTrace()
-
-                    }
-
-
-                    compressImage(mPhotoFile!!)
-
-                    //Glide.with(this).load(mPhotoFile).into(addCoverPhoto)
-
-                }
             }
+        }
+        if (requestCode== REQUEST_TAKE_PHOTO && resultCode== RESULT_OK){
+            binding.uploadPhoto.setImageURI(Uri.parse(mPhotoFile.toString()))
+
+
+            try {
+
+                mPhotoFile = File(getRealPathFromUri(Uri.parse(mPhotoFile.toString()))!!)
+
+                photopath=mPhotoFile.toString()
+                compressImage(mPhotoFile!!)
+
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+
         }
     }
     private fun showPopUp() {
@@ -449,11 +469,8 @@ class CreateEventActivity : BaseAppCompatActivity(), View.OnClickListener {
                 // Default compression
                 compressedImage = Compressor.compress(this@CreateEventActivity, imageFile)
 
-//                alertDialog?.show()
-                // showDialog()
+
                 Glide.with(this@CreateEventActivity).load(compressedImage).into(binding.uploadPhoto)
-//                alertDialog?.dismiss()
-                //dismissDialog()
                 Log.e("komal", "new file ${compressedImage!!.length()}")
 
             }
@@ -469,15 +486,13 @@ class CreateEventActivity : BaseAppCompatActivity(), View.OnClickListener {
                         if (percent <= 100 && percent.toInt() % 5 == 0)
                             this@CreateEventActivity.runOnUiThread {
 
-//                                progressBar.progress = percent.toInt()
+                                binding.progressBar.progress = percent.toInt()
                             }
                     }
 
                     override fun onStart() {
-
-
-//                        progressBar.visibility = View.VISIBLE
-//                        progressBar.progress = 0
+                        binding.progressBar.visibility = View.VISIBLE
+                        binding.progressBar.progress = 0
                     }
 
                     override fun onSuccess() {
@@ -487,15 +502,11 @@ class CreateEventActivity : BaseAppCompatActivity(), View.OnClickListener {
 
                             Looper.myLooper()?.let {
                                 Handler(it).postDelayed({
-//                                    progressBar.visibility = View.GONE
+                                    binding.progressBar.visibility = View.GONE
                                 }, 50)
                             }
                         }
 
-//                        addVideo.visibility = View.VISIBLE
-//                        add_pic.visibility = View.GONE
-//                        addVideo.setVideoPath(path)
-//                        addVideo.start();
                     }
 
                     override fun onFailure(failureMessage: String) {
@@ -587,7 +598,7 @@ class CreateEventActivity : BaseAppCompatActivity(), View.OnClickListener {
             TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
                 cal.set(Calendar.HOUR_OF_DAY, hour)
                 cal.set(Calendar.MINUTE, minute)
-                editText?.setText(SimpleDateFormat("HH:mm").format(cal.time))
+                editText?.setText(SimpleDateFormat("hh:mm a").format(cal.time))
             }
         TimePickerDialog(
             this,
@@ -614,7 +625,11 @@ class CreateEventActivity : BaseAppCompatActivity(), View.OnClickListener {
                 val selectedMonth = String.format("%02d", monthOfYear + 1)
                 val selectedDate = String.format("%02d", dayOfMonth)
 
-                editText?.setText("$year-$selectedMonth-$selectedDate")
+                editText?.setText( convertDateFormat(
+                    "$year-$selectedMonth-$selectedDate",
+                    "yyyy-MM-dd",
+                    "MMM dd,yyyy"
+                ).toString())
             },
             year,
             month,
@@ -646,7 +661,7 @@ class CreateEventActivity : BaseAppCompatActivity(), View.OnClickListener {
                 val file = File(filePath)
 
                 resolver.openInputStream(uri)?.use { inputStream ->
-                    FileOutputStream(file).use { outputStream ->
+                   FileOutputStream(file).use { outputStream ->
                         val buf = ByteArray(4096)
                         var len: Int
                         while (inputStream.read(buf).also { len = it } > 0) outputStream.write(buf, 0, len)
@@ -657,58 +672,6 @@ class CreateEventActivity : BaseAppCompatActivity(), View.OnClickListener {
         } finally { cursor?.close() }
     }
 
-    fun addEvent(title:String,desc:String){
-
-        val charset = "UTF-8"
-        showDialog()
-        try {
-            var uploadFile1=File("")
-            var uploadFile2=File("")
-            thread {
-                if (photopath.isNotEmpty()) {
-                uploadFile1 = File(photopath)
-            }else if (path.isNotEmpty()) {
-                uploadFile1 = File(path)
-            }
-              //  val uploadFile2 = File(path)
-                val requestURL = "https://bdztl.com/onov/api/v1/createEvent"
-           /*     runOnUiThread {  }*/
-
-                val multipart = MultipartUtility(requestURL, charset)
-                multipart.addFormField("userRef", userPreferences.getUserREf())
-                multipart.addFormField("title", title)
-                multipart.addFormField("price", binding.etEventPrice.text.toString())
-                multipart.addFormField("start_date", binding.edEventStartDate.text.toString())
-                multipart.addFormField("start_time", binding.edEventStartTime.text.toString())
-                multipart.addFormField("end_date", binding.edEventEndDate.text.toString())
-                multipart.addFormField("end_time", binding.edEventEndTime.text.toString())
-                multipart.addFormField("description", desc)
-                multipart.addFilePart("cover_image", uploadFile1)
-                multipart.addFilePart("ent_video", uploadFile1)
-                val response: String = multipart.finish()
-
-                println("SERVER REPLIED:")
-
-                val gson = Gson() // Or use new GsonBuilder().create();
-
-                data = gson.fromJson(response, EventModel::class.java)
-
-                if (data!=null) {
-                    setError(data?.msg.toString())
-                    dismissDialog()
-                    Handler(Looper.getMainLooper()).postDelayed({
-                        //finish()
-                      startActivity(Intent(this,EventsActivity::class.java))
-                    }, 2000)
-                }
-
-            }
-
-
-        } catch (ex: IOException) {
-            System.err.println(ex)
-        }
-    }
 }
 
 

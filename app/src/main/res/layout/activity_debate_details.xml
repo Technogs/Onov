@@ -154,11 +154,12 @@
                     android:text="Alex John"
                     android:textColor="@color/navigation_color"
                     android:textSize="@dimen/_12ssp" />
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_debate_requests"
                     android:layout_width="match_parent"
-                    android:layout_below="@+id/debateDetailsTime"
                     android:layout_height="wrap_content"
+                    android:layout_below="@+id/debateDetailsTime"
                     android:layout_marginTop="10dp"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
             </RelativeLayout>
@@ -193,7 +194,12 @@
                 android:visibility="gone"
                 android:textColor="@color/navigation_color"
                 android:textSize="16sp" />
-
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:id="@+id/allBtn"
+                android:layout_marginHorizontal="@dimen/_20sdp"
+                android:layout_height="wrap_content">
 <androidx.appcompat.widget.LinearLayoutCompat
     android:layout_width="match_parent"
     android:orientation="horizontal"
@@ -234,6 +240,25 @@ android:layout_marginStart="@dimen/_5sdp"
         android:textColor="@color/white"
         android:textSize="18sp" />
 </androidx.appcompat.widget.LinearLayoutCompat>
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnReshedule"
+                    android:layout_width="wrap_content"
+                    android:layout_height="45dp"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:layout_below="@id/time"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:background="@drawable/drawable_gradient_button_background"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Reschedule"
+                    android:paddingHorizontal="@dimen/_22sdp"
+                    android:onClick="onClick"
+                    android:textAllCaps="false"
+                    android:gravity="center"
+                    android:layout_marginBottom="40dp"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
 
         </LinearLayout>
 

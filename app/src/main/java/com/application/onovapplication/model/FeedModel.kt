@@ -3,85 +3,108 @@ package com.application.onovapplication.model
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
+
 @Parcelize
 data class FeedModel(
     @SerializedName("data")
     val `data`: List<FeedsData>,
     @SerializedName("msg")
     val msg: String,
+    @SerializedName("NotificationCount")
+    val NotificationCount: String,
     @SerializedName("status")
-    val status: String
-): Parcelable
+    val status: String) : Parcelable
+
+
 @Parcelize
 data class FeedsData(
     @SerializedName("Name")
-    val Name: String?="",
+    val Name: String? = "",
+    @SerializedName("fullName")
+    val fullName: String? = "",
     @SerializedName("created_at")
-    val created_at: String?="",
+    val created_at: String? = "",
     @SerializedName("description")
-    val description: String?="",
+    val description: String? = "",
     @SerializedName("polTitle")
-    val polTitle: String?="",
+    val polTitle: String? = "",
     @SerializedName("polOptions")
-    val polOptions: String?="",
+    val polOptions: List<String>?=ArrayList(),
     @SerializedName("filePath")
-    val filePath: String?="",
+    val filePath: String? = "",
     @SerializedName("polTillDateTime")
-    val polTillDateTime: String?="",
+    val polTillDateTime: String? = "",
+    @SerializedName("areaLimit")
+    val areaLimit: String? = "",
     @SerializedName("isPoll")
-    val isPoll: String?="",
+    val isPoll: String? = "",
     @SerializedName("polCreateBy")
-    val polCreateBy: String?="",
+    val polCreateBy: String? = "",
     @SerializedName("polId")
-    val polId: String?="",
+    val polId: String? = "",
     @SerializedName("fileType")
-    val fileType: String?="",
+    val fileType: String? = "",
     @SerializedName("id")
-    val id: String?="",
+    val id: String? = "",
     @SerializedName("recordId")
-    val recordId: String?="",
-    var like: Boolean=false,
-    var profile: Boolean=false,
-    var dislike: Boolean=false,
+    val recordId: String? = "",
+    var like: Boolean = false,
+    var profile: Boolean = false,
+    var dislike: Boolean = false,
     @SerializedName("petitionDiscription")
-    val petitionDiscription: String?="",
+    val petitionDiscription: String? = "",
+    @SerializedName("petitionLocation")
+    val petitionLocation: String? = "",
     @SerializedName("petitionDuration")
-    val petitionDuration: String?="",
+    val petitionDuration: String? = "",
     @SerializedName("Liked")
-    var Liked: String?="",
+    var Liked: String? = "",
     @SerializedName("Disliked")
-    var Disliked: String?="",
+    var Disliked: String? = "",
     @SerializedName("petitionMedia")
-    val petitionMedia: String?="",
+    val petitionMedia: String? = "",
     @SerializedName("petitionRadius")
-    val petitionRadius: String?="",
+    val petitionRadius: String? = "",
     @SerializedName("petitionReceiveSignCount")
-    val petitionReceiveSignCount: String?="",
+    val petitionReceiveSignCount: String? = "",
     @SerializedName("petitionSignCount")
-    val petitionSignCount: String?="",
+    val petitionSignCount: String? = "",
     @SerializedName("petitionTitle")
-    val petitionTitle: String?="",
+    val petitionTitle: String? = "",
     @SerializedName("petitionId")
-    val petitionId: String?="",
+    val petitionId: String? = "",
     @SerializedName("petitionWebsiteLink")
-    val petitionWebsiteLink: String?="",
+    val petitionWebsiteLink: String? = "",
     @SerializedName("profilePic")
-    val profilePic: String?="",
+    val profilePic: String? = "",
     @SerializedName("isShared")
-    val isShared: String?="",
+    val isShared: String? = "",
     @SerializedName("recordType")
-    val recordType: String?="",
+    val recordType: String? = "",
     @SerializedName("title")
-    val title: String?="",
+    val title: String? = "",
+    @SerializedName("polisPublic")
+    val polisPublic: String? = "",
+    @SerializedName("pollImage")
+    val pollImage: String? = "",
+    @SerializedName("polisMultiple")
+    val polisMultiple: String? = "",
     @SerializedName("userRef")
-    val userRef: String?="",
+    val userRef: String? = "",
+    @SerializedName("totalVote")
+    val totalVote: String? = "",
+    @SerializedName("donationGoal")
+    val donationGoal: String? = "",
     @SerializedName("dislikeCount")
-    var dislikeCount: String?="" ,
-@SerializedName("commentCount")
-    val commentCount: String?="",
-@SerializedName("likeCount")
-    var likeCount: String?=""
-): Parcelable
-{
-
-}
+    var dislikeCount: String? = "",
+    @SerializedName("cityName")
+    var cityName: String? = "",
+    @SerializedName("stateName")
+    var stateName: String? = "",
+    @SerializedName("countryName")
+    var countryName: String? = "",
+    @SerializedName("commentCount")
+    val commentCount: String? = "",
+    @SerializedName("likeCount")
+    var likeCount: String? = ""
+) : Parcelable

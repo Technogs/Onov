@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/_2sdp"
+    android:background="@color/white"
+    android:id="@+id/mainLyt"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView
+        android:id="@+id/see"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_20sdp"
+        android:layout_gravity="end"
+        android:text="view"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:drawablePadding="@dimen/_6sdp"
+        android:layout_margin="@dimen/_1sdp"
+        android:drawableRight="@drawable/ic_baseline_remove_red_eye_24"
+        android:scaleType="centerCrop" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/feedMedia"
+        android:layout_height="@dimen/_130sdp">
+
+        <ImageView
+            android:id="@+id/ivFeed"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_200sdp"
+            android:background="@drawable/dummy_debate"
+            android:scaleType="centerCrop" />
+
+        <VideoView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_200sdp"
+            android:id="@+id/vvFeed"
+            android:visibility="gone" />
+        <com.google.android.exoplayer2.ui.SimpleExoPlayerView
+            android:id="@+id/idExoPlayerVIew"
+            android:layout_width="match_parent"
+            android:visibility="gone"
+            app:resize_mode="fill"
+            android:layout_height="@dimen/_200sdp" />
+
+        <WebView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:id="@+id/wbFeed"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+</androidx.appcompat.widget.LinearLayoutCompat>

@@ -10,18 +10,17 @@ import android.view.View
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import com.application.onovapplication.R
-import com.application.onovapplication.activities.UsersActivity
 import com.application.onovapplication.activities.common.BaseAppCompatActivity
 import com.application.onovapplication.viewModels.DebatesViewModel
 
 import java.text.SimpleDateFormat
 import java.util.*
 import android.util.Log
-import android.widget.Toast
+import android.widget.AdapterView
 import com.application.onovapplication.activities.PeopleActivity
 import com.application.onovapplication.databinding.ActionBarLayout2Binding
 import com.application.onovapplication.databinding.ActivityRequestDebateBinding
-import com.tencent.bugly.proguard.s
+import com.application.onovapplication.utils.CustomSpinnerAdapter
 import kotlin.collections.ArrayList
 
 
@@ -31,9 +30,15 @@ class RequestDebateActivity : BaseAppCompatActivity() ,View.OnClickListener{
     val LAUNCH_SECOND_ACTIVITY = 1
     val ids = ArrayList<String>()
     var result = arrayListOf<String>()
-
-//    var result:String=""
+    private val spinnerList =
+        arrayOf("Select Petition Radius", "Local", "State", "National")
+    private val timeList =
+        arrayOf("Select Debate Duration","20 min", "40 min", "60 min", "2 hrs")
+    var radius = ""
     var date= ""
+    var debateDuration= ""
+    var notificationStatus = ""
+
     var persons= ""
     var time = ""
     private lateinit var binding: ActivityRequestDebateBinding
@@ -45,10 +50,24 @@ class RequestDebateActivity : BaseAppCompatActivity() ,View.OnClickListener{
         setContentView(view)
         val incBinding: ActionBarLayout2Binding =binding.ab
         incBinding.tvScreenTitle.text = getString(R.string.request_debate)
+        setSpinner()
+        setSwitchEventListener()
         observeViewModel()
     }
 
+    private fun setSwitchEventListener() {
+        binding.switchNotification.setOnClickListener {
+            notificationStatus = if (binding.switchNotification.isChecked) {
+                "1"
+            } else {
+                "0"
+            }
 
+        }
+
+
+
+    }
     private fun observeViewModel() {
 
         debatesViewModel.successfulRequestDebate.observe(this, androidx.lifecycle.Observer {
@@ -71,6 +90,63 @@ class RequestDebateActivity : BaseAppCompatActivity() ,View.OnClickListener{
 
 
 
+    }
+    private fun setSpinner() {
+        val spinnerAdapter = CustomSpinnerAdapter(
+            this,  // Use our custom adapter
+            R.layout.spinner_text, spinnerList
+        )
+
+
+        spinnerAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown)
+        binding.spPetition.adapter = spinnerAdapter
+
+
+        binding.spPetition.onItemSelectedListener = object :
+            AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+            }
+
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                // selectedRole = parent?.getItemAtPosition(position).toString()
+                radius = spinnerList[position]
+            }
+        }
+
+
+
+        val spinnerAdapterd = CustomSpinnerAdapter(
+            this,  // Use our custom adapter
+            R.layout.spinner_text, timeList
+        )
+
+
+        spinnerAdapterd.setDropDownViewResource(R.layout.simple_spinner_dropdown)
+        binding.spDuration.adapter = spinnerAdapterd
+
+
+        binding.spDuration.onItemSelectedListener = object :
+            AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+            }
+
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                // selectedRole = parent?.getItemAtPosition(position).toString()
+                debateDuration = timeList[position]
+            }
+        }
     }
 
     override fun onClick(v: View?) {
@@ -95,7 +171,7 @@ class RequestDebateActivity : BaseAppCompatActivity() ,View.OnClickListener{
         if (requestCode == LAUNCH_SECOND_ACTIVITY) {
             if (resultCode == RESULT_OK) {
               result= data?.getStringArrayListExtra("result") as ArrayList<String>
-                persons = TextUtils.join(", ", result)
+                persons = TextUtils.join(",", result)
 //                Toast.makeText(this, ""+ s, Toast.LENGTH_SHORT).show()
 if (binding.rdTitle.text.toString()==""){
     setError(resources.getString(R.string.title_error))
@@ -106,7 +182,7 @@ if (binding.rdTitle.text.toString()==""){
          } else if (binding.etDebateMsg.text.toString()==""){
              setError("Add a message")
          } else {
-            debatesViewModel.requestDebate(this,persons,userPreferences.getuserDetails()?.userRef.toString(),binding.rdTitle.text.toString(),binding.etDebateMsg.text.toString(),date,time)
+            debatesViewModel.requestDebate(this,persons,userPreferences.getuserDetails()?.userRef.toString(),binding.rdTitle.text.toString(),binding.etDebateMsg.text.toString(),date,time,notificationStatus,debateDuration,radius)
 }
 
             }
@@ -125,7 +201,7 @@ if (binding.rdTitle.text.toString()==""){
             TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
                 cal.set(Calendar.HOUR_OF_DAY, hour)
                 cal.set(Calendar.MINUTE, minute)
-                textView?.setText(SimpleDateFormat("HH:mm").format(cal.time))
+                textView?.setText(SimpleDateFormat("hh:mm a").format(cal.time))
                 time = SimpleDateFormat("HH:mm").format(cal.time)
             }
         TimePickerDialog(
@@ -154,7 +230,11 @@ if (binding.rdTitle.text.toString()==""){
                 val selectedDate = String.format("%02d", dayOfMonth)
                 date = "$year-$selectedMonth-$selectedDate"
 
-                textView?.setText("$year-$selectedMonth-$selectedDate")
+                textView?.setText( convertDateFormat(
+                    "$year-$selectedMonth-$selectedDate",
+                    "yyyy-MM-dd",
+                    "MMM dd,yyyy"
+                ).toString())
             },
             year,
             month,

@@ -10,9 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.application.onovapplication.R
-import com.application.onovapplication.adapters.DonationsAdapter
 import com.application.onovapplication.adapters.JudicialAdapter
-import com.application.onovapplication.viewModels.DonationViewModel
 import com.application.onovapplication.viewModels.GovernmentViewModel
 
 class JudicialFragment : Fragment() , View.OnClickListener{
@@ -42,16 +40,14 @@ class JudicialFragment : Fragment() , View.OnClickListener{
             if (it != null) {
                 if (it) {
                     if (governmentViewModel.status == "success") {
-                        //   setLayout(eventViewModel.eventResponse)
-                        //  donation=governmentViewModel.
+
                         if (governmentViewModel.judicialModel?.judicialData!!.isNotEmpty()){
                         rvJudicial.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
                         val adapter = this.context?.let { JudicialAdapter(it,governmentViewModel.judicialModel!!.judicialData) }
                         rvJudicial.adapter = adapter
                     }
             }
-                    //            else {
-//                setError(donationViewModel.message)
+
                 }
             }
         })

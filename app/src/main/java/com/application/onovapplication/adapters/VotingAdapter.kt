@@ -33,8 +33,6 @@ class VotingAdapter(val context: Context
 
 
     inner class RVHolder(itemView: View) :
-        RecyclerView.ViewHolder(itemView) {
-
-    }
+        RecyclerView.ViewHolder(itemView) {}
 
 }

@@ -3,20 +3,17 @@ package com.application.onovapplication.activities
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.AdapterView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.application.onovapplication.R
 import com.application.onovapplication.activities.common.AskToAddActivity
 import com.application.onovapplication.activities.common.BaseAppCompatActivity
-import com.application.onovapplication.activities.common.CreateEventActivity
-import com.application.onovapplication.activities.common.HomeTabActivity
 import com.application.onovapplication.adapters.EventsAdapter
-import com.application.onovapplication.adapters.ViewDebatesAdapter
-import com.application.onovapplication.databinding.ActivityCommentBinding
 import com.application.onovapplication.databinding.ActivityEventsBinding
 import com.application.onovapplication.model.EventData
 import com.application.onovapplication.model.EventModel
-import com.application.onovapplication.model.FeedsData
+import com.application.onovapplication.utils.CustomSpinnerAdapter
 import com.application.onovapplication.viewModels.EventViewModel
 import com.application.onovapplication.viewModels.HomeViewModel
 
@@ -25,32 +22,55 @@ class EventsActivity : BaseAppCompatActivity(), View.OnClickListener ,EventsAdap
     val eventViewModel by lazy { ViewModelProvider(this).get(EventViewModel::class.java) }
     private val homeViewModel by lazy { ViewModelProvider(this).get(HomeViewModel::class.java)}
     var eventsAdapter:EventsAdapter?  = null
-
+    private val spinnerList = arrayOf("Select Option", "Local", "State", "National")
+    var radius = ""
     private lateinit var binding: ActivityEventsBinding
     var eventObj: EventData? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-      //  setContentView(R.layout.activity_events)
         binding = ActivityEventsBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-
+        setSpinner()
         observeViewModel()
-
-        eventViewModel.getEvent(this,userPreferences.getuserDetails()?.userRef.toString())
+        eventViewModel.getEvent(this,userPreferences.getuserDetails()?.userRef.toString(),"")
     }
 
     override fun onClick(v: View?) {
         when(v?.id)
         {
             R.id.btnCreateEvent->{
-//                val intent = Intent(this , CreateEventActivity::class.java)
-//            startActivity(intent)
-
                 val intent = Intent(this, AskToAddActivity::class.java)
                 intent.putExtra("activity", "event")
                 startActivity(intent)
+            }
+        }
+    }
+    private fun setSpinner() {
+        val spinnerAdapter = CustomSpinnerAdapter(
+            this,  // Use our custom adapter
+            R.layout.spinner_text, spinnerList
+        )
+
+
+        spinnerAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown)
+        binding.spPetition.adapter = spinnerAdapter
+
+
+        binding.spPetition.onItemSelectedListener = object :
+            AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                radius = spinnerList[position]
+                eventViewModel.getEvent(this@EventsActivity,userPreferences.getuserDetails()?.userRef.toString(),radius)
+showDialog()
             }
         }
     }
@@ -62,7 +82,10 @@ class EventsActivity : BaseAppCompatActivity(), View.OnClickListener ,EventsAdap
             if (it != null) {
                 if (it) {
                     if (eventViewModel.status == "success") {
-                     setLayout(eventViewModel.eventResponse)
+                        if (eventViewModel.eventResponse.eventData.isNullOrEmpty())
+                            binding.noData.visibility = View.VISIBLE
+                            setLayout(eventViewModel.eventResponse)
+
 
                     } else {
                         setError(eventViewModel.message)

@@ -2,6 +2,7 @@ package com.application.onovapplication.viewModels
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.application.onovapplication.R
@@ -68,7 +69,9 @@ class HomeViewModel : ViewModel() {
                                 message = e.message.toString()
                             }
                             else -> {
-                                message = context.getString(R.string.error_something_went_wrong)
+                                message = e.message.toString()//context.getString(R.string.error_something_went_wrong)
+                           Log.d("errorarrray",e.message.toString())
+
                             }
                         }
                         successful.value = false

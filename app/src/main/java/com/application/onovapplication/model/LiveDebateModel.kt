@@ -37,6 +37,10 @@ data class LiveDebate(
     val topic: String?="",
     @SerializedName("updated_at")
     val updated_at: String?="",
+    @SerializedName("isPublic")
+    val isPublic: String?="",
+    @SerializedName("debateDuration")
+    val debateDuration: String?="",
     @SerializedName("userRef")
     val userRef: String?="",
     @SerializedName("view")

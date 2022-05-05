@@ -11,7 +11,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.application.onovapplication.activities.CommentActivity
 import com.application.onovapplication.activities.UsersActivity
-import com.application.onovapplication.activities.common.BaseAppCompatActivity
 import com.application.onovapplication.activities.common.BaseFragment
 import com.application.onovapplication.activities.common.HomeTabActivity
 import com.application.onovapplication.adapters.ViewDebatesAdapter
@@ -73,7 +72,7 @@ class FeedFragment : BaseFragment(), ViewDebatesAdapter.OnClickItem,
         super.onViewCreated(view, savedInstanceState)
 
         binding.tvRole.text =
-            "Role: ".plus((activity as BaseAppCompatActivity).userPreferences.getRole())
+            "Role: ".plus(userPreferences.getuserDetails()?.role)
         //       (activity as HomeTabActivity).showDialog()
         homeViewModel.getFeed(requireContext(), userPreferences.getUserREf())
         showDialog()
@@ -100,7 +99,8 @@ class FeedFragment : BaseFragment(), ViewDebatesAdapter.OnClickItem,
                         } else {
                             feedData = homeViewModel.getFeedResponse.data as MutableList<FeedsData>
                             debatesAdapter =
-                                ViewDebatesAdapter(requireActivity(), feedData!!, this, this)
+                                ViewDebatesAdapter(requireActivity(), feedData!!, this,
+                                    this,"")
                             binding.rvViewDebates.adapter = debatesAdapter
 
                         }
@@ -158,7 +158,7 @@ class FeedFragment : BaseFragment(), ViewDebatesAdapter.OnClickItem,
             dismissDialog()
             if (it) {
                 if (homeViewModel.status == "success") {
-//                    setError(profileViewModel.message)
+
                     if (feedData?.isNotEmpty() == true)
                         feedData!!.remove(feedData!![pos!!])
                     debatesAdapter?.notifyDataSetChanged()
@@ -277,7 +277,7 @@ class FeedFragment : BaseFragment(), ViewDebatesAdapter.OnClickItem,
             showDialog()
             Log.d("_DonActivityResult", "onActivityResult: " + data.getStringExtra("stripetoken"))
             val token = data.getStringExtra("stripetoken")
-            dntnViewModel.paymentStripe(requireActivity(), token.toString(), damount, paymentDesc)
+            dntnViewModel.paymentStripe(requireActivity(), token.toString(), damount, "payment")
 //            dntnViewModel.addDonations(requireActivity(),userPreferences.getUserREf(),result,damount)
 
         }
@@ -315,6 +315,11 @@ class FeedFragment : BaseFragment(), ViewDebatesAdapter.OnClickItem,
             homeViewModel.likeFeed(
                 requireActivity(), userPreferences.getuserDetails()?.userRef.toString(),
                 feeditem.recordId.toString(), "donationRequest", type
+            )
+        else if (feeditem.recordType == "polling")
+            homeViewModel.likeFeed(
+                requireActivity(), userPreferences.getuserDetails()?.userRef.toString(),
+                feeditem.recordId.toString(), "polling", type
             )
         else if (feeditem.recordType == "law")
             homeViewModel.likeFeed(

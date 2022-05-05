@@ -30,14 +30,15 @@
         android:layout_marginTop="20dp"
         android:background="@drawable/drawable_chat_background"
         >
+
         <TextView
-            android:layout_width="wrap_content"
-            android:text="Sent From:"
             android:id="@+id/tv"
-            android:textSize="16sp"
-            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_regular"
-            android:layout_height="wrap_content"/>
+            android:text="Sent From:"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -150,30 +151,66 @@
 
 
     </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginHorizontal="@dimen/_10sdp"
+                android:paddingVertical="@dimen/_4sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:text="@string/share"
+                    android:textSize="@dimen/_10ssp"
+                    android:id="@+id/sharept"
+                    android:onClick="onClick"
+                    android:layout_weight="1"
+                    android:textStyle="bold"
+                    android:layout_marginHorizontal="@dimen/_10sdp"
+                    android:layout_gravity="center|start"
+                    android:paddingVertical="@dimen/_2sdp"
+                    android:textColor="@color/petitions_color"
+                    android:fontFamily="@font/poppins_regular"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:text="View Signatures"
+                    android:textSize="@dimen/_10ssp"
+                    android:id="@+id/ViewReceiveSign"
+                    android:onClick="onClick"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginHorizontal="@dimen/_10sdp"
+                    android:paddingHorizontal="@dimen/_7sdp"
+                    android:paddingVertical="@dimen/_2sdp"
+                    android:background="@color/petitions_color"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/poppins_regular"
+                    android:layout_height="wrap_content"/>
+            </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:id="@+id/feedMedia"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
+      android:layout_marginHorizontal="@dimen/_10sdp"
         android:layout_marginTop="20dp"
-        android:layout_height="200dp">
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/ivFeed"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:background="@drawable/dummy_debate"
-            android:scaleType="centerCrop" />
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:src="@drawable/dummy_debate" />
+
         <com.google.android.exoplayer2.ui.SimpleExoPlayerView
             android:id="@+id/idExoPlayerVIew"
             android:layout_width="match_parent"
             android:visibility="gone"
-            android:layout_height="@dimen/_200sdp" />
+            app:resize_mode="fill"
+            android:layout_height="@dimen/_220sdp" />
 
     <VideoView
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="@dimen/_220sdp"
         android:id="@+id/vvFeed"
         android:visibility="gone" />
     </RelativeLayout>

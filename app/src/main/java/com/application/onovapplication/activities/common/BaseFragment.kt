@@ -34,7 +34,7 @@ open class BaseFragment:Fragment() {
 //        textView.setTextColor(Color.parseColor("#FFFF"))
         snackBar.show()
         Snackbar.make(
-            activity!!.findViewById(android.R.id.content),
+            requireActivity().findViewById(android.R.id.content),
             string,
             Snackbar.LENGTH_SHORT
         ).show()

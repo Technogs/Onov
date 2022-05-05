@@ -2,10 +2,7 @@ package com.application.onovapplication.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.application.onovapplication.R
-import com.application.onovapplication.databinding.ActivityFeedDetailBinding
 import com.application.onovapplication.databinding.ActivityGovtDetailBinding
-import com.application.onovapplication.model.EventData
 import com.application.onovapplication.model.Member
 
 class GovtDetailActivity : AppCompatActivity() {
@@ -31,7 +28,5 @@ class GovtDetailActivity : AppCompatActivity() {
         binding.teitterAc.text=members.twitter_account
         binding.fbAc.text=members.facebook_account
         binding.youtubeAc.text=members.youtube_account
-//        name_txt.text=members.first_name
-//        name_txt.text=members.first_name
     }
 }

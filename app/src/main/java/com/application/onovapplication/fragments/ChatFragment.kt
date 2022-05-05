@@ -13,7 +13,6 @@ import com.application.onovapplication.activities.common.BaseFragment
 import com.application.onovapplication.activities.common.ChatActivity
 import com.application.onovapplication.adapters.OnlineStatusAdapter
 import com.application.onovapplication.adapters.ViewChatsAdapter
-import com.application.onovapplication.databinding.ActivityAskToAddBinding
 import com.application.onovapplication.databinding.FragmentChatBinding
 import com.application.onovapplication.model.FeedsData
 import com.application.onovapplication.model.Follow
@@ -21,13 +20,15 @@ import com.application.onovapplication.repository.BaseUrl
 import com.application.onovapplication.viewModels.ChatViewModel
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+
 //https://objectpartners.com/2017/09/06/real-time-chat-application-with-kotlin-and-firebase/import com.application.onovapplication.viewModels.ChatViewModel
 
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-class ChatFragment : BaseFragment(), ViewChatsAdapter.OnMessageClickListener,ViewChatsAdapter.OnMessageClickLImage {
+class ChatFragment : BaseFragment(), ViewChatsAdapter.OnMessageClickListener,
+    ViewChatsAdapter.OnMessageClickLImage {
 
     private var param1: String? = null
     private var param2: String? = null
@@ -35,20 +36,26 @@ class ChatFragment : BaseFragment(), ViewChatsAdapter.OnMessageClickListener,Vie
 
     private var onlineStatusAdapter: OnlineStatusAdapter? = null
     private var chatsAdapter: ViewChatsAdapter? = null
-    val chatViewModel by lazy { ViewModelProvider(this).get(ChatViewModel::class.java) }
+    val chatViewModel by lazy {
+        ViewModelProvider(this).get(ChatViewModel::class.java)
+    }
     lateinit var binding: FragmentChatBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        Log.d("userinfo",userPreferences.getuserDetails().toString())
+        Log.d("userinfo", userPreferences.getuserDetails().toString())
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         // Inflate the layout for this fragment
         binding = FragmentChatBinding.inflate(inflater, container, false);
         return binding.getRoot();
@@ -60,11 +67,22 @@ class ChatFragment : BaseFragment(), ViewChatsAdapter.OnMessageClickListener,Vie
         onlineStatusAdapter = OnlineStatusAdapter(requireContext())
         binding.rvStatus.adapter = onlineStatusAdapter
 
-
-        chatViewModel.getChatList(requireActivity(),userPreferences.getUserREf())
-        showDialog()
+        binding.searchBtn.setOnClickListener {
+            chatViewModel.getChatList(
+                requireActivity(),
+                userPreferences.getUserREf(),
+                binding.searchKey.text.toString()
+            )
+            showDialog()
+        }
         observeViewModel()
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        chatViewModel.getChatList(requireActivity(), userPreferences.getUserREf(), "")
+//        showDialog()
     }
 
     companion object {
@@ -80,22 +98,29 @@ class ChatFragment : BaseFragment(), ViewChatsAdapter.OnMessageClickListener,Vie
 
 
     private fun observeViewModel() {
-
+        val activity = activity
         chatViewModel.successful.observe(requireActivity(), androidx.lifecycle.Observer {
             dismissDialog()
             if (it != null) {
                 if (it) {
                     if (chatViewModel.status == "success") {
-                        if (chatViewModel.chatdata.chatList.isNullOrEmpty()){
-                            binding.noChatData.visibility=View.VISIBLE
+                        if (chatViewModel.chatdata.chatList.isNullOrEmpty()) {
+                            binding.noChatData.visibility = View.VISIBLE
                         }
-                        chatsAdapter = ViewChatsAdapter(requireActivity(),chatViewModel.chatdata.chatList,this,this,0)
-                        binding.rvChatList.adapter = chatsAdapter
-                     //   chatsAdapter!!.notifyDataSetChanged()
+                        if (isAdded && activity != null) {
+                            chatsAdapter = ViewChatsAdapter(
+                                requireActivity(),
+                                chatViewModel.chatdata.chatList,
+                                this,
+                                this,
+                                0
+                            )
+                            binding.rvChatList.adapter = chatsAdapter
+                            //   chatsAdapter!!.notifyDataSetChanged()}
 
+                        }
                     } else {
                         setError(chatViewModel.message)
-
                     }
                 }
             } else {
@@ -106,23 +131,30 @@ class ChatFragment : BaseFragment(), ViewChatsAdapter.OnMessageClickListener,Vie
     }
 
 
-
     override fun onMessageClickListener(data: Follow) {
 
-        startActivity(ChatActivity.getStartIntent(
-            requireActivity(), data.id.trim(),
-            data.fullName,
-            BaseUrl.photoUrl + "" + data.profilePic.trim(),"",null,null,
-            data.userRef.trim()))
+        startActivity(
+            ChatActivity.getStartIntent(
+                requireActivity(),
+                data.user_id?.trim().toString(),
+                data.fullName,
+                BaseUrl.photoUrl + "" +
+                        data.profilePic.trim(), "", null, null,
+                data.userRef?.trim().toString()
+            )
+        )
 
     }
 
     override fun onMessageImageClick(data: Follow) {
-    previewChatImage(data.profilePic,data.fullName)
+        previewChatImage(data.profilePic, data.fullName)
+
+
     }
 
     private fun previewChatImage(url: String, userName: String) {
-        val ImagePreviewDialog = Dialog(requireActivity(),
+        val ImagePreviewDialog = Dialog(
+            requireActivity(),
             android.R.style.ThemeOverlay_Material_Dialog
         )
         ImagePreviewDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -132,7 +164,9 @@ class ChatFragment : BaseFragment(), ViewChatsAdapter.OnMessageClickListener,Vie
         val ivPreview = ImagePreviewDialog.findViewById(R.id.iv_preview_image) as ImageView
         val tvUsername = ImagePreviewDialog.findViewById(R.id.tv_username) as TextView
         tvUsername.text = userName
-        Glide.with(requireActivity()).load(BaseUrl.photoUrl +url).apply(RequestOptions().placeholder(R.drawable.ic_baseline_account_circle_24)).into(ivPreview)
+        Glide.with(requireActivity()).load(BaseUrl.photoUrl + url)
+            .apply(RequestOptions().placeholder(R.drawable.ic_baseline_account_circle_24))
+            .into(ivPreview)
 
         btnClose.setOnClickListener {
             ImagePreviewDialog.dismiss()

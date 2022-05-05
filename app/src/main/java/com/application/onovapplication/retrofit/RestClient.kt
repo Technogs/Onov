@@ -17,7 +17,8 @@ class RestClient {
         private val httpClient: OkHttpClient = OkHttpClient.Builder()
             .addInterceptor(HttpLoggingInterceptor().apply {
                 level =
-                    if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.BASIC
+                    if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else
+                        HttpLoggingInterceptor.Level.BASIC
             })
             .connectTimeout(30, TimeUnit.SECONDS)
             .readTimeout(30, TimeUnit.SECONDS).build()

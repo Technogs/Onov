@@ -11,12 +11,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.RecyclerView
-import com.application.onovapplication.R
-import com.application.onovapplication.activities.common.AskDonationsActivity
+
 import com.application.onovapplication.activities.common.AskToAddActivity
 import com.application.onovapplication.adapters.DonationsAdapter
-import com.application.onovapplication.databinding.FragmentCreatePostBinding
 import com.application.onovapplication.databinding.FragmentDonationsBinding
 import com.application.onovapplication.model.DonationData
 import com.application.onovapplication.prefs.PreferenceManager
@@ -68,7 +65,7 @@ class DonationsFragment : Fragment(){
             if (it != null) {
                 if (it) {
                     if (donationViewModel.status == "success") {
-                        //   setLayout(eventViewModel.eventResponse)
+
                         donation=donationViewModel.dndata.data
                         if (donation.donorList.isNotEmpty()){
                           binding.donorLyt.visibility=View.VISIBLE

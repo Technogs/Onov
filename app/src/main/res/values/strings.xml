@@ -1,8 +1,9 @@
 <resources>
-    <string name="app_name">Onov Application</string>
-<!--    <string name="bugly_app_id">30565fe82361456d85800fd8b9b492d2</string>-->
+    <string name="app_name">Onov</string>
+    <!--    <string name="bugly_app_id">30565fe82361456d85800fd8b9b492d2</string>-->
     <string name="bugly_app_id">b0cdd2e446454bdca42b3cc0b3b83417</string>
     <!--b0cdd2e446454bdca42b3cc0b3b83417-->
+    <string name="default_notification_channel_id">com.Onov</string>
 
     <!-- Application -->
     <string name="title_home">Home</string>
@@ -383,7 +384,7 @@
     <string name="continue_">Continue</string>
     <string name="enter_your_email_verification_code">Enter Your Email Verification Code</string>
     <string name="sign_up">Sign Up</string>
-    <string name="don_t_have_account">Don\'t have Password</string>
+    <string name="don_t_have_account">Don\'t have Account</string>
     <string name="login">Login</string>
     <string name="forgot_password">Forgot Password</string>
     <string name="password">Password</string>
@@ -400,7 +401,7 @@
     <string name="role_">Role</string>
     <string name="phone_no">Phone No.</string>
     <string name="update_profile">Update Profile</string>
-    <string name="_02_donors">Donors</string>
+    <string name="_02_donors">02\n Donors</string>
     <string name="already_account">Already Have Account</string>
     <string name="about_me">About Us</string>
     <string name="website_url">Website Url</string>
@@ -473,7 +474,7 @@
     <string name="terms_and_conditions"><![CDATA[Terms & Conditions]]></string>
     <string name="change_password">Change Password</string>
     <string name="new_password_error">Enter Valid Password</string>
-    <string name="password_length_error">Password should be more then 6</string>
+    <string name="password_length_error">Password should be more then 5</string>
     <string name="select_action">Select</string>
     <string name="select_image_from_gallery">Select From Gallery</string>
     <string name="select_image_from_camera">Capture from Camera</string>
@@ -504,9 +505,10 @@
     <string name="sg_count_error">Enter Signature count</string>
     <string name="support">Support</string>
     <string name="followers">Followers</string>
-    <string name="unfollow">Unfollow</string>
+    <string name="unfollow">UnSupport</string>
     <string name="remove">Remove</string>
     <string name="donors">Donors</string>
+    <string name="donatedTo">Donated To</string>
     <string name="announcements">Announcements</string>
     <string name="create_announcements">Create Announcements</string>
     <string name="new_law">New Law</string>
@@ -516,6 +518,269 @@
     <string name="action_device_token">Device Token</string>
     <string name="error_please_check_internet">Check Your Internet Connection</string>
     <string name="error_request_timed_out">Request Time Out</string>
+    <string name="privacy_content"><![CDATA[<p>PRIVACY POLICY &ndash; ONOV APP</p>
+
+<p>Last Updated: March 20, 2022</p>
+
+<p>By accessing or using ONOVMobile Application (the &ldquo;App&rdquo;) and/or using Services as set out in the Terms of Use, you consent to the information collection, disclosure and use practices described in this Privacy Policy. The App is owned, maintained and operated by Onov LLC, a company having its registered address located at 175 Fulton ave Hempstead NY 11550. 211b, USA(hereinafter referred to as &ldquo;Company&rdquo;, &ldquo;we,&rdquo; &ldquo;us&rdquo; or &ldquo;our&rdquo;). This Privacy Policy also applies to all Services provided by us and sets out how we may collect, use and disclose information in relation to our clients as well as users of the App.</p>
+
+<p>Use of our App and Services, including all materials presented herein, may be subject to separate Terms and Conditions and the following Privacy Policy.</p>
+
+<p>Information We Collect</p>
+
+<p>Your privacy is important to us and we have taken steps to ensure that we do not collect more information from you than is necessary for us to provide you with our Services and to protect your account.</p>
+
+<p>We may process the following categories of personal data about you:</p>
+
+<p>Personal Data means any information relating to an identified or identifiable natural person. This information may include, in particular by reference to an identifier, such as name, age, email address, date of birth, gender, user&rsquo;s photo, location including City, State and Country of residence/citizenship, details of affiliation with a political party, details of donor/done (at the time of giving donating), political interests, payment gateway details (for payment processing) and all information, data and materials as we may deem necessary for provision of Services. The Users may also be required to give permission to the App to haveaccess to camera to take pictures and record videos, access photos, media, files and location on their device.</p>
+
+<p>Communication Data may include any communication that you send to us whether that be through the Contact Form on our App/website, email, text, social media messaging, social media posting or any other communication that you send us. We process this data for the purposes of communicating with you, for record keeping and for the establishment, pursuance or defence of legal claims. Our lawful ground for this processing is our legitimate interests which in this case are to reply to communications sent to us, to keep records and to establish, pursue or defend legal claims.</p>
+
+<p>Marketing Data may include data about your preferences in receiving marketing from us and your communication preferences. Our lawful ground for this processing is our legitimate interests which in this case are to study how users use our services, to develop them, to grow our business and to decide our marketing strategy.</p>
+
+<p>We may use Personal Data, Communication Data and Marketing Data (the &ldquo;Data&rdquo;) to provide you with Services. We may also use such data to send other marketing communications to you.</p>
+
+<p>Consent and its Withdrawal</p>
+
+<p>When you use our App, you provide us consent to use your Data as per this Privacy Policy. In order to provide you with the Services, it is necessary for us to collect all relevant and necessary Data about you from you. In addition, by signing up and filling the Forms available on the App, you give us your express consent and permission to use your Data.</p>
+
+<p>We will process the Data only after taking written instructions/consent from you mostly in electronic form in the form of Clickable button, a checkbox or through an email.</p>
+
+<p>If you change your mind, you may withdraw your consent for us to contact you, for the continued collection, use or disclosure of your information, at any time, by contactingus at info@onov.com.</p>
+
+<p>Promotional Emails</p>
+
+<p>You agree that the App and/or third parties may from time to time send e-mail messages to you which offer products and services, promotions, subscriptions or registration-based services or other material. If you wish to discontinue receiving such email, you may opt-out by writing us through email at info@onov.com. Your preferences will then be updated.</p>
+
+<p>How We Use and Process the Data</p>
+
+<p>The Data collected by us from you may be used to provide you with Services and better understand your needs related services and programs, to correspond with you and reply to your questions with about our services.</p>
+
+<p>We will not rent or sell your Data to others. We may store the Data in locations outside our direct control (for instance, on servers or databases co-located with hosting providers).</p>
+
+<p>If you provide any Data to us, you are deemed to have authorized us to collect, retain and use that data for the following purposes:</p>
+
+<p>verifying your identity;</p>
+
+<p>providing you with customer service and responding to your queries, feedback, or disputes;</p>
+
+<p>making such disclosures as may be required for any of the above purposes or as required by law, regulations and guidelines or in respect of any investigations, claims or potential claims brought on or against us;</p>
+
+<p>provide and maintain the Services;</p>
+
+<p>notify you about changes to our Services;</p>
+
+<p>We shall ensure that:</p>
+
+<p>The Data collected and processed for and on our behalf by any party is collected and processed fairly and lawfully;</p>
+
+<p>You are always made fully aware of the reasons for the collection of Data and are given details of the purpose(s) for which the data will be used;</p>
+
+<p>The Data is only collected to the extent that is necessary to fulfil the purpose(s) for which it is required;</p>
+
+<p>No Data is held for any longer than necessary in light of the purpose(s) for which it is required.</p>
+
+<p>Whenever cookies or similar technologies are used online by us, they shall be used strictly in accordance with the law;</p>
+
+<p>You are informed if any data submitted by you online cannot be fully deleted at your request under normal circumstances and how to request that the we delete any other copies of that data, where it is within your right to do so;</p>
+
+<p>Appropriate technical and organizational measures are taken to protect the Data;</p>
+
+<p>Data is transferred securely, whether it is transmitted electronically or in hard copy.</p>
+
+<p>You can fully exercise your rights with ease and without hindrance.</p>
+
+<p>Disclosure of Data</p>
+
+<p>We shall not be able to keep your Data private in response to legal process i.e., a court order or a subpoena, a law enforcement agency&rsquo;s request. If, in our view, it is deemed appropriate to investigate, prevent, or take action regarding illegal activities, suspected fraud, situations involving potential threats to the physical safety of any person, violations of our terms of use, or as otherwise required by law, we may be compelled to disclose the Data and Personal Data. Moreover, in case of takeover, merger or acquisition, we reserve a right to transfer your data to new platform.</p>
+
+<p>We may disclose the Data in the good faith belief that such action is necessary to:</p>
+
+<p>comply with a legal obligation</p>
+
+<p>protect and defend our rights or property</p>
+
+<p>prevent or investigate possible wrongdoing</p>
+
+<p>protect the personal safety of users of the Service or the public</p>
+
+<p>protect against legal liability</p>
+
+<p>When necessary, we may also disclose and transfer your Data to our professional advisers, law enforcement agencies, insurers, government and regulatory and other organizations.</p>
+
+<p>Data Storage</p>
+
+<p>Your Data may be stored and processed at the servers in the United States, Europe, or any other country in which the App or its subsidiaries, affiliates or service providers maintain facilities.</p>
+
+<p>The App may transfer Data to affiliated entities, or to other third parties across borders and from your country or jurisdiction to other countries or jurisdictions around the world. Your consent to this Privacy Policy followed by your submission of such information represents your agreement to that transfer.</p>
+
+<p>We will take all steps reasonably necessary to ensure that your data is treated securely and in accordance with this Privacy Policy and no transfer of your Data will take place to an organization or a country unless there are adequate controls in place including the security of your data and other personal information.</p>
+
+<p>We will only retain your Data preferably for ten (10) years or as long as necessary to fulfil the purposes we collected it for, including for the purposes of satisfying any legal, see section regarding insurance requirement and reporting requirements. When deciding what the correct time is to keep the Data for we look at its amount, nature and sensitivity, potential risk of harm from unauthorised use or disclosure, the processing purposes, if these can be achieved by other means and legal requirements.</p>
+
+<p>How We Protect Your Information</p>
+
+<p>We store all the Data submitted by you through App at a secure database.</p>
+
+<p>We are concerned with protecting your privacy and data, but we cannot ensure or warrant the security of any data you transmit to or guarantee that your Data may not be accessed, disclosed, altered or destroyed by breach of any of our industry standard physical, technical or managerial safeguards.</p>
+
+<p>No method of transmission over the Internet or method of electronic Therefore, we cannot guarantee its absolute security. If you have any questions about security of our App, you can contact us at info@onov.com.</p>
+
+<p>Any Data supplied by you will be retained by us and will be accessible by our employees, any service providers engaged by us and third parties.</p>
+
+<p>Compliance with the GDPR</p>
+
+<p>For users based in the European Union (EU), the App shall make all reasonable efforts to ensure that it complies with The General Data Protection Regulation (GDPR) (EU) 2016/679 as set forth by the European Union regarding the collection, use, and retention of Data from European Union member countries. App shall make all reasonable efforts to adhere to the requirements of notice, choice, onward transfer, security, data integrity, access and enforcement.</p>
+
+<p>The Rights of Users</p>
+
+<p>You may exercise certain rights regarding your Data processed by us. In particular, users based in the EU may do the following:</p>
+
+<p>Right of confirmation</p>
+
+<p>You shall have the right granted by the European legislator to obtain from us the confirmation as to whether or not personal data concerning you are being processed.</p>
+
+<p>Right of Access</p>
+
+<p>You shall have the right granted by the European legislator to obtain from us free information about your personal data stored at any time and a copy of this information. Furthermore, the European directives and regulations grant you access to the following information:</p>
+
+<p>the purposes of the processing;</p>
+
+<p>the categories of personal data concerned;</p>
+
+<p>the recipients or categories of recipients to whom the personal data have been or will be disclosed, in particular recipients in third countries or international organizations;</p>
+
+<p>where possible, the envisaged period for which the personal data will be stored, or, if not possible, the criteria used to determine that period;</p>
+
+<p>the existence of the right to request from us rectification or erasure of personal data, or restriction of processing of personal data concerning the data subject, or to object to such processing;</p>
+
+<p>the existence of the right to lodge a complaint with a supervisory authority;</p>
+
+<p>where the personal data are not collected from you, any available information as to its source;</p>
+
+<p>the existence of automated decision-making, including profiling, referred to in Article 22(1) and (4) of the GDPR and, at least in those cases, meaningful information about the logic involved, as well as the significance and envisaged consequences of such processing for you.</p>
+
+<p>Furthermore, you shall have a right to obtain information as to whether personal data are transferred to a third country or to an international organisation. Where this is the case, you shall have the right to be informed of the appropriate safeguards relating to the transfer.</p>
+
+<p>Right to rectification</p>
+
+<p>You shall have the right granted by the European legislator to obtain from us without undue delay the rectification of inaccurate personal data concerning you. Taking into account the purposes of the processing, you shall have the right to have incomplete personal data completed, including by means of providing a supplementary statement.</p>
+
+<p>Right to erasure (Right to be forgotten)</p>
+
+<p>You shall have the right granted by the European legislator to obtain from us the erasure of personal data concerning you without undue delay, and we shall have the obligation to erase personal data without undue delay where one of the following grounds applies, as long as the processing is not necessary:</p>
+
+<p>The personal data are no longer necessary in relation to the purposes for which they were collected or otherwise processed.</p>
+
+<p>You withdraw consent to which the processing is based according to point (a) of Article 6(1) of the GDPR, or point (a) of Article 9(2) of the GDPR, and where there is no other legal ground for the processing.</p>
+
+<p>You object to the processing pursuant to Article 21(1) of the GDPR and there are no overriding legitimate grounds for the processing, or you object to the processing pursuant to Article 21(2) of the GDPR.</p>
+
+<p>The personal data have been unlawfully processed.</p>
+
+<p>The personal data must be erased for compliance with a legal obligation in Union or Member State law to which we are subject.</p>
+
+<p>The personal data have been collected in relation to the offer of information society services referred to in Article 8(1) of the GDPR.</p>
+
+<p>Where we have made personal data public and are obliged pursuant to Article 17(1) to erase the personal data, we, while taking account of available technology and the cost of implementation, shall take reasonable steps, including technical measures, to inform other controllers processing the personal data that you have requested erasure by such controllers of any links to, or copy or replication of, those personal data, as far as processing is not required. We will arrange the necessary measures in individual cases.</p>
+
+<p>Right of restriction of processing</p>
+
+<p>You shall have the right granted by the European legislator to obtain from us restriction of processing where one of the following applies:</p>
+
+<p>The accuracy of the personal data is contested by the data subject, for a period enabling us to verify the accuracy of the personal data.</p>
+
+<p>The processing is unlawful and the data subject opposes the erasure of the personal data and requests instead the restriction of their use instead.</p>
+
+<p>We no longer need the personal data for the purposes of the processing, but we are required by the data subject for the establishment, exercise or defence of legal claims.</p>
+
+<p>You have objected to processing pursuant to Article 21(1) of the GDPR pending the verification whether our legitimate grounds override those of yours.</p>
+
+<p>If one of the aforementioned conditions is met, and you wish to request the restriction of the processing of personal data stored by us, you may at any time contact us.</p>
+
+<p>Right to data portability</p>
+
+<p>You shall have the right granted by the European legislator, to receive the personal data concerning you, which was provided to us, in a structured, commonly used and machine-readable format. You shall have the right to transmit those data to another data controller without hindrance from us to which the personal data have been provided, as long as the processing is based on consent pursuant to point (a) of Article 6(1) of the GDPR or point (a) of Article 9(2) of the GDPR, or on a contract pursuant to point (b) of Article 6(1) of the GDPR, and the processing is carried out by automated means, as long as the processing is not necessary for the performance of a task carried out in the public interest or in the exercise of official authority vested in us.</p>
+
+<p>Right to object</p>
+
+<p>You shall have the right granted by the European legislator to object, on grounds relating to your particular situation, at any time, to processing of personal data concerning you, which is based on point (e) or (f) of Article 6(1) of the GDPR. This also applies to profiling based on these provisions.</p>
+
+<p>We shall no longer process the personal data in the event of the objection, unless we can demonstrate compelling legitimate grounds for the processing which override the interests, rights and freedoms of the data subject, or for the establishment, exercise or defence of legal claims.</p>
+
+<p>If we processes personal data for direct marketing purposes, you shall have the right to object at any time to processing of personal data concerning you for such marketing. This applies to profiling to the extent that it is related to such direct marketing. If you object to us to the processing for direct marketing purposes, we will no longer process the personal data for these purposes.</p>
+
+<p>In addition, you have the right, on grounds relating to your particular situation, to object to processing of personal data concerning you by us for scientific or historical research purposes, or for statistical purposes pursuant to Article 89(1) of the GDPR, unless the processing is necessary for the performance of a task carried out for reasons of public interest.</p>
+
+<p>Automated individual decision-making, including profiling</p>
+
+<p>You shall have the right granted by the European legislator not to be subject to a decision based solely on automated processing, including profiling, which produces legal effects concerning you, or similarly significantly affects you, as long as the decision (1) is not necessary for entering into, or the performance of, a contract between you and us, or (2) is not authorised by Union or Member State law to which we are subject and which also lays down suitable measures to safeguard your rights and freedoms and legitimate interests, or (3) is not based on your explicit consent.</p>
+
+<p>If the decision (1) is necessary for entering into, or the performance of, a contract between you and us, or (2) it is based on your explicit consent, we shall implement suitable measures to safeguard your rights and freedoms and legitimate interests, at least the right to obtain human intervention on our part, to express your point of view and contest the decision.</p>
+
+<p>Right to withdraw data protection consent</p>
+
+<p>You shall have the right granted by the European legislator to withdraw your consent to processing of your personal data at any time. You may initiate request with us at info@onov.com to exercise any of the above mentioned rights. We shall review your request and, in our own discretion, honor your request, if deemed necessary by us, within reasonable time.</p>
+
+<p>Compliance with CalOPPA</p>
+
+<p>We are also committed to complying with the California Online Privacy Protection Act (&ldquo;CalOPPA&rdquo;) which requires commercial websites/Apps and online services to post a privacy policy. The law requires any person or company in the United States (and conceivably the world) that operates websites/Apps collecting &lsquo;personally identifiable information&rsquo; from California consumers to post a conspicuous privacy policy on its website stating exactly the information being collected and those individuals or companies with whom it is being shared. As required under CalOPPA, we agree that our Privacy Policy link includes the word &lsquo;Privacy&rsquo; and can easily be found on the page specified above.</p>
+
+<p>We endeavor to fulfil requirements of the CalOPPA under this Privacy Policy in line with our policy for user data collection, storage, and disclosure as outlined for GDPR compliance.</p>
+
+<p>Compliance of California Privacy Act 2018</p>
+
+<p>This Privacy Policy is also applicable on California residents and explains how we collect, use, and share your Personal Information and how you may exercise your rights under the California Consumer Privacy Act of 2018 (&ldquo;CCPA&rdquo;).</p>
+
+<p>Your rights under the CCPA:</p>
+
+<p>Under the CCPA, you have the right to access the Personal Information we&rsquo;ve collected about you during the past 12 months and information about our data practices. You also have the right to request that we delete the Personal Information that we have collected from you.</p>
+
+<p>To request manual access or deletion of your Personal Information, please contact us at.</p>
+
+<p>Please note, for all manual requests, you will need to verify your identity by providing us with the all the information as we may require from you for this purpose.</p>
+
+<p>You have the right to be free from any discrimination for exercising your rights to access or delete your Personal Information. We will not discriminate against you for exercising any of these rights.</p>
+
+<p>If you have additional questions about this or how to exercise your rights under the CCPA, please contact us at info@onov.com.</p>
+
+<p>Changes to this Privacy Statement</p>
+
+<p>We may modify these this Privacy Policy from time to time, and any such change shall be reflected on the App with the updated version of the Privacy Policy and you agree to be bound to any changes to the updated version of Privacy Policy when you use the App or its Services.</p>
+
+<p>You acknowledge and agree that it is your responsibility to review this App and this Policy periodically and to be aware of any modifications. Updates to this Policy will be posted on this page.</p>
+
+<p>Also, occasionally there may be information on the App that contains typographical errors, inaccuracies or omissions that may relate to service descriptions, pricing, availability, and various other information, and the App reserves the right to correct any errors, inaccuracies or omissions and to change or update the information at any time, without prior notice.</p>
+
+<p>Contact US</p>
+
+<p>If you have questions about our Privacy Policy, please contact us via email: info@onov.com.</p>]]>
+    </string>
+    <string name="terms_of_use"><![CDATA[
+        <p>TERMS OF USE - ONOV</p>
+
+<p>Last updated: March 20, 2022</p>
+
+
+<p>PLEASE READ THESE TERMS OF USE CAREFULLY</p>
+
+<p> 1. AGREEMENT TO TERMS  1.1. These Terms of Use constitute a legally binding agreement made between you, whether personally or on behalf of an entity (&ldquo;you&rdquo; or &ldquo;users&rdquo;), and Onov LLC, a company having its registered address located at 175 Fulton ave Hempstead NY 11550. 211b, USA (&ldquo;we,&rdquo; &ldquo;us&rdquo; or &ldquo;our&rdquo;), concerning your access to and use of ONOV mobile application (the &ldquo;App&rdquo;) or its corresponding website. You agree that by accessing our App or website, you have read, understood, and agree to be bound by all of these Terms of Use. IF YOU DO NOT AGREE WITH ALL OF THESE TERMS OF USE, THEN YOU ARE EXPRESSLY PROHIBITED FROM USING THE APP AND WEBSITE.   1.2. Any supplemental terms and conditions or documents that may be posted on the App from time to time are hereby expressly incorporated herein by reference. We reserve the right, in our sole discretion, to make changes or modifications to these Terms of Use at any time and for any reason. We will alert you about any changes by updating the &ldquo;Last updated&rdquo; date of these Terms of Use and you waive any right to receive specific notice of each such change. It is your responsibility to periodically review these Terms of Use to stay informed of updates. You will be subject to, and will be deemed to have been made aware of and to have accepted, the changes in any revised Terms of Use by your continued use of the App after the date such revised Terms are posted.   1.3. The information provided on the App is not intended for distribution to or use by any person or entity in any jurisdiction or country where such distribution or use would be contrary to law or regulation or which would subject us to any registration requirement within such jurisdiction or country. Accordingly, those persons who choose to access the App from other locations do so on their own initiative and are solely responsible for compliance with local laws, if and to the extent local laws are applicable.&#160;  1.4. Users below the age of Eighteen (18) years are not allowed to use the App or any of its Services.   2. SERVICES  2.1. The App provides social networking services particularly focusing on politics and allows its users (who may be referred to as the &ldquo;citizens&rdquo; within the App) to hold debates, ask questions, post answers to questions, engage in discussions, post political content including news and videos, participate in live debates and political polls, exchange messages with other community members, have conversation with other users, share informative content including fundamental Government information, access laws, participate in events, sign petitions for various causes, give feedback primarily relating to local/international politics including their own constituencies and voluntarily give donations (hereinafter referred to as &ldquo;Services&rdquo;).  2.2. The purpose of our social network to allow users to express their political ideas by posting, debating, petitioning etc. through the App and build a community.  2.3. THE COMPANY DISCLAIMS RESPONSIBILITY FOR ANY ILLEGAL USE THE USERS MAKE OF THE APP.  3. USER REGISTRATION  3.1. In order to use some or all of the functionalities and Services provided through the App or website, you may be required to register an account with your email address or by linking your social media account (i.e. Facebook account). You will also be required to complete your profile by entering personal information such as date of birth, location, images, bio, etc. in your Profile. You will be able allowed to add your other social media accounts including but not limited to Instagram, Twitter, and LinkedIn information on your Profile.  3.2. You represent, warrant and covenant that:  (i) you have full power and authority to accept these Terms, to grant any license and authorization and to perform any of your obligations hereunder;  (ii) you will undertake the use the App for personal purposes only; and  (iii) the address you provide when registering is your personal address.  3.3. You must not allow any other person to use your account to access the App. You must notify us in writing immediately if you become aware of any unauthorized use of your account.  3.4. You must not use any other person\'s account to access the App, unless you have that person\'s express written permission to do so.  4. USER IDS AND PASSWORDS  4.1. If you register for an account with the App, you may be asked to choose a user ID and password. Your user ID must not be misleading and must comply with the content rules set out in this document; you must not use your account or user ID for or in connection with the impersonation of any person.  4.2. You shall be responsible to maintain the confidentiality of your password and shall be responsible for all uses via your registration and/or login, whether authorized or unauthorized by you. You agree to immediately notify us of any unauthorized use or your registration, user account or password.  4.3. You must notify by emailing us if you have reason to believe that your account is no longer secure for any reason (for example, in the event of a loss, theft or unauthorized disclosure or use of your password).  4.4. You shall be responsible for any activity and content on the account arising out of any failure to keep your password confidential, and may be held liable for any losses arising out of such a failure.  4.5. Registration data and other personally identifiable information that we may collect is subject to the terms of our Privacy Policy.  5. In-App Purchases  5.1. The App allows Users to make in-app purchases. Users may subscribe to paid services, if any. There may be an option for auto renewal of subscription. If a User wishes to cancel his subscription within 48 hours of purchase, the total amount of purchase shall be fully refunded. The 48 hours&rsquo; full refund policy is applicable only once a year. After 48 hours, the User will be charged accordingly on prorated basis. In other words, he will be charged for the active months of his subscription.   6. Your Content and Your Responsibilities  6.1. Definition of Your Content. The App enables you to post content and add posts, texts, photos, videos, and links to share with others. All material that you upload, publish or display to others via the App will be referred to collectively as &ldquo;Your Content.&rdquo; You acknowledge and agree that, as part of using the App, Your Content may be viewed by the general public.  6.2. Ownership. You, or your licensors, as applicable, retain ownership of the copyright and other intellectual property in Your Content, subject to the non-exclusive rights granted to us below.  6.3. License and Permission to Use Your Content. By submitting, posting, or displaying Your Content on the App, you grant App and its affiliated companies a nonexclusive, worldwide, royalty free, fully paid up, transferable, sublicensable (through multiple tiers), license to use, copy, reproduce, process, adapt, modify, create derivative works from, publish, transmit, store, display and distribute, translate, communicate and make available to the public, and otherwise use Your Content in connection with the operation or use of the App or the promotion, advertising or marketing of the App or our business partners, in any and all media or distribution methods (now known or later developed). You agree that this license includes the right for App to make Your Content available to other companies, organizations, business partners, or individuals who collaborate with App for the syndication, broadcast, monetization, communication and making available to the public, distribution or publication of Your Content on the App or through other media or distribution methods. This license also includes the right for other users of the App to use, copy, reproduce, adapt, modify, create derivative works from, publish, transmit, display, and distribute, translate, communicate and make available to the public Your Content, subject to our Terms of Use.  6.4. The App may remove or edit Your Content App at any time. Any edits and changes made by you may be visible to other users. The right for App to copy, display, transmit, publish, perform, distribute, store, modify, and otherwise use Your Content you post, and sublicense those rights to others, is perpetual and irrevocable, to the maximum extent permitted by law, except as otherwise specified in this Agreement.  6.5. You acknowledge and agree that the App may preserve Your Content and may also disclose Your Content and related information if required to do so by law or in the good faith belief that such preservation or disclosure is reasonably necessary to: (a) comply with legal process, applicable laws or government requests; (b) enforce these Terms of Use; (c) respond to claims that any of Your Content violates the rights of third parties; (d) detect, prevent, or otherwise address fraud, security or technical issues; or (e) protect the rights, property, or personal safety of the App, its users, or the public.  6.6. You understand that we may modify, adapt, or create derivative works from Your Content in order to transmit, display or distribute it over computer networks, devices, service providers, and in various media. We also may remove or refuse to publish Your Content, in whole or part, at any time.  6.7. You further give us the permission and authority to act as your nonexclusive agent to take enforcement action against any unauthorized use by third-parties of any of Your Content outside of the App or in violation of our Terms of Use.  6.8. Your Responsibilities for Your Content. By posting Your Content on the App, you represent and warrant to us that: i) you have the ownership rights, or you have obtained all needed licenses or permissions from any necessary parties, to use Your Content and grant us the rights to use Your Content as provided for under this Agreement, and ii) that posting Your Content violates no intellectual property or personal right of others or any applicable law or regulation. You accept full responsibility for avoiding infringement of the intellectual property or personal rights of others or violation of laws and regulations in connection with Your Content. You are responsible for ensuring that Your Content does not violate App&rsquo;s Acceptable Use Policy, Copyright Policy, Trademark Policy, other published App policy, or any applicable law or regulation. You agree to pay all royalties, fees, and any other monies owed to any person by reason of Your Content.  7. Advertisements.  7.1. The App may include advertisements, which may be targeted to content or information on the App, queries made through the App, or other information, in an effort to make them relevant to you. The types and extent of advertising by App are subject to change. In consideration for App granting you access to and use of the App, you agree that App and its third party providers and partners may place such advertising on the App. If you wish to become an advertiser, you will be required to enter into separate and supplemental terms with us about providing advertising services on the App.  8. Web resources and third-party services.  8.1. The App may also offer you the opportunity to visit links to other websites or to engage with third-party products or services. You assume all risk arising out of your use of such websites or resources.  9. Services that Require Separate Agreement.  9.1. Certain features or services may require that you enter into a separate and supplemental written agreement prior to use.  10. INTELLECTUAL PROPERTY RIGHTS OF APP  10.1. Unless otherwise indicated, the App is our proprietary property and except the intellectual property rights (including articles, logos, trademarks and content) of the third party websites, all source code, databases, functionality, software, website designs, audio, video, text, photographs, and graphics on the App (collectively, the &ldquo;Content&rdquo;) and the trademarks, service marks, and logos contained therein (the &ldquo;Marks&rdquo;) are owned or controlled by us or licensed to us, and are protected by copyright and trademark laws and various other intellectual property rights and unfair competition laws and international conventions. The Content and the Marks are provided on the App &ldquo;AS IS&rdquo; for your information and personal use only. Except as expressly provided in these Terms of Use, no part of the App and no Content or Marks may be copied, reproduced, aggregated, republished, uploaded, posted, publicly displayed, encoded, translated, transmitted, distributed, sold, licensed, or otherwise exploited for any commercial purpose whatsoever, without our express prior written permission.  10.2. Provided that you are eligible to use the App, you are granted a limited license to access and use the App. We reserve all rights not expressly granted to you in and to the App, Content and the Marks.  11. USER REPRESENTATIONS  11.1. By using the App, you represent and warrant that: [(1) all registration information you submit will be true, accurate, current, and complete; (2) you will maintain the accuracy of such information and promptly update such registration information as necessary;] (3) you have the legal capacity and you agree to comply with these Terms of Use; [(4) you are not under the age of 18;] (5) you will not access the App through automated or non-human means, whether through a bot, script or otherwise; (6) you will not use the App for any illegal or unauthorized purpose; and (7) your use of the App will not violate any applicable law or regulation.  11.2. If you provide any information that is untrue, inaccurate, not current, or incomplete, we have the right to suspend or terminate your account and refuse any and all current or future use of the App (or any portion thereof). &#160;  12. PROHIBITED ACTIVITIES  12.1. You may not access or use the App for any purpose other than that for which we make the App available. The App may not be used in connection with any commercial endeavors except those that are specifically endorsed or approved by us.   12.2. As a user of the App, you agree not to:  12.2.1. systematically retrieve data or other content from the App to create or compile, directly or indirectly, a collection, compilation, database, or directory without written permission from us.  12.2.2. make any unauthorized use of the App, including collecting usernames and/or email addresses of users by electronic or other means for the purpose of sending unsolicited email, or creating user accounts by automated means or under false pretenses.  12.2.3. use the App to advertise or offer to sell illegal goods and services.  12.2.4. circumvent, disable, or otherwise interfere with security-related features of the App, including features that prevent or restrict the use or copying of any Content or enforce limitations on the use of the App and/or the Content contained therein.  12.2.5. engage in unauthorized framing of or linking to the App.  12.2.6. trick, defraud, or mislead us and other users, especially in any attempt to learn sensitive account information such as user passwords;  12.2.7. make improper use of our support services or submit false reports of abuse or misconduct.  12.2.8. engage in any automated use of the system, such as using scripts to send comments or messages, or using any data mining, robots, or similar data gathering and extraction tools.  12.2.9. interfere with, disrupt, or create an undue burden on the App or the networks or services connected to the App.  12.2.10. attempt to impersonate another user or person or use the username of another user.  12.2.11. sell or otherwise transfer your profile.  12.2.12. use any information obtained from the App in order to harass, abuse, or harm another person or user of the App.  12.2.13. use the App as part of any effort to compete with us or otherwise use the App and/or the Content for any revenue-generating endeavor or commercial enterprise.  12.2.14. decipher, decompile, disassemble, or reverse engineer any of the software comprising or in any way making up a part of the App.  12.2.15. attempt to bypass any measures of the App designed to prevent or restrict access to the App, or any portion of the App.  12.2.16. harass, annoy, intimidate, or threaten any of our employees or agents engaged in providing any portion of the App to you.  12.2.17. delete the copyright or other proprietary rights notice from any Content.  12.2.18. copy or adapt the App&rsquo;s software, including but not limited to Flash, PHP, HTML, JavaScript, or other code.  12.2.19. upload or transmit (or attempt to upload or to transmit) viruses, Trojan horses, or other material, including excessive use of capital letters and spamming (continuous posting of repetitive text), that interferes with any party&rsquo;s uninterrupted use and enjoyment of the App or modifies, impairs, disrupts, alters, or interferes with the use, features, functions, operation, or maintenance of the App.  12.2.20. upload or transmit (or attempt to upload or to transmit) any material that acts as a passive or active information collection or transmission mechanism, including without limitation, clear graphics interchange formats (&ldquo;gifs&rdquo;), 1&times;1 pixels, web bugs, cookies, or other similar devices (sometimes referred to as &ldquo;spyware&rdquo; or &ldquo;passive collection mechanisms&rdquo; or &ldquo;pcms&rdquo;).  12.2.21. except as may be the result of standard search engine or Internet browser usage, use, launch, develop, or distribute any automated system, including without limitation, any spider, robot, cheat utility, scraper, or offline reader that accesses the App, or using or launching any unauthorized script or other software.  12.2.22. disparage, tarnish, or otherwise harm, in our opinion, us and/or the App.  12.2.23. use the App in a manner inconsistent with any applicable laws or regulations.     13. USE LICENSE  13.1. If you access the App via a mobile application, then we grant you a revocable, non-exclusive, non-transferable, limited right to install and use the mobile application on wireless electronic devices owned or controlled by you, and to access and use the mobile application on such devices strictly in accordance with the terms this mobile application license contained in these Terms of Use. You shall not: (1) decompile, reverse engineer, disassemble, attempt to derive the source code of, or decrypt the application; (2) make any modification, adaptation, improvement, enhancement, translation, or derivative work from the application; (3) violate any applicable laws, rules, or regulations in connection with your access or use of the application; (4) remove, alter, or obscure any proprietary notice (including any notice of copyright or trademark) posted by us or the licensors of the application; (5) use the application for any revenue generating endeavor, commercial enterprise, or other purpose for which it is not designed or intended; (6) make the application available over a network or other environment permitting access or use by multiple devices or users at the same time; (7) use the application for creating a product, service, or software that is, directly or indirectly, competitive with or in any way a substitute for the application; (8) use the application to send automated queries to any website or to send any unsolicited commercial e-mail; or (9) use any proprietary information or any of our interfaces or our other intellectual property in the design, development, manufacture, licensing, or distribution of any applications, accessories, or devices for use with the application.  14. APPLE AND ANDROID DEVICES  14.1. The following terms apply when you use a mobile application obtained from either the Apple Store or Google Play (each an &ldquo;App Distributor&rdquo;): (1) the license granted to you for the App is limited to a non-transferable license to use the App on a device that utilizes the Apple iOS or Android operating systems, as applicable, and in accordance with the usage rules set forth in the applicable App Distributor&rsquo;s terms of service; (2) we are responsible for providing any maintenance and support services with respect to the App as specified in the terms of this App license contained in these Terms or as otherwise required under applicable law, and you acknowledge that each App Distributor has no obligation whatsoever to furnish any maintenance and support services with respect to the App; (3) in the event of any failure of the App to conform to any applicable warranty, you may notify the App Distributor, and the App Distributor, in accordance with its terms and policies, may refund the purchase price, if any, paid for the App, and to the maximum extent permitted by applicable law, the App Distributor will have no other warranty obligation whatsoever with respect to the App; (4) you represent and warrant that (i) you are not located in a country that is subject to a U.S. government embargo, or that has been designated by the U.S. government as a &ldquo;terrorist supporting&rdquo; country and (ii) you are not listed on any U.S. government list of prohibited or restricted parties; (5) you must comply with applicable third-party terms of agreement when using the App, and (6) you acknowledge and agree that the App Distributors are third-party beneficiaries of the terms in this App license contained in these Terms of Use, and that each App Distributor will have the right (and will be deemed to have accepted the right) to enforce the terms in this App license contained in these Terms of Use against you as a third-party beneficiary thereof.  15. SUBMISSIONS  15.1. You acknowledge and agree that any questions, comments, suggestions, ideas, feedback, or other information regarding the App (&quot;Submissions&quot;) provided by you to us are non-confidential and shall become our sole property. We shall own exclusive rights, including all intellectual property rights, and shall be entitled to the unrestricted use and dissemination of these Submissions for any lawful purpose, commercial or otherwise, without acknowledgment or compensation to you. You hereby waive all moral rights to any such Submissions, and you hereby warrant that any such Submissions are original with you or that you have the right to submit such Submissions. You agree there shall be no recourse against us for any alleged or actual infringement or misappropriation of any proprietary right in your Submissions.   16. APP MANAGEMENT  16.1. We reserve the right, but not the obligation, to:&#160;(1) monitor the App for violations of these Terms of Use; (2) take appropriate legal action against anyone who, in our sole discretion, violates the law or these Terms of Use, including without limitation, reporting such user to law enforcement authorities; (3) in our sole discretion and without limitation, refuse, restrict access to, limit the availability of, or disable (to the extent technologically feasible) any of your Contributions or any portion thereof; (4) in&#160;our sole discretion and without limitation, notice, or liability, to remove from the App or otherwise disable all files and content that are excessive in size or are in any way burdensome to our systems; and (5) otherwise manage the App in a manner designed to protect our rights and property and to facilitate the proper functioning of the App.  17. PRIVACY POLICY  17.1. We care about data privacy and security. Please review our Privacy Policy. By using the App, you agree to be bound by our Privacy Policy, which is incorporated into these Terms of Use. Further, we do not knowingly accept, request, or solicit information from children or knowingly market to children. Therefore, in accordance with the U.S. Children&rsquo;s Online Privacy Protection Act, if we receive actual knowledge that anyone under the age of 18 has provided personal information to us without the requisite and verifiable parental consent, we will delete that information from the App as quickly as is reasonably practical.]&#160;&#160;  18. COPYRIGHT INFRINGEMENTS  18.1. We respect the intellectual property rights of others. If you believe that any material available on or through the App infringes upon any copyright you own or control, please immediately notify us using the contact information provided below (a &ldquo;Notification&rdquo;). A copy of your Notification will be sent to the person who posted or stored the material addressed in the Notification. Please be advised that pursuant to federal law you may be held liable for damages if you make material misrepresentations in a Notification. Thus, if you are not sure that material located on or linked to by the App infringes your copyright, you should consider first contacting an attorney.  19. TERM AND TERMINATION  19.1. These Terms of Use shall remain in full force and effect while you use the App. WITHOUT LIMITING ANY OTHER PROVISION OF THESE TERMS, WE RESERVE THE RIGHT TO, IN OUR SOLE DISCRETION AND WITHOUT NOTICE OR LIABILITY, DENY ACCESS TO AND USE OF THE APP (INCLUDING BLOCKING CERTAIN IP ADDRESSES), TO ANY PERSON FOR ANY REASON OR FOR NO REASON, INCLUDING WITHOUT LIMITATION FOR BREACH OF ANY REPRESENTATION, WARRANTY, OR COVENANT CONTAINED IN THESE TERMS OF USE OR OF ANY APPLICABLE LAW OR REGULATION. WE MAY TERMINATE YOUR USE OR PARTICIPATION IN THE APP OR DELETE [YOUR ACCOUNT AND] ANY CONTENT OR INFORMATION THAT YOU POSTED AT ANY TIME, WITHOUT WARNING, IN OUR SOLE DISCRETION. &#160;  19.2. If we terminate or suspend your account for any reason, you are prohibited from registering and creating a new account under your name, a fake or borrowed name, or the name of any third party, even if you may be acting on behalf of the third party. In addition to terminating or suspending your account, we reserve the right to take appropriate legal action, including without limitation pursuing civil, criminal, and injunctive redress.  20. MODIFICATIONS AND INTERRUPTIONS   20.1. We reserve the right to change, modify, or remove the contents of the App at any time or for any reason at our sole discretion without notice. However, we have no obligation to update any information on our App. We also reserve the right to modify or discontinue all or part of the App without notice at any time. We will not be liable to you or any third party for any modification, suspension, or discontinuance of the App.   20.2. We cannot guarantee the App will be available at all times. We may experience hardware, software, or other problems or need to perform maintenance related to the App, resulting in interruptions, delays, or errors. We reserve the right to change, revise, update, suspend, discontinue, or otherwise modify the App at any time or for any reason without notice to you. You agree that we have no liability whatsoever for any loss, damage, or inconvenience caused by your inability to access or use the App during any downtime or discontinuance of the App. Nothing in these Terms of Use will be construed to obligate us to maintain and support the App or to supply any corrections, updates, or releases in connection therewith.  21. GOVERNING LAW   21.1. These Terms of Use and your use of the App are governed by and construed in accordance with the laws of New York applicable to agreements, without regard to its conflict of law principles.  22. CORRECTIONS  22.1. There may be information on the App that contains typographical errors, inaccuracies, or omissions that may relate to the App, including descriptions, pricing, availability, and various other information. We reserve the right to correct any errors, inaccuracies, or omissions and to change or update the information on the App at any time, without prior notice.  23. INDEMNIFICATION  23.1. You agree to defend, indemnify, and hold us harmless, including our subsidiaries, affiliates, and all of our respective officers, agents, partners, and employees, from and against any loss, damage, liability, claim, or demand, including reasonable attorneys&rsquo; fees and expenses, made by any third party due to or arising out of: (1) Your Contributions; (2) use of the App; (3) breach of these Terms of Use; (4) any breach of your representations and warranties set forth in these Terms of Use; (5) your violation of the rights of a third party, including but not limited to intellectual property rights; or (6) any overt harmful act toward any other user of the App with whom you connected via the App. Notwithstanding the foregoing, we reserve the right, at your expense, to assume the exclusive defense and control of any matter for which you are required to indemnify us, and you agree to cooperate, at your expense, with our defense of such claims. We will use reasonable efforts to notify you of any such claim, action, or proceeding which is subject to this indemnification upon becoming aware of it.&#160;&#160;&#160;  24. USER DATA  24.1. We will maintain certain data that you transmit to the App for the purpose of managing the App, as well as data relating to your use of the App. Although we perform regular routine backups of data, you are solely responsible for all data that you transmit or that relates to any activity you have undertaken using the App. You agree that we shall have no liability to you for any loss or corruption of any such data, and you hereby waive any right of action against us arising from any such loss or corruption of such data.  25. ELECTRONIC COMMUNICATIONS, TRANSACTIONS, AND SIGNATURES  25.1. Visiting the App, sending us emails, and completing online forms constitute electronic communications. You consent to receive electronic communications, and you agree that all agreements, notices, disclosures, and other communications we provide to you electronically, via email and on the App, satisfy any legal requirement that such communication be in writing. YOU HEREBY AGREE TO THE USE OF ELECTRONIC SIGNATURES, CONTRACTS, ORDERS, AND OTHER RECORDS, AND TO ELECTRONIC DELIVERY OF NOTICES, POLICIES, AND RECORDS OF TRANSACTIONS INITIATED OR COMPLETED BY US OR VIA THE APP. You hereby waive any rights or requirements under any statutes, regulations, rules, ordinances, or other laws in any jurisdiction which require an original signature or delivery or retention of non-electronic records, or to payments or the granting of credits by any means other than electronic means.   26. CONTACT US&#160;  26.1. In order to resolve a complaint regarding the App or to receive further information regarding use of the App, please contact us at info@onov.com.</p>
+]]></string>
+
+    <string name="aboutus"><![CDATA[
+       <p> <b>One Nation One Voice</b> started with the idea of making political discussion more accessible to the public. With this goal in mind, we’ve created a highly interactive and easy-to-use mobile platform users can effortlessly exchange political ideas and shape a more informed democratic society.</p></br></br>
+
+        <p><b>ONOV</b> offers a user-friendly interface to run petitions, donations, polls, and provides a creative place to debate and explore political issues efficiently. Combining technology, connectivity, and a community that aspires to have a transparent democracy, this app hopes to benefit politicians and citizens alike.</p></br></br>
+
+<p>We aim to further educate the world about politics and make information easier to access. ONOV is dedicated to creating a network based on integrity and further creating a connection between politicians and the people they serve.</p></br></br>
+
+<p>Our mission is to help people get a better understanding about politics and how it works. Through this initiative, we wish to ease the lives of politicians and citizens, so they can easily maintain an understanding and hopefully be politically engaged for years to come.</p></br></br>
+
+<p>With an array of features we offer, we hope to strengthen the bond between politicians and the public. This app helps both the people and the government stay informed and create a trust-based relationship that hopefully serves the society for the better.</p></br></br>
+
+<b>Download the app now.</b>
+]]>
+</string>
     <string name="error_something_went_wrong" translatable="false">Something went wrong</string>
     <string name="nice_html" translatable="false">
 <![CDATA[
@@ -612,6 +877,16 @@
 <li>No State shall, without the Consent of Congress, lay any Duty of Tonnage, keep Troops, or Ships of War in time of Peace, enter into any Agreement or Compact with another State, or with a foreign Power, or engage in War, unless actually invaded, or in such imminent Danger as will not admit of delay.</li></ol></p></br></br>
 ]]>
 </string>
+    <string name="active">Active</string>
+    <string name="expired">Expired</string>
+    <string name="block_donation_request">Block Donation Request</string>
+    <string name="overall">Overall</string>
+    <string name="local">Local</string>
+    <string name="national">National</string>
+    <string name="enter_your_email_address">Enter Your Email Address</string>
+    <string name="enter_otp">Enter Otp</string>
+    <string name="create_new_password">Create New Password</string>
+    <string name="reset_your_password">Reset Your Password</string>
     <!--    <string name="time_">Time</string>-->
     <!--    <string name="date_">Date</string>-->
 </resources>

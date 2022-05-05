@@ -11,6 +11,8 @@ import com.application.onovapplication.repository.service.DataManager
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.observers.DisposableObserver
 import io.reactivex.schedulers.Schedulers
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody
 import retrofit2.HttpException
 import java.io.IOException
 import java.util.concurrent.TimeoutException
@@ -81,10 +83,17 @@ class WinningsViewModel : ViewModel() {
 
     @SuppressLint("CheckResult")
     fun getAllWinners(
-        context: Context
+        context: Context,
+        userRef: String,
+        keyword: String
     ) {
 
-        dataManager.getAllWinners()
+        val keyword: RequestBody =
+            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), keyword)
+        val userRef: RequestBody =
+            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), userRef)
+
+        dataManager.getAllWinners(userRef,keyword)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeWith(

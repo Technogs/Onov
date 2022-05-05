@@ -93,6 +93,8 @@
                     android:fontFamily="@font/poppins_regular"
                     android:gravity="center_vertical"
                     android:hint="@string/name"
+                    android:textColorHint="@color/navigation_color"
+                    android:textColor="@color/black"
                     android:textSize="14sp" />
             </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -121,6 +123,8 @@
                     android:background="@null"
                     android:fontFamily="@font/poppins_regular"
                     android:hint="@string/email"
+                    android:textColorHint="@color/navigation_color"
+                    android:textColor="@color/black"
                     android:textSize="14sp" />
             </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -167,6 +171,8 @@
                     android:background="@null"
                     android:fontFamily="@font/poppins_regular"
                     android:hint="@string/phone_no"
+                    android:textColorHint="@color/navigation_color"
+                    android:textColor="@color/black"
                     android:textSize="14sp" />
             </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -195,6 +201,8 @@
                     android:background="@null"
                     android:fontFamily="@font/poppins_regular"
                     android:hint="@string/password"
+                    android:textColorHint="@color/navigation_color"
+                    android:textColor="@color/black"
                     android:inputType="textPassword"
                     android:textSize="14sp" />
             </androidx.appcompat.widget.LinearLayoutCompat>
@@ -247,18 +255,34 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:padding="5dp">
 
 
                 <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/edWebsiteUrl"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:background="@null"
                     android:fontFamily="@font/poppins_regular"
                     android:hint="@string/website_url"
+                    android:textColorHint="@color/navigation_color"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/edCountry"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:background="@null"
+                    android:layout_marginTop="40dp"
+                    android:text="United States"
+                    android:fontFamily="@font/poppins_regular"
+                    android:hint="@string/website_url"
+                    android:textColorHint="@color/navigation_color"
+                    android:textColor="@color/black"
                     android:textSize="14sp" />
             </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -266,12 +290,146 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/edit_text_background" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginTop="30dp"
+                android:orientation="horizontal">
 
+
+                <Spinner
+                    android:id="@+id/spState"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:background="@android:color/white"
+                    android:gravity="center"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:spinnerMode="dropdown" />
+
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="10dp"
+                    android:src="@drawable/ic_down_arrow" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_alignParentBottom="true"
+                    android:background="@color/edit_text_background" />
+
+            </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
                 android:layout_marginTop="30dp"
+                android:visibility="gone"
+                android:orientation="horizontal">
+
+
+                <Spinner
+                    android:id="@+id/spCities"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:background="@android:color/white"
+                    android:gravity="center"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:spinnerMode="dropdown" />
+
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="10dp"
+                    android:src="@drawable/ic_down_arrow" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_alignParentBottom="true"
+                    android:background="@color/edit_text_background" />
+
+            </RelativeLayout>
+            <EditText
+                android:id="@+id/cityEditText"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_below="@+id/abtMe"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/drawable_chat_background"
+                android:fontFamily="@font/poppins_regular"
+                android:hint="Enter City"
+                android:textColorHint="@color/black"
+                android:textColor="@color/black"
+                android:paddingStart="10dp"
+                android:paddingTop="5dp"
+                android:paddingEnd="10dp"
+                android:paddingBottom="5dp"
+                android:textSize="14sp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginTop="30dp"
+                android:orientation="horizontal">
+
+
+                <Spinner
+                    android:id="@+id/spparties"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:background="@android:color/white"
+                    android:gravity="center"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:spinnerMode="dropdown" />
+
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="10dp"
+                    android:src="@drawable/ic_down_arrow" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_alignParentBottom="true"
+                    android:background="@color/edit_text_background" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginTop="30dp"
+                android:visibility="gone"
                 android:orientation="horizontal">
 
 
@@ -307,6 +465,7 @@
 
             </RelativeLayout>
 
+
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -329,6 +488,8 @@
                     android:inputType="textImeMultiLine"
                     android:lines="3"
                     android:maxLength="300"
+                    android:textColorHint="@color/navigation_color"
+                    android:textColor="@color/black"
                     android:maxLines="3"
                     android:padding="16dp"
                     android:textSize="16sp" />

@@ -5,12 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.application.onovapplication.R
 import com.application.onovapplication.adapters.VotingAdapter
-import com.application.onovapplication.databinding.FragmentMoreBinding
 import com.application.onovapplication.databinding.FragmentVotingBinding
 
-// TODO: Rename parameter arguments, choose names that match
 
 class VotingFragment : Fragment() {
 

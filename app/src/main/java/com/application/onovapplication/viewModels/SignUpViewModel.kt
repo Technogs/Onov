@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import com.application.onovapplication.R
 import com.application.onovapplication.model.RegisterResponse
 import com.application.onovapplication.model.RegistrationData
+import com.application.onovapplication.model.UserInfo
 import com.application.onovapplication.repository.service.DataManager
 
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -30,7 +31,7 @@ class SignUpViewModel : ViewModel() {
     val successful: MutableLiveData<Boolean> = MutableLiveData()
     var message: String = ""
     var status: String = ""
-    var userInfo: RegistrationData? = null
+    var userInfo: UserInfo? = null
 
     @SuppressLint("CheckResult")
     fun register(
@@ -39,6 +40,9 @@ class SignUpViewModel : ViewModel() {
         password: String,
         user_name: String,
         phone_number: String,
+        countryName: String,
+        stateName: String,
+        cityName: String,
         countryCode: String,
         image: File?,
         role: String,
@@ -70,6 +74,12 @@ class SignUpViewModel : ViewModel() {
 
 
 
+        val countryName: RequestBody =
+            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), countryName)
+        val stateName: RequestBody =
+            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), stateName)
+        val cityName: RequestBody =
+            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), cityName)
         val user_email: RequestBody =
             RequestBody.create("multipart/form-data".toMediaTypeOrNull(), email)
 
@@ -101,6 +111,9 @@ class SignUpViewModel : ViewModel() {
             userPassword,
             userRole,
             deviceToken,
+            countryName,
+            stateName,
+            cityName,
             phoneCountryCode,
             mobileType,
             body!!,

@@ -2,12 +2,10 @@ package com.application.onovapplication.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.application.onovapplication.R
 import com.application.onovapplication.databinding.ReplyRowBinding
-import com.application.onovapplication.databinding.RvPredefinedTextsBinding
 import com.application.onovapplication.model.CommentData
 import com.application.onovapplication.repository.BaseUrl
 import com.bumptech.glide.Glide
@@ -41,8 +39,6 @@ class ReplyAdapter (val context: Context, val cmntlist:List<CommentData>)
             Glide.with(context).load(BaseUrl.photoUrl + dataitem.profilePic).apply(
                 RequestOptions().placeholder(
                     R.drawable.ic_baseline_account_circle_24)).into(binding.ivCommentProfile)
-
-//            itemView.receivedFrom.text=dataitem.donateFrom
 
         }
     }

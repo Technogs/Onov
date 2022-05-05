@@ -9,7 +9,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.application.onovapplication.R
 import com.application.onovapplication.databinding.ActionBarLayout2Binding
-import com.application.onovapplication.databinding.ActivityDebateDetailsBinding
 import com.application.onovapplication.databinding.ActivityForgotPasswordOtpBinding
 import com.application.onovapplication.viewModels.VerifyViewModel
 

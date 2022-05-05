@@ -6,8 +6,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-class ApiClient {
-    companion object {
+class
+ApiClient { companion object {
         @JvmStatic
         public var retrofit: Retrofit? = null
         @JvmStatic

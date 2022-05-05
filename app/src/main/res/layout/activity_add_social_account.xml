@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:layout_height="match_parent"
+    tools:context=".activities.common.AddSocialAccountActivity">
+
+    <include layout="@layout/action_bar_layout"/>
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_marginHorizontal="@dimen/_5sdp"
+        android:layout_height="match_parent">
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/add_social_account"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:layout_gravity="end"
+            android:layout_marginTop="10sp"
+            android:layout_marginEnd="10sp"
+            android:background="@drawable/golden_circle"
+            android:fontFamily="@font/poppins_medium"
+            android:text="@string/submit"
+            android:onClick="onClick"
+            android:textAllCaps="false"
+            android:textColor="@color/white" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:background="@null"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:fontFamily="@font/poppins_regular"
+        android:gravity="center_vertical"
+        android:text="Twitter"
+        android:textColor="@color/black"
+        android:textSize="14sp" />
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/edTwitterName"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginStart="10dp"
+        android:background="@drawable/background_headings"
+        android:fontFamily="@font/poppins_regular"
+        android:gravity="center_vertical"
+        android:textColor="@color/black"
+        android:textColorHint="@color/navigation_color"
+        android:hint="Enter Twitter Account"
+        android:paddingHorizontal="@dimen/_10sdp"
+        android:textSize="14sp" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:background="@null"
+        android:fontFamily="@font/poppins_regular"
+        android:gravity="center_vertical"
+        android:text="Facebook"
+        android:textColor="@color/black"
+
+        android:textSize="14sp" />
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/edFacebookName"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginStart="10dp"
+        android:background="@drawable/background_headings"
+        android:fontFamily="@font/poppins_regular"
+        android:gravity="center_vertical"
+        android:textColor="@color/black"
+        android:textColorHint="@color/navigation_color"
+        android:paddingHorizontal="@dimen/_10sdp"
+        android:hint="Enter Facebook Account"
+        android:textSize="14sp" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginStart="10dp"
+        android:background="@null"
+        android:textColor="@color/black"
+        android:fontFamily="@font/poppins_regular"
+        android:gravity="center_vertical"
+        android:text="Instagram"
+        android:textSize="14sp" />
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/edInstagramName"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginStart="10dp"
+        android:background="@drawable/background_headings"
+        android:fontFamily="@font/poppins_regular"
+        android:gravity="center_vertical"
+        android:textColor="@color/black"
+        android:paddingHorizontal="@dimen/_10sdp"
+        android:textColorHint="@color/navigation_color"
+        android:hint="Enter Instagram Account"
+        android:textSize="14sp" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

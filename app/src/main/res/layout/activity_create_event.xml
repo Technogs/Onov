@@ -179,7 +179,7 @@
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/etPostDescription"
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
+                android:layout_height="200dp"
                 android:background="@null"
                 android:fontFamily="@font/poppins_regular"
                 android:gravity="start"
@@ -187,7 +187,19 @@
                 android:padding="15dp"
                 android:textColor="@color/navigation_color"
                 android:textColorHint="@color/navigation_color" />
-
+            <Spinner
+                android:id="@+id/spPetition"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:background="@android:color/white"
+                android:gravity="center"
+                android:layout_marginHorizontal="@dimen/_20sdp"
+                android:layout_marginVertical="@dimen/_20sdp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:spinnerMode="dropdown" />
             <View
                 android:id="@+id/vShadowThree"
                 android:layout_width="match_parent"
@@ -207,12 +219,12 @@
                 android:orientation="horizontal">
 
                 <RelativeLayout
+                    android:id="@+id/pic_layout"
                     android:layout_width="wrap_content"
                     android:layout_height="80dp"
-                    android:id="@+id/pic_layout"
-                    android:onClick="onClick"
-                    android:layout_marginStart="50dp"
-                    android:layout_marginTop="20dp">
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="20dp"
+                    android:onClick="onClick">
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/upload_photo"
@@ -247,15 +259,21 @@
                     />
 
                 <RelativeLayout
+                    android:id="@+id/video_lyt"
                     android:layout_width="wrap_content"
                     android:layout_height="80dp"
-                    android:id="@+id/video_lyt"
-                    android:onClick="onClick"
                     android:layout_alignParentEnd="true"
                     android:layout_marginStart="50dp"
                     android:layout_marginTop="20dp"
+                    android:layout_marginEnd="50dp"
 
-                    android:layout_marginEnd="50dp">
+                    android:onClick="onClick">
+                    <ProgressBar
+                        android:layout_width="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:id="@+id/progressBar"
+                        android:visibility="gone"
+                        android:layout_height="wrap_content"/>
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/upload_video"
@@ -264,7 +282,13 @@
                         android:layout_centerHorizontal="true"
 
                         android:src="@drawable/video_transparent" />
-
+                    <VideoView
+                        android:id="@+id/view_video"
+                        android:layout_width="@dimen/_50sdp"
+                        android:layout_height="@dimen/_30sdp"
+                        android:layout_centerHorizontal="true"
+                        android:src="@drawable/video_transparent"
+                        android:visibility="gone" />
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

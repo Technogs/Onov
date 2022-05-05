@@ -38,7 +38,6 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             app:lottie_autoPlay="true"
-
             app:lottie_loop="false"
             app:lottie_rawRes="@raw/payment_successful"
             app:lottie_speed="1" />

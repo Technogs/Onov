@@ -5,10 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clipChildren="false"
+    android:background="@color/white"
     tools:context=".activities.common.HomeTabActivity">
-    <include layout="@layout/action_bar_layout"
 
-        android:id="@+id/ab_home"/>
+    <include
+        android:id="@+id/ab_home"
+        layout="@layout/action_bar_layout" />
 
     <FrameLayout
         android:id="@+id/homeTabContainer"

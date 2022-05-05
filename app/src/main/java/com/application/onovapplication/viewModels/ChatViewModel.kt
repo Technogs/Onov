@@ -5,9 +5,7 @@ import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.application.onovapplication.R
-import com.application.onovapplication.model.ChatImageResponse
-import com.application.onovapplication.model.ChatModel
-import com.application.onovapplication.model.DonationModel
+import com.application.onovapplication.model.*
 import com.application.onovapplication.repository.service.DataManager
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.observers.DisposableObserver
@@ -26,6 +24,7 @@ class ChatViewModel:ViewModel() {
     val successful: MutableLiveData<Boolean> = MutableLiveData()
     val successfulShareFeed: MutableLiveData<Boolean> = MutableLiveData()
     val successfulChatImg: MutableLiveData<Boolean> = MutableLiveData()
+    val successfulChatNotification: MutableLiveData<Boolean> = MutableLiveData()
     var message: String = ""
     lateinit var chatdata: ChatModel
     lateinit var chatImgdata: ChatImageResponse
@@ -33,17 +32,20 @@ class ChatViewModel:ViewModel() {
 
 
     @SuppressLint("CheckResult")
-    fun getChatList(
+    fun getMesageSeen(
         context: Context,
-        userRef: String
+        userRef: String,
+        otherref: String
     ) {
 
 
         val userRef: RequestBody =
             RequestBody.create("multipart/form-data".toMediaTypeOrNull(), userRef)
+        val otherref: RequestBody =
+            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), otherref)
 
 
-        dataManager.getChatList(userRef)
+        dataManager.getChatSeen(userRef,otherref)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeWith(
@@ -84,6 +86,115 @@ class ChatViewModel:ViewModel() {
 
 
     @SuppressLint("CheckResult")
+    fun getChatList(
+        context: Context,
+        userRef: String,
+        keyword: String
+    ) {
+
+
+        val userRef: RequestBody =
+            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), userRef)
+        val keyword: RequestBody =
+            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), keyword)
+
+
+        dataManager.getChatList(userRef,keyword)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeWith(
+                object : DisposableObserver<ChatModel>() {
+                    override fun onComplete() {
+
+                    }
+
+                    override fun onNext(t: ChatModel) {
+                        status = t.status
+                        chatdata=t
+                        message = t.msg
+                        successful.value = true
+                    }
+
+                    override fun onError(e: Throwable) {
+                        when (e) {
+                            is IOException -> {
+                                message = context
+                                    .getString(R.string.error_please_check_internet)
+                            }
+                            is TimeoutException -> {
+                                message = context
+                                    .getString(R.string.error_request_timed_out)
+                            }
+                            is HttpException -> {
+                                message = e.message.toString()
+                            }
+                            else -> {
+                                message = context
+                                    .getString(R.string.error_something_went_wrong)
+                            }
+                        }
+                        successful.value = false
+                    }
+                })
+    }
+
+
+
+    @SuppressLint("CheckResult")
+    fun chatNotification(
+        context: Context,
+        fromRef: String,
+        toRef: String,
+        msge: String
+    ) {
+
+
+        val fromRef: RequestBody =
+            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), fromRef)
+        val toRef: RequestBody =
+            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), toRef)
+
+        val msg: RequestBody =
+            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), msge)
+
+
+        dataManager.chatNotification(fromRef,toRef,msg)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeWith(
+                object : DisposableObserver<SimpleResponse>() {
+                    override fun onComplete() {
+
+                    }
+
+                    override fun onNext(t: SimpleResponse) {
+                        status = t.status
+                       message=t.msg
+                        successfulChatNotification.value = true
+                    }
+
+                    override fun onError(e: Throwable) {
+                        when (e) {
+                            is IOException -> {
+                                message = context.getString(R.string.error_please_check_internet)
+                            }
+                            is TimeoutException -> {
+                                message = context.getString(R.string.error_request_timed_out)
+                            }
+                            is HttpException -> {
+                                message = e.message.toString()
+                            }
+                            else -> {
+                                message = context.getString(R.string.error_something_went_wrong)
+                            }
+                        }
+                        successfulChatNotification.value = false
+                    }
+                })
+    }
+
+
+    @SuppressLint("CheckResult")
     fun shareFeed(
         context: Context,
         userId: String,
@@ -102,9 +213,7 @@ class ChatViewModel:ViewModel() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeWith(
                 object : DisposableObserver<ChatModel>() {
-                    override fun onComplete() {
-
-                    }
+                    override fun onComplete() {}
 
                     override fun onNext(t: ChatModel) {
                         status = t.status

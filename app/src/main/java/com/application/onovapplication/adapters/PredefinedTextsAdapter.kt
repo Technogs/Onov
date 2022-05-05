@@ -2,11 +2,8 @@ package com.application.onovapplication.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.application.onovapplication.R
-import com.application.onovapplication.databinding.RvNotificationsBinding
 import com.application.onovapplication.databinding.RvPredefinedTextsBinding
 import com.application.onovapplication.model.PredefinedTextsModel
 

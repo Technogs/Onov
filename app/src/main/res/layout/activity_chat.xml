@@ -3,10 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:anim="http://schemas.android.com/apk/res-auto"
-
+    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.common.ChatActivity">
+
     <RelativeLayout
         android:id="@+id/ab"
         android:layout_width="match_parent"
@@ -53,7 +54,6 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:fontFamily="@font/poppins_regular"
-            android:text="Jennie Doe"
             android:textColor="@color/app_color"
             android:textSize="16sp" />
 

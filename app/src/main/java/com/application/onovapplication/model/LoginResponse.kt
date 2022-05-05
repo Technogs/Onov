@@ -63,6 +63,10 @@ data class UserInfo(
     @Expose
     var notification: String? = null,
 
+    @SerializedName("rank")
+    @Expose
+    val rank: Rank,
+
     @SerializedName("donationsVisible")
     @Expose
     var donationsVisible: String? = null,
@@ -79,9 +83,9 @@ data class UserInfo(
     @Expose
     var role: String? = null,
 
-    @SerializedName("supporter")
+    @SerializedName("politicalParty")
     @Expose
-    var supporter: String? = null,
+    var politicalParty: String? = null,
 
     @SerializedName("about")
     @Expose
@@ -115,7 +119,30 @@ data class UserInfo(
     @Expose
     var createdAt: String? = null,
 
+    @SerializedName("isFollow")
+    @Expose
+    var isFollow: String? = null,
+    @SerializedName("countryName")
+    @Expose
+    var countryName: String? = null,
+    @SerializedName("stateName")
+    @Expose
+    var stateName: String? = null,
+    @SerializedName("cityName")
+    @Expose
+    var cityName: String? = null,
+
     @SerializedName("updated_at")
     @Expose
     var updatedAt: String? = null
+) : Parcelable
+
+@Parcelize
+data class Rank(
+    @SerializedName("Local")
+    val Local: String,
+    @SerializedName("National")
+    val National: String,
+    @SerializedName("State")
+    val State: String
 ) : Parcelable

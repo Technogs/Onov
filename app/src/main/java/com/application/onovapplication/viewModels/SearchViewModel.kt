@@ -50,8 +50,10 @@ class SearchViewModel:ViewModel() {
                         if (status == "success") {
                             searchList = t
 
-                            message = t.msg
-                        successful.value = true} }
+                           }
+                        message = t.msg
+                                successful.value = true
+                    }
 
                     override fun onError(e: Throwable) {
                         when (e) {
@@ -88,12 +90,14 @@ class SearchViewModel:ViewModel() {
 
                     override fun onNext(t: SearchModel) {
                         status = t.status
-
+                        message = t.msg
+                        successfullyUpdated.value = true
                         if (status == "success") {
 //                            searchList = t
 
-                            message = t.msg
-                            successfullyUpdated.value = true} }
+                          }
+
+                    }
 
                     override fun onError(e: Throwable) {
                         when (e) {

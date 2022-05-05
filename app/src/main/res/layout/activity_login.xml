@@ -144,6 +144,7 @@
             android:layout_alignParentEnd="true"
             android:layout_gravity="end"
             android:layout_marginTop="20dp"
+            android:onClick="onClick"
             android:fontFamily="@font/poppins_regular"
             android:text="@string/forgot_password"
             android:textColor="@color/black"

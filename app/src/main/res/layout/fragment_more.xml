@@ -21,14 +21,14 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_more"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/tvMoreTitle"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
-android:id="@+id/rv_more"
-        android:background="@color/white"
         android:layout_marginBottom="10dp"
+        android:background="@color/white"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:spanCount="2" />
 

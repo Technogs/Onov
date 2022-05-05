@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".activities.PeopleActivity">
 
     <include layout="@layout/action_bar_layout_2"
@@ -39,13 +40,49 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_followers"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/submit"
         android:layout_marginTop="10dp"
         android:orientation="vertical"
-        android:id="@+id/rv_followers"
-        android:layout_below="@+id/submit"
-        tools:listitem="@layout/rv_followers"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/rv_followers" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_45sdp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/action_sheet_item_bg">
+
+        <EditText
+            android:id="@+id/serchText"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginVertical="@dimen/_5sdp"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_weight="1"
+            android:focusableInTouchMode="true"
+            android:fontFamily="@font/poppins_regular"
+            android:gravity="center"
+            android:hint="Enter name"
+            android:onClick="onClick"
+            android:paddingHorizontal="@dimen/_8sdp"
+            android:paddingVertical="@dimen/_2sdp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_12ssp"
+            android:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/searchBtn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="15dp"
+            android:onClick="onClick"
+            android:src="@drawable/ic_search" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 </RelativeLayout>

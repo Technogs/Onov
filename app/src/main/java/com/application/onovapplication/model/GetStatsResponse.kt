@@ -13,6 +13,15 @@ class GetStatsResponse {
     @Expose
     var msg: String? = null
 
+    @SerializedName("totalWin")
+    @Expose
+    var totalWin: String? = null
+    @SerializedName("totallose")
+    @Expose
+    var totallose: String? = null
+    @SerializedName("totalParticipate")
+    @Expose
+    var totalParticipate: String? = null
     @SerializedName("base_url")
     @Expose
     var baseUrl: String? = null
@@ -35,6 +44,10 @@ class StatsDataList {
     @SerializedName("debateId")
     @Expose
     var debateId: String? = null
+
+    @SerializedName("myResult")
+    @Expose
+    var myResult: String? = null
 
     @SerializedName("title")
     @Expose

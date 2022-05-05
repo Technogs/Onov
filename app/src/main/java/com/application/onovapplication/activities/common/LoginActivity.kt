@@ -6,6 +6,7 @@ import android.util.Log
 import android.util.Patterns
 import android.view.View
 import android.widget.AdapterView
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.application.onovapplication.R
@@ -18,7 +19,6 @@ import com.live.kicktraders.viewModel.LoginViewModel
 class LoginActivity : BaseAppCompatActivity(), View.OnClickListener {
 
     private lateinit var binding: ActivityLoginBinding
-//    private lateinit var token:String
 
     private val loginViewModel by lazy {
         ViewModelProvider(this).get(LoginViewModel::class.java)
@@ -35,7 +35,8 @@ class LoginActivity : BaseAppCompatActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = com.application.onovapplication.databinding.ActivityLoginBinding.inflate(layoutInflater)
+        binding =
+            com.application.onovapplication.databinding.ActivityLoginBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
         binding.tvSignUp.setOnClickListener(this)
@@ -51,20 +52,24 @@ class LoginActivity : BaseAppCompatActivity(), View.OnClickListener {
                 val intent = Intent(this, RegisterActivity::class.java)
                 startActivity(intent)
             }
+            binding.tvForgotPassword -> {
+                val intent = Intent(this, ForgotPasswordActivity::class.java)
+                startActivity(intent)
+            }
 
             binding.btLogin -> {
 
                 when {
-                    checkEmpty( binding.etEmail) -> {
+                    checkEmpty(binding.etEmail) -> {
                         setError(getString(R.string.email_error))
                     }
 
-                    !Patterns.EMAIL_ADDRESS.matcher( binding.etEmail.text.toString().trim())
+                    !Patterns.EMAIL_ADDRESS.matcher(binding.etEmail.text.toString().trim())
                         .matches() -> {
                         setError(getString(R.string.invalid_email_error))
                     }
 
-                    checkEmpty( binding.etPassword) -> {
+                    checkEmpty(binding.etPassword) -> {
                         setError(getString(R.string.password_error))
                     }
 
@@ -78,8 +83,8 @@ class LoginActivity : BaseAppCompatActivity(), View.OnClickListener {
                             this,
                             binding.etEmail.text.toString().trim(),
                             binding.etPassword.text.toString().trim(),
-                             "Android",
-                          token
+                            "Android",
+                            token
                         )
                         showDialog()
                     }
@@ -87,7 +92,8 @@ class LoginActivity : BaseAppCompatActivity(), View.OnClickListener {
             }
         }
     }
-    fun fbToken(){
+
+    fun fbToken() {
 
 
         // 1
@@ -99,16 +105,16 @@ class LoginActivity : BaseAppCompatActivity(), View.OnClickListener {
                     return@OnCompleteListener
                 }
                 // 3
-               token = task.result?.token.toString()
+                token = task.result?.token.toString()
 
                 // 4
                 val msg = token
                 Log.d("TAG token", msg.toString())
                 userPreferences.saveUserToken(msg.toString())
-//                Toast.makeText(this, userPreferences.getUserToken(), Toast.LENGTH_SHORT).show()
 
-                //   Toast.makeText(baseContext, msg, Toast.LENGTH_LONG).show()
-            }) }
+            })
+    }
+
     private fun observeViewModel() {
 
         loginViewModel.successful.observe(this, Observer {
@@ -119,7 +125,9 @@ class LoginActivity : BaseAppCompatActivity(), View.OnClickListener {
 
                     userPreferences.saveUserRef(loginViewModel.userInfo.userRef)
                     userPreferences.saveRole(loginViewModel.userInfo.role)
-userPreferences.setUserDetails(loginViewModel.userInfo)
+                    userPreferences.setUserDetails(loginViewModel.userInfo)
+//                    Toast.makeText(this, ""+loginViewModel.userInfo.deviceToken, Toast.LENGTH_SHORT).show()
+
                     val intent = Intent(this@LoginActivity, HomeTabActivity::class.java)
                     intent.putExtra("role", loginViewModel.userInfo.role)
                     startActivity(intent)

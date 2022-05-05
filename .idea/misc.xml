@@ -3,32 +3,29 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Komal Projects/Onov 10th jan/Onov/app/src/main/res/drawable/action_sheet_online_user_call_application_blue_btn.xml" value="0.2203125" />
-        <entry key="..\:/Komal Projects/Onov 10th jan/Onov/app/src/main/res/drawable/drawable_gradient_button_background.xml" value="0.2203125" />
-        <entry key="..\:/Komal Projects/Onov 10th jan/Onov/app/src/main/res/drawable/golden_circle.xml" value="0.2203125" />
-        <entry key="..\:/Komal Projects/Onov 10th jan/Onov/app/src/main/res/drawable/green_circle.xml" value="0.2203125" />
-        <entry key="..\:/Komal Projects/Onov 10th jan/Onov/app/src/main/res/drawable/orange_circle.xml" value="0.2203125" />
-        <entry key="..\:/Komal Projects/Onov 10th jan/Onov/app/src/main/res/layout/activity_about_info.xml" value="0.20416666666666666" />
-        <entry key="..\:/Komal Projects/Onov 10th jan/Onov/app/src/main/res/layout/activity_ask_donations.xml" value="0.20416666666666666" />
-        <entry key="..\:/Komal Projects/Onov 10th jan/Onov/app/src/main/res/layout/activity_comment.xml" value="0.1" />
-        <entry key="..\:/Komal Projects/Onov 10th jan/Onov/app/src/main/res/layout/activity_create_event.xml" value="0.20416666666666666" />
-        <entry key="..\:/Komal Projects/Onov 10th jan/Onov/app/src/main/res/layout/activity_debate_details.xml" value="0.20416666666666666" />
-        <entry key="..\:/Komal Projects/Onov 10th jan/Onov/app/src/main/res/layout/activity_debate_requests.xml" value="0.20416666666666666" />
-        <entry key="..\:/Komal Projects/Onov 10th jan/Onov/app/src/main/res/layout/activity_donations_ngo.xml" value="0.25" />
-        <entry key="..\:/Komal Projects/Onov 10th jan/Onov/app/src/main/res/layout/activity_event_details.xml" value="0.20416666666666666" />
-        <entry key="..\:/Komal Projects/Onov 10th jan/Onov/app/src/main/res/layout/activity_events.xml" value="0.20416666666666666" />
-        <entry key="..\:/Komal Projects/Onov 10th jan/Onov/app/src/main/res/layout/activity_petition_details.xml" value="0.20416666666666666" />
-        <entry key="..\:/Komal Projects/Onov 10th jan/Onov/app/src/main/res/layout/activity_start_petition.xml" value="0.20416666666666666" />
-        <entry key="..\:/Komal Projects/Onov 10th jan/Onov/app/src/main/res/layout/comment_row.xml" value="0.20416666666666666" />
-        <entry key="..\:/Komal Projects/Onov 10th jan/Onov/app/src/main/res/layout/rv_debates.xml" value="0.20416666666666666" />
-        <entry key="..\:/Komal Projects/Onov 10th jan/Onov/app/src/main/res/layout/rv_event_attendees.xml" value="0.20416666666666666" />
-        <entry key="..\:/Komal Projects/Onov 10th jan/Onov/app/src/main/res/layout/rv_petitions.xml" value="0.20416666666666666" />
-        <entry key="..\:/Komal Projects/Onov 10th jan/Onov/app/src/main/res/layout/rv_receiver_layout.xml" value="0.20416666666666666" />
-        <entry key="..\:/Komal Projects/Onov 10th jan/Onov/app/src/main/res/layout/rv_sender_layout.xml" value="0.20416666666666666" />
+        <entry key="..\:/AndroidStudioProjects/Onov/app/src/main/res/drawable-v21/googlepay_button_background.xml" value="0.1" />
+        <entry key="..\:/AndroidStudioProjects/Onov/app/src/main/res/drawable-v21/googlepay_button_no_shadow_background.xml" value="0.1" />
+        <entry key="..\:/AndroidStudioProjects/Onov/app/src/main/res/drawable/btn_beauty.xml" value="0.10677083333333333" />
+        <entry key="..\:/AndroidStudioProjects/Onov/app/src/main/res/drawable/btn_mute_audio.xml" value="0.19230769230769232" />
+        <entry key="..\:/AndroidStudioProjects/Onov/app/src/main/res/drawable/circle_white.xml" value="0.1953125" />
+        <entry key="..\:/AndroidStudioProjects/Onov/app/src/main/res/drawable/color_rect_white.xml" value="0.1953125" />
+        <entry key="..\:/AndroidStudioProjects/Onov/app/src/main/res/drawable/ic_dislike.xml" value="0.1953125" />
+        <entry key="..\:/AndroidStudioProjects/Onov/app/src/main/res/drawable/ic_like.xml" value="0.1953125" />
+        <entry key="..\:/AndroidStudioProjects/Onov/app/src/main/res/layout/action_bar_layout.xml" value="0.17916666666666667" />
+        <entry key="..\:/AndroidStudioProjects/Onov/app/src/main/res/layout/activity_chat.xml" value="0.1712962962962963" />
+        <entry key="..\:/AndroidStudioProjects/Onov/app/src/main/res/layout/activity_home_tab.xml" value="0.17916666666666667" />
+        <entry key="..\:/AndroidStudioProjects/Onov/app/src/main/res/layout/activity_notifications.xml" value="0.17916666666666667" />
+        <entry key="..\:/AndroidStudioProjects/Onov/app/src/main/res/layout/activity_people.xml" value="0.1764102564102564" />
+        <entry key="..\:/AndroidStudioProjects/Onov/app/src/main/res/layout/activity_profile2.xml" value="0.17916666666666667" />
+        <entry key="..\:/AndroidStudioProjects/Onov/app/src/main/res/layout/activity_view_followers.xml" value="0.17916666666666667" />
+        <entry key="..\:/AndroidStudioProjects/Onov/app/src/main/res/layout/fragment_feeds.xml" value="0.17916666666666667" />
+        <entry key="..\:/AndroidStudioProjects/Onov/app/src/main/res/layout/rv_chats.xml" value="0.16302083333333334" />
+        <entry key="..\:/AndroidStudioProjects/Onov/app/src/main/res/layout/rv_events.xml" value="0.17916666666666667" />
+        <entry key="..\:/AndroidStudioProjects/Onov/app/src/main/res/layout/rv_notifications.xml" value="0.17916666666666667" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

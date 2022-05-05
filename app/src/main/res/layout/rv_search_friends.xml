@@ -33,19 +33,19 @@ android:layout_centerVertical="true"
 
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_marginEnd="25dp"
         android:id="@+id/follow"
-        android:textSize="10sp"
-        android:padding="4dp"
-android:layout_alignParentBottom="true"
-        android:text="ow"
-        android:gravity="center"
-android:layout_alignParentEnd="true"
-        android:drawablePadding="2dp"
-        android:textColor="@color/black"
-        android:fontFamily="@font/poppins_regular"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="25dp"
+        android:drawablePadding="2dp"
+        android:fontFamily="@font/poppins_regular"
+        android:gravity="center"
+        android:padding="4dp"
+        android:text="Support"
+        android:textColor="@color/black"
+        android:textSize="10sp"
         app:drawableTopCompat="@drawable/ic_folow" />
 
 </RelativeLayout>

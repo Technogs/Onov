@@ -14,22 +14,20 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-
         applicationId "com.application.onovapplication"
         minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
-        ndkVersion '21.3.6528147'
-    
+    ndkVersion '21.3.6528147'
+
     buildTypes {
         release {
             minifyEnabled false
-         //   proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            //   proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
     compileOptions {
@@ -55,6 +53,7 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'com.hbb20:ccp:2.4.0'
     implementation 'com.tbuonomo:morph-bottom-navigation:1.0.1'
+    implementation 'com.google.android.gms:play-services-location:19.0.1'
 
     //  implementation 'com.github.irfaan008:IRBottomNavigationView:1.0.1'
     testImplementation 'junit:junit:4.+'
@@ -85,6 +84,8 @@ dependencies {
     //    Glide
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+
+    implementation 'com.squareup.picasso:picasso:2.71828'
 //    otp
     implementation 'com.github.aabhasr1:OtpView:v1.1.2-ktx' // kotlin
 
@@ -128,7 +129,9 @@ dependencies {
 
 // for adding dash support in our exoplayer.
 
-
+//    implementation 'com.google.android.exoplayer:exoplayer-core:2.X.X'
+//    implementation 'com.google.android.exoplayer:exoplayer-dash:2.X.X'
+//    implementation 'com.google.android.exoplayer:exoplayer-ui:2.X.X'
 
 
     implementation 'com.google.android.exoplayer:exoplayer-dash:r2.4.0'
@@ -164,7 +167,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-functions:19.0.2'
 
     //agora
-   // implementation 'io.agora.rtc:full-sdk:3.1.2'
+    // implementation 'io.agora.rtc:full-sdk:3.1.2'
 
 
 //    implementation 'com.intuit.sdp:sdp-android:1.0.6'
@@ -207,7 +210,7 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
     implementation "com.google.code.gson:gson:$gson_version"
-    implementation ("com.github.bumptech.glide:glide:$glide_version") {
+    implementation("com.github.bumptech.glide:glide:$glide_version") {
         exclude group: "com.android.support"
     }
     annotationProcessor "com.github.bumptech.glide:compiler:$glide_version"

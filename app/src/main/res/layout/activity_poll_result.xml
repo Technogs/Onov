@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".activities.PollResultActivity">
     <include layout="@layout/action_bar_layout"/>
 
@@ -21,10 +22,18 @@
         android:textStyle="bold"
         android:layout_marginVertical="@dimen/_10sdp"
         android:inputType="number"
-        android:padding="15dp"
-        android:textSize="@dimen/_14ssp"
+        android:paddingHorizontal="15dp"
+        android:paddingVertical="@dimen/_6sdp"
+        android:textSize="@dimen/_13ssp"
         android:textColor="@color/black"
         android:textColorHint="@color/navigation_color" />
+    <ImageView
+        android:id="@+id/ivFeed"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_120sdp"
+        android:layout_marginHorizontal="@dimen/_15sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:scaleType="centerCrop" />
     <LinearLayout
         android:layout_width="match_parent"
         android:orientation="horizontal"
@@ -38,9 +47,10 @@
             android:id="@+id/pollOption"
             android:fontFamily="@font/poppins_regular"
             android:hint="@string/time"
+            android:visibility="gone"
             android:layout_marginVertical="@dimen/_5sdp"
             android:inputType="number"
-            android:paddingVertical="15dp"
+            android:paddingVertical="@dimen/_5sdp"
             android:paddingHorizontal="@dimen/_18sdp"
             android:text="Option"
             android:textStyle="bold"
@@ -58,7 +68,9 @@
             android:hint="@string/time"
             android:layout_marginVertical="@dimen/_4sdp"
             android:inputType="number"
-            android:padding="15dp"
+            android:paddingVertical="@dimen/_5sdp"
+android:visibility="gone"
+            android:paddingHorizontal="15dp"
             android:text="Votes"
             android:textColor="@color/black"
             android:textColorHint="@color/navigation_color" />
@@ -67,9 +79,46 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_addpolling"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_200sdp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:itemCount="2"
         tools:listitem="@layout/poll_result" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:background="@null"
+        android:clickable="true"
+        android:id="@+id/voteTotal"
+        android:textStyle="bold"
+        android:fontFamily="@font/poppins_regular"
+        android:hint="@string/time"
+        android:layout_marginVertical="@dimen/_4sdp"
+        android:inputType="number"
+        android:text="Total Votes:"
+        android:layout_marginStart="@dimen/_15sdp"
+        android:textSize="@dimen/_10ssp"
+        android:textColor="@color/navigation_color"
+        android:textColorHint="@color/navigation_color" />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:background="@null"
+        android:clickable="true"
+        android:id="@+id/pollEndTime"
+        android:textStyle="bold"
+        android:fontFamily="@font/poppins_regular"
+        android:hint="@string/time"
+        android:layout_marginVertical="@dimen/_4sdp"
+        android:inputType="number"
+        android:text="Poll Ended"
+        android:layout_marginStart="@dimen/_15sdp"
+        android:textSize="@dimen/_10ssp"
+        android:textColor="@color/navigation_color"
+        android:textColorHint="@color/navigation_color" />
+
+
 </LinearLayout>

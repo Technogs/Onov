@@ -23,18 +23,29 @@
         android:text="@string/sign_petition"
         android:textColor="@color/black"
         android:textSize="18sp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_below="@+id/tv"
+        android:layout_marginTop="20dp"
+        android:layout_toLeftOf="@+id/ivClear"
+        android:fontFamily="@font/poppins_medium"
+        android:text="Clear signature"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_14ssp" />
 
     <ImageView
+        android:id="@+id/ivClear"
         android:layout_width="50dp"
         android:layout_height="40dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginTop="20dp"
-        android:onClick="onClick"
-android:layout_alignParentEnd="true"
-        android:id="@+id/ivClear"
         android:layout_below="@+id/tv"
-        android:src="@drawable/ic_baseline_clear"
-        />
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
+        android:onClick="onClick"
+        android:padding="@dimen/_9sdp"
+        android:src="@drawable/black_cross" />
 
     <LinearLayout
         android:layout_width="match_parent"

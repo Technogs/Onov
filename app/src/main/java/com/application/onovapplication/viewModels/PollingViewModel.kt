@@ -6,10 +6,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.application.onovapplication.R
-import com.application.onovapplication.model.LoginResponse
-import com.application.onovapplication.model.PollResultResponse
-import com.application.onovapplication.model.RegisterResponse
-import com.application.onovapplication.model.UserInfo
+import com.application.onovapplication.model.*
 import com.application.onovapplication.repository.service.DataManager
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.observers.DisposableObserver
@@ -21,7 +18,7 @@ import retrofit2.HttpException
 import java.io.IOException
 import java.util.concurrent.TimeoutException
 import okhttp3.MultipartBody
-
+import java.io.File
 
 
 class PollingViewModel:ViewModel() {
@@ -30,9 +27,13 @@ class PollingViewModel:ViewModel() {
     val successful: MutableLiveData<Boolean> = MutableLiveData()
     val successfulSubmitPoll: MutableLiveData<Boolean> = MutableLiveData()
     val successfulResultPoll: MutableLiveData<Boolean> = MutableLiveData()
+    val successfulEndPoll: MutableLiveData<Boolean> = MutableLiveData()
+    val successfulAllPoll: MutableLiveData<Boolean> = MutableLiveData()
     var message: String = ""
     var status: String = ""
     lateinit var pollResultResponse: PollResultResponse
+    lateinit var searchModel: SearchModel
+    lateinit var pollListsResponse: PollListsResponse
 
 
     @SuppressLint("CheckResult")
@@ -40,26 +41,24 @@ class PollingViewModel:ViewModel() {
         context: Context,
         createBy: String,
         pollTitle: String,
-        options: ArrayList<String>,
+        options: String,
         tillDate: String,
-        tillTime: String
+        tillTime: String,
+        areaLimit: String,
+        isPublic: String,
+        isMultiple: String,
+        pollImage: File?
     ) {
-        var requestBody: RequestBody
-    //    val hashMap: LinkedHashMap<String, RequestBody> = LinkedHashMap()
-        val ids = ArrayList<RequestBody>()
-
-        var descriptionList: MutableList<MultipartBody.Part> = ArrayList()
-
-        for (i in 0 until options.size) {
-            requestBody = RequestBody.create("text/plain".toMediaTypeOrNull(),options.get(i) )
-           // hashMap["options[$i]"] = requestBody*/
-          //  descriptionList.add(MultipartBody.Part.createFormData("options", options.get(i)));
-
-ids.add(requestBody)
+//Log.d("sizeis" ,ids.size.toString())
+        var body: MultipartBody.Part? = null
+        body = if (pollImage != null) {
+            val requestFile = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), pollImage)
+            MultipartBody.Part.createFormData("pollImage", pollImage.name, requestFile)
+        } else {
+            val requestFile = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), "")
+            MultipartBody.Part.createFormData("pollImage", "", requestFile)
         }
 
-
-Log.d("sizeis" ,ids.size.toString())
         val createBy: RequestBody =
             RequestBody.create("multipart/form-data".toMediaTypeOrNull(), createBy)
         val pollTitle: RequestBody =
@@ -70,9 +69,17 @@ Log.d("sizeis" ,ids.size.toString())
 
         val tillTime: RequestBody =
             RequestBody.create("multipart/form-data".toMediaTypeOrNull(), tillTime)
+        val options: RequestBody =
+            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), options)
+        val areaLimit: RequestBody =
+            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), areaLimit)
+        val isPublic: RequestBody =
+            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), isPublic)
+        val isMultiple: RequestBody =
+            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), isMultiple)
 
 
-        dataManager.createpolling(createBy, pollTitle, ids, tillDate, tillTime)
+        dataManager.createpolling(createBy, pollTitle, options, tillDate, tillTime, areaLimit, isPublic, isMultiple,body)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeWith(
@@ -176,17 +183,73 @@ Log.d("sizeis" ,ids.size.toString())
                         successfulSubmitPoll.value = false
                     }
                 })
+    } @SuppressLint("CheckResult")
+
+    fun endpoll(
+        context: Context,
+        userRef: String,
+        pollId: String
+    ) {
+        val userRef: RequestBody =
+            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), userRef)
+        val pollId: RequestBody =
+            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), pollId)
+
+        dataManager.endpoll( userRef, pollId)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeWith(
+                object : DisposableObserver<SearchModel>() {
+                    override fun onComplete() {}
+
+                    override fun onNext(t: SearchModel) {
+                        status = t.status!!
+
+                        if (status == "success") {
+                         searchModel=t
+                        }
+
+                        message = t.msg!!
+                        successfulEndPoll.value = true
+                    }
+
+                    override fun onError(e: Throwable) {
+                        Log.d("error",e.message.toString())
+                        when (e) {
+                            is IOException -> {
+
+                                message =e.message.toString() //context.getString(R.string.error_please_check_internet)
+                            }
+                            is TimeoutException -> {
+                                message = context
+                                    .getString(R.string.error_request_timed_out)
+
+                            }
+                            is HttpException -> {
+                                message = e.message.toString()
+                            }
+                            else -> {
+                                message = context
+                                    .getString(R.string.error_something_went_wrong)
+                            }
+                        }
+                        successfulEndPoll.value = false
+                    }
+                })
     }
 
     @SuppressLint("CheckResult")
     fun getpollresult(
         context: Context,
-        pollId: String
+        pollId: String,
+        userRef: String
     ) {
         val pollId: RequestBody =
             RequestBody.create("multipart/form-data".toMediaTypeOrNull(), pollId)
+        val userRef: RequestBody =
+            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), userRef)
 
-        dataManager.getpollresult( pollId)
+        dataManager.getpollresult( pollId,userRef)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeWith(
@@ -228,6 +291,59 @@ Log.d("sizeis" ,ids.size.toString())
                             }
                         }
                         successfulResultPoll.value = false
+                    }
+                })
+    }
+
+
+    @SuppressLint("CheckResult")
+    fun getallpoll(
+        context: Context,
+        userRef: String
+    ) {
+        val userRef: RequestBody =
+            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), userRef)
+
+        dataManager.getallpoll( userRef)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeWith(
+                object : DisposableObserver<PollListsResponse>() {
+                    override fun onComplete() {}
+
+                    override fun onNext(t: PollListsResponse) {
+                        status = t.status!!
+
+                        if (status == "success") {
+                            pollListsResponse=t
+
+                        }
+
+                        message = t.msg!!
+                        successfulAllPoll.value = true
+                    }
+
+                    override fun onError(e: Throwable) {
+                        Log.d("error",e.message.toString())
+                        when (e) {
+                            is IOException -> {
+
+                                message =e.message.toString() //context.getString(R.string.error_please_check_internet)
+                            }
+                            is TimeoutException -> {
+                                message = context
+                                    .getString(R.string.error_request_timed_out)
+
+                            }
+                            is HttpException -> {
+                                message = e.message.toString()
+                            }
+                            else -> {
+                                message = context
+                                    .getString(R.string.error_something_went_wrong)
+                            }
+                        }
+                        successfulAllPoll.value = false
                     }
                 })
     }

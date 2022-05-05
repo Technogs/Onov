@@ -1,11 +1,13 @@
 package com.application.onovapplication.activities.common
 
 import android.Manifest
+import android.app.Activity
 import android.app.AlertDialog
 import android.content.ContentValues
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.database.Cursor
+import android.location.Location
 import android.media.MediaPlayer
 import android.net.Uri
 import android.os.*
@@ -13,11 +15,13 @@ import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.abedelazizshe.lightcompressorlibrary.CompressionListener
 import com.abedelazizshe.lightcompressorlibrary.VideoCompressor
@@ -29,8 +33,14 @@ import com.application.onovapplication.databinding.ActivitySettingsBinding
 import com.application.onovapplication.databinding.ActivityStartPetitionBinding
 import com.application.onovapplication.model.EventModel
 import com.application.onovapplication.model.FeedsData
+import com.application.onovapplication.repository.BaseUrl
 import com.application.onovapplication.utils.CustomSpinnerAdapter
+import com.application.onovapplication.viewModels.EventViewModel
+import com.application.onovapplication.viewModels.PetitionViewModel
+import com.application.onovapplication.viewModels.StatsViewModel
 import com.bumptech.glide.Glide
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.gson.Gson
 import id.zelory.compressor.Compressor
 
@@ -60,8 +70,12 @@ class StartPetition : BaseAppCompatActivity(), View.OnClickListener {
     private var photopath: String = ""
     var data: EventModel? = null;
     private val spinnerList =
-        arrayOf("Select Petition Radius", "Local", "State", "Nationwide")
+        arrayOf("Select Petition Radius", "Local", "State", "National")
     private lateinit var binding: ActivityStartPetitionBinding
+    val petitionViewModel by lazy { ViewModelProvider(this).get(PetitionViewModel::class.java) }
+    lateinit var fusedLocationClient: FusedLocationProviderClient
+    private val statsViewModel by lazy { ViewModelProvider(this).get(StatsViewModel::class.java) }
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -69,27 +83,38 @@ class StartPetition : BaseAppCompatActivity(), View.OnClickListener {
         binding = ActivityStartPetitionBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+        fusedLocationClient  = LocationServices.getFusedLocationProviderClient(this)
         if (Build.VERSION.SDK_INT > 9) {
             val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
             StrictMode.setThreadPolicy(policy)
         }
 
         type = intent.getStringExtra("type").toString()
+           setSpinner()
         if (intent.getParcelableExtra<FeedsData>("feed")!=null) {
             feeds = intent.getParcelableExtra("feed")
             if (feeds!=null)binding.createPt.setText("Edit")
-            binding.etptTitle.setText(feeds?.title)
-            binding.etPtDescription.setText(feeds?.description)
+            binding.etptTitle.setText(feeds?.petitionTitle)
+            binding.etPtDescription.setText(feeds?.petitionDiscription)
             binding.pteWbLink.setText(feeds?.petitionWebsiteLink)
             binding.petitionDuration.setText(feeds?.petitionDuration)
             binding.petitionSignatureCount.setText(feeds?.petitionSignCount)
+            binding.pLocation.setText(feeds?.petitionLocation)//cityName+", "+feeds?.stateName+", "+feeds?.countryName
+            for (i in spinnerList.indices) {
+                if (spinnerList[i] == feeds?.areaLimit) {
+                    binding.spPetition.setSelection(i)
+                }
+            }
             if (feeds?.fileType=="photo") {
-                Glide.with(this).load(feeds?.filePath).into(binding.uploadPhoto)
+                Glide.with(this).load(BaseUrl.photoUrl+feeds?.petitionMedia).into(binding.uploadPhoto)
               //  photopath=feeds?.fileType.toString()
-            }//else if (feeds?.fileType=="video") path=feeds?.fileType.toString()
-            //  dntnGoal.setText(feeds?.)
+            }else if (feeds?.fileType=="video") {
+                binding.uploadVideo.visibility=View.GONE
+                binding.viewVideo.visibility=View.VISIBLE
+                binding.viewVideo.setVideoURI(Uri.parse(feeds?.petitionMedia))            }
 
         }
+
 
         if (type == "photo") {
             binding.petitionPic.visibility = View.VISIBLE
@@ -98,15 +123,39 @@ class StartPetition : BaseAppCompatActivity(), View.OnClickListener {
             binding.petitionPic.visibility = View.GONE
             binding.petitionVideo.visibility = View.VISIBLE
         }
-        setSpinner()
         init()
+        observeViewModel()
     }
+
 
 
     fun init() {
 
         val sdf = SimpleDateFormat("yyyy/MM/dd")
         pdate = sdf.format(Date())
+
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return
+        }
+        fusedLocationClient.lastLocation
+            .addOnSuccessListener { location : Location? ->
+                binding.pLocation.setText(location.toString())
+                // Got last known location. In some rare situations this can be null.
+            }
     }
 
     private fun setSpinner() {
@@ -132,7 +181,6 @@ class StartPetition : BaseAppCompatActivity(), View.OnClickListener {
                 position: Int,
                 id: Long
             ) {
-                // selectedRole = parent?.getItemAtPosition(position).toString()
                 radius = spinnerList[position]
             }
         }
@@ -193,24 +241,75 @@ class StartPetition : BaseAppCompatActivity(), View.OnClickListener {
                 } else if (binding.petitionSignatureCount.text.toString() == "") {
                     setError(getString(R.string.sg_count_error))
 
-                } else if (type == "photo" && mPhotoFile.toString() == "") {
-                    setError(getString(R.string.phone_error))
+//                } else if (type == "photo" && mPhotoFile.toString() == "") {
+//                    setError(getString(R.string.photo_error))
+//
+//                } else if (type == "video" && path == "") {
+//                    setError(getString(R.string.video_error))
 
-                } else if (type == "video" && path == "") {
-                    setError(getString(R.string.video_error))
+                } else if (binding.pteWbLink.text.toString() == "") {
+                    setError("Enter website link")
 
-//                } else if (pteWbLink.text.toString() == "") {
-//                    setError(getString(R.string.weblink_error))
+                } else    if ( radius=="Select Radius" )
+                    setError("Please select a radius")
+                else {
 
-                } else {
                     if (binding.createPt.text=="Post") {
+
                         if (type == "photo") {
-                            addEvent(compressedImage.toString(), "photo")
-                        } else if (type == "video") addEvent(path, "video")
+                            Log.d("addPetition image Post" ,"yes")
+                            if (compressedImage == null)
+                                setError(getString(R.string.photo_error))
+                        else { showDialog()
+                                petitionViewModel.addPetition(
+                                    this,
+                                    userPreferences.getuserDetails()?.userRef.toString(),
+                                    binding.etptTitle.text.toString(),
+                                    binding.etPtDescription.text.toString(),
+                                    pdate,
+                                    binding.pteWbLink.text.toString(),
+                                    binding.petitionDuration.text.toString(),
+                                    binding.petitionSignatureCount.text.toString(),
+                                    "photo",
+                                    radius,
+                                    binding.pLocation.text.toString(),
+                                    compressedImage
+                                )
+                            }
+                        } else if (type == "video") {
+                            Log.d("addPetition video Post" ,"yes")
+                            if (type == "video" && path == "")
+                                setError(getString(R.string.video_error))
+                          else      {showDialog()
+                                    petitionViewModel.addPetition(
+                                        this,
+                                        userPreferences.getuserDetails()?.userRef.toString(),
+                                        binding.etptTitle.text.toString(),
+                                        binding.etPtDescription.text.toString(),
+                                        pdate,
+                                        binding.pteWbLink.text.toString(),
+                                        binding.petitionDuration.text.toString(),
+                                        binding.petitionSignatureCount.text.toString(),
+                                        "video",
+                                        radius,
+                                        binding.pLocation.text.toString(),
+                                        videoFile
+                                    )
+                                }
+
+                        }
                     } else if (binding.createPt.text=="Edit") {
-                        if (type == "photo") {
-                            editPetition(compressedImage.toString(), feeds!!)
-                        } else if (type == "video") editPetition(path,feeds!!)
+                        if (feeds?.fileType == "photo") {
+                            Log.d("addPetition photo Edit" ,"yes")
+                            petitionViewModel.editPetition(this,feeds?.id.toString(),binding.etptTitle.text.toString(),
+                                binding.etPtDescription.text.toString(),binding.pteWbLink.text.toString(),binding.petitionDuration.text.toString(),
+                                binding.petitionSignatureCount.text.toString(), "photo",radius,binding.pLocation.text.toString(),compressedImage)
+                        } else if (feeds?.fileType == "video") {
+                            Log.d("addPetition video Edit" ,"yes")
+                            petitionViewModel.editPetition(this,feeds?.id.toString(),binding.etptTitle.text.toString(),
+                                binding.etPtDescription.text.toString(),binding.pteWbLink.text.toString(),binding.petitionDuration.text.toString(),
+                                binding.petitionSignatureCount.text.toString(), "video",radius,binding.pLocation.text.toString(),videoFile)
+                        }
                     }
                 }
             }
@@ -345,7 +444,44 @@ class StartPetition : BaseAppCompatActivity(), View.OnClickListener {
         return File.createTempFile(mFileName, ".jpg", storageDir)
     }
 
+    private fun observeViewModel() {
+        petitionViewModel.successfulAddPetition.observe(this, androidx.lifecycle.Observer {
+            dismissDialog()
+            if (it != null) {
+                if (it) {
+                    if (petitionViewModel.status == "success") {
+                        setError(petitionViewModel.loginResponse.msg.toString())
+                     startActivity(Intent(this,HomeTabActivity::class.java))
+                        finish()
 
+                    } else {
+                        setError(petitionViewModel.message)
+                        finish()
+                    }
+                }
+            } else {
+                setError(petitionViewModel.message)
+            }
+        })
+        petitionViewModel.successfulEditPetition.observe(this, androidx.lifecycle.Observer {
+            dismissDialog()
+            if (it != null) {
+                if (it) {
+                    if (petitionViewModel.status == "success") {
+                        setError(petitionViewModel.loginResponse.msg.toString())
+                     startActivity(Intent(this,HomeTabActivity::class.java))
+                        finish()
+
+                    } else {
+                        setError(petitionViewModel.message)
+                        finish()
+                    }
+                }
+            } else {
+                setError(petitionViewModel.message)
+            }
+        })
+    }
     private fun getRealPathFromUri(contentUri: Uri?): String? {
         var cursor: Cursor? = null
         return try {
@@ -369,80 +505,51 @@ class StartPetition : BaseAppCompatActivity(), View.OnClickListener {
         if (data != null) {
             when (requestCode) {
                 GALLERYVIDEO -> {
-                    if (data != null) {
+                    if (resultCode== RESULT_OK) {
+
+                        binding.uploadVideo.visibility=View.GONE
+                        binding.viewVideo.visibility=View.VISIBLE
                         val contentURI: Uri = data.data!!
+
+                        binding.viewVideo.setVideoURI(contentURI)
+                        binding.viewVideo.start()
                         path = getMediaPath(contentURI)
 
 
-                        val mp: MediaPlayer = MediaPlayer.create(this, Uri.fromFile(File(path)))
-                        val duration: Int = mp.duration
-                        mp.release()
-                        if (duration / 10000 > 10) {
-
-                            showPopUp()
-                        } else {
-                            videoFile = saveVideoFile(path)
-                            compressVideo(path, videoFile)
-
-
-                            ////////////////
-                            videoFile = File(getRealPathFromUri(contentURI)!!)
-//                        // Get the Video from data
-
-//                        // Get the Video from data
-//                        val selectedVideo: Uri = data.data!!
-//                        val filePathColumn = arrayOf(MediaStore.Video.Media.DATA)
+//                        val mp: MediaPlayer = MediaPlayer.create(this, Uri.fromFile(File(path)))
+//                        val duration: Int = mp.duration
+//                        mp.release()
+//                        if (duration / 10000 > 10) {
 //
-//                        val cursor: Cursor =
-//                            activity?.getContentResolver()?.query(
-//                                selectedVideo,
-//                                filePathColumn,
-//                                null,
-//                                null,
-//                                null
-//                            )!!
-//                        cursor.moveToFirst()
-//
-//                        val columnIndex = cursor.getColumnIndex(filePathColumn[0])
-//
-//                      val  mediaPath1 = cursor.getString(columnIndex)
-//                        videoFile= File(mediaPath1)
-//                        str2.setText(mediaPath1)
-//                        // Set the Video Thumb in ImageView Previewing the Media
-//                        // Set the Video Thumb in ImageView Previewing the Media
-//                        imgView.setImageBitmap(
-//                            getThumbnailPathForLocalFile(
-//                                this@MainActivity,
-//                                selectedVideo
-//                            )
-//                        )
-//                        cursor.close() /////////////////////////////////////
+//                            showPopUp()
+//                        } else {
+                        videoFile = saveVideoFile(path)
+                        compressVideo(path, videoFile)
 
-//                        saveVideoToInternalStorage(selectedVideoPath)
-//                        addVideo.visibility = View.VISIBLE
-//                        addVideoImage.visibility = View.GONE
-//                        addVideo.setVideoPath(selectedVideoPath);
-//                        addVideo.start();
-                        }
 
-                    }
+
+                    //}
+                }
                 }
 
                 CAMERAVIDEO -> {
                     if (data != null) {
                         val contentURI: Uri = data.data!!
                         path = getMediaPath(contentURI)
+                        binding.uploadVideo.visibility=View.GONE
+                        binding.viewVideo.visibility=View.VISIBLE
 //                    addVideo.visibility = View.VISIBLE
 //                    addVideoImage.visibility = View.GONE
 //                    addVideo.setVideoPath(path);
 //                    addVideo.start();
-//
+                        binding.viewVideo.setVideoURI(contentURI)
+                        binding.viewVideo.start()
                         videoFile = saveVideoFile(path)
                         compressVideo(path, videoFile)
                     }
                 }
                 REQUEST_GALLERY_PHOTO -> {
-                    val selectedImage = data!!.data
+                    val selectedImage = data.data
                     try {
 
                         mPhotoFile = File(getRealPathFromUri(selectedImage)!!)
@@ -530,11 +637,8 @@ class StartPetition : BaseAppCompatActivity(), View.OnClickListener {
                 // Default compression
                 compressedImage = Compressor.compress(this@StartPetition, imageFile)
 
-//                alertDialog?.show()
-                // showDialog()
                 Glide.with(this@StartPetition).load(compressedImage).into(binding.uploadPhoto )
-//                alertDialog?.dismiss()
-                //dismissDialog()
+
                 Log.e("komal", "new file ${compressedImage!!.length()}")
 
             }
@@ -552,15 +656,15 @@ class StartPetition : BaseAppCompatActivity(), View.OnClickListener {
                         if (percent <= 100 && percent.toInt() % 5 == 0)
                             this@StartPetition.runOnUiThread {
 
-//                                progressBar.progress = percent.toInt()
+                               binding.progressBar.progress = percent.toInt()
                             }
                     }
 
                     override fun onStart() {
 
 
-//                        progressBar.visibility = View.VISIBLE
-//                        progressBar.progress = 0
+                        binding.progressBar.visibility = View.VISIBLE
+                        binding.progressBar.progress = 0
                     }
 
                     override fun onSuccess() {
@@ -570,7 +674,7 @@ class StartPetition : BaseAppCompatActivity(), View.OnClickListener {
 
                             Looper.myLooper()?.let {
                                 Handler(it).postDelayed({
-//                                    progressBar.visibility = View.GONE
+                                    binding.progressBar.visibility = View.GONE
                                 }, 50)
                             }
                         }
@@ -700,92 +804,4 @@ class StartPetition : BaseAppCompatActivity(), View.OnClickListener {
             cursor?.close()
         }
     }
-
-    fun addEvent(media: String, type: String) {
-        //   showDialog()
-        val charset = "UTF-8"
-        val uploadFile1 = File(media)
-        //    val uploadFile2 = File(path)
-        val requestURL = "https://bdztl.com/onov/api/v1/addPetition"
-        showDialog()
-        try {
-
-            thread {
-                val multipart = MultipartUtility(requestURL, charset)
-                multipart.addFormField("userRef", userPreferences.getUserREf())
-                multipart.addFormField("title", binding.etptTitle.text.toString())
-                multipart.addFormField("discription", binding.etPtDescription.text.toString())
-                multipart.addFormField("petitionDate", pdate)
-                multipart.addFormField("websitelink", binding.pteWbLink.text.toString())
-                multipart.addFormField("duration", binding.petitionDuration.text.toString())
-                multipart.addFormField("signtureCount", binding.petitionSignatureCount.text.toString())
-                multipart.addFormField("radius", radius)
-                multipart.addFormField("mediaType", type)
-                multipart.addFilePart("petitionMedia", uploadFile1)
-                val response: String = multipart.finish()
-
-                println("SERVER REPLIED:")
-
-                val gson = Gson() // Or use new GsonBuilder().create();
-                data = gson.fromJson(response, EventModel::class.java)
-                if (data!=null) {
-                    setError(data?.msg.toString())
-                    dismissDialog()
-                    Handler(Looper.getMainLooper()).postDelayed({
-                        startActivity(Intent(this,HomeTabActivity::class.java))
-                    }, 1000)
-                }
-                //   Log.e("PRACHI", data?.status)
-
-            }.start()
-
-         /*   Handler(Looper.getMainLooper()).postDelayed({
-
-            }, 2000)*/
-
-        } catch (ex: IOException) {
-            System.err.println(ex)
-        }
-    }
-    fun editPetition(media: String, feedsData: FeedsData) {
-        //   showDialog()
-        val charset = "UTF-8"
-        val uploadFile1 = File(media)
-        //    val uploadFile2 = File(path)
-        val requestURL = "https://bdztl.com/onov/api/v1/addPetition"
-        showDialog()
-        try {
-            Handler(Looper.getMainLooper()).postDelayed({
-                val multipart = MultipartUtility(requestURL, charset)
-                multipart.addFormField("feedId", feedsData.id)
-                multipart.addFormField("title", binding.etptTitle.text.toString())
-                multipart.addFormField("discription", binding.etPtDescription.text.toString())
-                multipart.addFormField("petitionDate", pdate)
-                multipart.addFormField("websitelink", binding.pteWbLink.text.toString())
-                multipart.addFormField("duration", binding.petitionDuration.text.toString())
-                multipart.addFormField("signtureCount", binding.petitionSignatureCount.text.toString())
-                multipart.addFormField("radius", radius)
-                multipart.addFormField("mediaType", type)
-                multipart.addFilePart("petitionMedia", uploadFile1)
-                val response: String = multipart.finish()
-
-                println("SERVER REPLIED:")
-
-                val gson = Gson() // Or use new GsonBuilder().create();
-                data = gson.fromJson(response, EventModel::class.java)
-                //   Log.e("PRACHI", data?.status)
-                if (data!=null) {
-                    setError(data?.msg.toString())
-                    dismissDialog()
-                    Handler(Looper.getMainLooper()).postDelayed({
-                        finish()
-                    }, 2000)
-                }
-            }, 2000)
-
-        } catch (ex: IOException) {
-            System.err.println(ex)
-        }
-    }
-
 }

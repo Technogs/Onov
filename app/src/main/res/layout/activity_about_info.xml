@@ -3,41 +3,139 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:background="@color/white"
     android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
     tools:context=".activities.common.AboutInfoActivity">
 
 
-    <include layout="@layout/action_bar_layout"/>
+    <include layout="@layout/action_bar_layout" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
 
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_gravity="center"
-    android:layout_marginTop="15dp"
-    android:text="@string/about_info"
-    android:textSize="18sp"
-android:fontFamily="@font/poppins_regular"
-    android:textColor="@color/black"
-    android:layout_height="wrap_content"/>
+
+<androidx.appcompat.widget.LinearLayoutCompat
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
 
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_marginTop="25dp"
-        android:text="@string/about_me"
-        android:textSize="14sp"
-        android:layout_marginStart="20dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
         android:fontFamily="@font/poppins_regular"
+        android:text="Edit Profile"
+        android:id="@+id/edText"
+        android:layout_marginBottom="@dimen/_10sdp"
         android:textColor="@color/black"
-        android:layout_height="wrap_content"/>
+        android:textSize="18sp" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:layout_height="210dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Tap to add cover photo"
+            android:layout_height="wrap_content" />
+
+
+        <ImageView
+            android:id="@+id/coverPhoto"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_130sdp"
+            android:background="@drawable/drawable_chat_background"
+            android:onClick="onClick"
+            android:scaleType="centerCrop" />
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/ivProfile"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/_100sdp"
+            android:background="@drawable/register_profile_camera"
+            android:elevation="10dp"
+            android:onClick="onClick" />
+
+    </RelativeLayout>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:id="@+id/pname"
+        android:fontFamily="@font/poppins_regular"
+        android:text="@string/profile_picture"
+        android:textColor="@color/black"
+        android:textSize="15sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="25dp"
+        android:fontFamily="@font/poppins_regular"
+        android:text="@string/name"
+        android:textColor="@color/black"
+        android:textSize="14sp" />
+
+<!--    <EditText-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="25dp"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:background="@drawable/drawable_chat_background"-->
+<!--        android:layout_marginEnd="25dp"-->
+<!--        android:hint="Enter Name"-->
+<!--        android:textSize="@dimen/_11ssp"-->
+<!--        android:id="@+id/usrName"-->
+<!--        android:padding="@dimen/_8sdp"-->
+<!--        app:boxBackgroundMode="none" />-->
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/etUserName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/drawable_chat_background"
+        android:layout_marginTop="@dimen/_3sdp"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:fontFamily="@font/poppins_regular"
+        android:hint="@string/name"
+        android:imeOptions="actionNext"
+        android:inputType="textImeMultiLine"
+        android:lines="3"
+        android:maxLength="300"
+        android:textColorHint="@color/black"
+        android:textColor="@color/black"
+        android:maxLines="3"
+        android:padding="@dimen/_10sdp"
+        android:textSize="16sp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="25dp"
+        android:fontFamily="@font/poppins_regular"
+        android:text="@string/about_me"
+        android:textColor="@color/black"
+        android:textSize="14sp" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
         android:layout_marginTop="10dp"
+        android:id="@+id/countText"
         android:layout_marginEnd="25dp"
         app:boxBackgroundMode="none"
         app:counterEnabled="true"
@@ -53,70 +151,200 @@ android:fontFamily="@font/poppins_regular"
             android:drawablePadding="14dp"
             android:fontFamily="@font/poppins_regular"
             android:hint="@string/comment"
-            android:focusable="false"
             android:imeOptions="actionNext"
             android:inputType="textImeMultiLine"
-            android:maxLines="3"
             android:lines="3"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
             android:maxLength="300"
+            android:maxLines="3"
             android:padding="16dp"
             android:textSize="16sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
 
-
     <TextView
         android:layout_width="wrap_content"
-
-        android:layout_marginTop="15dp"
-        android:text="@string/website_url"
-        android:textSize="14sp"
+android:id="@+id/weburltext"
+        android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
         android:fontFamily="@font/poppins_regular"
+        android:text="@string/website_url"
         android:textColor="@color/black"
-        android:layout_height="wrap_content"/>
+        android:textSize="14sp" />
 
 
     <EditText
         android:id="@+id/websiteLink"
         android:layout_width="match_parent"
-        android:layout_marginBottom="10dp"
+        android:layout_height="@dimen/_35sdp"
+        android:layout_below="@+id/abtMe"
         android:layout_marginStart="20dp"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp"
         android:layout_marginTop="10dp"
-        android:paddingTop="5dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/drawable_chat_background"
         android:fontFamily="@font/poppins_regular"
         android:gravity="center"
         android:hint="www.abc.com"
-        android:textSize="14sp"
-        android:paddingBottom="5dp"
-        android:background="@drawable/drawable_chat_background"
-        android:layout_marginEnd="20dp"
-        android:layout_below="@+id/abtMe"
-        android:layout_height="wrap_content"
-        android:focusable="false" />
-
-    <TextView
-        android:layout_width="wrap_content"
-
-        android:layout_marginTop="15dp"
-        android:text="@string/supports"
-        android:textSize="14sp"
-        android:layout_marginStart="20dp"
-        android:fontFamily="@font/poppins_regular"
+        android:textColorHint="@color/black"
         android:textColor="@color/black"
-        android:layout_height="wrap_content"/>
+        android:paddingStart="10dp"
+        android:paddingTop="5dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="5dp"
+        android:textSize="14sp" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/edCountry"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_35sdp"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:layout_marginVertical="@dimen/_10sdp"
+        android:paddingHorizontal="@dimen/_8sdp"
+        android:paddingVertical="@dimen/_5sdp"
+        android:background="@drawable/drawable_chat_background"
+        android:fontFamily="@font/poppins_regular"
+        android:hint="@string/website_url"
+        android:textColorHint="@color/black"
+        android:textColor="@color/black"
+        android:text="United States"
+        android:textSize="14sp" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="35dp"
-        android:layout_marginEnd="25dp"
-        android:layout_marginStart="25dp"
-        android:background="@drawable/drawable_chat_background"
-        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:id="@+id/stateLyt"
+        android:layout_marginTop="@dimen/_15sdp"
         android:orientation="horizontal">
 
+
+        <Spinner
+            android:id="@+id/spState"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:background="@android:color/white"
+            android:gravity="center"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:spinnerMode="dropdown" />
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/ic_down_arrow" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/edit_text_background" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:id="@+id/cityLyt"
+        android:visibility="gone"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal">
+
+
+        <Spinner
+            android:id="@+id/spCities"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:background="@android:color/white"
+            android:gravity="center"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:spinnerMode="dropdown" />
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/ic_down_arrow" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/edit_text_background" />
+
+    </RelativeLayout>
+    <EditText
+        android:id="@+id/cityEditText"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_35sdp"
+        android:layout_below="@+id/abtMe"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/drawable_chat_background"
+        android:fontFamily="@font/poppins_regular"
+        android:hint="Enter City"
+        android:textColorHint="@color/black"
+        android:textColor="@color/black"
+        android:paddingStart="10dp"
+        android:paddingTop="5dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="5dp"
+        android:textSize="14sp" />
+    <TextView
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/poppins_regular"
+        android:text="@string/supports"
+        android:textColor="@color/black"
+        android:textSize="14sp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/drawable_chat_background"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="15dp"
+            android:id="@+id/etParty"
+            android:fontFamily="@font/poppins_regular"
+            android:text="@string/supports"
+            android:visibility="gone"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
 
         <Spinner
             android:id="@+id/spAbout"
@@ -133,104 +361,111 @@ android:fontFamily="@font/poppins_regular"
             android:spinnerMode="dropdown" />
 
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true"
-        android:layout_gravity="center"
-        android:layout_marginEnd="10dp"
-        android:src="@drawable/ic_down_arrow" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:id="@+id/partySpinImg"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/ic_down_arrow" />
     </RelativeLayout>
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_marginTop="15dp"
-        android:layout_height="wrap_content">
-
-    <LinearLayout
-        android:id="@+id/ll2"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/photoLayout"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="15dp"
-        android:orientation="horizontal">
+        android:layout_marginTop="15dp">
 
-
-        <TextView
-            android:id="@+id/tv"
+        <LinearLayout
+            android:id="@+id/ll2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_regular"
-            android:text="@string/role_"
-            android:textColor="@color/black"
-            android:textSize="14sp" />
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/roleValue"
+
+            <TextView
+                android:id="@+id/tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
+                android:text="@string/role_"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/roleValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Citizen"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:fontFamily="@font/poppins_regular"
-            android:text="Citizen"
-            android:textColor="@color/black"
-            android:textSize="14sp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/photoLayout"
-        android:layout_alignParentEnd="true"
-        android:layout_gravity="center"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="40dp"
-        android:orientation="horizontal">
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="40dp"
+            android:orientation="horizontal">
 
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:fontFamily="@font/poppins_regular"
-            android:text="@string/total_donations"
-            android:textColor="@color/black"
-            android:textSize="14sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:fontFamily="@font/poppins_regular"
+                android:text="@string/total_donations"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
 
-        <TextView
-            android:id="@+id/donaionsValue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:fontFamily="@font/poppins_regular"
-            android:text="00"
-            android:textColor="@color/black"
-            android:textSize="14sp" />
-    </LinearLayout>
+            <TextView
+                android:id="@+id/donaionsValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:fontFamily="@font/poppins_regular"
+                android:text="00"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+        </LinearLayout>
     </RelativeLayout>
-<TextView
-    android:layout_width="match_parent"
-    android:layout_marginHorizontal="20dp"
-    android:layout_marginTop="40dp"
-    android:text="@string/edit"
-    android:textSize="15sp"
-android:id="@+id/edit_info"
-    android:fontFamily="@font/poppins_bold"
-    android:gravity="center"
-    android:textColor="@color/white"
-    android:background="@drawable/background_gradient_square"
-    android:layout_height="40dp"/>
+
     <TextView
-    android:layout_width="match_parent"
-    android:layout_marginHorizontal="20dp"
-    android:layout_marginTop="40dp"
-    android:text="Update"
-        android:visibility="gone"
+        android:id="@+id/edit_info"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+android:visibility="gone"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="@dimen/_20sdp"
+        android:background="@drawable/background_gradient_square"
+        android:fontFamily="@font/poppins_bold"
+        android:gravity="center"
+        android:text="@string/edit"
+        android:textColor="@color/white"
+        android:textSize="15sp" />
+
+    <TextView
         android:id="@+id/update_info"
-    android:textSize="15sp"
-    android:fontFamily="@font/poppins_bold"
-    android:gravity="center"
-    android:textColor="@color/white"
-    android:background="@drawable/background_gradient_square"
-    android:layout_height="40dp"/>
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/background_gradient_square"
+        android:fontFamily="@font/poppins_bold"
+        android:gravity="center"
+        android:text="Update"
+        android:onClick="onClick"
+        android:layout_marginBottom="@dimen/_20sdp"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        />
+</androidx.appcompat.widget.LinearLayoutCompat>
+    </ScrollView>
 </androidx.appcompat.widget.LinearLayoutCompat>

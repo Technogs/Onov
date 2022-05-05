@@ -1,12 +1,13 @@
 package com.application.onovapplication.activities.common
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.application.onovapplication.R
+import com.application.onovapplication.activities.DonationRequestsActivity
 import com.application.onovapplication.databinding.ActionBarLayout2Binding
-import com.application.onovapplication.databinding.ActivitySearchFriendsBinding
 import com.application.onovapplication.databinding.ActivitySettingsBinding
 import com.application.onovapplication.viewModels.SettingsViewModel
 
@@ -27,7 +28,7 @@ class SettingsActivity : BaseAppCompatActivity(),View.OnClickListener {
         val view = binding.root
         setContentView(view)
         val incBinding:ActionBarLayout2Binding=binding.ab
-        userRef = userPreferences.getUserREf()
+        userRef = userPreferences.getuserDetails()?.userRef.toString()
 
         settingsViewModel.getSettings(this, userRef)
         showDialog()
@@ -116,10 +117,17 @@ class SettingsActivity : BaseAppCompatActivity(),View.OnClickListener {
 
     override fun onClick(v: View?) {
      when(v?.id){
-         R.id.emailEdit->{
-
+         R.id.donationReq->{
+startActivity(Intent(this,DonationRequestsActivity::class.java))
          }
-         R.id.phoneEdit->{
+         R.id.resetPass->{
+             startActivity(Intent(this,ChangePasswordActivity::class.java))
+
+         } R.id.media->{
+             startActivity(Intent(this,MediaActivity::class.java))
+
+          } R.id.socialAccounts->{
+             startActivity(Intent(this,AddSocialAccountActivity::class.java))
 
          }
      }

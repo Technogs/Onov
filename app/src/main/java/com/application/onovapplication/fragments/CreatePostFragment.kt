@@ -1,41 +1,45 @@
 package com.application.onovapplication.fragments
 
+
+
 import android.Manifest
 import android.app.AlertDialog
 import android.content.ContentValues
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.database.Cursor
-import android.media.MediaPlayer
 import android.net.Uri
 import android.os.*
-//https://stackoverflow.com/questions/9042932/getting-image-from-imageview
-//https://www.py4u.net/discuss/645280
-///https://gist.github.com/mcxiaoke/8929954
-//https://gist.github.com/sandeeplearner/bdededdd2f432c49a77a
-//https://medium.com/@Tarek360/upload-file-via-multipart-post-method-in-kotlin-d43d3f025670
 import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import android.widget.AdapterView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-
+import com.abedelazizshe.lightcompressorlibrary.CompressionListener
+import com.abedelazizshe.lightcompressorlibrary.VideoCompressor
+import com.abedelazizshe.lightcompressorlibrary.VideoQuality
 import com.application.onovapplication.BuildConfig
 import com.application.onovapplication.R
 import com.application.onovapplication.UrlConnection.MultipartUtility
 import com.application.onovapplication.activities.common.BaseFragment
 import com.application.onovapplication.adapters.PredefinedTextsAdapter
 import com.application.onovapplication.databinding.FragmentCreatePostBinding
+import com.application.onovapplication.extensions.loadImage
 import com.application.onovapplication.model.EventModel
 import com.application.onovapplication.model.FeedsData
 import com.application.onovapplication.model.PredefinedTextsModel
+import com.application.onovapplication.repository.BaseUrl
+import com.application.onovapplication.utils.CustomSpinnerAdapter
+import com.application.onovapplication.viewModels.PostViewModel
+import com.application.onovapplication.viewModels.StatsViewModel
 import com.bumptech.glide.Glide
 import com.google.gson.Gson
 import id.zelory.compressor.Compressor
@@ -50,160 +54,291 @@ import kotlin.collections.ArrayList
 import kotlin.concurrent.thread
 
 
-class CreatePostFragment : BaseFragment(), PredefinedTextsAdapter.PredefinedTextClickInterface ,View.OnClickListener
-{
+class CreatePostFragment : BaseFragment(), PredefinedTextsAdapter.PredefinedTextClickInterface,
+    View.OnClickListener {
+    private val spinnerList = arrayOf("Select Radius", "Local", "State", "National")
 
     private var videoFile: File? = null
-    private var path: String=""
-    private var photopath: String=""
+    private var path: String = ""
+    private var photopath: String = ""
     private lateinit var data: EventModel
     private lateinit var data1: EventModel
     private var compressedImage: File? = null
     var mPhotoFile: File? = null
     var mVideoFile: File? = null
     val LAUNCH_INFO_ACTIVITY = 11
-    var feedData: FeedsData?=null
-
+    var feedData: FeedsData? = null
+    var radius = ""
     private val GALLERYVIDEO = 1
     private var CAMERAVIDEO: Int = 2
     private val REQUEST_TAKE_PHOTO = 101
     private val TAKE_PHOTO = 4
     private val REQUEST_GALLERY_PHOTO = 201
     private var adapter: PredefinedTextsAdapter? = null
-    var type=""
+    var type = ""
     lateinit var binding: FragmentCreatePostBinding
+    val postViewModel by lazy { ViewModelProvider(this).get(PostViewModel::class.java) }
+    private val statsViewModel by lazy { ViewModelProvider(this).get(StatsViewModel::class.java) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-      type= arguments?.getString("type").toString()
-
-
-
-
-        if (Build.VERSION.SDK_INT > 9) {
-            val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
-            StrictMode.setThreadPolicy(policy)
-
-        }
-
-//        val gfgPolicy = ThreadPolicy.Builder().permitAll().build()
-//        StrictMode.setThreadPolicy(gfgPolicy)
+        type = arguments?.getString("type").toString()
 
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    ): View {
         // Inflate the layout for this fragment
         binding = FragmentCreatePostBinding.inflate(inflater, container, false)
-        return binding.getRoot()    }
+        return binding.root
+    }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        setSpinner()
         val predefinedTextsList: ArrayList<PredefinedTextsModel> = ArrayList()
-        if (arguments?.getParcelable<FeedsData>("feedData")!=null) {
-            feedData = arguments?.getParcelable<FeedsData>("feedData")!! as FeedsData
-            if (feedData!=null)binding.createPost.setText("Edit")
+        observeViewModel()
+        if (arguments?.getParcelable<FeedsData>("feedData") != null) {
+            feedData = arguments?.getParcelable<FeedsData>("feedData")!!
+//            if (feedData != null) {
+                binding.createPost.text = "Edit"
+
+//                if (feedData?.fileType == "photo") binding.uploadPhoto.loadImage(BaseUrl.photoUrl + feedData?.filePath)
+//            }
             binding.etPostTitle.setText(feedData?.title)
             binding.etPostDscptn.setText(feedData?.description)
-            if (feedData?.fileType=="photo") {
-                Glide.with(requireActivity()!!).load(feedData?.filePath).into(binding.uploadPhoto)
-//                photopath=feedData?.filePath.toString()
-//                mPhotoFile= File(feedData?.filePath)
+            if (feedData?.fileType == "photo") {
+                Glide.with(requireActivity()).load(BaseUrl.photoUrl +feedData?.filePath).into(binding.uploadPhoto)
+
             }
-//            else if (feedData?.fileType=="video"){  upload_video.visibility=View.GONE
-//                view_video.visibility=View.VISIBLEs
+            else if (feedData?.fileType=="video"){
+                binding.uploadVideo.visibility=View.GONE
+               binding.viewVideo.visibility=View.VISIBLE
 //                path=feedData?.filePath.toString()
-//                view_video.setVideoURI(Uri.parse(feedData?.filePath))
-////                view_video.start()
-//            }
+                binding.viewVideo.setVideoURI(Uri.parse(feedData?.filePath))
+//                binding.viewVideo.start()
+            }
+            for (i in spinnerList.indices) {
+                if (spinnerList[i] == feedData?.areaLimit) {
+                    binding.spPetition.setSelection(i)
+                }
+            }
         }
         predefinedTextsList.add(PredefinedTextsModel("BREAKING NEWS!"))
         predefinedTextsList.add(PredefinedTextsModel("What's happening locally now!"))
         predefinedTextsList.add(PredefinedTextsModel("Call to action!"))
-        if (type=="photo"){
-            binding.addPhoto.visibility=View.VISIBLE
-            binding.addVideo.visibility=View.GONE}
-        else if (type=="video"){
-            binding.addPhoto.visibility=View.GONE
-            binding.addVideo.visibility=View.VISIBLE}
+        if (type == "photo") {
+            binding.addPhoto.visibility = View.VISIBLE
+            binding.addVideo.visibility = View.GONE
+        } else if (type == "video") {
+            binding.addPhoto.visibility = View.GONE
+            binding.addVideo.visibility = View.VISIBLE
+        }
         adapter = PredefinedTextsAdapter(requireContext(), predefinedTextsList, this)
 
         binding.rvPredefinedTexts.adapter = adapter
 
-        binding.addPhoto.setOnClickListener {   if (
-    ContextCompat.checkSelfPermission(
-        requireActivity(),
-        Manifest.permission.CAMERA
-    ) != PackageManager.PERMISSION_GRANTED
-) {
-    ActivityCompat.requestPermissions(
-        requireActivity(),
-        arrayOf(
-            Manifest.permission.CAMERA,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            Manifest.permission.READ_EXTERNAL_STORAGE
-        ),
-        0
-    )
-} else {
-    showPictureDialog()
-} }
+        binding.addPhoto.setOnClickListener {
+            if (
+                ContextCompat.checkSelfPermission(
+                    requireActivity(),
+                    Manifest.permission.CAMERA
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                ActivityCompat.requestPermissions(
+                    requireActivity(),
+                    arrayOf(
+                        Manifest.permission.CAMERA,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.READ_EXTERNAL_STORAGE
+                    ),
+                    0
+                )
+            } else {
+                showPictureDialog()
+            }
+        }
 
         binding.addVideo.setOnClickListener {
             if (ContextCompat.checkSelfPermission(
-                requireActivity()!!,
-                Manifest.permission.CAMERA
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            ActivityCompat.requestPermissions(
-                requireActivity()!!,
-                arrayOf(
-                    Manifest.permission.CAMERA,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                    Manifest.permission.READ_EXTERNAL_STORAGE
-                ), 0)
-        } else { showVideoDialog() }  }
+                    requireActivity(),
+                    Manifest.permission.CAMERA
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                ActivityCompat.requestPermissions(
+                    requireActivity(),
+                    arrayOf(
+                        Manifest.permission.CAMERA,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.READ_EXTERNAL_STORAGE
+                    ), 0
+                )
+            } else {
+                showVideoDialog()
+            }
+        }
 
         binding.createPost.setOnClickListener {
-           if (binding.etPostTitle.text.toString()=="")
-               setError("Enter a title")
-               else    if (binding.etPostDscptn.text.toString()=="")
-                   setError("Enter description")
-           else    if ( type=="photo"&& photopath=="" )
-               setError("add a picture to upload")
-           else    if ( type=="video"&& path=="" )
-               setError("add a video to upload")
-           else{ showDialog()
-               if (binding.createPost.text=="Post") {
-                   if (path != "") {
-                       addEvent("video", File(path),
-                           binding.etPostTitle.text.toString(),
-                           binding.etPostDscptn.text.toString()
-                       )
-                   } else if (photopath != "") {
-                       addEvent("photo", compressedImage!!,//mPhotoFile!!,
-                           binding.etPostTitle.text.toString(),
-                           binding.etPostDscptn.text.toString()
-                       )
-                   }
-               }else if (binding.createPost.text=="Edit") {
-                   if (path != "") {
-                       editPost(feedData!!, File(path),
-                           binding.etPostTitle.text.toString(),
-                           binding.etPostDscptn.text.toString()
-                       )
-                   } else if (photopath != "") {
-                       editPost(feedData!!, mPhotoFile!!,
-                           binding.etPostTitle.text.toString(),
-                           binding.etPostDscptn.text.toString()
-                       )
-                   }
-               }
-       }
-       }
+            if (binding.etPostTitle.text.toString() == "")
+                setError("Enter a title")
+            else if (binding.etPostDscptn.text.toString() == "")
+                setError("Enter description")
+            else if (type == "photo" && photopath == "" && binding.createPost.text == "Post")
+                setError("add a picture to upload")
+            else if (type == "video" && path == "" && binding.createPost.text == "Post")
+                setError("add a video to upload")
+            else if (radius == "Select Radius")
+                setError("Please select a radius")
+            else {
+
+                if (binding.createPost.text == "Post") {
+                    showDialog()
+                    if (path != "") {
+
+                        if (videoFile != null) {
+                            postViewModel.createPost(
+                                requireActivity(),
+                                userPreferences.getuserDetails()?.userRef.toString(),
+                                binding.etPostTitle.text.toString(),
+                                binding.etPostDscptn.text.toString(),
+                                "video",
+                                radius,
+                                videoFile
+                            )
+                        }
+                    } else if (photopath != "") {
+                        postViewModel.createPost(
+                            requireActivity(),
+                            userPreferences.getuserDetails()?.userRef.toString(),
+                            binding.etPostTitle.text.toString(),
+                            binding.etPostDscptn.text.toString(),
+                            "photo",
+                            radius,
+                            compressedImage
+                        )
+
+                    }
+                } else if (binding.createPost.text == "Edit") {
+                    if (feedData?.fileType == "video") {
+//                        if (videoFile != null) {
+                            showDialog()
+                            statsViewModel.editLaws(
+                                requireActivity(),
+                                feedData?.id.toString(),
+                                feedData?.recordType.toString(),
+                                binding.etPostTitle.text.toString(),
+                                binding.etPostDscptn.text.toString(),
+                                feedData?.fileType.toString(),
+                                "",
+                                radius,
+                                videoFile
+                            )
+//                        }
+                    } else if (feedData?.fileType == "photo")  {
+                        showDialog()
+                        statsViewModel.editLaws(
+                            requireActivity(),
+                            feedData?.id.toString(),
+                            feedData?.recordType.toString(),
+                            binding.etPostTitle.text.toString(),
+                            binding.etPostDscptn.text.toString(),
+                            feedData?.fileType.toString(),
+                            "",
+                            radius,
+                            compressedImage
+                        )
+                    }
+                }
+            }
+        }
+    }
+
+    private fun observeViewModel() {
+
+        postViewModel.successful.observe(requireActivity(), androidx.lifecycle.Observer {
+
+            if (it != null) {
+                if (it) {
+                    if (postViewModel.status == "success") {
+                        dismissDialog()
+                        setError(postViewModel.message)
+                        val fragment = FeedFragment()
+                        val transaction: FragmentTransaction =
+                            requireActivity().supportFragmentManager.beginTransaction()
+                        transaction.replace(
+                            R.id.homeTabContainer,
+                            fragment
+                        ) // give your fragment container id in first parameter
+                        transaction.addToBackStack(null).commit()
+
+                    } else {
+                        setError(postViewModel.message)
+
+                    }
+                }
+            } else {
+                setError(postViewModel.message)
+            }
+
+        })
+        statsViewModel.successfulEditLaw.observe(requireActivity(), androidx.lifecycle.Observer {
+
+            if (it != null) {
+                if (it) {
+                    if (statsViewModel.status == "success") {
+                        dismissDialog()
+                        setError(statsViewModel.message)
+                        val fragment = FeedFragment()
+                        val transaction: FragmentTransaction =
+                            requireActivity().supportFragmentManager.beginTransaction()
+                        transaction.replace(
+                            R.id.homeTabContainer,
+                            fragment
+                        ) // give your fragment container id in first parameter
+                        transaction.addToBackStack(null).commit()
+
+                    } else {
+                        setError(statsViewModel.message)
+
+                    }
+                }
+            } else {
+                setError(statsViewModel.message)
+            }
+
+        })
+    }
+
+    private fun setSpinner() {
+        val spinnerAdapter = CustomSpinnerAdapter(
+            requireActivity(),  // Use our custom adapter
+            R.layout.spinner_text, spinnerList
+        )
+
+
+        spinnerAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown)
+        binding.spPetition.adapter = spinnerAdapter
+
+
+        binding.spPetition.onItemSelectedListener = object :
+            AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+            }
+
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                // selectedRole = parent?.getItemAtPosition(position).toString()
+                radius = spinnerList[position]
+            }
+        }
     }
 
     override fun onClick(predefinedTextsModel: PredefinedTextsModel) {
@@ -213,8 +348,8 @@ class CreatePostFragment : BaseFragment(), PredefinedTextsAdapter.PredefinedText
     }
 
     override fun onClick(v: View?) {
-       when (v!!.id){
-          // R.id.create_event->{ } //R.id.add_photo->{ } R.id.add_video->{ }
+        when (v!!.id) {
+
         }
     }
 
@@ -235,30 +370,54 @@ class CreatePostFragment : BaseFragment(), PredefinedTextsAdapter.PredefinedText
         }
         pictureDialog.show()
     }
+
     private fun chooseVideoFromGallery() {
-        if (ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(requireActivity(), arrayOf(
-                Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE), 0)
-        } else { val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Video.Media.EXTERNAL_CONTENT_URI)
+        if (ContextCompat.checkSelfPermission(
+                requireActivity(),
+                Manifest.permission.CAMERA
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(
+                requireActivity(), arrayOf(
+                    Manifest.permission.CAMERA,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    Manifest.permission.READ_EXTERNAL_STORAGE
+                ), 0
+            )
+        } else {
+            val galleryIntent =
+                Intent(Intent.ACTION_PICK, MediaStore.Video.Media.EXTERNAL_CONTENT_URI)
 
             startActivityForResult(galleryIntent, GALLERYVIDEO)
         }
     }
 
     private fun takeVideoFromCamera() {
-        if (ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(
+                requireActivity(),
+                Manifest.permission.CAMERA
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
             ActivityCompat.requestPermissions(
-                requireActivity(), arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE),
-                0)
+                requireActivity(),
+                arrayOf(
+                    Manifest.permission.CAMERA,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    Manifest.permission.READ_EXTERNAL_STORAGE
+                ),
+                0
+            )
         } else {
             val intent = Intent(MediaStore.ACTION_VIDEO_CAPTURE)
-            intent.putExtra("android.intent.extra.durationLimit", 30)
+            intent.putExtra("android.intent.extra.durationLimit", 10)
             intent.putExtra("EXTRA_VIDEO_QUALITY", 0)
             startActivityForResult(intent, CAMERAVIDEO)
         }
     }
+
     private fun showPictureDialog() {
-        val pictureDialog: AlertDialog.Builder = AlertDialog.Builder(requireActivity(), R.style.TimePickerTheme)
+        val pictureDialog: AlertDialog.Builder =
+            AlertDialog.Builder(requireActivity(), R.style.TimePickerTheme)
         pictureDialog.setTitle("Select Action")
         val pictureDialogItems = arrayOf(
             "Select image from gallery",
@@ -299,12 +458,14 @@ class CreatePostFragment : BaseFragment(), PredefinedTextsAdapter.PredefinedText
             }
             if (photoFile != null) {
                 val photoURI = FileProvider.getUriForFile(
-                    requireActivity()!!, "${BuildConfig.APPLICATION_ID}.provider",
+                    requireActivity(), "${BuildConfig.APPLICATION_ID}.provider",
                     photoFile
                 )
                 mPhotoFile = photoFile
-            //    Toast.makeText(requireActivity(), "photoFile is:"+photoFile+" photoURI"+photoURI+" mPhotoFile"+mPhotoFile, Toast.LENGTH_SHORT).show()
-Log.d("checkcamerapic",""+"photoFile is:"+photoFile+" photoURI"+photoURI+" mPhotoFile"+mPhotoFile)
+                Log.d(
+                    "checkcamerapic",
+                    "" + "photoFile is:" + photoFile + " photoURI" + photoURI + " mPhotoFile" + mPhotoFile
+                )
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
                 startActivityForResult(
                     takePictureIntent, TAKE_PHOTO
@@ -320,7 +481,7 @@ Log.d("checkcamerapic",""+"photoFile is:"+photoFile+" photoURI"+photoURI+" mPhot
             SimpleDateFormat("yyyyMMddHHmmss").format(Date())
         val mFileName = "JPEG_" + timeStamp + "_"
         val storageDir =
-            requireActivity()!!.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+            requireActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES)
         return File.createTempFile(mFileName, ".jpg", storageDir)
     }
 
@@ -330,7 +491,7 @@ Log.d("checkcamerapic",""+"photoFile is:"+photoFile+" photoURI"+photoURI+" mPhot
         return try {
             val proj =
                 arrayOf(MediaStore.Images.Media.DATA)
-            cursor = requireActivity()!!.contentResolver.query(contentUri!!, proj, null, null, null)
+            cursor = requireActivity().contentResolver.query(contentUri!!, proj, null, null, null)
             if (BuildConfig.DEBUG && cursor == null) {
                 error("Assertion failed")
             }
@@ -345,14 +506,13 @@ Log.d("checkcamerapic",""+"photoFile is:"+photoFile+" photoURI"+photoURI+" mPhot
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        Toast.makeText(requireActivity(), ""+requestCode+resultCode+"  "+data, Toast.LENGTH_SHORT).show()
 
-        if(data!= null){
+        if (data != null) {
             when (requestCode) {
                 GALLERYVIDEO -> {
                     if (data != null) {
-                        binding.uploadVideo.visibility=View.GONE
-                        binding.viewVideo.visibility=View.VISIBLE
+                        binding.uploadVideo.visibility = View.GONE
+                        binding.viewVideo.visibility = View.VISIBLE
 
                         val contentURI: Uri = data.data!!
                         //val uri = Uri.parse("android.resource://" + getPackageName().toString() + "/" + R.raw.test)
@@ -360,60 +520,16 @@ Log.d("checkcamerapic",""+"photoFile is:"+photoFile+" photoURI"+photoURI+" mPhot
                         binding.viewVideo.start()
                         path = getMediaPath(contentURI)
 
-                        Log.d("path...=  ",path)
-                        val mp: MediaPlayer = MediaPlayer.create(requireActivity()!!, Uri.fromFile(File(path)))
-                        val duration: Int = mp.duration
-                        mp.release()
-                        if (duration / 10000 > 10) {
-
-                            showPopUp()
-                        } else {
-                            videoFile = saveVideoFile(path)
-//                            compressVideo(path, videoFile)
-
-
-                            ////////////////
-                            Log.e("saved video file",videoFile.toString())
-                            videoFile = File(getRealPathFromUri(contentURI)!!)
-                            Log.e("get real video file",videoFile.toString())
-
-//                        // Get the Video from data
-
-//                        // Get the Video from data
-//                        val selectedVideo: Uri = data.data!!
-//                        val filePathColumn = arrayOf(MediaStore.Video.Media.DATA)
+//                        Log.d("path...=  ",path)
+//                        val mp: MediaPlayer = MediaPlayer.create(requireActivity(), Uri.fromFile(File(path)))
+//                        val duration: Int = mp.duration
+//                        mp.release()
+//                        if (duration / 10000 > 10) {
 //
-//                        val cursor: Cursor =
-//                            activity?.getContentResolver()?.query(
-//                                selectedVideo,
-//                                filePathColumn,
-//                                null,
-//                                null,
-//                                null
-//                            )!!
-//                        cursor.moveToFirst()
-//
-//                        val columnIndex = cursor.getColumnIndex(filePathColumn[0])
-//
-//                      val  mediaPath1 = cursor.getString(columnIndex)
-//                        videoFile= File(mediaPath1)
-//                        str2.setText(mediaPath1)
-//                        // Set the Video Thumb in ImageView Previewing the Media
-//                        // Set the Video Thumb in ImageView Previewing the Media
-//                        imgView.setImageBitmap(
-//                            getThumbnailPathForLocalFile(
-//                                this@MainActivity,
-//                                selectedVideo
-//                            )
-//                        )
-//                        cursor.close() /////////////////////////////////////
-
-//                        saveVideoToInternalStorage(selectedVideoPath)
-//                        addVideo.visibility = View.VISIBLE
-//                        addVideoImage.visibility = View.GONE
-//                        addVideo.setVideoPath(selectedVideoPath);
-//                        addVideo.start();
-                        }
+//                            showPopUp()
+//                        } else {
+                        videoFile = saveVideoFile(path)
+                        compressVideo(path, videoFile)
 
                     }
                 }
@@ -422,43 +538,36 @@ Log.d("checkcamerapic",""+"photoFile is:"+photoFile+" photoURI"+photoURI+" mPhot
                     if (data != null) {
                         val contentURI: Uri = data.data!!
                         path = getMediaPath(contentURI)
-                        Log.d("path...=  ",path)
-                        binding.uploadVideo.visibility=View.GONE
-                        binding.viewVideo.visibility=View.VISIBLE
-//                    addVideo.visibility = View.VISIBLE
-//                    addVideoImage.visibility = View.GONE
-//                    addVideo.setVideoPath(path);
-//                    addVideo.start();
+                        Log.d("path...=  ", path)
+                        binding.uploadVideo.visibility = View.GONE
+                        binding.viewVideo.visibility = View.VISIBLE
+
                         binding.viewVideo.setVideoURI(contentURI)
                         binding.viewVideo.start()
                         videoFile = saveVideoFile(path)
-                      //  path= videoFile.toString()
+                        compressVideo(path, videoFile)
+                        //  path= videoFile.toString()
 //                        compressVideo(path, videoFile)
-                        Log.d("videoFilepath...=  ",videoFile.toString())
+                        Log.d("videoFilepath...=  ", videoFile.toString())
                     }
                 }
                 REQUEST_GALLERY_PHOTO -> {
-                    val selectedImage = data!!.data
+                    val selectedImage = data.data
                     try {
-
                         mPhotoFile = File(getRealPathFromUri(selectedImage)!!)
-
-                        photopath=mPhotoFile.toString()
+                        photopath = mPhotoFile.toString()
                         compressImage(mPhotoFile!!)
-                        //Glide.with(this).load(mPhotoFile).into(addCoverPhoto)
+                      Glide.with(this).load(mPhotoFile).into(binding.uploadPhoto)
 
                     } catch (e: IOException) {
                         e.printStackTrace()
                     }
                 }
 
-//             TAKE_PHOTO -> {
-//
-//
-//                }
+
             }
         }
-        if (requestCode== TAKE_PHOTO && resultCode== AppCompatActivity.RESULT_OK){
+        if (requestCode == TAKE_PHOTO && resultCode == AppCompatActivity.RESULT_OK) {
             binding.uploadPhoto.setImageURI(Uri.parse(mPhotoFile.toString()))
 
 
@@ -466,19 +575,18 @@ Log.d("checkcamerapic",""+"photoFile is:"+photoFile+" photoURI"+photoURI+" mPhot
 
 //                mPhotoFile = File(getRealPathFromUri(Uri.parse(mPhotoFile.toString()))!!)
 
-                photopath=mPhotoFile.toString()
+                photopath = mPhotoFile.toString()
                 compressImage(mPhotoFile!!)
 
             } catch (e: IOException) {
                 e.printStackTrace()
             }
-
-
             compressImage(mPhotoFile!!)
 
             Glide.with(this).load(mPhotoFile).into(binding.uploadPhoto)
         }
     }
+
     private fun showPopUp() {
         val builder =
             androidx.appcompat.app.AlertDialog.Builder(requireActivity())
@@ -497,6 +605,7 @@ Log.d("checkcamerapic",""+"photoFile is:"+photoFile+" photoURI"+photoURI+" mPhot
         }
         builder.show()
     }
+
     private fun compressImage(photoFile: File) {
 
         Log.e("komal", "old file ${photoFile.length()}")
@@ -505,71 +614,67 @@ Log.d("checkcamerapic",""+"photoFile is:"+photoFile+" photoURI"+photoURI+" mPhot
             this.lifecycleScope.launch {
                 // Default compression
                 compressedImage = Compressor.compress(requireActivity(), imageFile)
-
-//                alertDialog?.show()
-               // showDialog()
                 Glide.with(requireActivity()).load(compressedImage).into(binding.uploadPhoto)
-//                alertDialog?.dismiss()
-                //dismissDialog()
+
                 Log.e("komal", "new file ${compressedImage!!.length()}")
 
             }
         }
 
     }
-//    private fun compressVideo(path: String, videoFile: File?) {
-//        videoFile?.let {
-//            VideoCompressor.start(path, videoFile.path,
-//                object : CompressionListener {
-//                    override fun onProgress(percent: Float) {
-//                        //Update UI
-//                        if (percent <= 100 && percent.toInt() % 5 == 0)
-//                            activity!!.runOnUiThread {
-//
-////                                progressBar.progress = percent.toInt()
-//                            }
-//                    }
-//
-//                    override fun onStart() {
-//
-//
-////                        progressBar.visibility = View.VISIBLE
-////                        progressBar.progress = 0
-//                    }
-//
-//                    override fun onSuccess() {
-//
-//
-//                        Looper.myLooper()?.let {
-//
-//                            Looper.myLooper()?.let {
-//                                Handler(it).postDelayed({
-////                                    progressBar.visibility = View.GONE
-//                                }, 50)
-//                            }
-//                        }
-//
-////                        addVideo.visibility = View.VISIBLE
-////                        add_pic.visibility = View.GONE
-////                        addVideo.setVideoPath(path)
-////                        addVideo.start();
-//                    }
-//
-//                    override fun onFailure(failureMessage: String) {
-//                        Log.wtf("failureMessage", failureMessage)
-//                    }
-//
-//                    override fun onCancelled() {
-//                        Log.wtf("TAG", "compression has been cancelled")
-//                        // make UI changes, cleanup, etc
-//                    }
-//                },
-//                VideoQuality.MEDIUM,
-//                isMinBitRateEnabled = true,
-//                keepOriginalResolution = false
-//            )
-//        }
-//    }
+
+    private fun compressVideo(path: String, videoFile: File?) {
+        videoFile?.let {
+            VideoCompressor.start(
+                path, videoFile.path,
+                object : CompressionListener {
+                    override fun onProgress(percent: Float) {
+                        //Update UI
+                        if (percent <= 100 && percent.toInt() % 5 == 0)
+                            activity!!.runOnUiThread {
+
+                                binding.progressBar.progress = percent.toInt()
+                            }
+                    }
+
+                    override fun onStart() {
+                        binding.progressBar.visibility = View.VISIBLE
+                        binding.progressBar.progress = 0
+                    }
+
+                    override fun onSuccess() {
+
+                        Looper.myLooper()?.let {
+
+                            Looper.myLooper()?.let {
+                                Handler(it).postDelayed({
+                                    binding.progressBar.visibility = View.GONE
+                                }, 50)
+                            }
+                        }
+
+//                        addVideo.visibility = View.VISIBLE
+//                        add_pic.visibility = View.GONE
+//                        addVideo.setVideoPath(path)
+//                        addVideo.start();
+                    }
+
+                    override fun onFailure(failureMessage: String) {
+                        Log.wtf("failureMessage", failureMessage)
+                    }
+
+                    override fun onCancelled() {
+                        Log.wtf("TAG", "compression has been cancelled")
+                        // make UI changes, cleanup, etc
+                    }
+                },
+                VideoQuality.MEDIUM,
+                isMinBitRateEnabled = true,
+                keepOriginalResolution = false
+            )
+        }
+    }
+
     private fun saveVideoFile(filePath: String?): File? {
         filePath?.let {
             val videoFile = File(filePath)
@@ -591,10 +696,11 @@ Log.d("checkcamerapic",""+"photoFile is:"+photoFile+" photoURI"+photoURI+" mPhot
                 val collection =
                     MediaStore.Video.Media.getContentUri(MediaStore.VOLUME_EXTERNAL_PRIMARY)
 
-                val fileUri = requireActivity().applicationContext.contentResolver.insert(collection, values)
+                val fileUri =
+                    requireActivity().applicationContext.contentResolver.insert(collection, values)
 
                 fileUri?.let {
-                   requireActivity().application.contentResolver.openFileDescriptor(fileUri, "rw")
+                    requireActivity().application.contentResolver.openFileDescriptor(fileUri, "rw")
                         .use { descriptor ->
                             descriptor?.let {
                                 FileOutputStream(descriptor.fileDescriptor).use { out ->
@@ -612,7 +718,12 @@ Log.d("checkcamerapic",""+"photoFile is:"+photoFile+" photoURI"+photoURI+" mPhot
 
                     values.clear()
                     values.put(MediaStore.Video.Media.IS_PENDING, 0)
-                   requireActivity().applicationContext.contentResolver.update(fileUri, values, null, null)
+                    requireActivity().applicationContext.contentResolver.update(
+                        fileUri,
+                        values,
+                        null,
+                        null
+                    )
 
                     return File(getMediaPath(fileUri))
                 }
@@ -660,120 +771,19 @@ Log.d("checkcamerapic",""+"photoFile is:"+photoFile+" photoURI"+photoURI+" mPhot
                     FileOutputStream(file).use { outputStream ->
                         val buf = ByteArray(4096)
                         var len: Int
-                        while (inputStream.read(buf).also { len = it } > 0) outputStream.write(buf, 0, len)
+                        while (inputStream.read(buf).also { len = it } > 0) outputStream.write(
+                            buf,
+                            0,
+                            len
+                        )
                     }
                 }
                 return file.absolutePath
             }
-        } finally { cursor?.close() }
-    }
-
-    fun addEvent(type:String,mediaFile: File,title:String,desc:String){
-
-        val charset = "UTF-8"
-      //  val uploadFile1 = File(mediaFile)
-        val uploadFile2 = File("e:/Test/PIC2.JPG")
-        val requestURL = "https://bdztl.com/onov/api/v1/createPost"
-showDialog()
-        try {
-
-            thread {
-
-                requireActivity().runOnUiThread {
-
-            //    }
-
-                val multipart = MultipartUtility(requestURL, charset)
-                multipart.addFormField("userRef", userPreferences.getUserREf())
-                multipart.addFormField("title", title)
-                multipart.addFormField("description", desc)
-                multipart.addFormField("fileType", type)
-                multipart.addFilePart("mediaFile", mediaFile)
-                Log.e("mediaFilepath...=  ",mediaFile.toString())
-                //   cretePostViewModel.addFilePart("fileUpload", uploadFile2)
-                //  val response: List<String> = multipart.finish() as List<String>
-                val response: String = multipart.finish()
-                println("SERVER REPLIED:")
-                // dismissDialog()
-                val gson = Gson() // Or use new GsonBuilder().create();
-
-                data = gson.fromJson(response, EventModel::class.java)
-                if (data!=null) {
-                    setError(data?.msg.toString())
-                    dismissDialog()
-                    if (data.status=="success"){
-                        val fragment = FeedFragment()
-                        val transaction: FragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
-                        transaction.replace(R.id.homeTabContainer, fragment) // give your fragment container id in first parameter
-                        transaction.addToBackStack(null).commit()
-                    }
-                    Handler(Looper.getMainLooper()).postDelayed({
-                        /// finish()
-                    }, 2000)
-                }
-
-            }}
-
-
-        } catch (ex: IOException) {
-            System.err.println(ex)
+        } finally {
+            cursor?.close()
         }
-
-
     }
-    fun editPost(data:FeedsData,mediaFile: File,title:String,desc:String){
-
-        val charset = "UTF-8"
-      //  val uploadFile1 = File(mediaFile)
-        val uploadFile2 = File("e:/Test/PIC2.JPG")
-        val requestURL = "https://bdztl.com/onov/api/v1/editFeed"
-showDialog()
-        try {
-
-
-            thread {
-                val multipart = MultipartUtility(requestURL, charset)
-
-                multipart.addFormField("recordId",data.id)
-                multipart.addFormField("recordType", data.recordType)
-                multipart.addFormField("title", title)
-                multipart.addFormField("description", desc)
-                multipart.addFormField("fileType", data.fileType)
-                multipart.addFormField("donationGoal", null)
-                multipart.addFilePart("mediaFile", mediaFile)
-                Log.e("mediaFilepath...=  ",mediaFile.toString())
-                //   cretePostViewModel.addFilePart("fileUpload", uploadFile2)
-                //  val response: List<String> = multipart.finish() as List<String>
-                val response: String = multipart.finish()
-                println("SERVER REPLIED:")
-                // dismissDialog()
-                val gson = Gson() // Or use new GsonBuilder().create();
-
-                data1 = gson.fromJson(response, EventModel::class.java)
-                if (data!=null) {
-                    setError(data1.msg)
-                    dismissDialog()
-                    if (data1.status=="success"){
-                        val fragment = FeedFragment()
-                        val transaction: FragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
-                        transaction.replace(R.id.homeTabContainer, fragment) // give your fragment container id in first parameter
-                        transaction.addToBackStack(null).commit()
-                    }
-                    Handler(Looper.getMainLooper()).postDelayed({
-                        /// finish()
-                    }, 2000)
-                }
-
-            }
-
-
-        } catch (ex: IOException) {
-            System.err.println(ex)
-        }
-
-
-    }
-
 
 
 }

@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.application.onovapplication.R
 import com.application.onovapplication.databinding.RvEventAttendeesBinding
-import com.application.onovapplication.model.AttendeeData
 import com.application.onovapplication.model.JoinerData
 import com.application.onovapplication.repository.BaseUrl
 import com.bumptech.glide.Glide
@@ -27,9 +26,11 @@ class DebateJoineeAdapter (val context: Context, val attendees:List<JoinerData>,
     }
 
     override fun onBindViewHolder(holder: RVHolder, position: Int) {
+
+            holder.binding.btnText.text=attendees[position].requestStatus
         holder.bind(attendees[position])
 if (page=="dbdt"){
-    holder.binding.btnText.visibility=View.GONE
+    holder.binding.btnText.visibility=View.VISIBLE
     holder.binding.btnVote.visibility=View.GONE
 }
 holder.binding.btnVote.setOnClickListener {

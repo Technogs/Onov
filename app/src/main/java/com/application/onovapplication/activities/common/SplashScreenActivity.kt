@@ -8,6 +8,7 @@ import android.util.Log
 import android.widget.Toast
 import com.application.onovapplication.R
 import com.application.onovapplication.prefs.PreferenceManager
+import com.application.onovapplication.utils.Constants
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
 import com.google.android.gms.tasks.OnCompleteListener
@@ -22,6 +23,20 @@ class SplashScreenActivity : BaseAppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
+
+
+        val bundle = intent.extras
+        if (bundle != null) {
+            //bundle must contain all info sent in "data" field of the notification
+
+            Log.e("fsdfsdfsdf",bundle.get(Constants.USER_ID).toString())
+
+        }
+
+
+
+
+
         Log.d("Firebase", "token "+ FirebaseInstanceId.getInstance().getToken());
         FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(this@SplashScreenActivity,
             OnSuccessListener<Any> { instanceIdResult ->
@@ -78,7 +93,6 @@ class SplashScreenActivity : BaseAppCompatActivity() {
                     userPreferences.saveUserToken(msg.toString())
 //                Toast.makeText(this, userPreferences.getUserToken(), Toast.LENGTH_SHORT).show()
 
-                    //   Toast.makeText(baseContext, msg, Toast.LENGTH_LONG).show()
                 }) }
 
 

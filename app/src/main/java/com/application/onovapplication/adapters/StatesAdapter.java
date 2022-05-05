@@ -11,10 +11,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 
-import com.application.onovapplication.model.statesData;
-
-import java.util.List;
-
 public class StatesAdapter extends ArrayAdapter<String> {
     private static final int ITEM_HEIGHT = ViewGroup.LayoutParams.WRAP_CONTENT;
     private final int textViewResourceId;

@@ -5,6 +5,7 @@
     android:layout_marginStart="10dp"
     android:layout_marginTop="10dp"
     android:layout_marginEnd="10dp"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -15,7 +16,6 @@
         android:paddingStart="4dp"
         android:paddingEnd="4dp"
         android:layout_height="wrap_content">
-
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/ivChatProfile"
@@ -39,7 +39,6 @@
                 android:layout_marginStart="-24dp"
                 android:layout_marginTop="48dp"
                 android:paddingHorizontal="@dimen/_3sdp"
-
                 android:background="@drawable/drawable_green_circle"
                 android:visibility="gone" />
 
@@ -80,8 +79,25 @@
                 android:text="5 Jan, 3:45pm"
                 android:textColor="@color/navigation_color" />
 
+            <TextView
+                android:id="@+id/count"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_below="@+id/tvChatDate"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginRight="@dimen/_14sdp"
+                android:background="@drawable/circle_white"
+                android:backgroundTint="@color/red"
+                android:fontFamily="@font/poppins_regular"
+                android:gravity="center"
+                android:textColor="@color/white">
 
-        </RelativeLayout>   </RelativeLayout>
+            </TextView>
+
+
+        </RelativeLayout>
+    </RelativeLayout>
 
 
 </LinearLayout>

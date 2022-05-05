@@ -2,12 +2,10 @@ package com.application.onovapplication.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.application.onovapplication.R
-import com.application.onovapplication.databinding.RvDebateRequestsBinding
 import com.application.onovapplication.databinding.RvDonationsBinding
+import com.application.onovapplication.extensions.convertDateFormat
 import com.application.onovapplication.model.ReceivedList
 
 class DonationsAdapter (val context: Context,val type: String,val donorlist:List<ReceivedList>)
@@ -40,7 +38,11 @@ fun bind(dataitem:ReceivedList){
 
     }
     binding.donationAmount.text=dataitem.amount
-    binding.donationDate.text=dataitem.created_at
+    binding.donationDate.text=convertDateFormat(
+        dataitem.created_at,
+        "yyyy-MM-dd hh:mm:ss",
+        "MMM dd, hh:mm a"
+    ).trim()
 
 
 }

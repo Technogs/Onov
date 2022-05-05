@@ -36,7 +36,6 @@ class CommentActivity : BaseAppCompatActivity(), View.OnClickListener,
     var id: String? = ""
     var count: Int? = 5
     var rply: String? = ""
-    //var debatesAdapter: CommentsAdapter? = null
 
     var commentList = arrayListOf<CommentData>()
     private val debatesAdapter: CommentsAdapter by lazy {
@@ -50,34 +49,68 @@ class CommentActivity : BaseAppCompatActivity(), View.OnClickListener,
         binding = ActivityCommentBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-       // setContentView(R.layout.activity_comment)
+
         feeds = intent.getParcelableExtra("feeds")
         dataevent = intent.getParcelableExtra("event")
         Log.d("datajhjhhfh", "feeds  " + feeds + "  feeds  " + dataevent)
 
-        binding.rvComment.adapter= debatesAdapter
+        binding.rvComment.adapter = debatesAdapter
 
         if (feeds == null) {
             id = dataevent?.id.toString()
             binding.userName.text = "Event"
 
-            homeViewModel.getComment(this, id.toString(), "event", userPreferences.getuserDetails()?.userRef.toString(),"")
-        } else  {
+            homeViewModel.getComment(
+                this,
+                id.toString(),
+                "event",
+                userPreferences.getuserDetails()?.userRef.toString(),
+                ""
+            )
+        } else {
             id = feeds?.id.toString()
             binding.userName.text = feeds?.recordType
             if (feeds?.recordType == "post")
-                homeViewModel.getComment(this,feeds?.id.toString() , "post", userPreferences.getuserDetails()?.userRef.toString(),"")
+                homeViewModel.getComment(
+                    this,
+                    feeds?.id.toString(),
+                    "post",
+                    userPreferences.getuserDetails()?.userRef.toString(),
+                    ""
+                )
             else if (feeds?.recordType == "petition")
-                homeViewModel.getComment(this, feeds?.id.toString(), "petition",userPreferences.getuserDetails()?.userRef.toString(), "")
+                homeViewModel.getComment(
+                    this,
+                    feeds?.id.toString(),
+                    "petition",
+                    userPreferences.getuserDetails()?.userRef.toString(),
+                    ""
+                )
             else if (feeds?.recordType == "donationRequest")
-                homeViewModel.getComment(this, feeds?.id.toString(), "donationRequest", userPreferences.getuserDetails()?.userRef.toString(),"")
+                homeViewModel.getComment(
+                    this,
+                    feeds?.id.toString(),
+                    "donationRequest",
+                    userPreferences.getuserDetails()?.userRef.toString(),
+                    ""
+                )
+            else if (feeds?.recordType == "polling")
+                homeViewModel.getComment(
+                    this,
+                    feeds?.id.toString(),
+                    "polling",
+                    userPreferences.getuserDetails()?.userRef.toString(),
+                    ""
+                )
             else if (feeds?.recordType == "law")
-                homeViewModel.getComment(this, feeds?.id.toString(), "law", userPreferences.getuserDetails()?.userRef.toString(),"")
+                homeViewModel.getComment(
+                    this,
+                    feeds?.id.toString(),
+                    "law",
+                    userPreferences.getuserDetails()?.userRef.toString(),
+                    ""
+                )
         }
-
-
-
-
 
 
         observeViewModel()
@@ -88,9 +121,10 @@ class CommentActivity : BaseAppCompatActivity(), View.OnClickListener,
             R.id.send_cmnt -> {
                 if (binding.etCommentBox.text.isNullOrEmpty()) setError("Please add a comment")
                 else {
-                 id=   if (feeds?.isShared=="1") feeds?.id else feeds?.id
-                    rply=""
+                    id = if (feeds?.isShared == "1") feeds?.id else feeds?.id
+                    rply = ""
                     if (feeds != null) {
+                        id = feeds?.id
                         if (feeds?.recordType == "post")
                             homeViewModel.addComment(
                                 this,
@@ -114,7 +148,15 @@ class CommentActivity : BaseAppCompatActivity(), View.OnClickListener,
                                 id.toString(),
                                 "donationRequest",
                                 binding.etCommentBox.text.toString(), ""
-                            )  else if (feeds?.recordType == "law")
+                            ) else if (feeds?.recordType == "polling")
+                            homeViewModel.addComment(
+                                this,
+                                userPreferences.getuserDetails()?.userRef.toString(),
+                                id.toString(),
+                                "polling",
+                                binding.etCommentBox.text.toString(), ""
+                            )
+                        else if (feeds?.recordType == "law")
                             homeViewModel.addComment(
                                 this,
                                 userPreferences.getuserDetails()?.userRef.toString(),
@@ -122,14 +164,15 @@ class CommentActivity : BaseAppCompatActivity(), View.OnClickListener,
                                 "law",
                                 binding.etCommentBox.text.toString(), ""
                             )
-                    } else homeViewModel.addComment(
-                        this,
-                        userPreferences.getuserDetails()?.userRef.toString(),
-                        id.toString(), "event",
-                        binding.etCommentBox.text.toString(), ""
-                    )
-
-
+                    } else {
+                        id = dataevent?.id
+                        homeViewModel.addComment(
+                            this,
+                            userPreferences.getuserDetails()?.userRef.toString(),
+                            id.toString(), "event",
+                            binding.etCommentBox.text.toString(), ""
+                        )
+                    }
 
                     binding.etCommentBox.setText("")
                 }
@@ -142,12 +185,11 @@ class CommentActivity : BaseAppCompatActivity(), View.OnClickListener,
         homeViewModel.successfulCommentGet.observe(this, androidx.lifecycle.Observer {
             dismissDialog()
 
-
             if (it != null) {
                 if (it) {
                     if (homeViewModel.status == "success") {
                         if (rply == "") {
-
+                            rcView?.visibility = View.GONE
                             if (!commentList.isNullOrEmpty())
                                 commentList.clear()
 
@@ -155,7 +197,7 @@ class CommentActivity : BaseAppCompatActivity(), View.OnClickListener,
                             debatesAdapter.notifyDataSetChanged()
 
 
-                        } else if (rply=="reply"){
+                        } else if (rply == "reply") {
                             replyAdapter =
                                 ReplyAdapter(this, homeViewModel.cmntResponse.commentData)
                             rcView?.adapter = replyAdapter
@@ -179,39 +221,54 @@ class CommentActivity : BaseAppCompatActivity(), View.OnClickListener,
                 if (it) {
                     if (homeViewModel.status == "success") {
                         setError(homeViewModel.message)
-id=feeds?.id.toString()
-                            if (feeds != null) {
-                                if (feeds?.recordType == "post")
-                                    homeViewModel.getComment(
-                                        this,
-                                        id.toString(),
-                                        "post",
-                                        userPreferences.getuserDetails()?.userRef.toString(),
-                                        ""
-                                    )
-                                else if (feeds?.recordType == "petition")
-                                    homeViewModel.getComment(
-                                        this,
-                                        id.toString(),
-                                        "petition",
-                                        userPreferences.getuserDetails()?.userRef.toString(),
-                                        ""
-                                    )
-                                else if (feeds?.recordType == "donationRequest")
-                                    homeViewModel.getComment(
-                                        this,
-                                        id.toString(),
-                                        "donationRequest",
-                                        userPreferences.getuserDetails()?.userRef.toString(),
-                                        ""
-                                    )
-                            } else homeViewModel.getComment(
+                        if (rply == "reply") {
+                            cmtdata?.replyCount = (cmtdata?.replyCount?.toInt()?.plus(1)).toString()
+                            debatesAdapter.notifyDataSetChanged()
+                        }
+
+                        if (feeds != null) {
+                            id = feeds?.id.toString()
+                            if (feeds?.recordType == "post")
+                                homeViewModel.getComment(
+                                    this,
+                                    id.toString(),
+                                    "post",
+                                    userPreferences.getuserDetails()?.userRef.toString(),
+                                    ""
+                                )
+                            else if (feeds?.recordType == "petition")
+                                homeViewModel.getComment(
+                                    this,
+                                    id.toString(),
+                                    "petition",
+                                    userPreferences.getuserDetails()?.userRef.toString(),
+                                    ""
+                                )
+                            else if (feeds?.recordType == "donationRequest")
+                                homeViewModel.getComment(
+                                    this,
+                                    id.toString(),
+                                    "donationRequest",
+                                    userPreferences.getuserDetails()?.userRef.toString(),
+                                    ""
+                                ) else if (feeds?.recordType == "polling")
+                                homeViewModel.getComment(
+                                    this,
+                                    id.toString(),
+                                    "polling",
+                                    userPreferences.getuserDetails()?.userRef.toString(),
+                                    ""
+                                )
+                        } else {
+                            id = dataevent?.id
+                            homeViewModel.getComment(
                                 this,
                                 id.toString(),
                                 "event",
                                 userPreferences.getuserDetails()?.userRef.toString(),
                                 ""
                             )
+                        }
 
 
                     } else {
@@ -230,12 +287,6 @@ id=feeds?.id.toString()
             if (it != null) {
                 if (it) {
                     if (homeViewModel.status == "success") {
-                    //    setError(homeViewModel.message)
-//                        cmtdata?.like=  if (homeViewModel.message == "Liked successfully")
-//                           true else false
-//                        cmtdata?.dislike=  if (homeViewModel.message == "Disliked successfully")
-//                           true else false
-//                       // if (count==1)
 
                         if (homeViewModel.message == "Disliked successfully") {
                             cmtdata?.dislike = true
@@ -276,33 +327,55 @@ id=feeds?.id.toString()
     }
 
 
-
     override fun OnClickReplyPost(
         replyLyt: RelativeLayout,
         replyMsg: EditText,
         commentData: CommentData
     ) {
-        cmtdata=commentData
-        replyLyt.visibility=View.GONE
-rply="reply"
+        cmtdata = commentData
+        replyLyt.visibility = View.GONE
+        rply = "reply"
         showDialog()
-        homeViewModel.addComment(
-            this,
-            userPreferences.getuserDetails()?.userRef.toString(),
-            feeds?.recordId.toString(),
-            "reply",
-            replyMsg.text.toString(), commentData.id
-        )
+        if (feeds != null) {
+            homeViewModel.addComment(
+                this,
+                userPreferences.getuserDetails()?.userRef.toString(),
+                feeds?.recordId.toString(),
+                "reply",
+                replyMsg.text.toString(), commentData.id
+            )
+        } else {
+            homeViewModel.addComment(
+                this,
+                userPreferences.getuserDetails()?.userRef.toString(),
+                dataevent?.id.toString(),
+                "reply",
+                replyMsg.text.toString(), commentData.id
+            )
+        }
         replyMsg.setText("")
-//        if (rcView!=null && rcView!!.isVisible)
-//            rcView!!.visibility=View.GONE
+
     }
 
     override fun OnViewReplyClick(rview: RecyclerView, commentData: CommentData) {
-        cmtdata=commentData
+        cmtdata = commentData
         rply = "reply"
         showDialog()
-        homeViewModel.getComment(this, feeds!!.recordId.toString(), "reply", userPreferences.getuserDetails()?.userRef.toString(),commentData.id)
+        if (feeds != null)
+            homeViewModel.getComment(
+                this,
+                feeds!!.recordId.toString(),
+                "reply",
+                userPreferences.getuserDetails()?.userRef.toString(),
+                commentData.id
+            )
+        else homeViewModel.getComment(
+            this,
+            dataevent!!.id.toString(),
+            "reply",
+            userPreferences.getuserDetails()?.userRef.toString(),
+            commentData.id
+        )
 
         rview.visibility = View.VISIBLE
         rcView = rview
@@ -311,31 +384,33 @@ rply="reply"
     }
 
     override fun OnLikeClick(likeText: ImageView, commentData: CommentData) {
-        cmtdata=commentData
-        if (commentData.Liked=="0") {
-            homeViewModel.commentlike(this,
+        cmtdata = commentData
+        if (commentData.Liked == "0") {
+            homeViewModel.commentlike(
+                this,
                 userPreferences.getuserDetails()?.userRef.toString(), commentData.id, "reply", "1"
             )
 
-            count=1
+            count = 1
 
         }
     }
 
     override fun OnDisLikeClick(likeText: ImageView, commentData: CommentData) {
-        cmtdata=commentData
-        if (commentData.Liked=="1") {
-            homeViewModel.commentlike(this,
+        cmtdata = commentData
+        if (commentData.Liked == "1") {
+            homeViewModel.commentlike(
+                this,
                 userPreferences.getuserDetails()?.userRef.toString(),
                 commentData.id, "reply", "0"
             )
-            count=0
-//            likeText.setTextColor(resources.getColor(R.color.black))
+            count = 0
         }
     }
 
     override fun onBackPressed() {
+
+        startActivity(Intent(this, HomeTabActivity::class.java))
         super.onBackPressed()
-        startActivity(Intent(this,HomeTabActivity::class.java))
     }
 }

@@ -25,11 +25,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Event Title"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
         android:id="@+id/event_title"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="@dimen/_10sdp"
         android:fontFamily="@font/poppins_medium"
-        android:textSize="18sp"
+        android:textSize="@dimen/_14ssp"
         android:textColor="@color/black"
         />
 
@@ -38,7 +39,16 @@
         android:layout_height="200dp"
         android:layout_marginTop="10dp"
         android:id="@+id/event_photo"
+        android:onClick="onClick"
+        android:layout_marginHorizontal="@dimen/_11sdp"
+        android:scaleType="centerCrop"
         android:src="@drawable/ic__add" />
+            <com.google.android.exoplayer2.ui.SimpleExoPlayerView
+                android:id="@+id/idExoPlayerVIew"
+                android:layout_width="match_parent"
+                android:visibility="gone"
+app:resize_mode="fill"
+                android:layout_height="@dimen/_200sdp" />
 
     <TextView
         android:layout_width="wrap_content"

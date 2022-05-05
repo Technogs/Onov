@@ -87,7 +87,7 @@ class StatsViewModel : ViewModel() {
 
     @SuppressLint("CheckResult")
     fun addLaws(
-        context: Context, lawTitle: String, userRef: String, description: String, fileType: String, documentFile: File?
+        context: Context, lawTitle: String, userRef: String, description: String,areaLimit: String, fileType: String, documentFile: File?
     ) {
         var body: MultipartBody.Part? = null
 
@@ -126,10 +126,13 @@ class StatsViewModel : ViewModel() {
         val desc: RequestBody =
             RequestBody.create("multipart/form-data".toMediaTypeOrNull(), description)
 
+        val areaLimit: RequestBody =
+            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), areaLimit)
+
         Log.e("file","file addLaws ")
 
         dataManager.addLaws(
-            userReference, lawTitle, desc, fileType,  body
+            userReference, lawTitle, desc,areaLimit, fileType,  body
         )
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -141,6 +144,7 @@ class StatsViewModel : ViewModel() {
 
                     override fun onNext(t: FeedModel) {
                         Log.e("file","file onNext ")
+                        status=t.status
                         message = t.msg
                         successfulAddLaw.value = true
                     }
@@ -172,7 +176,7 @@ class StatsViewModel : ViewModel() {
 
     @SuppressLint("CheckResult")
     fun editLaws(
-        context: Context, recordId: String, recordType: String, title: String, description: String,fileType: String,donationGoal: String, mediaFile: File?
+        context: Context, recordId: String, recordType: String, title: String, description: String,fileType: String,donationGoal: String,areaLimit: String, mediaFile: File?
     ) {
         var body: MultipartBody.Part? = null
 
@@ -197,11 +201,13 @@ class StatsViewModel : ViewModel() {
             RequestBody.create("multipart/form-data".toMediaTypeOrNull(), fileType)
         val donationGoal: RequestBody =
             RequestBody.create("multipart/form-data".toMediaTypeOrNull(), donationGoal)
+        val areaLimit: RequestBody =
+            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), areaLimit)
 
         Log.e("file","file addLaws ")
 
         dataManager.editFeed(
-            recordId, recordType, title,desc,fileType, donationGoal,  body
+            recordId, recordType, title,desc,fileType, donationGoal,areaLimit,  body
         )
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -213,6 +219,7 @@ class StatsViewModel : ViewModel() {
 
                     override fun onNext(t: FeedModel) {
                         Log.e("file","file onNext ")
+                        status=t.status
                         message = t.msg
                         successfulEditLaw.value = true
                     }

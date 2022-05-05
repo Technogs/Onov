@@ -32,14 +32,15 @@
         android:layout_marginEnd="10dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/drawable_chat_background">
-        <TextView
-            android:layout_width="wrap_content"
-            android:text="@string/total_wins"
-            android:id="@+id/tv_"
-            android:textSize="16sp"
-            android:textColor="@color/black"
-            android:fontFamily="@font/poppins_regular"
-            android:layout_height="wrap_content"/>
+
+          <TextView
+              android:id="@+id/tv_"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:fontFamily="@font/poppins_regular"
+              android:text="@string/total_wins"
+              android:textColor="@color/black"
+              android:textSize="16sp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -47,7 +48,7 @@
             android:textSize="16sp"
             android:layout_toEndOf="@+id/tv_"
             android:layout_marginStart="40dp"
-            android:id="@+id/senderNameDetails"
+            android:id="@+id/totalWin"
             android:textColor="@color/navigation_color"
             android:fontFamily="@font/poppins_medium"
             android:layout_height="wrap_content"/>
@@ -57,7 +58,7 @@
             android:text="@string/total_losses"
             android:id="@+id/tv2"
             android:layout_marginTop="10dp"
-            android:layout_below="@id/senderNameDetails"
+            android:layout_below="@id/totalWin"
             android:textColor="@color/black"
             android:textSize="16sp"
             android:fontFamily="@font/poppins_regular"
@@ -69,8 +70,8 @@
             android:textSize="16sp"
             android:layout_marginTop="10dp"
             android:layout_toEndOf="@+id/tv_"
-            android:id="@+id/petitionTitleDetails"
-            android:layout_below="@+id/senderNameDetails"
+            android:id="@+id/totalLose"
+            android:layout_below="@+id/totalWin"
             android:layout_marginStart="40dp"
             android:textColor="@color/navigation_color"
             android:fontFamily="@font/poppins_medium"
@@ -100,11 +101,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/rl"
+        android:layout_centerHorizontal="true"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
-        android:layout_centerHorizontal="true"
         android:fontFamily="@font/poppins_bold"
-        android:text="@string/views"
+        android:text="Result"
         android:textColor="@color/black"
         android:textSize="18sp" />
 

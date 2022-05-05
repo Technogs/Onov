@@ -8,25 +8,24 @@ android:background="@color/white"
     tools:context=".fragments.FeedFragment">
 
     <TextView
+        android:id="@+id/tvRole"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:text="Role: Citizens"
-        android:textSize="18sp"
-        android:textColor="@color/text_blue"
         android:fontFamily="@font/poppins_bold"
-        android:id="@+id/tvRole"
-        />
+        android:text="Role: Citizens"
+        android:textColor="@color/text_blue"
+        android:textSize="18sp" />
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_marginTop="7dp"
-        android:layout_below="@+id/tvRole"
         android:id="@+id/rv_view_debates"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvRole"
+        android:layout_marginTop="7dp"
         android:layout_marginBottom="10dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:layout_height="wrap_content"/>
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
 
     <TextView
@@ -38,7 +37,7 @@ android:background="@color/white"
         android:visibility="gone"
         android:id="@+id/noDebateData"
         android:layout_centerInParent="true"
-        android:text="@string/no_debates_yet"
+        android:text="@string/no_data_yet"
         />
 
 </RelativeLayout>

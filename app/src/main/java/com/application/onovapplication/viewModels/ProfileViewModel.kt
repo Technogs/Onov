@@ -41,7 +41,8 @@ class ProfileViewModel : ViewModel() {
     @SuppressLint("CheckResult")
     fun getProfile(
         context: Context,
-        userRef: String
+        userRef: String,
+        selfUserRef: String
     ) {
 
 
@@ -49,9 +50,11 @@ class ProfileViewModel : ViewModel() {
             RequestBody.create("multipart/form-data".toMediaTypeOrNull(), userRef)
         val key: RequestBody =
             RequestBody.create("multipart/form-data".toMediaTypeOrNull(), "userRef")
+        val selfUserRef: RequestBody =
+            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), selfUserRef)
 
 
-        dataManager.getProfile(key, value)
+        dataManager.getProfile(key, value, selfUserRef)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeWith(
@@ -154,7 +157,7 @@ class ProfileViewModel : ViewModel() {
 
     @SuppressLint("CheckResult")
     fun editProfile(
-        context: Context, name: String, aboutusr: String, webUrlusr: String, userRef: String, coverPic: File?,
+        context: Context, name: String, aboutusr: String,supporter: String, webUrlusr: String, countryName: String, stateName: String, cityName: String, userRef: String, coverPic: File?,
         photo: File?
     ) {
         var body: MultipartBody.Part? = null
@@ -176,6 +179,8 @@ class ProfileViewModel : ViewModel() {
         }
         val about: RequestBody =
             RequestBody.create("multipart/form-data".toMediaTypeOrNull(), aboutusr)
+        val supporter: RequestBody =
+            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), supporter)
         val userReference: RequestBody =
             RequestBody.create("multipart/form-data".toMediaTypeOrNull(), userRef)
         val userName: RequestBody =
@@ -183,11 +188,15 @@ class ProfileViewModel : ViewModel() {
 
         val webUrl: RequestBody =
             RequestBody.create("multipart/form-data".toMediaTypeOrNull(), webUrlusr)
-//        val coverPhoto: RequestBody =
-//            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), coverPic)
+        val countryName: RequestBody =
+            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), countryName)
+        val stateName: RequestBody =
+            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), stateName)
+        val cityName: RequestBody =
+            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), cityName)
 
         dataManager.editProfile(
-            userName, about, webUrl, userReference,cpbody,  body
+            userName, about,supporter, webUrl, countryName,stateName,cityName,userReference,cpbody,  body
         )
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -199,6 +208,7 @@ class ProfileViewModel : ViewModel() {
 
                     override fun onNext(t: LoginResponse) {
                         updateProfileStatus = t.status!!
+                        status = t.status!!
                         userInfo=t.userInfo
                         if (updateProfileStatus == "success") {
                             photoPath = t.userInfo!!.profilePic!!

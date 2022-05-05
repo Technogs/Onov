@@ -4,9 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.application.onovapplication.R
 import com.application.onovapplication.adapters.NotificationsAdapter
-import com.application.onovapplication.databinding.ActivityLoginBinding
 import com.application.onovapplication.databinding.ActivityNotificationsBinding
 import com.application.onovapplication.model.NotificationList
 import com.application.onovapplication.viewModels.NotificationsViewModel

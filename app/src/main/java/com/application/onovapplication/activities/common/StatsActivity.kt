@@ -45,6 +45,8 @@ class StatsActivity : BaseAppCompatActivity() {
                 if (statsViewModel.status == "success") {
 
                     statsList.addAll(statsViewModel.statsResponse.statsDataList!!)
+                    binding.totalLose.text=statsViewModel.statsResponse.totallose
+                    binding.totalWin.text=statsViewModel.statsResponse.totalWin
                     statsAdapter = StatsAdapter(this,
                         statsViewModel.statsResponse.statsDataList as ArrayList<StatsDataList>
                     )

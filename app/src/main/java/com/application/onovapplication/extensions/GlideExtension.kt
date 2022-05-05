@@ -1,10 +1,22 @@
 package com.application.onovapplication.extensions
 
+import android.app.Dialog
+import android.content.DialogInterface
 import android.net.Uri
+import android.view.KeyEvent
+import android.view.View
+import android.view.Window
+import android.webkit.WebView
 import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.VideoView
 import com.application.onovapplication.R
+import com.application.onovapplication.model.FeedsData
+import com.application.onovapplication.repository.BaseUrl
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.google.android.exoplayer2.ui.AspectRatioFrameLayout
+import com.google.android.exoplayer2.ui.SimpleExoPlayerView
 import java.io.File
 
 fun ImageView.loadImage(url: String) {
@@ -28,3 +40,4 @@ fun ImageView.loadImage(uri: Uri) {
 fun ImageView.loadImage(resource: Int) {
     Glide.with(context).load(resource).diskCacheStrategy(DiskCacheStrategy.AUTOMATIC).into(this)
 }
+

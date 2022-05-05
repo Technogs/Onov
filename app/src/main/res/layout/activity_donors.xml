@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".activities.DonorsActivity">
 
     <include
@@ -11,32 +12,63 @@
         layout="@layout/action_bar_layout_2" />
 
     <TextView
-        android:id="@+id/submit"
+        android:id="@+id/addAllText"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/_40sdp"
         android:layout_below="@+id/ab"
-        android:layout_alignParentEnd="true"
-        android:layout_centerInParent="true"
-        android:layout_marginHorizontal="@dimen/_20sdp"
         android:layout_marginVertical="@dimen/_5sdp"
-        android:background="@drawable/drawable_gradient_button_background"
+        android:layout_marginStart="@dimen/_15sdp"
         android:fontFamily="@font/poppins_bold"
         android:gravity="center"
         android:onClick="onClick"
         android:paddingHorizontal="@dimen/_8sdp"
-        android:paddingVertical="@dimen/_5sdp"
+        android:paddingVertical="@dimen/_2sdp"
+        android:text="Select All"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_14ssp"
+        android:visibility="visible" />
+
+    <CheckBox
+        android:id="@+id/selectAllCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_below="@+id/ab"
+        android:layout_marginVertical="@dimen/_5sdp"
+        android:layout_toRightOf="@+id/addAllText"
+        android:gravity="center"
+        android:visibility="visible"
+        android:onClick="onClick"
+        android:paddingHorizontal="@dimen/_8sdp"
+        android:paddingVertical="@dimen/_2sdp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_14ssp" />
+
+    <TextView
+        android:id="@+id/submit"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_below="@+id/ab"
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:background="@drawable/drawable_gradient_button_background"
+        android:fontFamily="@font/poppins_bold"
+        android:gravity="center"
+        android:onClick="onClick"
+        android:paddingHorizontal="@dimen/_11sdp"
+        android:paddingVertical="@dimen/_2sdp"
         android:text="@string/submit"
         android:textColor="@color/white"
-        android:textSize="@dimen/_14ssp" />
+        android:textSize="@dimen/_12ssp" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_centerInParent="true"
         android:textColor="@color/app_color"
         android:fontFamily="@font/poppins_bold"
         android:textSize="18sp"
-        android:visibility="gone"
         android:id="@+id/noDataLayout"
-        android:text="@string/no_data_yet"
+        android:text="No data found"
         android:layout_height="wrap_content"/>
 
 
@@ -49,4 +81,41 @@
         android:layout_below="@+id/submit"
         tools:listitem="@layout/rv_followers"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_45sdp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/action_sheet_item_bg">
+
+        <EditText
+            android:id="@+id/serchText"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginVertical="@dimen/_5sdp"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_weight="1"
+            android:focusableInTouchMode="true"
+            android:fontFamily="@font/poppins_regular"
+            android:gravity="center"
+            android:hint="Enter name"
+            android:onClick="onClick"
+            android:paddingHorizontal="@dimen/_8sdp"
+            android:paddingVertical="@dimen/_2sdp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_12ssp"
+            android:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/searchBtn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="15dp"
+            android:onClick="onClick"
+            android:src="@drawable/ic_search" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
 </RelativeLayout>

@@ -1,10 +1,10 @@
 package com.application.onovapplication.api
 
-import com.application.onovapplication.model.DebateJoinerResponse
-import com.application.onovapplication.model.PresidentResponse
-import com.application.onovapplication.model.SenateResponse
+import com.application.onovapplication.model.*
+import com.google.gson.JsonObject
 import retrofit2.Call
 import retrofit2.http.*
+import retrofit2.http.POST
 
 interface ApiInterface {
 
@@ -30,7 +30,19 @@ interface ApiInterface {
         @Field("debateId") deviceType: String?
     ): Call<DebateJoinerResponse?>?
 
+    @Headers("X-Api-Key: onovApp@onovapplication.com")
+    @FormUrlEncoded
+    @POST("endDebates")
+    fun endDebates(
+        @Field("debateId") debateId: String?
+    ): Call<EndDebateResponse?>
+
 //    @Headers("X-Api-Key: eL7l0ylsnLmmRE5vlPQEowt1RoAxtPcS5s9RjJAz")
     @GET("page?q=POTUS/")
     fun presidentData(): Call<PresidentResponse?>?
+
+    @Headers(*["Accept: application/json", "Content-Type: application/json"])
+    @POST("cities")
+//    fun postJson(@Body body: String): Call<CitiesResponse?>?
+    fun postJson(@Body body: JsonObject?): Call<CitiesResponse?>?
 }

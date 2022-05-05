@@ -4,13 +4,10 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import com.application.onovapplication.R
 import com.application.onovapplication.databinding.ActionBarLayout2Binding
-import com.application.onovapplication.databinding.ActivityAskDonationsBinding
 import com.application.onovapplication.databinding.ActivityChangePasswordBinding
 import com.application.onovapplication.viewModels.NewPasswordViewModel
 
@@ -28,7 +25,7 @@ class ChangePasswordActivity : BaseAppCompatActivity(), View.OnClickListener {
         val view = binding.root
         setContentView(view)
         val incBinding: ActionBarLayout2Binding =binding.inc
-        incBinding.tvScreenTitle.text = getString(R.string.change_password)
+        incBinding.tvScreenTitle.text = getString(R.string.reset)
 
         observeViewModel()
 
@@ -40,17 +37,25 @@ class ChangePasswordActivity : BaseAppCompatActivity(), View.OnClickListener {
             R.id.btnChangePassword -> {
 
                 when {
-                    binding.edNewCHangedPassword.text.toString().trim().isEmpty() -> {
-                        setError(getString(R.string.new_password_error))
+                    binding.edOldPassword.text.toString().trim().isEmpty() -> {
+                        setError("Enter Old Password")
+                    } binding.edNewPassword.text.toString().trim().isEmpty() -> {
+                        setError("Enter new Password")
                     }
-                    binding.edNewCHangedPassword.text.toString().trim().length < 8 -> {
+                    binding.edNewPassword.text.toString().trim().length < 6 -> {
 
                         setError(getString(R.string.password_length_error))
+                    }
+                    binding.edNewCHangedPassword.text.toString().trim().isEmpty() -> {
+                        setError("Confirm your Password")
+                    }binding.edNewCHangedPassword.text.toString()!=binding.edNewPassword.text.toString()-> {
+
+                        setError("Password Mismatch")
                     }
                     else -> {
                         newPasswordViewModel.changePassword(
                             this,
-                            userPreferences.getUserREf(),
+                            userPreferences.getuserDetails()?.userRef.toString(),
                             binding.edOldPassword.text.toString().trim(),
                             binding.edNewCHangedPassword.text.toString().trim()
                         )

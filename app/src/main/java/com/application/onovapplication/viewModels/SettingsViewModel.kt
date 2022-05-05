@@ -5,8 +5,10 @@ import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.application.onovapplication.R
+import com.application.onovapplication.model.DebateResponse
 import com.application.onovapplication.model.GetSettingsResponse
 import com.application.onovapplication.model.RegisterResponse
+import com.application.onovapplication.model.SocialMediaResponse
 import com.application.onovapplication.repository.service.DataManager
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.observers.DisposableObserver
@@ -23,11 +25,14 @@ class SettingsViewModel : ViewModel() {
     private val dataManager: DataManager = DataManager()
     val successful: MutableLiveData<Boolean> = MutableLiveData()
     val getSettingsSuccess: MutableLiveData<Boolean> = MutableLiveData()
+    val socialAccountSuccess: MutableLiveData<Boolean> = MutableLiveData()
+    val getSocialAccountSuccess: MutableLiveData<Boolean> = MutableLiveData()
     var message: String = ""
     var status: String = ""
     var getSettingsStatus: String = ""
 
     lateinit var getSettingsResponse: GetSettingsResponse
+    lateinit var socialMediaResponse: SocialMediaResponse
 
     @SuppressLint("CheckResult")
     fun saveSettings(
@@ -84,6 +89,65 @@ class SettingsViewModel : ViewModel() {
                 })
     }
 
+
+    @SuppressLint("CheckResult")
+    fun addsocialmedia(
+        context: Context,
+        userRef: String,
+        instagram: String,
+        twitter: String,
+        facebook: String
+    ) {
+
+        val userId: RequestBody =
+            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), userRef)
+
+        val twitter =
+            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), twitter)
+
+        val facebook =
+            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), facebook)
+        val instagram =
+            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), instagram)
+
+        dataManager.addsocialmedia(userId,instagram, twitter, facebook)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeWith(
+                object : DisposableObserver<DebateResponse>() {
+                    override fun onComplete() {
+                    }
+
+                    override fun onNext(t: DebateResponse) {
+                        status = t.status!!
+                        message = t.msg!!
+                        socialAccountSuccess.value = true
+                    }
+
+                    override fun onError(e: Throwable) {
+                        when (e) {
+                            is IOException -> {
+                                message = context
+                                    .getString(R.string.error_please_check_internet)
+                            }
+
+                            is TimeoutException -> {
+                                message = context
+                                    .getString(R.string.error_request_timed_out)
+                            }
+                            is HttpException -> {
+                                message = e.message.toString()
+                            }
+                            else -> {
+                                message = context
+                                    .getString(R.string.error_something_went_wrong)
+                            }
+                        }
+                        socialAccountSuccess.value = false
+                    }
+                })
+    }
+
     @SuppressLint("CheckResult")
     fun getSettings(
         context: Context,
@@ -132,7 +196,61 @@ class SettingsViewModel : ViewModel() {
                                     .getString(R.string.error_something_went_wrong)
                             }
                         }
-                        successful.value = false
+                        getSettingsSuccess.value = false
+                    }
+                })
+    }
+
+
+    @SuppressLint("CheckResult")
+    fun getsocialaccount(
+        context: Context,
+        userId: String
+    ) {
+
+
+        val userRef: RequestBody =
+
+            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), userId)
+
+
+        dataManager.getsocialaccount(userRef)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeWith(
+                object : DisposableObserver<SocialMediaResponse>() {
+                    override fun onComplete() {
+
+                    }
+
+                    override fun onNext(t: SocialMediaResponse) {
+                        socialMediaResponse = t
+                        status = t.status
+                        message = t.msg
+                        getSocialAccountSuccess.value = true
+                    }
+
+                    override fun onError(e: Throwable) {
+
+                        when (e) {
+                            is IOException -> {
+                                message = context
+                                    .getString(R.string.error_please_check_internet)
+                            }
+                            is TimeoutException -> {
+                                message = context
+                                    .getString(R.string.error_request_timed_out)
+                            }
+
+                            is HttpException -> {
+                                message = e.message.toString()
+                            }
+                            else -> {
+                                message = context
+                                    .getString(R.string.error_something_went_wrong)
+                            }
+                        }
+                        getSocialAccountSuccess.value = false
                     }
                 })
     }

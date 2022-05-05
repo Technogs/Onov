@@ -1,13 +1,10 @@
 package com.application.onovapplication.activities.common
 
-import android.app.Activity
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.application.onovapplication.R
 import com.application.onovapplication.activities.DonationsActivity
-import com.application.onovapplication.activities.EventsActivity
 
 class AskToAddActivity : BaseAppCompatActivity(),View.OnClickListener {
     var activty:String=""

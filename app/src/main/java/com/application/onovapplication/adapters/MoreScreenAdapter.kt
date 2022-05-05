@@ -2,10 +2,7 @@ package com.application.onovapplication.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import com.application.onovapplication.R
-import com.application.onovapplication.databinding.ItemViewGovernmentImagesBinding
 import com.application.onovapplication.databinding.RvMoreBinding
 import com.application.onovapplication.model.MoreScreenData
 

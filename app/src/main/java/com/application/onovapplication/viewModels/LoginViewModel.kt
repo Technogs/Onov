@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.application.onovapplication.R
 import com.application.onovapplication.model.LoginResponse
+import com.application.onovapplication.model.MediaResponse
 import com.application.onovapplication.model.UserInfo
 import com.application.onovapplication.repository.service.DataManager
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -23,9 +24,12 @@ class LoginViewModel : ViewModel() {
 
     private val dataManager: DataManager = DataManager()
     val successful: MutableLiveData<Boolean> = MutableLiveData()
+    val successfulMedia: MutableLiveData<Boolean> = MutableLiveData()
+    val successfulDeleteMedia: MutableLiveData<Boolean> = MutableLiveData()
     var message: String = ""
     var status: String = ""
     lateinit var userInfo: UserInfo
+    lateinit var mediaResponse: MediaResponse
 
 
     @SuppressLint("CheckResult")
@@ -97,6 +101,122 @@ class LoginViewModel : ViewModel() {
                             }
                         }
                         successful.value = false
+                    }
+                })
+    }
+
+    @SuppressLint("CheckResult")
+    fun getAllMedia(
+        context: Context,
+        userRef: String
+
+    ) {
+
+
+        val userRef: RequestBody =
+            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), userRef)
+
+        dataManager.getAllMedia(userRef)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeWith(
+                object : DisposableObserver<MediaResponse>() {
+                    override fun onComplete() {
+
+                    }
+
+                    override fun onNext(t: MediaResponse) {
+                        status = t.status
+
+                        if (status == "success") {
+
+                            mediaResponse = t
+                        }
+
+                        message = t.msg
+                        successfulMedia.value = true
+                    }
+
+                    override fun onError(e: Throwable) {
+                        Log.d("error",e.message.toString())
+                        when (e) {
+                            is IOException -> {
+
+                                message =e.message.toString() //context.getString(R.string.error_please_check_internet)
+                            }
+                            is TimeoutException -> {
+                                message = context
+                                    .getString(R.string.error_request_timed_out)
+
+                            }
+                            is HttpException -> {
+                                message = e.message.toString()
+                            }
+                            else -> {
+                                message = e.message.toString()//context .getString(R.string.error_something_went_wrong)
+                            }
+                        }
+                        successfulMedia.value = false
+                    }
+                })
+    }
+
+
+    @SuppressLint("CheckResult")
+    fun deleteMedia(
+        context: Context,
+        id: String,
+        recordType: String
+
+    ) {
+
+
+        val id: RequestBody =
+            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), id)
+        val recordType: RequestBody =
+            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), recordType)
+
+        dataManager.deleteMedia(id,recordType)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeWith(
+                object : DisposableObserver<MediaResponse>() {
+                    override fun onComplete() {
+
+                    }
+
+                    override fun onNext(t: MediaResponse) {
+                        status = t.status
+
+                        if (status == "success") {
+
+                            mediaResponse = t
+                        }
+
+                        message = t.msg
+                        successfulDeleteMedia.value = true
+                    }
+
+                    override fun onError(e: Throwable) {
+                        Log.d("error",e.message.toString())
+                        when (e) {
+                            is IOException -> {
+
+                                message =e.message.toString() //context.getString(R.string.error_please_check_internet)
+                            }
+                            is TimeoutException -> {
+                                message = context
+                                    .getString(R.string.error_request_timed_out)
+
+                            }
+                            is HttpException -> {
+                                message = e.message.toString()
+                            }
+                            else -> {
+                                message = e.message.toString()//context .getString(R.string.error_something_went_wrong)
+                            }
+                        }
+                        successfulDeleteMedia.value = false
                     }
                 })
     }

@@ -6,28 +6,43 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.database.Cursor
 import android.net.Uri
-import android.os.Bundle
-import android.os.Environment
+import android.os.*
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.application.onovapplication.BuildConfig
 import com.application.onovapplication.R
-import com.application.onovapplication.databinding.ActivityProfile2Binding
+import com.application.onovapplication.UrlConnection.MultipartUtility
+import com.application.onovapplication.api.ApiClient
+import com.application.onovapplication.api.ApiInterface
 import com.application.onovapplication.databinding.ActivityRegisterBinding
+import com.application.onovapplication.model.CitiesResponse
+import com.application.onovapplication.model.RegisterResponse
 import com.application.onovapplication.model.UserInfo
 import com.application.onovapplication.utils.CustomSpinnerAdapter
 import com.application.onovapplication.viewModels.SignUpViewModel
 import com.bumptech.glide.Glide
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.iid.FirebaseInstanceId
+import com.google.gson.Gson
+import com.google.gson.JsonObject
+import id.zelory.compressor.Compressor
+import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.concurrent.thread
 
 class RegisterActivity : BaseAppCompatActivity(), View.OnClickListener {
 
@@ -36,11 +51,18 @@ class RegisterActivity : BaseAppCompatActivity(), View.OnClickListener {
     var mPhotoCoverFile: File? = null
     val REQUEST_TAKE_PHOTO = 101
     val REQUEST_GALLERY_PHOTO = 201
-
+    private var apiInterface: ApiInterface? = null
+    private var compressedImage: File? = null
+    private var compressedImagep: File? = null
+    var data: RegisterResponse? = null
+    var token = ""
     private val REQUEST_TAKE_COVER_PHOTO = 105
     private val REQUEST_COVER_GALLERY_PHOTO = 205
 
     private var selectedRole: String = ""
+    private var selectedParty: String = ""
+    private var selectedState: String = ""
+    private var selectedCities: String = ""
     private var selectedSupport: String = ""
     private val signUpViewModel by lazy {
         ViewModelProvider(this).get(SignUpViewModel::class.java)
@@ -48,6 +70,16 @@ class RegisterActivity : BaseAppCompatActivity(), View.OnClickListener {
     private val rolesList =
         arrayOf("Select Role", "Citizens", "Politicians", "Organizations", "Entertainers", "lpa")
 
+    private val partyList =
+        arrayOf("Select Party", "American Independent Party", "Democratic Party","Green Party",
+          "Libertarian Party", "Peace and Freedom Party","Republican Party")
+
+    private val statesList = arrayOf("Select State","Alaska","Arizona","Arkansas","California","Colorado","Connecticut"
+        ,"Delaware","Florida", "Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky", "Louisiana"
+        ,"Maine", "Maryland", "Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska",
+        "Nevada","New Hampshire", "New Jersey","New Mexico","New York","North Carolina", "North Dakota","Ohio",
+        "Oklahoma","Oregon","Pennsylvania", "Rhode Island","South Carolina", "South Dakota", "Tennessee",
+        "Texas","Utah","Vermont","Virginia", "Washington","West Virginia", "Wisconsin","Wyoming")
     private val supportList =
         arrayOf("Select Support", "Republican", "Democrat", "Independent")
     private lateinit var binding: ActivityRegisterBinding
@@ -57,8 +89,11 @@ class RegisterActivity : BaseAppCompatActivity(), View.OnClickListener {
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+        if (Build.VERSION.SDK_INT > 9) {
+            val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
+            StrictMode.setThreadPolicy(policy) }
         setSpinner()
-
+deviceToken()
         observeViewModel()
     }
 
@@ -116,6 +151,57 @@ class RegisterActivity : BaseAppCompatActivity(), View.OnClickListener {
             }
         }
 
+        val spinnerAdapterparty = CustomSpinnerAdapter(
+            this,  // Use our custom adapter
+            R.layout.spinner_text, partyList
+        )
+
+
+        spinnerAdapterparty.setDropDownViewResource(R.layout.simple_spinner_dropdown)
+        binding.spparties.adapter = spinnerAdapterparty
+
+
+        binding.spparties.onItemSelectedListener = object :
+            AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+            }
+
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                selectedParty = parent?.getItemAtPosition(position).toString()
+            }
+        }
+
+        val spinnerAdapter3 = CustomSpinnerAdapter(
+            this,  // Use our custom adapter
+            R.layout.spinner_text, statesList
+        )
+
+
+        spinnerAdapter3.setDropDownViewResource(R.layout.simple_spinner_dropdown)
+        binding.spState.adapter = spinnerAdapter3
+
+
+        binding.spState.onItemSelectedListener = object :
+            AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                selectedState = parent?.getItemAtPosition(position).toString()
+               // getCitiesData(selectedState)
+            }
+        }
+
 
         val spinnerAdapter2 = CustomSpinnerAdapter(
             this,  // Use our custom adapter
@@ -145,7 +231,60 @@ class RegisterActivity : BaseAppCompatActivity(), View.OnClickListener {
         }
     }
 
+    private fun getCitiesData(state:String) {
+        showDialog()
+        apiInterface = ApiClient.getRetrofit("https://countriesnow.space/api/v0.1/countries/state/")?.create(
+            ApiInterface::class.java)
+//        val call = apiInterface?.postJson(Gson().toJson(CitiesRequest("United States",  state)))
+    val jsonObject = JsonObject()
+    jsonObject.addProperty("country", "United States")
+    jsonObject.addProperty("state", state)
+        val call = apiInterface?.postJson(jsonObject)
+        call?.enqueue(object : Callback<CitiesResponse?> {
+            override fun onResponse(call: Call<CitiesResponse?>, response: Response<CitiesResponse?>) {
+                dismissDialog()
+                val response1 = response.body()
+                if (response1!=null) {
+                    val r1 = response1.data.toTypedArray()
+                    val spinnerAdapter3 = CustomSpinnerAdapter(
+                        this@RegisterActivity,  // Use our custom adapter
+                        R.layout.spinner_text, r1
+                    )
 
+
+                    spinnerAdapter3.setDropDownViewResource(R.layout.simple_spinner_dropdown)
+                    binding.spCities.adapter = spinnerAdapter3
+
+
+                    binding.spCities.onItemSelectedListener = object :
+                        AdapterView.OnItemSelectedListener {
+                        override fun onNothingSelected(parent: AdapterView<*>?) {
+
+                        }
+
+                        override fun onItemSelected(
+                            parent: AdapterView<*>?,
+                            view: View?,
+                            position: Int,
+                            id: Long
+                        ) {
+                            selectedCities = parent?.getItemAtPosition(position).toString()
+
+                        }
+                    }
+
+                }
+            }
+            override fun onFailure(call: Call<CitiesResponse?>, t: Throwable) {
+                dismissDialog()
+                if (t is IOException) {
+                    Toast.makeText(this@RegisterActivity, t.message, Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this@RegisterActivity, "Something went wrong", Toast.LENGTH_SHORT).show()
+                }
+            }
+        })
+    }
     override fun onClick(v: View?) {
         when (v!!.id) {
 
@@ -176,6 +315,22 @@ class RegisterActivity : BaseAppCompatActivity(), View.OnClickListener {
                         setError("Website Url cannot be empty")
                     }
 
+                    compressedImage==null->{
+                        setError("Please add profile image")
+                    }
+                    compressedImagep==null->{
+                        setError("Please add cover image")
+                    }
+                    selectedState == "Select State" -> {
+                        setError("Please select State")
+                    }
+                    checkEmpty(binding.cityEditText) -> {
+                        setError("Enter your city")
+                    }
+
+                    selectedParty == "Select Party" -> {
+                        setError("Please select a Party")
+                    }
                     checkEmpty(binding.etAboutMe) -> {
                         setError("About me cannot be empty")
                     }
@@ -185,27 +340,30 @@ class RegisterActivity : BaseAppCompatActivity(), View.OnClickListener {
                     }
 
                     else -> {
-                        signUpViewModel.register(
-                            this,
-                            binding.edRegisterEmail.text.toString().trim(),
-                            binding.edRegisterPassword.text.toString().trim(),
-                            binding.edRegisterName.text.toString().trim(),
-                            binding.edRegisterPhone.text.toString().trim(),
-                            binding.ccPicker.selectedCountryCode,
-                            mPhotoFile,
-                            selectedRole,
-                            "3223",
-                            "Android",
-                            binding.etAboutMe.text.toString().trim(),
-                            binding.edWebsiteUrl.text.toString().trim(),
-                            mPhotoCoverFile,
-                            selectedSupport
-
-                        )
+//                        signUpViewModel.register(
+//                            this,
+//                            binding.edRegisterEmail.text.toString().trim(),
+//                            binding.edRegisterPassword.text.toString().trim(),
+//                            binding.edRegisterName.text.toString().trim(),
+//                            binding.edRegisterPhone.text.toString().trim(),
+//                            binding.edCountry.text.toString().trim(),
+//                            selectedState,
+//                            selectedCities,
+//                            binding.ccPicker.selectedCountryCode,
+//                            mPhotoFile,
+//                            selectedRole,
+//                            "3223",
+//                            "Android",
+//                            binding.etAboutMe.text.toString().trim(),
+//                            binding.edWebsiteUrl.text.toString().trim(),
+//                            mPhotoCoverFile,
+//                            selectedSupport
+//
+//                        )
+                        register()
                         showDialog()
                     }
                 }
-                //  signUpViewModel.register(this , )
             }
 
 
@@ -377,6 +535,18 @@ class RegisterActivity : BaseAppCompatActivity(), View.OnClickListener {
             }
         }
     }
+    private fun compressImage(photoFile: File) {
+
+        Log.e("komal", "old file ${photoFile.length()}")
+
+        photoFile.let { imageFile ->
+            this.lifecycleScope.launch {
+                // Default compression
+                compressedImage = Compressor.compress(this@RegisterActivity, imageFile)
+            }
+        }
+
+    }
 
     @Throws(IOException::class)
     private fun createImageFile(): File? {
@@ -410,44 +580,163 @@ class RegisterActivity : BaseAppCompatActivity(), View.OnClickListener {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == REQUEST_TAKE_PHOTO) {
+      // if (data!=null) {
+            if (requestCode == REQUEST_TAKE_PHOTO && resultCode== RESULT_OK) {
 
-            //Toast.makeText(this, "New Logo Added", Toast.LENGTH_SHORT).show()
-
-
-            Glide.with(this).load(mPhotoFile).into(binding.ivRegister)
-
-        } else if (requestCode == REQUEST_GALLERY_PHOTO) {
-            val selectedImage = data?.data
-            try {
-
-                Log.e("PRACHI", getRealPathFromUri(selectedImage)!!)
-                mPhotoFile = File(getRealPathFromUri(selectedImage)!!)
                 Glide.with(this).load(mPhotoFile).into(binding.ivRegister)
+                mPhotoFile.let { imageFile ->
+                    this.lifecycleScope.launch {
+                        // Default compression
+                        compressedImagep = Compressor.compress(this@RegisterActivity, imageFile!!)
+                    }
+                }
 
-            } catch (e: IOException) {
 
-                e.printStackTrace()
+            } else if (requestCode == REQUEST_GALLERY_PHOTO && resultCode== RESULT_OK) {
+                val selectedImage = data?.data
+                try {
+
+                    Log.e("PRACHI", getRealPathFromUri(selectedImage)!!)
+                    mPhotoFile = File(getRealPathFromUri(selectedImage)!!)
+                    Glide.with(this).load(mPhotoFile).into(binding.ivRegister)
+                    mPhotoFile.let { imageFile ->
+                        this.lifecycleScope.launch {
+                            // Default compression
+                            compressedImagep =
+                                Compressor.compress(this@RegisterActivity, imageFile!!)
+                        }
+                    }
+
+                } catch (e: IOException) {
+
+                    e.printStackTrace()
+                }
             }
-        }
 
-        if (requestCode == REQUEST_TAKE_COVER_PHOTO) {
+            if (requestCode == REQUEST_TAKE_COVER_PHOTO && resultCode== RESULT_OK) {
 
 
-            Glide.with(this).load(mPhotoCoverFile).into(binding.coverPhoto)
-
-        } else if (requestCode == REQUEST_COVER_GALLERY_PHOTO) {
-            val selectedImage = data?.data
-            try {
-                mPhotoCoverFile = File(getRealPathFromUri(selectedImage))
                 Glide.with(this).load(mPhotoCoverFile).into(binding.coverPhoto)
+                compressImage(File(mPhotoCoverFile.toString()))
 
-            } catch (e: IOException) {
+            } else if (requestCode == REQUEST_COVER_GALLERY_PHOTO && resultCode== RESULT_OK) {
+                val selectedImage = data?.data
+                try {
 
-                e.printStackTrace()
+                    mPhotoCoverFile = File(getRealPathFromUri(selectedImage))
+//                    mPhotoCoverFile =  compressImage(File(selectedImage.toString()))
+                    Glide.with(this).load(mPhotoCoverFile).into(binding.coverPhoto)
+//                    compressImage(File(selectedImage.toString()))
+
+//                    Log.e("PRACHI", getRealPathFromUri(selectedImage)!!)
+//                    mPhotoFile = File(getRealPathFromUri(selectedImage)!!)
+//                    Glide.with(this).load(mPhotoFile).into(binding.ivRegister)
+                    mPhotoCoverFile.let { imageFile ->
+                        this.lifecycleScope.launch {
+                            // Default compression
+                            compressedImage =
+                                Compressor.compress(this@RegisterActivity, imageFile!!)
+                        }
+                    }
+                } catch (e: IOException) {
+
+                    e.printStackTrace()
+                }
             }
+
+
+    }
+    fun deviceToken(){
+
+
+        // 1
+        FirebaseInstanceId.getInstance().instanceId
+            .addOnCompleteListener(OnCompleteListener { task ->
+                // 2
+                if (!task.isSuccessful) {
+                    Log.w("TAG token failed", "getInstanceId failed", task.exception)
+                    return@OnCompleteListener
+                }
+                // 3
+                token = task.result?.token.toString()
+
+                // 4
+                val msg = token
+                Log.d("TAG token", msg.toString())
+                userPreferences.saveUserToken(msg.toString())
+
+            }) }
+
+    fun register(){
+
+        val charset = "UTF-8"
+        showDialog()
+        try {
+            var uploadFile1=File("")
+            var uploadFile2=File("")
+            thread {
+
+                //  val uploadFile2 = File(path)
+                val requestURL = "https://bdztl.com/onov/api/v1/userRegister"
+                /*     runOnUiThread {  }*/
+
+                val multipart = MultipartUtility(requestURL, charset)
+                multipart.addFormField("fullName", binding.edRegisterName.text.toString().trim())
+                multipart.addFormField("email", binding.edRegisterEmail.text.toString().trim())
+                multipart.addFormField("countryCode",  binding.ccPicker.selectedCountryCode)
+                multipart.addFormField("phone",  binding.edRegisterPhone.text.toString().trim())
+                multipart.addFormField("password", binding.edRegisterPassword.text.toString().trim())
+                multipart.addFormField("role", selectedRole)
+                multipart.addFormField("about", binding.etAboutMe.text.toString().trim())
+                multipart.addFormField("countryName", binding.edCountry.text.toString().trim())
+                multipart.addFormField("stateName", selectedState)
+                multipart.addFormField("cityName",binding.cityEditText.text.toString()) //selectedCities)
+                multipart.addFormField("webUrl",  binding.edWebsiteUrl.text.toString().trim())
+                multipart.addFormField("deviceToken", token)
+                multipart.addFormField("deviceType", "Android")
+                multipart.addFormField("politicalParty", selectedParty)
+                multipart.addFilePart("profilePic", compressedImagep)
+                multipart.addFilePart("coverPhoto", compressedImage)
+                val response: String = multipart.finish()
+
+                println("SERVER REPLIED:")
+
+                val gson = Gson() // Or use new GsonBuilder().create();
+
+                data = gson.fromJson(response, RegisterResponse::class.java)
+
+                if (data!=null) {
+                    setError(data?.msg.toString())
+                    dismissDialog()
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        //finish()
+                        if (data?.status=="success") {
+                            val intent = Intent(this, ForgotPasswordOtpActivity::class.java)
+                            userPreferences.saveUserRef(data?.registrationData?.userRef)
+                            userInfo?.userRef = data?.registrationData?.userRef
+                            userInfo?.id = data?.registrationData?.id
+                            userInfo?.profilePic = data?.registrationData?.profilePic
+                            userPreferences.setUserDetails(data?.registrationData)
+                            intent.putExtra("role", data?.registrationData?.role)
+                            intent.putExtra("type", "verify")
+                            intent.putExtra(
+                                "otp",
+                                data?.registrationData?.validationCode.toString()
+                            )
+                            intent.putExtra("email", binding.edRegisterEmail.text.toString().trim())
+                            startActivity(intent)
+                            finish()
+                            finishAffinity()
+                        }else setError(data?.msg.toString())
+
+                                                                }, 2000)
+                }
+
+            }
+
+
+        } catch (ex: IOException) {
+            System.err.println(ex)
         }
-
-
     }
 }

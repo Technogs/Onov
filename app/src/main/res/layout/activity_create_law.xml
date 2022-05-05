@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/white"
     tools:context=".activities.politicians.CreateLawActivity">
 
     <include layout="@layout/action_bar_layout_2"
@@ -84,7 +85,19 @@
                 android:fontFamily="@font/poppins_medium"
                 android:background="@drawable/drawable_chat_background"
                 android:layout_height="36dp" />
-
+            <Spinner
+                android:id="@+id/spPetition"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:background="@android:color/white"
+                android:gravity="center"
+                android:layout_marginHorizontal="@dimen/_20sdp"
+                android:layout_marginVertical="@dimen/_20sdp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:spinnerMode="dropdown" />
             <ImageView
                 android:layout_width="20dp"
     android:layout_gravity="end"

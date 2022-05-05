@@ -13,6 +13,7 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -24,6 +25,7 @@ import android.widget.Toast;
 import androidx.appcompat.widget.AppCompatEditText;
 
 import com.application.onovapplication.R;
+import com.application.onovapplication.activities.common.HomeTabActivity;
 import com.application.onovapplication.api.ApiClient;
 import com.application.onovapplication.api.ApiInterface;
 import com.application.onovapplication.debate.vlive.Config;
@@ -54,17 +56,21 @@ import com.application.onovapplication.debate.vlive.ui.components.RtcStatsView;
 import com.application.onovapplication.debate.vlive.ui.components.bottomLayout.LiveBottomButtonLayout;
 import com.application.onovapplication.debate.vlive.utils.GiftUtil;
 import com.application.onovapplication.debate.vlive.utils.Global;
+import com.application.onovapplication.model.DebateJoinerResponse;
+import com.application.onovapplication.model.EndDebateResponse;
+import com.application.onovapplication.model.WinData;
 import com.application.onovapplication.prefs.PreferenceManager;
 import com.elvishew.xlog.XLog;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import io.agora.rtc.IRtcEngineEventHandler;
 import io.agora.rtm.ErrorInfo;
 import io.agora.rtm.ResultCallback;
-
-
+import retrofit2.Call;
+import retrofit2.Callback;
 
 
 public abstract class LiveRoomActivity extends LiveBaseActivity implements
@@ -620,15 +626,62 @@ public abstract class LiveRoomActivity extends LiveBaseActivity implements
 
     protected void leaveRoom() {
         leaveRoom(roomId);
-        finish();
+       // finish();
         closeDialog();
         dismissActionSheetDialog();
+        endDebate();
     }
-
     protected void leaveRoom(String roomId) {
         sendRequest(Request.LEAVE_ROOM, new RoomRequest(
                 config().getUserProfile().getToken(), roomId));
+
     }
+    private void endDebate() {
+        //alertDialog.show();
+
+
+        Call<EndDebateResponse> call=apiInterface.endDebates(userPreferences.getDebateDetails().getId());
+
+        call.enqueue(new Callback<EndDebateResponse>() {
+
+
+            @Override
+            public void onResponse(Call<EndDebateResponse> call, retrofit2.Response<EndDebateResponse> response) {
+                EndDebateResponse response1=response.body();
+
+                if (response1.getStatus().equalsIgnoreCase("success")){
+                List<WinData> winData=response1.getWinData();
+                    Log.d("messagevote",response1.getMsg());
+// showBottomSheetDialog(joinerData);
+              if (winData.isEmpty())     {
+                  startActivity(new Intent(LiveRoomActivity.this, HomeTabActivity.class)); }
+              else {
+                  Intent i = new Intent(LiveRoomActivity.this, HomeTabActivity.class);
+                  i.putExtra("debate", "end");
+                  i.putExtra("user", winData.get(0).getWinnerRef());
+                  startActivity(i);
+              }
+finish();
+finishAffinity();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<EndDebateResponse> call, Throwable t) {
+//                alertDialog.dismiss();
+                if (t instanceof IOException) {
+                    Toast.makeText(LiveRoomActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                  Log.d("error is:",""+t.getMessage());
+                    // logging probably not necessary
+                }
+                else {
+                    Toast.makeText(LiveRoomActivity.this, "Something went wrong, Please try again", Toast.LENGTH_SHORT).show();
+                    // todo log to some central bug tracking service
+                }
+            }});
+    }
+
+
 
     @Override
     public void finish() {

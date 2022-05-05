@@ -1,13 +1,17 @@
 package com.application.onovapplication.chat
 
+import android.app.Dialog
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.media.MediaPlayer
 import android.net.Uri
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.webkit.WebView
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.VideoView
 import androidx.recyclerview.widget.RecyclerView
 import com.application.onovapplication.R
 import com.application.onovapplication.activities.FeedDetailActivity
@@ -29,6 +33,7 @@ import com.google.android.exoplayer2.source.MediaSource
 import com.google.android.exoplayer2.trackselection.AdaptiveTrackSelection
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector
 import com.google.android.exoplayer2.trackselection.TrackSelector
+import com.google.android.exoplayer2.ui.AspectRatioFrameLayout
 import com.google.android.exoplayer2.ui.SimpleExoPlayerView
 import com.google.android.exoplayer2.upstream.BandwidthMeter
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter
@@ -95,8 +100,6 @@ class ChatMessageAdapter(
             holder.receiverImage.setOnClickListener {
                 chatCallBack.onImageViewClick(position, 1)
             }
-
-
         }
     }
 
@@ -109,21 +112,8 @@ class ChatMessageAdapter(
         val message: Messages = messagesArrayList[position]
         return if ((context as ChatActivity).userPreferences.getuserDetails()?.id == message.sender_id) {
             ITEM_SEND
-        } else {
-            ITEM_RECEIVE
-        }
-
-
+        } else { ITEM_RECEIVE }
     }
-/*//changed
-    override fun getbindingType(position: Int): Int {
-        val message: Messages = messagesArrayList[position]
-        return if ((context as ChatActivity).userPreferences.getuserDetails()?.id == message.sender_id) {
-            ITEM_SEND
-        } else {
-            ITEM_RECEIVE
-        }
-    }*/
 
     internal inner class MessageSenderViewHolder(private val binding: RvSenderLayoutBinding) :
         androidx.recyclerview.widget.RecyclerView.ViewHolder(binding.root) {
@@ -135,10 +125,6 @@ class ChatMessageAdapter(
 
 
         fun bind(messages: Messages) {
-
-
-            // val chatTime = (context as ChatActivity).convertDateFormat((context as ChatActivity).getEpochDate(messages.timeStamp.toLong()), "yyyy-MM-dd hh:mm:ss", "hh:mm a").trim()
-//            val chatTime = (context as ChatActivity).convertDateFormat((context as ChatActivity).getEpochDate(messages.timeStamp.toLong()), "yyyy-MM-dd hh:mm:ss", "hh:mm aa").trim()
 
             val chatTime = (context as ChatActivity).convertDateFormat(
                 messages.message_date.toString(),
@@ -166,20 +152,17 @@ class ChatMessageAdapter(
                 binding.tvImageTime.text = chatTime
                 binding.ivPic.loadImage(messages.fileUrl)
                 binding.ivSenderProfile.loadImage(BaseUrl.photoUrl + "" + (context as ChatActivity).userPreferences.getUserPhoto())
+                binding.ivPic.setOnClickListener { showDialog(messages.fileUrl, "photo") }
 
 
-            }else if (messages.message_type.equals("video")) {
+            } else if (messages.message_type.equals("video")) {
                 binding.llImageLayout.hide()
                 binding.llMessageLayout.hide()
                 binding.llFeedLayout.hide()
                 binding.llAudioLayout.hide()
                 binding.llVideoLayout.show()
                 binding.tvImageTime.text = chatTime
-//                binding.ivPic.loadImage(messages.fileUrl)
-                exoplayer(
-                    BaseUrl.photoUrl + messages.fileUrl,
-                    binding.idExoVideoVIew
-                )
+                exoplayer(BaseUrl.photoUrl + messages.fileUrl, binding.idExoVideoVIew)
                 binding.ivSenderProfile.loadImage(BaseUrl.photoUrl + "" + (context as ChatActivity).userPreferences.getUserPhoto())
 
 
@@ -201,8 +184,32 @@ class ChatMessageAdapter(
                     binding.feedTitle.text = messages.feed?.petitionTitle
                     binding.feedDescription.text = messages.feed?.petitionDiscription
 
+                } else if (messages.feed?.recordType == "polling") {
+                   var path = messages.feed?.pollImage.toString()
+                    if (path.isNullOrEmpty()) {
+                        binding.feedMedia.visibility = View.GONE
+                    } else {
+                        Glide.with(context)
+                            .load(BaseUrl.photoUrl + messages.feed?.pollImage)
+                            .into(binding.ivFeed)
+                    }
+                    if (messages.feed?.description.isNullOrEmpty()) {
+                        binding.feedDescription.visibility = View.GONE
+                    } else {
+                        binding.feedDescription.visibility = View.VISIBLE
+                    }
+                    if (messages.feed?.pollImage.isNullOrEmpty()) {
+                        binding.feedMedia.visibility = View.GONE
+                    }
 
                 }
+//                if (messages.feed?.recordType == "polling") {
+
+
+
+//                            Glide.with(context).load(BaseUrl.photoUrl + messages.feed?.pollImage)
+//                                .into(binding.ivFeed)
+//                }
 
                 binding.senderRlyt.setOnClickListener {
                     val intent = Intent(context, FeedDetailActivity::class.java)
@@ -262,12 +269,25 @@ class ChatMessageAdapter(
                         binding.vvFeed.visibility = View.GONE
                         binding.idExoPlayerVIew.visibility = View.GONE
                         binding.ivFeed.visibility = View.VISIBLE
+                        var path = ""
+                         if (messages.feed?.recordType == "petition") {
+                            path = messages.feed?.petitionMedia.toString()
+                            Glide.with(context)
+                                .load(BaseUrl.photoUrl + messages.feed?.petitionMedia)
+                                .into(binding.ivFeed)
+                        } else {
+                            path = messages.feed?.filePath.toString()
+                            Glide.with(context)
+                                .load(BaseUrl.photoUrl + messages.feed?.filePath)
+                                .into(binding.ivFeed)
+                        }
+                        binding.ivFeed.setOnClickListener {
+                            showDialog(
+                                BaseUrl.photoUrl + path,
+                                "photo"
+                            )
+                        }
 
-                        if (messages.feed?.recordType == "petition") Glide.with(context)
-                            .load(BaseUrl.photoUrl + messages.feed?.petitionMedia)
-                            .into(binding.ivFeed) else Glide.with(context)
-                            .load(BaseUrl.photoUrl + messages.feed?.filePath)
-                            .into(binding.ivFeed)
 
                     }
                 }
@@ -279,8 +299,6 @@ class ChatMessageAdapter(
                 binding.llAudioLayout.hide()
                 binding.tvFeedTime.text = chatTime
                 binding.ivChatProfile.visibility = View.GONE
-//                Glide.with(context).load(BaseUrl.photoUrl + messages.feed?.profilePic).apply(
-//                    RequestOptions().placeholder(R.drawable.ic_baseline_account_circle_24)).into(binding.ivChatProfile)
                 binding.userName.visibility = View.GONE
                 binding.feedType.visibility = View.GONE
                 binding.feedTitle.text = messages.event?.title
@@ -292,6 +310,12 @@ class ChatMessageAdapter(
                 binding.ivFeed.visibility = View.VISIBLE
                 Glide.with(context).load(BaseUrl.photoUrl + messages.event?.cover_image)
                     .into(binding.ivFeed)
+                binding.ivFeed.setOnClickListener {
+                    showDialog(
+                        BaseUrl.photoUrl + messages.event?.cover_image.toString(),
+                        "photo"
+                    )
+                }
 
                 binding.viewFeed.setOnClickListener {
                     val intent = Intent(context, FeedDetailActivity::class.java)
@@ -303,6 +327,79 @@ class ChatMessageAdapter(
             }
 
         }
+    }
+
+    private fun showDialog(url: String, type: String) {
+
+        var dialog = Dialog(context)
+
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(false)
+        dialog.setContentView(R.layout.custom_layout)
+        dialog.window?.setLayout(
+            LinearLayout.LayoutParams.MATCH_PARENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT
+        )
+
+        val ivFeed = dialog.findViewById(R.id.ivFeed) as ImageView
+        val cross = dialog.findViewById(R.id.close) as ImageView
+        val vvFeed = dialog.findViewById(R.id.vvFeed) as VideoView
+
+        val idExoPlayerVIew = dialog.findViewById(R.id.idExoPlayerVIew) as SimpleExoPlayerView
+        val wbFeed = dialog.findViewById(R.id.wbFeed) as WebView
+        idExoPlayerVIew.setResizeMode(AspectRatioFrameLayout.RESIZE_MODE_FILL)
+
+        cross.setOnClickListener { dialog.dismiss() }
+
+        when (type) {
+            "document" -> {
+                wbFeed.visibility = View.VISIBLE
+                vvFeed.visibility = View.GONE
+                idExoPlayerVIew.visibility = View.GONE
+
+                ivFeed.visibility = View.GONE
+                wbFeed.settings.javaScriptEnabled = true
+
+                wbFeed.settings.javaScriptCanOpenWindowsAutomatically = true
+                wbFeed.scrollBarStyle = View.SCROLLBARS_INSIDE_OVERLAY
+                wbFeed.loadUrl("https://docs.google.com/gview?embedded=true&url=".plus(BaseUrl.photoUrl + url))
+
+            }
+
+            "video" -> {
+
+                //here position
+                wbFeed.visibility = View.GONE
+                //   binding.vvFeed.visibility = View.VISIBLE
+                idExoPlayerVIew.visibility = View.VISIBLE
+                ivFeed.visibility = View.GONE
+
+                exoplayer(BaseUrl.photoUrl + url, idExoPlayerVIew)
+//                    exoplayer(BaseUrl.photoUrl + mdData.filePath)
+            }
+
+            "photo" -> {
+                wbFeed.visibility = View.GONE
+                vvFeed.visibility = View.GONE
+                idExoPlayerVIew.visibility = View.GONE
+                ivFeed.visibility = View.VISIBLE
+
+                Glide.with(context).load(url)
+                    .into(ivFeed)
+                //   Glide.with(context).load(BaseUrl.photoUrl + mdData.filePath).into(ivFeed)
+
+            }
+        }
+        dialog.setOnKeyListener(DialogInterface.OnKeyListener { dialog, keyCode, event ->
+            if (keyCode == KeyEvent.KEYCODE_BACK) {
+                dialog?.cancel()
+                return@OnKeyListener true
+
+            }
+            false
+        })
+        dialog.show()
+
     }
 
     internal inner class MessageReceiverViewHolder(private val binding: RvReceiverLayoutBinding) :
@@ -317,11 +414,6 @@ class ChatMessageAdapter(
                 "hh:mm a"
             ).trim()
             //    var chatTime = (context as ChatActivity).convertDateFormat((context as ChatActivity).getEpochDate(messages.timeStamp.toLong()), "yyyy-MM-dd hh:mm:ss", "hh:mm a").trim()
-
-
-//        val sfd = SimpleDateFormat("dd-MM-yyyy HH:mm:ss")
-//         chatTime=   sfd.format(chatTime)
-
 
             if (messages.message_type.equals("text")) {
                 binding.llReceiverLayout.show()
@@ -340,6 +432,7 @@ class ChatMessageAdapter(
                 binding.tvImageTime.text = chatTime
                 binding.ivPic.loadImage(messages.fileUrl)
                 binding.ivReceiverProfile.loadImage(receiverPhotoUrl)
+                binding.ivPic.setOnClickListener { showDialog(messages.fileUrl, "photo") }
 
             }
             if (messages.message_type.equals("feed")) {
@@ -357,6 +450,24 @@ class ChatMessageAdapter(
                 if (messages.feed?.recordType == "petition") {
                     binding.feedTitle.text = messages.feed?.petitionTitle
                     binding.feedDescription.text = messages.feed?.petitionDiscription
+
+                } else if (messages.feed?.recordType == "polling") {
+                    var path = messages.feed?.pollImage.toString()
+                    if (path.isNullOrEmpty()) {
+                        binding.feedMedia.visibility = View.GONE
+                    } else {
+                        Glide.with(context)
+                            .load(BaseUrl.photoUrl + messages.feed?.pollImage)
+                            .into(binding.ivFeed)
+                    }
+                    if (messages.feed?.description.isNullOrEmpty()) {
+                        binding.feedDescription.visibility = View.GONE
+                    } else {
+                        binding.feedDescription.visibility = View.VISIBLE
+                    }
+                    if (messages.feed?.pollImage.isNullOrEmpty()) {
+                        binding.feedMedia.visibility = View.GONE
+                    }
 
                 }
                 binding.viewFeed.setOnClickListener {
@@ -417,12 +528,42 @@ class ChatMessageAdapter(
                         binding.vvFeed.visibility = View.GONE
                         binding.idExoPlayerVIew.visibility = View.GONE
                         binding.ivFeed.visibility = View.VISIBLE
+                        var path = ""
+                        if (messages.feed?.recordType == "polling") {
+                            path = messages.feed?.pollImage.toString()
+                            if (path.isNullOrEmpty()) {
+                                binding.feedMedia.visibility = View.GONE
+                            } else {
+                                Glide.with(context)
+                                    .load(BaseUrl.photoUrl + messages.feed?.pollImage)
+                                    .into(binding.ivFeed)
+                            }
 
-                        if (messages.feed?.recordType == "petition") Glide.with(context)
-                            .load(BaseUrl.photoUrl + messages.feed?.petitionMedia)
-                            .into(binding.ivFeed) else Glide.with(context)
-                            .load(BaseUrl.photoUrl + messages.feed?.filePath)
-                            .into(binding.ivFeed)
+                            if (messages.feed?.description.isNullOrEmpty()) {
+                                binding.feedDescription.visibility = View.GONE
+                            } else {
+                                binding.feedDescription.visibility = View.VISIBLE
+                            }
+//                            Glide.with(context).load(BaseUrl.photoUrl + messages.feed?.pollImage)
+//                                .into(binding.ivFeed)
+                        } else if (messages.feed?.recordType == "petition") {
+                            path = messages.feed?.petitionMedia.toString()
+                            Glide.with(context)
+                                .load(BaseUrl.photoUrl + messages.feed?.petitionMedia)
+                                .into(binding.ivFeed)
+                        } else {
+                            path = messages.feed?.filePath.toString()
+                            Glide.with(context)
+                                .load(BaseUrl.photoUrl + messages.feed?.filePath)
+                                .into(binding.ivFeed)
+                        }
+
+                        binding.ivFeed.setOnClickListener {
+                            showDialog(
+                                BaseUrl.photoUrl + path,
+                                "photo"
+                            )
+                        }
 
                     }
                 }
@@ -444,6 +585,12 @@ class ChatMessageAdapter(
 
                 Glide.with(context).load(BaseUrl.photoUrl + messages.event?.cover_image)
                     .into(binding.ivFeed)
+                binding.ivFeed.setOnClickListener {
+                    showDialog(
+                        BaseUrl.photoUrl + messages.event?.cover_image,
+                        "photo"
+                    )
+                }
 
                 binding.receiverRlyt.setOnClickListener {
                     val intent = Intent(context, FeedDetailActivity::class.java)

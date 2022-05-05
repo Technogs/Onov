@@ -28,6 +28,10 @@ data class GovtData(
     val picture: String,
     @SerializedName("role")
     val role: String,
+    @SerializedName("contactInfo")
+    val contactInfo: String,
+    @SerializedName("officeLocation")
+    val officeLocation: String,
     @SerializedName("state")
     val state: String,
     @SerializedName("updated_at")

@@ -137,13 +137,16 @@ class DebatesViewModel:ViewModel() {
     @SuppressLint("CheckResult")
     fun     searchDebate(
         context: Context,
+        userRef: String,
         keyword: String
     ) {
 
         val keyword: RequestBody =
             RequestBody.create("multipart/form-data".toMediaTypeOrNull(), keyword)
+        val userRef: RequestBody =
+            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), userRef)
 
-        dataManager.searchDebate(keyword)
+        dataManager.searchDebate(userRef,keyword)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeWith(
@@ -243,7 +246,10 @@ liveDebateModel=t
         title: String,
         message: String,
         date: String,
-        time: String
+        time: String,
+        isPublic: String,
+        debateDuration: String,
+        areaLimit: String
     ) {
 
 
@@ -260,8 +266,14 @@ liveDebateModel=t
             RequestBody.create("multipart/form-data".toMediaTypeOrNull(), date)
         val time: RequestBody =
             RequestBody.create("multipart/form-data".toMediaTypeOrNull(), time)
+        val areaLimit: RequestBody =
+            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), areaLimit)
+        val isPublic: RequestBody =
+            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), isPublic)
+        val debateDuration: RequestBody =
+            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), debateDuration)
 
-        dataManager.requestDebate(userRefTo,userRefFrom,title,message_,date_,time)
+        dataManager.requestDebate(userRefTo,userRefFrom,title,message_,date_,time,isPublic,debateDuration,areaLimit)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeWith(
